@@ -1,6 +1,3 @@
-.main-container-wrapper {
-    height: 601px;
-}
 
 header {
     height: 125px;
@@ -297,6 +294,10 @@ td.social-fcn-links-left:hover, td.social-fcn-links-right:hover {
     color:white;
     font-size: 10px;
 }
+
+.selected-button:hover{
+    cursor:hand;
+}
 .unselected-button {
     background: url(../images/unselected.png) no-repeat;
     width: 114px;
@@ -311,6 +312,7 @@ td.social-fcn-links-left:hover, td.social-fcn-links-right:hover {
 .unselected-button:hover {
     background: url(../images/selected.png) no-repeat;
     color:white;
+    cursor:hand;
 }
 
 .pad-left{
@@ -367,4 +369,18 @@ td.social-fcn-links-left:hover, td.social-fcn-links-right:hover {
 .sidebar-right-content-wrapper {
     height:309px;
     background-color: #f5f5f5;
+}
+
+.footer-container{
+    height: 45px;
+    margin-top: 32px;
+    background-color:#727272;
+}
+
+.footer-content {
+    width: 931px;
+    margin: 0px auto;
+    padding-top:18px;
+    color: #c1c1c1;
+    font-size: 9px;
 }

@@ -17,10 +17,38 @@ a.sidebar-link {
     text-decoration: none;
 }
 
+a.entry-link-blue:hover {
+    color: #50afc1;
+    text-decoration: underline;
+}
 
+a.entry-link-green:hover {
+    color: #8ba949;
+    text-decoration: underline;
+}
+
+a.topic-link {
+    color: #505050;
+}
+
+a.topic-link:hover {
+    text-decoration:underline;
+}
+
+
+
+
+a.footer-contact{
+    text-decoration: none;
+    color: #c1c1c1;
+}
+
+a.footer-contact:hover{
+    text-decoration:underline;
+}
 
 .bold {
-    font-weight: bold;
+    font-weight:bold;
 }
 
 .green {
@@ -32,5 +60,5 @@ a.sidebar-link {
 }
 
 .red {
-    color: #50afc1;
+    color: #d3401e;
 }
