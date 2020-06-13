@@ -16,3 +16,49 @@ a.sidebar-link {
     color: #f0f4f5;
     text-decoration: none;
 }
+
+a.entry-link-blue:hover {
+    color: #50afc1;
+    text-decoration: underline;
+}
+
+a.entry-link-green:hover {
+    color: #8ba949;
+    text-decoration: underline;
+}
+
+a.topic-link {
+    color: #505050;
+}
+
+a.topic-link:hover {
+    text-decoration:underline;
+}
+
+
+
+
+a.footer-contact{
+    text-decoration: none;
+    color: #c1c1c1;
+}
+
+a.footer-contact:hover{
+    text-decoration:underline;
+}
+
+.bold {
+    font-weight:bold;
+}
+
+.green {
+    color: #8ba949;
+}
+
+.blue {
+ color: #50afc1;
+}
+
+.red {
+    color: #d3401e;
+}

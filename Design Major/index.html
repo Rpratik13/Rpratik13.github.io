@@ -4,11 +4,11 @@
         <link rel="stylesheet" type="text/css" href="css/reset.css">
         <link rel="stylesheet" type="text/css" href="css/layout.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
-
     </head>
 
     <body>
         <header>
+            <div class="header-top-wrapper">
             <div class="nav-bar-top">
                 <div class="nav-top-container">
                     <div class="logo left">
@@ -49,9 +49,9 @@
                             <table>
                                 <tr>
                                     <td class="user-profile-fcn-link"><a href="#">Home</a></td>
-                                    <td class="divider"><img src="images/divider.png"></td>
+                                    <td class="divider"><img src="images/divider1.png"></td>
                                     <td class="user-profile-fcn-link"><a href="#">Settings</a></td>
-                                    <td class="divider"><img src="images/divider.png"></td>
+                                    <td class="divider"><img src="images/divider2.png"></td>
                                     <td class="user-profile-fcn-link"><a href="#">Log out</a></td>
                                 </tr>
                             </table>
@@ -66,6 +66,8 @@
                 </div>
 
             </div>
+        </div>
+        <div class="header-bottom-wrapper">
             <div class="nav-bar-bottom">
                 <div class="nav-bottom-container social-fcn ">
                     <div class="left">
@@ -82,36 +84,40 @@
                         <table cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="social-fcn-links-right">
-                                    <span class="social-fcn-icon">
+                                    <a href="#">
+                                    <div class="social-fcn-icon-container left">
                                         <img src="images/invite.png" class="social-fcn-icon">
-                                    </span>
-                                    <span class="social-fcn-link-right"><a href="#">Topic Boxes Invites - 2</a></span>
-
+                                    </div>
+                                    <div class="social-fcn-link-right right">Topic Boxes Invites - 2</div></a>
+                                    <div class="clearfix"></div>
                                     </td>
                                 <td class="social-fcn-links-right">
-                                    <span class="social-fcn-icon">
+                                    <a href="#">
+                                    <div class="social-fcn-icon-container left">
                                         <img src="images/request.png" class="social-fcn-icon">
-                                    </span>
-                                    <span class="social-fcn-link-right"><a class="gray" href="#">Friend Requests - 0</a></span>
-                                </td>
+                                    </div>
+                                    <div class="social-fcn-link-right right gray">Friend Requests - 0</div></a>
+                                    <div class="clearfix"></div>
+                                    </td>
                             </tr>
                         </table>
                     </div>
                     <div class="clearfix"></div>
                 </div>
             </div>
-
+        </div>
         </header>
         <div class="main-container-wrapper">
             <div class="main-content">
                 <div class="main-left left">
-                    <div class="sidebar left">
-                        <div class="sidebar-title">Recent Searches</div>
+                    <div class="sidebar-left left">
+                        <div class="sidebar-title-top">Recent Searches</div>
+                        <div class="sidebar-top">
                         <ul>
                             <li class="sidebar-content">
                                 <a href="#" class="sidebar-link">
                                     <div class="sidebar-text left">
-                                    Nick Cave and the<br>Bad Seeds
+                                    <p class="top-text-top-sidebar">Nick Cave and the</p>Bad Seeds
 
                                 </div>
                                 <div class="sidebar-icon right">
@@ -134,13 +140,15 @@
                                 <div class="clearfix"></div>
                             </li>
                         </ul>
+                    </div>
 
-                        <div class="sidebar-title">Recent Searches</div>
+                        <div class="sidebar-title-bottom">Recent Searches</div>
+                        <div class="sidebar-content-wrapper sidebar-bottom">
                         <ul>
                             <li class="sidebar-content"><a href="#" class="sidebar-link">
 
-                                <div class="sidebar-text left">
-                                    Different versions of the<br>Tristan Und Isolde Prelude
+                                <div class="sidebar-text-bottom left pad2">
+                                    <p class="top-text-bottom-sidebar">Different versions of the</p>  Tristan Und Isolde Prelude
                                 </div>
                                 <div class="sidebar-icon right">
                                     <img src="images/menu.png" class="sidebar-icon-menu">
@@ -151,7 +159,7 @@
                             <li class="sidebar-content">
                                 <a href="#" class="sidebar-link">
 
-                                <div class="sidebar-text left">
+                                <div class="sidebar-text-bottom left">
                                     Music
                                 </div>
                                 <div class="sidebar-icon right">
@@ -163,7 +171,7 @@
                             <li class="sidebar-content">
                                 <a href="#" class="sidebar-link">
 
-                                <div class="sidebar-text left">
+                                <div class="sidebar-text-bottom left">
                                     Guitar
                                 </div>
                                 <div class="sidebar-icon right">
@@ -175,7 +183,7 @@
                             <li class="sidebar-content">
                                 <a href="#" class="sidebar-link">
 
-                                <div class="sidebar-text left">
+                                <div class="sidebar-text-bottom left">
                                     Bob Cohen
                                 </div>
                                 <div class="sidebar-icon right">
@@ -187,7 +195,7 @@
                             <li class="sidebar-content">
                                 <a href="#" class="sidebar-link">
 
-                                <div class="sidebar-text left">
+                                <div class="sidebar-text-bottom left">
                                     Mark Schnack
                                 </div>
                                 <div class="sidebar-icon right">
@@ -199,7 +207,7 @@
                             <li class="sidebar-content">
                                 <a href="#" class="sidebar-link">
 
-                                <div class="sidebar-text left">
+                                <div class="sidebar-text-bottom left">
                                     Jefferson Dickey
                                 </div>
                                 <div class="sidebar-icon right">
@@ -210,11 +218,159 @@
                             </li>
 
                         </ul>
+
+
                     </div>
-                                <div class="clearfix"></div>
-                            </li>
-                    </div>
+
                 </div>
+                <div class="entry-container right">
+                    <div class="entry-title">
+                    Entries
+                    </div>
+
+                <div class="entry-nav">
+                    <div class="all-entries left">
+                        <div class="entry-nav-title">All Entries</div>
+                        <div class="entry-nav-buttons">
+                            <div class="selected-button left pad-left">
+                                All Members
+                            </div>
+                            <div class="unselected-button right pad-right">
+                               Friends
+                            </div>
+                            <div class="clearfix"></div>
+                    </div>
+                    </div>
+                    <div class="subscribed right">
+                        <div class="entry-nav-title">Subscribed</div>
+                        <div class="entry-nav-buttons">
+                            <div class="unselected-button left pad-left">
+                            New Entries
+                            </div>
+                            <div class="unselected-button right pad-right">
+                            New Comments
+                            </div>
+                            <div class="clearfix"></div>
+                    </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="entry-list">
+                    <ul>
+                        <li>
+                            <div class="entry">
+                            <div class="profile-pic left">
+                                <a href="#"><img src="images/profile1.png"></a>
+                            </div>
+                            <div class="entry-details right">
+                                <h2 class="entry-topic"><a href="#" class="topic-link">Day for Night by François Truffaut, a ground breaking film</a></h2>
+                                <p class="entry-info">by <a href="#" class="entry-link-blue"><span class="blue bold">Alan Coe</span></a> | February 10, 2012 | <a href="#" class="entry-link-green"><span class="green bold">Subscribed</span></a></p>
+                                <p class="entry-info">From Topic Box: <a href="#" class="entry-link-blue"><span class="blue bold">My Favorite Movies</span></a></p>
+                            </div>
+                            <div class="clearfix"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="entry">
+                            <div class="profile-pic left">
+                                <a href="#"><img src="images/profile2.png"></a>
+                            </div>
+                            <div class="entry-details right">
+                                <h4 class="notification"><span class="blue bold">NEW ENTRY!</span></h4>
+                                <h2 class="entry-topic"><a href="#" class="topic-link">Blade Runner, The Director's Cut</a></h2>
+                                <p class="entry-info">by <a href="#" class="entry-link-blue"><span class="blue bold">Mary Pilot</span></a> | February 8, 2012</p>
+                                <p class="entry-info">From Topic Box: <a href="#" class="entry-link-blue"><span class="blue bold">Behind the Scene</span></a></p>
+                            </div>
+                            <div class="clearfix"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="entry">
+                            <div class="profile-pic left">
+                                <a href="#"><img src="images/profile3.png"></a>
+                            </div>
+                            <div class="entry-details right">
+                                <h4 class="notification"><span class="blue bold">NEW COMMENT!</span></h4>
+                                <h2 class="entry-topic"><a href="#" class="topic-link">The Best French Restaurant in Chicago?</a></h2>
+                                <p class="entry-info">by <a href="#" class="entry-link-blue"><span class="blue bold">Jim Roy</span></a> | February 7, 2012</p>
+                                <p class="entry-info">From Topic Box: <a href="#" class="entry-link-blue"><span class="blue bold">Chicago Restaurants Reviews</span></a></p>
+                            </div>
+                            <div class="clearfix"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="entry">
+                            <div class="profile-pic left">
+                                <a href="#"><img src="images/profile4.png"></a>
+                            </div>
+                            <div class="entry-details right">
+                                <h2 class="entry-topic"><a href="#" class="topic-link">The Meaning of the Night. Dark Book but incredibly well written.</a></h2>
+                                <p class="entry-info">by <a href="#" class="entry-link-blue"><span class="blue bold">John Peter Moise</span></a> | February 7, 2012 | <a href="#" class="entry-link-green"><span class="green bold">Subscribed</span></a></p>
+                                <p class="entry-info">From Topic Box: <a href="#" class="entry-link-blue"><span class="blue bold">Books Read &amp Books to Read</span></a></p>
+                            </div>
+                            <div class="clearfix"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="entry">
+                            <div class="profile-pic left">
+                                <a href="#"><img src="images/profile5.png"></a>
+                            </div>
+                            <div class="entry-details right">
+                                <h4 class="notification"><span class="red bold">TOPIC BOX INVITE!</span></h4>
+                                <h2 class="entry-topic"><a href="#" class="topic-link">Pea Pesto</a></h2>
+                                <p class="entry-info">by <a href="#" class="entry-link-blue"><span class="blue bold">Marianne Gig</span></a> | February 5, 2012</p>
+                                <p class="entry-info">From Topic Box: <a href="#" class="entry-link-blue"><span class="blue bold">Favorite Recipes</span></a></p>
+                            </div>
+                            <div class="clearfix"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+                <div class="sidebar-right right">
+                    <div class="sidebar-title-right">
+                        Video Tutorial
+                    </div>
+                    <div class="sidebar-right-content-wrapper">
+                    <ul>
+                        <li class="sidebar-right-content"><a href="#" class="sidebar-link-right">Overview of Tutangle</a></li>
+                        <li class="sidebar-right-content"><a href="#" class="sidebar-link-right">Searching the Site</a></li>
+                        <li class="sidebar-right-content"><a href="#" class="sidebar-link-right">Previous & Saved Searches</a></li>
+                        <li class="sidebar-right-content"><a href="#" class="sidebar-link-right">The Topic Box Page</a></li>
+                        <li class="sidebar-right-content"><a href="#" class="sidebar-link-right">Creating a Topic Box</a></li>
+                        <li class="sidebar-right-content"><a href="#" class="sidebar-link-right">View Topic Box Entries</a></li>
+                        <li class="sidebar-right-content"><a href="#" class="sidebar-link-right">Creating an Entry</a></li>
+                        <li class="sidebar-right-content"><a href="#" class="sidebar-link-right">Privacy Settings</li>
+                        <li class="sidebar-right-content"><a href="#" class="sidebar-link-right">Co-Authoring</a></li>
+                    </ul>
+                    </div>
+
+                </div>
+        <div class="clearfix"></div>
+    </div>
+
+</div>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="about-dev left">
+                    <a href="#" class="footer-contact">About Us</a>
+                    <img src="images/dot.png">
+                    <a href="#" class="footer-contact">Contact Us</a>
+                    <img src="images/dot.png">
+                    <a href="#" class="footer-contact">Terms of Use</a>
+                    <img src="images/dot.png">
+                    <a href="#" class="footer-contact">Privacy Policy</a>
+                    <img src="images/dot.png">
+                    <a href="#" class="footer-contact">Feedback</a>
+                </div>
+                <div class="copyright right">
+                    &copy Tutangle 2013
+                </div>
+                <div class="clearfix"></div>
             </div>
         </div>
     </body>
