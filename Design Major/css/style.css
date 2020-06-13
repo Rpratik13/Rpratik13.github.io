@@ -7,8 +7,12 @@ a{
     text-decoration: none;
 }
 
-a.social-fcn-links, a.social-fcn-link-right {
+a.social-fcn-links, a.social-fcn-link-right, a. {
     color: #3b464a;
     text-decoration: none;
 }
 
+a.sidebar-link {
+    color: #f0f4f5;
+    text-decoration: none;
+}

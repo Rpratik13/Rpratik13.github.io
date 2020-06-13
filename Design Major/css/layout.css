@@ -118,19 +118,24 @@ ul {
     padding-right:0px;
 }
 
-.social-fcn-links {
+.social-fcn-links-left {
     padding: 8px 9px 9px 9px;
     font-size:10.5px;
     color:#505050;
 }
 
-td.social-fcn-links:hover {
+td.social-fcn-links-left:hover, td.social-fcn-links-right:hover {
     background-color:gray;
 }
-
 .social-fcn-link-right {
     vertical-align:top;
+}
+
+.social-fcn-links-right {
     margin-left:2px;
+    padding: 8px 9px 7px 8px;
+    font-size: 10.5px;
+    color: #505050;
 }
 .social-fcn-icon{
     margin-top: 1px;
@@ -141,4 +146,62 @@ td.social-fcn-links:hover {
 
 .gray{
     color: #b9b9b9;
+}
+
+.main-content {
+    width: 673px;
+    height:100px;
+    margin:0px auto;
+    padding: 21px 23px;
+
+}
+
+.main-left {
+    width: 530px;
+}
+
+.sidebar {
+    width: 140px;
+}
+
+.sidebar-title {
+    background-color: #2fc1da;
+    color: white;
+    padding: 9px 9px 13px 9px;
+    font-size: 12px;
+    height: 9px;
+    vertical-align:top;
+    border-bottom: 1px white solid;
+}
+
+.sidebar-content {
+    background-color: #f0f4f5;
+    position:relative;
+}
+
+.sidebar-content:hover {
+    background-color: white;
+}
+
+.sidebar-text {
+    font-size: 9px;
+    padding:7px 9px 7px 9px;
+    position: relative;
+    color: #474747;
+}
+
+
+.sidebar-icon-download {
+    position:absolute;
+    bottom: 8px;
+    right: 10px;
+}
+.sidebar-content:last-child{
+    border-bottom: 1px solid white;
+}
+
+.sidebar-icon-menu {
+    position: absolute;
+    top: calc(50% - 3px);
+    right:6px;
 }
