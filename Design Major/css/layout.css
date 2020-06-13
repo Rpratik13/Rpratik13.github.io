@@ -1,0 +1,144 @@
+.main-container-wrapper {
+    height: 601px;
+}
+
+header {
+    height: 90px;
+    width: 100%;
+
+}
+
+
+.nav-bar-top {
+    background-color: #7dd9e8;
+    height: 61px;
+}
+
+.nav-bar-bottom {
+    background-color: #f5f5f5;
+    height:29px;
+}
+
+.nav-bar-top, .nav-bar-bottom {
+
+    width: 719px;
+    margin: 0px auto;
+
+}
+
+.nav-top-container {
+    padding: 14px 23px 11px 24px;
+}
+
+.nav-bottom-container {
+    padding:0px 12px 0px 20px;
+}
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.search-container {
+    width: 247px;
+    padding-top:14px;
+}
+
+.search-bar{
+    background-image: url(../images/search_bar.png);
+    width: 168px;
+    height:16px;
+    border: 0px ;
+    padding-left:6px;
+    font-size: 8px;
+}
+
+.user-profile{
+    margin-left:131px;
+    text-align: right;
+
+}
+
+.user-name {
+    font-size:12px;
+    margin-bottom:1px;
+}
+
+input:focus{
+    outline: none;
+}
+
+.cross-icon, .search-icon, .search-button {
+    border: 0px;
+    outline:none;
+}
+.search-button-container {
+    background:  url("../images/search_button.png") no-repeat;
+
+    width:39px;
+    height:17px;
+    font-size: 7px;
+    padding-top:4px;
+    margin-left:5px;
+    padding-left: 5px;
+    color:white;
+}
+
+.search-button-container:hover{
+    background: url("../images/search_button_hover.png") no-repeat;
+}
+
+.cross-icon:hover {
+    cursor: hand;
+}
+
+ul {
+    list-style: none;
+}
+.user-profile-fcn-links {
+    word-spacing: 0px;
+}
+.user-profile-fcn-link:hover, .user-name:hover{
+    text-decoration: underline;
+}
+
+.user-profile-fcn-link {
+    display: inline;
+    font-size: 10px;;
+    padding: 0px 1px;
+}
+
+.user-profile-fcn-link:first-child{
+    padding-left:0px;
+}
+.user-profile-fcn-link:last-child{
+    border-right:0px;
+    padding-right:0px;
+}
+
+.social-fcn-links {
+    padding: 8px 9px 9px 9px;
+    font-size:10.5px;
+    color:#505050;
+}
+
+td.social-fcn-links:hover {
+    background-color:gray;
+}
+
+.social-fcn-link-right {
+    vertical-align:top;
+    margin-left:2px;
+}
+.social-fcn-icon{
+    margin-top: 1px;
+    margin-left:1px;
+}
+
+
+
+.gray{
+    color: #b9b9b9;
+}

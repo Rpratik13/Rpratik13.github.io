@@ -1,0 +1,14 @@
+body {
+    font-family: Arial;
+}
+
+a{
+    color: #3b464a;
+    text-decoration: none;
+}
+
+a.social-fcn-links, a.social-fcn-link-right {
+    color: #3b464a;
+    text-decoration: none;
+}
+
