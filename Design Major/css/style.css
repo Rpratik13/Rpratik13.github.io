@@ -16,3 +16,21 @@ a.sidebar-link {
     color: #f0f4f5;
     text-decoration: none;
 }
+
+
+
+.bold {
+    font-weight: bold;
+}
+
+.green {
+    color: #8ba949;
+}
+
+.blue {
+ color: #50afc1;
+}
+
+.red {
+    color: #50afc1;
+}
