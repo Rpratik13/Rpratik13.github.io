@@ -15,7 +15,7 @@ a.entry-link-green:hover {
 }
 
 a.footer-contact {
-  color: #c1c1c1;
+  color: #d4d4d4;
   text-decoration: none;
 }
 
@@ -84,6 +84,15 @@ ul {
 
 .entry-container {
   font-size: 30px;
+}
+
+.entry-info {
+    color: #7e7e7e;
+}
+.entry-info,
+.notification,
+.user-profile-fcn-link{
+  font-size: 11px;
 }
 
 .entry-nav-title {
@@ -220,11 +229,7 @@ ul {
   text-align: right;
 }
 
-.user-profile-fcn-link,
-.entry-info,
-.notification {
-  font-size: 11px;
-}
+
 
 .user-profile-fcn-links {
   word-spacing: 0px;
