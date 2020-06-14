@@ -50,14 +50,19 @@ input:focus,
 }
 
 .footer-container {
-  height: 45px;
-  margin-top: 32px;
+    width: 1002px;
+    margin: 0px auto;
 }
 
 .footer-content {
   margin: 0px auto;
-  padding-top: 18px;
-  width: 931px;
+  padding: 18px 36px 17px 35px;
+}
+
+.footer-wrapper {
+  height: 45px;
+  margin: 32px auto 0px auto;
+  width: 100%;
 }
 
 .header-bottom-wrapper {
