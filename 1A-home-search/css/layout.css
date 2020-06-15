@@ -33,7 +33,7 @@ ul.margin-right {
 
 .entry-details {
   width: 429px;
-  padding-right: 9px;
+  padding-right: 11px;
 }
 
 .entry-info {
@@ -117,8 +117,20 @@ ul.margin-right {
   margin-left: 10px;
 }
 
+.pad-left1{
+  padding-left: 1px;
+}
+
 .pad-right {
   margin-right: 10px;
+}
+
+.pad-right1 {
+  padding-right: 1px;
+}
+
+.pad-right2{
+  padding-right: 2px;
 }
 
 .pad2 {
