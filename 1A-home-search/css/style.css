@@ -58,6 +58,8 @@ td.social-fcn-links-right:hover {
 }
 
 td,
+.cross-icon-container,
+.search-icon-container,
 .selected-button,
 .sidebar-icon,
 .sidebar-link,
@@ -83,6 +85,14 @@ ul {
 
 .bold {
   font-weight: bold;
+}
+
+.cross-icon-container {
+  background: url(../images/cross_icon.png);
+}
+
+.cross-icon-container:hover {
+  background: url(../images/cross_icon_hover.png);
 }
 
 .entry {
@@ -160,6 +170,14 @@ ul {
 
 .search-button-container:hover {
   background: url("../images/search_button_hover.png") no-repeat;
+}
+
+.search-icon-container {
+  background: url(../images/search_icon.png);
+}
+
+.search-icon-container:hover {
+  background: url(../images/search_icon_hover.png);
 }
 
 .selected-button,
