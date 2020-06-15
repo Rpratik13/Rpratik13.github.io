@@ -59,7 +59,6 @@ td.social-fcn-links-right:hover {
 
 td,
 .cross-icon-container,
-.search-icon-container,
 .selected-button,
 .sidebar-icon,
 .sidebar-link,
@@ -90,11 +89,6 @@ ul {
 .cross-icon-container {
   background: url(../images/cross_icon.png);
 }
-
-.cross-icon-container:hover {
-  background: url(../images/cross_icon_hover.png);
-}
-
 .entry {
   padding: 14px 0px 15px 0px;
 }
@@ -170,14 +164,6 @@ ul {
 
 .search-button-container:hover {
   background: url("../images/search_button_hover.png") no-repeat;
-}
-
-.search-icon-container {
-  background: url(../images/search_icon.png);
-}
-
-.search-icon-container:hover {
-  background: url(../images/search_icon_hover.png);
 }
 
 .selected-button,
