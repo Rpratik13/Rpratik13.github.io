@@ -3,11 +3,6 @@
   padding: 0;
 }
 
-table {
-  border-spacing: 0px;
-  padding: 0px;
-}
-
 .clearfix {
   clear: both;
   content: "";
