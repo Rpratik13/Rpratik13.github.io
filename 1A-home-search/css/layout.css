@@ -6,6 +6,10 @@ input:focus,
   outline: none;
 }
 
+ul.margin-right {
+  margin-right: 4px ;
+}
+
 .all-entries,
 .subscribed {
   height: 65px;
@@ -115,10 +119,6 @@ input:focus,
 
 .pad-right {
   margin-right: 10px;
-}
-
-ul.margin-right {
-  margin-right: 5px ;
 }
 
 .pad2 {
@@ -248,18 +248,18 @@ ul.margin-right {
 }
 
 .social-fcn-link-right {
-  margin-top: 7px;
-  margin-left:8px;
+  margin-top: 6px;
+  margin-left: 7px;
 }
 
 .social-fcn-links-left {
-  padding: 15px 15px 14px 15px;
+  padding: 13px 16px 14px 15px;
 }
 
 .social-fcn-links-right {
   height: 20px;
   margin-left: 2px;
-  padding: 8px 9px 12px 21px;
+  padding: 8px 9px 12px 19px;
 }
 
 .top-text-bottom-sidebar {
@@ -288,7 +288,10 @@ ul.margin-right {
   padding-right: 2px;
 }
 
-
 .user-profile {
-  margin-left: 218px;
+  margin-left: 200px;
+}
+
+.user-profile-fcn-link {
+  padding: 0px 1px;
 }
