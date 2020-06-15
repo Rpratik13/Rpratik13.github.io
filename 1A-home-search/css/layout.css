@@ -117,6 +117,10 @@ input:focus,
   margin-right: 10px;
 }
 
+ul.margin-right {
+  margin-right: 5px ;
+}
+
 .pad2 {
   padding-bottom: 12px;
 }
@@ -137,10 +141,10 @@ input:focus,
 }
 
 .search-button-container {
-  height: 14px;
-  padding-top: 6px;
-  width: 43px;
-  padding-left: 10px;
+  height: 15px;
+  padding-top: 5px;
+  width: 44px;
+  padding-left: 9px;
 }
 
 .search-container {
@@ -180,8 +184,8 @@ input:focus,
 
 .sidebar-icon-menu {
   position: absolute;
-  top: 40.7%;
-  right: 6px;
+  top: 40.99%;
+  right: 14px;
 }
 
 .sidebar-left {
@@ -244,15 +248,16 @@ input:focus,
 }
 
 .social-fcn-link-right {
-  margin-top: 6px;
+  margin-top: 7px;
   margin-left:8px;
 }
 
 .social-fcn-links-left {
-  padding: 13px 15px 12px 15px;
+  padding: 15px 15px 14px 15px;
 }
 
 .social-fcn-links-right {
+  height: 20px;
   margin-left: 2px;
   padding: 8px 9px 12px 21px;
 }
@@ -273,15 +278,16 @@ input:focus,
   width: 114px;
 }
 
+.user-fcn {
+  width: 695px;
+}
+
 .user-name {
-  margin-bottom: 6px;
-  margin-top: 6px;
+  margin-bottom: 8px;
+  margin-top: 5px;
   padding-right: 2px;
 }
 
-.user-profile-fcn-link {
-  padding: 0px 5px;
-}
 
 .user-profile {
   margin-left: 218px;

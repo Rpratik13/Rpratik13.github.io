@@ -23,7 +23,8 @@ a.footer-contact:hover {
 }
 
 a.search-button-text {
-    color:#fff;
+    color: #fff;
+    font-size: 9px;
 }
 
 a.sidebar-link {
@@ -52,13 +53,13 @@ body {
 
 .sidebar-content:hover,
 .sidebar-right-content:hover,
-td.social-fcn-links-left:hover,
-td.social-fcn-links-right:hover {
+.social-fcn-links-left:hover,
+.social-fcn-links-right:hover {
   background-color: white;
 }
 
-td,
 .cross-icon-container,
+.search-icon-container,
 .selected-button,
 .sidebar-icon,
 .sidebar-link,
@@ -66,12 +67,24 @@ td,
 .sidebar-text-bottom,
 .sidebar-top-text,
 .sidebar-right-content,
+.social-fcn-links-left,
+.social-fcn-links-right,
 .unselected-button {
     cursor: pointer;
 }
 
+.top {
+  text-align:top;
+}
+
 ul {
   list-style: none;
+}
+
+.inline {
+  display: inline-block;
+  line-height: 11px;
+  vertical-align: top;
 }
 
 .all-entries {
@@ -89,6 +102,11 @@ ul {
 .cross-icon-container {
   background: url(../images/cross_icon.png);
 }
+
+.cross-icon-container:hover {
+  background: url(../images/cross_icon_hover.png);
+}
+
 .entry {
   padding: 14px 0px 15px 0px;
 }
@@ -166,6 +184,14 @@ ul {
   background: url("../images/search_button_hover.png") no-repeat;
 }
 
+.search-icon-container {
+  background: url("../images/search_icon.png");
+}
+
+.search-icon-container:hover {
+  background: url("../images/search_icon_hover.png");
+}
+
 .selected-button,
 .unselected-button:hover {
   background: url(../images/selected.png) no-repeat;
@@ -228,7 +254,7 @@ ul {
 }
 
 .user-name {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
 }
 
