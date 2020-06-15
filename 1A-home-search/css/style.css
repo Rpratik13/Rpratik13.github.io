@@ -64,7 +64,6 @@ ul {
 
 .cross-icon-container,
 .search-button-container,
-.search-icon-container,
 .selected-button,
 .sidebar-icon,
 .sidebar-link,
@@ -182,10 +181,6 @@ ul {
 
 .search-icon-container {
   background: url("../images/search_icon.png");
-}
-
-.search-icon-container:hover {
-  background: url("../images/search_icon_hover.png");
 }
 
 .selected-button,
