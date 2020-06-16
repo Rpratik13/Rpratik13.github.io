@@ -8,6 +8,11 @@
 .social-fcn-icon-right:hover {
   background: #fff;
 }
+
+.social-fcn-icon-left:active,
+.social-fcn-icon-right:active {
+  background: #f3fbf2;
+}
 }
 
 @media(min-width: 768px){
@@ -19,6 +24,7 @@
   .search-icon-container:hover{
     background-image: url(../images/search_icon_hover.png);
   }
+
 }
 
 @media(min-width: 962px){
@@ -26,6 +32,7 @@
   .unselected-button {
     font-size: 11px;
   }
+
 
   .copyright,
   .footer-contact {
@@ -211,6 +218,20 @@ ul {
 
 .hover {
   display: none;
+}
+
+.social-fcn-links-left:active,
+.social-fcn-links-right:active{
+  background-color: #f3fbf2;
+}
+
+.disabled:active {
+  background-color: #f5f5f5;
+}
+
+.sidebar-content:active,
+.sidebar-right-content:active{
+    background: #f3fbf2;
 }
 
 .account-button:hover .not-hover {

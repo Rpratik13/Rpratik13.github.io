@@ -5,7 +5,7 @@ input:focus {
 }
 
 .account {
-  padding-top: 7px;
+  margin-top: 7px;
   width: 20px;
 }
 
@@ -695,7 +695,7 @@ img.logo {
 }
 
 .social-fcn-links-left {
-  padding: 13px 16px 14px 15px;
+  padding: 13px 16px 12px 15px;
 }
 
 .social-fcn-links-right {
