@@ -577,15 +577,17 @@ img.logo {
 }
 
 .search-button-container {
+  position: absolute;
   display: initial;
   height: 20px;
-  width: 47px;
+  width: 45px;
   padding-left: 7px;
+  margin-left:7px;
 }
 
 .search-container {
   padding-top: 20px;
-  width: 48.3453237%;
+  width: calc(47.3381295% + 7px);
 }
 
 .search-icon-container {
@@ -598,6 +600,7 @@ img.logo {
 }
 
 .search-input-container {
+  position: relative;
   width: 82.1428571%;
 }
 
