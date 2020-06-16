@@ -3,15 +3,24 @@
   .unselected-button {
     font-size: 9px;
   }
+
+.social-fcn-icon-left:hover,
+.social-fcn-icon-right:hover {
+  background: #fff;
+}
 }
 @media(min-width: 768px){
   .selected-button,
   .unselected-button {
     font-size: 10px;
   }
+
+  .search-icon-container:hover{
+    background-image: url(../images/search_icon_hover.png);
+  }
 }
 
-@media(min-width: 768px){
+@media(min-width: 962px){
   .selected-button,
   .unselected-button {
     font-size: 11px;
@@ -21,6 +30,12 @@
   .footer-contact {
     font-size: 9px;
   }
+
+  .search-icon-container:hover{
+    background-image: url(../images/search_icon.png);
+  }
+
+
 }
 
 
@@ -179,6 +194,7 @@ ul {
   color: #8ba949;
 }
 
+
 .header-bottom-wrapper,
 .nav-bar-bottom {
   background-color: #f5f5f5;
@@ -187,6 +203,18 @@ ul {
 .header-top-wrapper,
 .nav-bar-top {
   background-color: #7dd9e8;
+}
+
+.hover {
+  display: none;
+}
+
+.account-button:hover .not-hover {
+  display: none;
+}
+
+.account-button:hover .hover {
+  display: initial;
 }
 
 .red {
@@ -249,6 +277,8 @@ ul {
 .sidebar-top{
   background-color: #f0f4f5;
 }
+
+
 
 .social-fcn-links-left {
   color: #505050;

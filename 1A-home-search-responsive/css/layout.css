@@ -193,12 +193,12 @@ img.logo {
 }
 
 .social-fcn-icon-left {
-  margin-top: 7px;
+  padding: 10px 5px 12px 5px;
 }
 
 .social-fcn-icon-right {
-  padding-top: 10px;
-  padding-left: 40px;
+  margin-left: 15px;
+  padding: 10px 5px 11px 5px;
 }
 
 .social-fcn-links-left {
@@ -391,7 +391,6 @@ img.logo {
 
 .social-fcn-icon-right {
   padding-top: 10px;
-  padding-left: 40px;
 }
 
 .social-fcn-links-left {
