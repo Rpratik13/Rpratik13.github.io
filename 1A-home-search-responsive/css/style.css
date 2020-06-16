@@ -8,6 +8,11 @@
 .social-fcn-icon-right:hover {
   background: #fff;
 }
+
+.social-fcn-icon-left:active,
+.social-fcn-icon-right:active {
+  background: #284e57;
+}
 }
 
 @media(min-width: 768px){
@@ -212,6 +217,8 @@ ul {
 .hover {
   display: none;
 }
+
+
 
 .account-button:hover .not-hover {
   display: none;
