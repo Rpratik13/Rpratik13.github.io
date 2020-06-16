@@ -1,5 +1,4 @@
-@media(min-width: 1px){
-
+@media(min-width:1px){
 input:focus {
   border: 0px;
   outline: none;
@@ -221,11 +220,9 @@ img.logo {
   border-top-left-radius:15px;
   border-top-right-radius:15px;
 }
-
-
 }
 
-@media(min-width: 768px){
+@media(min-width:768px){
 input:focus,
 .cross-icon,
 .search-icon {
@@ -503,8 +500,9 @@ img.logo {
 }
 
 .main-content {
-  padding: 22px 3.09381238% 0px 3.29341317%;
-  width: 93.612774451%;
+  padding: 22px 28px 0px 32px;
+  width: 94.011976%;
+  margin:0px;
 }
 
 .main-left {

@@ -9,6 +9,7 @@
   background: #fff;
 }
 }
+
 @media(min-width: 768px){
   .selected-button,
   .unselected-button {
@@ -34,8 +35,6 @@
   .search-icon-container:hover{
     background-image: url(../images/search_icon.png);
   }
-
-
 }
 
 
@@ -147,6 +146,11 @@ ul {
 
 .cross-icon-container:hover {
   background: url(../images/cross_icon_hover.png);
+}
+
+.disabled:hover {
+  background-color: #f5f5f5;
+  cursor: auto;
 }
 
 .entry {
