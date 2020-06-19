@@ -1,0 +1,318 @@
+a {
+    text-decoration: none;
+}
+
+a.blog-link:hover,
+a.underline:hover{
+    text-decoration: underline;
+}
+
+a.fcn-link {
+    text-decoration: none;
+    color: #fff;
+}
+
+a.fcn-link:hover,
+.learn-more:hover {
+    color: #fce38a;
+}
+
+.left-button:hover,
+.right-button:hover,
+.testimonial-left-button:hover,
+.testimonial-right-button:hover{
+    cursor: pointer;
+}
+
+.accordion-box:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+
+.creative-template {
+    color: #fff;
+    font-size: 72px;
+}
+  .welcome-to-mogo {
+    color: #fff;
+    font-size: 150px;
+  }
+
+.icon-fcn:hover {
+    cursor: pointer;
+}
+
+header {
+    background-color: transparent ;
+}
+
+.num {
+    font-size: 24px;
+}
+
+.slider-value {
+    font-size: 18px;
+}
+
+.logo {
+    color: #fff;
+    font-size: 29.5px;
+}
+
+.logo-gray {
+    color: #b0b0b0;
+    font-size: 46px;
+}
+
+.montserrat-bold {
+    font-family: 'Montserrat';
+    font-weight: 700;
+}
+
+.accordion-details-open {
+    font-size: 14.49px;
+}
+
+.montserrat-regular {
+    font-family: 'Montserrat';
+    font-weight: 400;
+}
+
+.roboto-regular {
+    font-family: 'Roboto';
+    font-weight: 400;
+}
+
+.roboto-light-italic {
+    font-family: 'Roboto';
+    font-weight: 300;
+    font-style: italic;
+}
+
+.kaushanscript-regular {
+    font-family: 'Kaushan Script';
+    font-weight: 400;
+}
+.text-fcn {
+    color: #fff;
+    font-size: 13.5px;
+}
+
+.banner{
+    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.73), rgba(252, 227, 128, 0.52)), url(../images/eagle_background.png);
+    background-position: contain;
+    text-align: center;
+}
+
+.description,
+.description-services2,
+.description-www,
+.section-title,
+.section-sub-title,
+.section-sub-title-wps {
+    text-align: center;
+}
+
+.description,
+.description-services2,
+.description-www,
+.footer-text {
+    color: #999;
+    font-size: 15px;
+}
+
+.section-title {
+    font-size: 24px;
+}
+
+.section-sub-title,
+.section-sub-title-wps{
+    font-size: 29px;
+}
+.white {
+    color: #fff;
+}
+
+
+.matthew,
+.wwd-img-left {
+    background-color: #95e1d3   ;
+}
+
+.super-team{
+  text-align: center;
+  color: #fff;
+}
+
+.services-desc{
+    font-size: 15px;
+}
+
+
+.fad {
+    background-image: url("../images/unique_design.png");
+}
+
+.accordion-text {
+    font-size: 14px;
+ }
+
+ .author-name,
+ .testimonial-author-name {
+    font-size: 24px;
+    margin-top: 12px;
+ }
+
+ .by-line {
+    width: 60px;
+    height: 3px;
+    background-color: #f38181;
+    margin-top: 30px;
+ }
+
+ .name-title,
+ .name-title-matthew {
+    text-align: center;
+ }
+
+ .name,
+ .blog-title,
+ .blogs2-title,
+ .footer-bottom {
+    font-size: 14px;
+ }
+
+ .blog-title {
+    color: #000;
+ }
+
+ .wps-name {
+    font-size: 13px;
+ }
+
+ .title {
+    font-size: 15px;
+    color: #c6c6c6;
+ }
+
+ .logos {
+    background-color: #f8f8f8;
+ }
+
+  .wps-title {
+    font-size: 15px;
+    color: #585858;
+ }
+
+ .wps-say {
+    font-size: 15px;
+    color: #b0b0b0;
+ }
+
+ .wps {
+    background-image: url(../images/mountain.png);
+ }
+
+ .date {
+    text-align: center;
+    color: #fff;
+ }
+
+ .date-num {
+    font-size: 30px;
+ }
+
+ .date-month,
+ .blog-stats {
+    font-size: 15px;
+ }
+
+.blog-stats {
+    color: #acacac;
+}
+ .blog-desc {
+    font-size: 15px;
+    color: #999;
+    line-height: 23px;
+    margin-top: 12px;
+    padding-bottom: 17px;
+    border-bottom: 1px solid #e5e5e5;
+ }
+
+ .map {
+    background-image: url(../images/map.png);
+    text-align: center;
+ }
+
+ .red {
+    color: #f38181;
+ }
+
+ .open-map {
+    font-size: 24px;
+ }
+
+ .blog2-heading {
+    font-size: 12px;
+ }
+
+ .blog2-date {
+    font-size: 13px;
+
+ }
+
+ .stone {
+    background-image: url(../images/stone.png);
+ }
+
+ .couple {
+    background-image: url(../images/couple.png);
+ }
+
+ .road {
+    background-image: url(../images/road.png);
+ }
+
+ .night {
+    background-image: url(../images/night.png);
+ }
+
+.snail {
+    background-image: url(../images/snail.png);
+ }
+
+ .hill {
+    background-image: url(../images/hill.png);
+ }
+
+  .tunnel {
+    background-image: url(../images/tunnel.png);
+ }
+
+  .grass {
+    background-image: url(../images/grass.png);
+ }
+
+  .girl {
+    background-image: url(../images/girl.png);
+ }
+
+ .more-imgs {
+    color: #585858;
+    font-size: 13px;
+ }
+
+ .orange{
+    color: #facfcf;
+
+ }
+
+ .footer-bottom {
+    text-align: center;
+    padding-top: 22px   ;
+ }
+
+ .input-email:focus,
+ .subscribe-btn:focus {
+    outline:none;
+ }
