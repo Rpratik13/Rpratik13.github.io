@@ -573,11 +573,20 @@
 .work-images-left-top,
 .work-images-left-bottom {
     width: 100%;
+    display:block;
 
 }
 
+
+.work-images {
+  width: 50%;
+}
 .work-image{
     width: 50%;
+}
+
+.work-image img {
+  max-width: 100%;
 }
 
 .testimonial {
@@ -832,6 +841,10 @@
     width: 150px;
     border: none;
     background: #caf0e9;
+ }
+
+ .subscribe-btn:hover{
+  background: #baf0e9;
  }
 
  .blog2-text {
