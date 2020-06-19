@@ -1,3 +1,34 @@
+@media(min-width: 768px){
+    .welcome-to-mogo {
+    color: #fff;
+    font-size: 100px;
+  }
+
+  .wwd-img-middle{
+    background-image: url(../images/wwd2.png);
+    background-size: cover;
+}
+.wwd-img-bottom {
+    background-image: url(../images/wwd3.png);
+    background-size: cover;
+}
+  .wwd-img-top-cover{
+    background-image: url(../images/wwd1.png);
+    background-size: cover;
+  }
+.wwd-img-top {
+    background-color: #95e1d3   ;
+}
+
+}
+
+@media(min-width: 1280px){
+    .welcome-to-mogo {
+    color: #fff;
+    font-size: 150px;
+  }
+}
+
 a {
     text-decoration: none;
 }
@@ -33,10 +64,6 @@ a.fcn-link:hover,
     color: #fff;
     font-size: 72px;
 }
-  .welcome-to-mogo {
-    color: #fff;
-    font-size: 150px;
-  }
 
 .icon-fcn:hover {
     cursor: pointer;
@@ -98,9 +125,14 @@ header {
     font-size: 13.5px;
 }
 
+.ipad {
+  background-image: url(../images/ipad.png);
+  background-size: contain;
+}
+
 .banner{
     background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.73), rgba(252, 227, 128, 0.52)), url(../images/eagle_background.png);
-    background-position: contain;
+    background-position-x: center;
     text-align: center;
 }
 
@@ -195,7 +227,9 @@ header {
     color: #c6c6c6;
  }
 
- .logos {
+ .logo-background,
+ .logos-tablet,
+ .logo-wrapper {
     background-color: #f8f8f8;
  }
 
@@ -211,6 +245,7 @@ header {
 
  .wps {
     background-image: url(../images/mountain.png);
+    background-size: cover;
  }
 
  .date {
@@ -296,6 +331,44 @@ header {
   .girl {
     background-image: url(../images/girl.png);
  }
+
+ .man {
+    background-image: url(../images/man.png);
+    background-size: cover;
+ }
+
+ .roof {
+    background-image: url(../images/roof.png);
+    background-size: cover;
+ }
+
+.bridge {
+    background-image: url(../images/bridge.png);
+    background-size: cover;
+}
+
+.dome {
+    background-image: url(../images/dome.png);
+    background-size: cover;
+}
+
+.jellyfish {
+    background-image: url(../images/jellyfish.png);
+    background-size: cover;
+    height: 780px;
+}
+
+.window {
+    background-image: url(../images/window.png);
+    background-size: cover;
+}
+
+.building {
+    background-image: url(../images/building.png);
+    background-size: cover;
+}
+
+
 
  .more-imgs {
     color: #585858;
