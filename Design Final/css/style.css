@@ -1,31 +1,362 @@
-@media(min-width: 768px){
-    .welcome-to-mogo {
+.welcome-to-mogo {
     color: #fff;
-    font-size: 80px;
+    font-size: 40px;
   }
 .creative-template {
     color: #fff;
-    font-size: 52px;
+    font-size: 22px;
 }
 
-  .wwd2{
+.num {
+    font-size: 10px;
+}
+.slider-value {
+    font-size: 8px;
+}
+
+.services-desc {
+    font-size: 12px;
+}
+
+
+ .author-name,
+ .testimonial-author-name {
+    font-size: 18px;
+    margin-top: 12px;
+ }
+
+.wwd2{
     background-image: url(../images/wwd2.png);
     background-size: cover;
+    background-position: center;
 }
 .wwd3 {
     background-image: url(../images/wwd3.png);
     background-size: cover;
+    background-position: center;
 }
   .wwd-img-left-top{
     background-image: url(../images/wwd1.png);
     background-size: cover;
+    background-position: center;
   }
 .wwd1 {
     background-color: #95e1d3   ;
 }
 
+.section-title {
+    font-size: 17px;
 }
 
+.section-sub-title,
+.section-sub-title-wps{
+    font-size: 19px;
+}
+
+
+ .by-line {
+    width: 30px;
+    height: 3px;
+    background-color: #f38181;
+    margin-top: 15px;
+ }
+
+
+#arrow-up {
+    display: none;
+}
+ .matthew-hover {
+    background-image: url(../images/matthew_hover.png);
+}
+
+ .christopher-hover {
+    background-image:  linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/christopher.png);
+    background-position-x: center;
+
+}
+
+ .michael-hover {
+    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/michael.png);
+    background-position-x: -110px;
+}
+
+
+
+.michael {
+    background-image: url(../images/michael.png);
+    background-position-x: -110px;
+}
+
+ .title {
+    font-size: 13px;
+    color: #c6c6c6;
+ }
+
+
+  .name {
+    font-size: 14px;
+  }
+
+.blog-title {
+    font-size: 12px;
+}
+  .blogs2-title,
+  .insta-title{
+    font-size: 10px;
+  }
+
+  .blog2-date{
+    font-size: 10px;
+  }
+
+
+ .footer-bottom {
+    font-size: 14px;
+ }
+
+
+ .blog-desc {
+    font-size: 12px;
+    color: #999;
+    line-height: 16px;
+    margin-top: 12px;
+    padding-bottom: 17px;
+ }
+
+ .logo-gray {
+    color: #b0b0b0;
+    font-size: 26px;
+}
+
+.blog2-heading {
+    font-size: 8px;
+ }
+
+ .footer-text {
+    color: #999;
+    font-size: 12px;
+}
+
+
+ .more-imgs {
+    color: #585858;
+    font-size: 10px;
+ }
+
+
+ .wps-say {
+    font-size: 12px;
+    color: #b0b0b0;
+ }
+
+ a .nav-fcn{
+    text-decoration: none;
+    color: #fff;
+ }
+
+ a .nav-fcn:hover {
+    color: #fce38a;
+ }
+
+
+ .nav-fcn:hover {
+    border-bottom: 1px solid #fce38a;
+
+    padding: 5px 0px;
+  }
+
+  .man,
+.roof,
+.bridge,
+.dome,
+.jellyfish,
+.window,
+.building {
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+ .title {
+    font-size: 9px;
+    color: #c6c6c6;
+ }
+
+
+  .name {
+    font-size: 10px;
+  }
+
+  .matthew,
+  .matthew-hover {
+    background-position-x: -20px;
+  }
+
+ .man:hover .creative,
+ .bridge:hover .creative,
+ .roof:hover .creative,
+ .jellyfish:hover .creative-jellyfish,
+ .window:hover .creative,
+ .building:hover .creative,
+ .dome:hover .creative {
+    display: block;
+ }
+
+@media(min-width: 768px){
+
+ .wps-say {
+    font-size: 15px;
+ }
+
+ .man,
+.man:hover,
+.roof,
+.roof:hover,
+.bridge,
+.bridge:hover,
+.dome,
+.dome:hover,
+.jellyfish,
+.jellyfish:hover,
+.window,
+.window:hover,
+.building,
+.building:hover{
+    background-position-x: center;
+}
+
+
+
+
+
+  .blogs2-title,
+  .insta-title{
+    font-size: 14px;
+  }
+
+
+ .more-imgs {
+    font-size: 13px;
+ }
+
+ .blog2-date {
+    font-size: 13px;
+
+ }
+
+.footer-text {
+    font-size: 15px;
+}
+
+ .blog2-heading {
+    font-size: 12px;
+ }
+
+.logo-gray {
+    font-size: 46px;
+}
+
+ .blog-desc {
+    font-size: 15px;
+    line-height: 23px;
+ }
+
+  .blog-title{
+    font-size: 14px;
+ }
+
+    .welcome-to-mogo {
+    color: #fff;
+    font-size: 100px;
+  }
+
+ .title {
+    font-size: 15px;
+    color: #c6c6c6;
+ }
+
+  .name {
+    font-size: 14px;
+  }
+
+ .by-line {
+    width: 60px;
+    height: 3px;
+    background-color: #f38181;
+    margin-top: 30px;
+ }
+.creative-template {
+    color: #fff;
+    font-size: 57px;
+}
+
+
+.services-desc{
+    font-size: 15px;
+}
+
+.num {
+    font-size: 24px;
+}
+
+.slider-value {
+    font-size: 18px;
+}
+
+.matthew,
+.matthew-hover,
+.christopher,
+.christopher-hover
+.michael,
+.michael-hover {
+    background-position: center;
+}
+
+.christopher {
+    background-image: url(../images/christopher.png);
+}
+
+.michael {
+    background-image: url(../images/michael.png);
+}
+
+
+.section-title {
+    font-size: 24px;
+}
+
+
+
+.section-sub-title,
+.section-sub-title-wps{
+    font-size: 29px;
+}
+
+ .author-name,
+ .testimonial-author-name {
+    font-size: 24px;
+    margin-top: 12px;
+ }
+
+ .matthew-image {
+    background-image: url(../images/matthew.png);
+    background-position-x: left;
+}
+
+.michael {
+    background-position-x: center;
+}
+
+
+
+
+}
+
+.testimonial-image {
+    background-image: url(../images/testimonial_img.png);
+    background-size: cover;
+}
 @media(min-width: 1280px){
     .welcome-to-mogo {
     color: #fff;
@@ -45,42 +376,50 @@
 
 .christopher {
     background-image: url(../images/christopher.png);
-    height:470px;
     background-position-x: center;
 }
 
 .blog1 {
     background-image: url(../images/blog1.png);
     background-size: cover;
-    background-position-x: center;
-    height:240px;
+    background-position-x: center;;
 }
 
 .blog2 {
     background-image: url(../images/blog2.png);
     background-size: cover;
     background-position-x: center;
-    height:240px;
 }
 
 .blog3 {
     background-image: url(../images/blog3.png);
     background-size: cover;
     background-position-x: center;
-    height:240px;
 }
 
-.michael {
-    background-image: url(../images/michael.png);
-    height: 470px;
+
+
+
+
+.candle {
+    background-image: url(../images/candle.png);
     background-position-x: center;
+    background-size: cover;
 }
 
-.matthew-image {
-    background-image: url(../images/matthew.png);
-    height: 470px;
-    background-position-x: left;
+.wave {
+    background-image: url(../images/wave.png);
+    background-position-x: center;
+    background-size: cover;
 }
+
+
+.guitar {
+    background-image: url(../images/guitar.png);
+    background-position-x: center;
+    background-size: cover;
+}
+
 
 a {
     text-decoration: none;
@@ -121,30 +460,25 @@ a.fcn-link:hover,
 header {
     background-color: transparent ;
 }
-
-.num {
-    font-size: 24px;
-}
-
-.slider-value {
-    font-size: 18px;
-}
-
 .logo {
     color: #fff;
     font-size: 29.5px;
 }
 
-.logo-gray {
-    color: #b0b0b0;
-    font-size: 46px;
-}
 
 .montserrat-bold {
     font-family: 'Montserrat';
     font-weight: 700;
 }
 
+
+#accordion-details2 {
+    display: none;
+    border: 1px solid #e5e5e5;
+    border-top: 0px;
+    width: 100%;
+
+}
 .accordion-details-open {
     font-size: 14.49px;
 }
@@ -176,12 +510,17 @@ header {
 
 .ipad {
   background-image: url(../images/ipad.png);
-  background-size: contain;
+  background-size: cover;
+}
+
+.iphone {
+    background-image: url(../images/iphone.png);
+    background-size: cover;
 }
 
 .banner{
     background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.73), rgba(252, 227, 128, 0.52)), url(../images/eagle_background.png);
-    background-position-x: center;
+    background-position: center;
     text-align: center;
 }
 
@@ -196,38 +535,75 @@ header {
 
 .description,
 .description-services2,
-.description-www,
-.footer-text {
+.description-www {
     color: #999;
     font-size: 15px;
 }
 
-.section-title {
-    font-size: 24px;
-}
-
-.section-sub-title,
-.section-sub-title-wps{
-    font-size: 29px;
-}
 .white {
     color: #fff;
 }
 
 
-.matthew,
-.wwd-img-left {
-    background-color: #95e1d3   ;
+
+.matthew:hover,
+.christopher:hover,
+.michael:hover,
+.wwd-img-left:hover,
+.wwd-img:hover {
+    background-color: #95e1d3;
+    background-image: url("");
 }
 
+.wwd-img-left {
+    background-image: url(../images/wwd1.png);
+    background-position: center;
+}
+
+.wwd-img-left-top {
+    background-image: url(../images/wwd1_hover.png);
+    background-position: center;
+}
+
+.wwd-img-wwd2 {
+    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.9), rgba(252, 227, 128, 0.8)), url(../images/wwd2.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.wwd-img-wwd3 {
+    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.9), rgba(252, 227, 128, 0.8)), url(../images/wwd3.png);
+    background-position: center;
+}
+
+.wwd-img-left:hover .wwd-img-left-top,
+.wwd-img-left:hover .super-team,
+.wwd-img:hover .wwd-img-wwd2,
+.wwd-img:hover .super-team,
+.wwd-img:hover .wwd-img-wwd3,
+.wwd-img:hover .super-team {
+    display: initial;
+}
+
+
+
+
+.matthew {
+    background-image: url(../images/matthew.png);
+}
+
+.christopher {
+    background-image: url(../images/christopher.png);
+}
+
+.michael {
+    background-image: url(../images/michael.png);
+}
 .super-team{
   text-align: center;
   color: #fff;
 }
 
-.services-desc{
-    font-size: 15px;
-}
 
 
 .fad {
@@ -238,30 +614,16 @@ header {
     font-size: 14px;
  }
 
- .author-name,
- .testimonial-author-name {
-    font-size: 24px;
-    margin-top: 12px;
- }
 
- .by-line {
-    width: 60px;
-    height: 3px;
-    background-color: #f38181;
-    margin-top: 30px;
- }
+
 
  .name-title,
  .name-title-matthew {
     text-align: center;
  }
 
- .name,
- .blog-title,
- .blogs2-title,
- .footer-bottom {
-    font-size: 14px;
- }
+
+
 
  .blog-title {
     color: #000;
@@ -271,10 +633,6 @@ header {
     font-size: 13px;
  }
 
- .title {
-    font-size: 15px;
-    color: #c6c6c6;
- }
 
  .logo-background,
  .logos-tablet,
@@ -287,10 +645,6 @@ header {
     color: #585858;
  }
 
- .wps-say {
-    font-size: 15px;
-    color: #b0b0b0;
- }
 
  .wps {
     background-image: url(../images/mountain.png);
@@ -314,17 +668,11 @@ header {
 .blog-stats {
     color: #acacac;
 }
- .blog-desc {
-    font-size: 15px;
-    color: #999;
-    line-height: 23px;
-    margin-top: 12px;
-    padding-bottom: 17px;
- }
 
  .map {
     background-image: url(../images/map.png);
     text-align: center;
+    background-size: cover;
  }
 
  .red {
@@ -335,14 +683,7 @@ header {
     font-size: 24px;
  }
 
- .blog2-heading {
-    font-size: 12px;
- }
 
- .blog2-date {
-    font-size: 13px;
-
- }
 
  .stone {
     background-image: url(../images/stone.png);
@@ -380,10 +721,17 @@ header {
     background-image: url(../images/girl.png);
  }
 
+
+
+
  .man {
     background-image: url(../images/man.png);
     background-size: cover;
     background-position-x: center;
+ }
+
+ .man:hover{
+    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/man.png);
  }
 
  .roof {
@@ -392,11 +740,21 @@ header {
     background-position-x: center;
  }
 
+  .roof:hover{
+    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/roof.png);
+ }
+
+
 .bridge {
     background-image: url(../images/bridge.png);
     background-size: cover;
     background-position-x: center;
 }
+
+ .bridge:hover{
+    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/bridge.png);;
+ }
+
 
 .dome {
     background-image: url(../images/dome.png);
@@ -404,12 +762,25 @@ header {
     background-position-x: center;
 }
 
+ .dome:hover{
+    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/dome.png);
+
+ }
+
+
+
+
 .jellyfish {
     background-image: url(../images/jellyfish.png);
     background-size: cover;
     background-position-x: center;
-    height: 780px;
+
 }
+
+ .jellyfish:hover{
+    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/jellyfish.png);;
+ }
+
 
 .window {
     background-image: url(../images/window.png);
@@ -417,18 +788,24 @@ header {
     background-position-x: center;
 }
 
+ .window:hover{
+    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/window.png);;
+ }
+
+
 .building {
     background-image: url(../images/building.png);
     background-size: cover;
     background-position-x: center;
 }
 
-
-
- .more-imgs {
-    color: #585858;
-    font-size: 13px;
+ .building:hover{
+    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/building.png);;
  }
+
+
+
+
 
  .orange{
     color: #facfcf;
