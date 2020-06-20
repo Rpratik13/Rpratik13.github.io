@@ -14,13 +14,14 @@
     z-index: 10;
   }
 
-  .wwd-tablet,
+  .dev-imgs{
+    width: 1200px;
+  }
   .dev-imgs-tablet,
   .logos-tablet,
   .services2-tablet,
   .services-container-tablet,
-  .wwd-tablet,
-  .stories-tablet {
+  .wwd-tablet {
     display: none;
   }
 
@@ -28,8 +29,6 @@
     margin-top: 120px;
   }
 
-  .stories-desktop,
-  .wwd-desktop,
   .logos-desktop,
   .dev-imgs-desktop,
   .services2-desktop,
@@ -235,7 +234,7 @@
     margin-top: 9px;
   }
 
-
+  /*.wwd-img {}*/
   .wwd-imgs{
     width: 1210px;
     margin: 98px auto 106px auto;
@@ -282,11 +281,15 @@
     right: 10px;
   }
 
+  .matthew-container {
+    width: 29.6875%;
+  }
   .matthew-image {
     position: absolute;
     width: 380px;
     bottom: 6px;
     right: 10px;
+    height: 470px;
   }
 
   .wwd-imgs-right {
@@ -408,6 +411,10 @@
     position: absolute;
     top: 235px;
     left: 407px;
+}
+
+.services2-img {
+  max-width: 570px;
 }
 
 .services2-details {
@@ -876,6 +883,7 @@
  .text-field {
     border: 1px solid #e5e5e5;
     border-right:none;
+    width: 228px;
  }
 
  .subscribe-btn {

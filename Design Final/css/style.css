@@ -1,22 +1,26 @@
 @media(min-width: 768px){
     .welcome-to-mogo {
     color: #fff;
-    font-size: 100px;
+    font-size: 80px;
   }
+.creative-template {
+    color: #fff;
+    font-size: 52px;
+}
 
-  .wwd-img-middle{
+  .wwd2{
     background-image: url(../images/wwd2.png);
     background-size: cover;
 }
-.wwd-img-bottom {
+.wwd3 {
     background-image: url(../images/wwd3.png);
     background-size: cover;
 }
-  .wwd-img-top-cover{
+  .wwd-img-left-top{
     background-image: url(../images/wwd1.png);
     background-size: cover;
   }
-.wwd-img-top {
+.wwd1 {
     background-color: #95e1d3   ;
 }
 
@@ -27,6 +31,55 @@
     color: #fff;
     font-size: 150px;
   }
+
+.creative-template {
+    color: #fff;
+    font-size: 72px;
+}
+}
+
+
+.services2-img {
+  background-image: url(../images/services2_img.png);
+}
+
+.christopher {
+    background-image: url(../images/christopher.png);
+    height:470px;
+    background-position-x: center;
+}
+
+.blog1 {
+    background-image: url(../images/blog1.png);
+    background-size: cover;
+    background-position-x: center;
+    height:240px;
+}
+
+.blog2 {
+    background-image: url(../images/blog2.png);
+    background-size: cover;
+    background-position-x: center;
+    height:240px;
+}
+
+.blog3 {
+    background-image: url(../images/blog3.png);
+    background-size: cover;
+    background-position-x: center;
+    height:240px;
+}
+
+.michael {
+    background-image: url(../images/michael.png);
+    height: 470px;
+    background-position-x: center;
+}
+
+.matthew-image {
+    background-image: url(../images/matthew.png);
+    height: 470px;
+    background-position-x: left;
 }
 
 a {
@@ -56,14 +109,10 @@ a.fcn-link:hover,
 }
 
 .accordion-box:hover{
-    background-color: gray;
+    border: 1px solid #95e1d3;
     cursor: pointer;
 }
 
-.creative-template {
-    color: #fff;
-    font-size: 72px;
-}
 
 .icon-fcn:hover {
     cursor: pointer;
@@ -271,7 +320,6 @@ header {
     line-height: 23px;
     margin-top: 12px;
     padding-bottom: 17px;
-    border-bottom: 1px solid #e5e5e5;
  }
 
  .map {
@@ -335,37 +383,44 @@ header {
  .man {
     background-image: url(../images/man.png);
     background-size: cover;
+    background-position-x: center;
  }
 
  .roof {
     background-image: url(../images/roof.png);
     background-size: cover;
+    background-position-x: center;
  }
 
 .bridge {
     background-image: url(../images/bridge.png);
     background-size: cover;
+    background-position-x: center;
 }
 
 .dome {
     background-image: url(../images/dome.png);
     background-size: cover;
+    background-position-x: center;
 }
 
 .jellyfish {
     background-image: url(../images/jellyfish.png);
     background-size: cover;
+    background-position-x: center;
     height: 780px;
 }
 
 .window {
     background-image: url(../images/window.png);
     background-size: cover;
+    background-position-x: center;
 }
 
 .building {
     background-image: url(../images/building.png);
     background-size: cover;
+    background-position-x: center;
 }
 
 
@@ -389,3 +444,5 @@ header {
  .subscribe-btn:focus {
     outline:none;
  }
+
+
