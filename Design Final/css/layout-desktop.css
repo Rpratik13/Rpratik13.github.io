@@ -948,6 +948,10 @@
     padding-right: 4px;
  }
 
+ #arrow-up1 {
+  display: none;
+ }
+
  footer {
     height: 560px;
  }
@@ -971,6 +975,7 @@
 
  .subscribe-form {
     width: 324px;
+    margin:0px;
  }
 
  .subscribe {
@@ -989,8 +994,8 @@
  }
 
 .follow-icon {
-  margin-top: 16px;
-  margin-left: 16px;
+  margin-top: 5px;
+  margin-left: 5px;
   margin-right: 0px;
 }
 

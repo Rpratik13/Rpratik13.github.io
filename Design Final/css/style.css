@@ -1,3 +1,23 @@
+a:visited .view,
+a:visited .speech {
+    color: #999;
+}
+
+a:visited .blog2-heading {
+    color: #333;
+}
+
+a .blog2-heading:hover,
+.more-imgs:hover,
+.view:hover .view-count,
+.speech:hover .speech-count{
+    text-decoration: underline;
+}
+
+.accordion-details-text {
+    color: #acacac;
+}
+
 .welcome-to-mogo {
     color: #fff;
     font-size: 40px;
@@ -16,6 +36,7 @@
 
 .services-desc {
     font-size: 12px;
+    color: #999999;
 }
 
 
@@ -201,10 +222,40 @@
     display: block;
  }
 
+.follow-icon:hover{
+    background: #4adbbf;
+}
+
+
+.icon-hover,
+.follow-icon:hover .icon-regular{
+    display: none;
+}
+
+.follow-icon:hover .icon-hover{
+    display: initial;
+    background: #4adbbf;
+}
+
+
  .services-text{
     font-size: 12px;
  }
 
+ .quote-entry {
+    font-size: 10px;
+ }
+
+ .quote-image{
+    background: url(../images/quote_image.png) no-repeat;
+    background-position: center;
+ }
+
+
+.quote-text,
+.testimonial-text{
+    color: #9f9f9f;
+}
 @media(min-width: 768px){
 
  .wps-say {
@@ -477,9 +528,14 @@ header {
     display: none;
     border: 1px solid #e5e5e5;
     border-top: 0px;
-    width: 598px;
+    width: 100%;
 
 }
+
+#arrow-up1 {
+    display: none;
+}
+
 .accordion-details-open {
     font-size: 14.49px;
 }
@@ -688,38 +744,56 @@ header {
 
  .stone {
     background-image: url(../images/stone.png);
+    background-position: center;
+    background-size: cover;
  }
 
  .couple {
     background-image: url(../images/couple.png);
+    background-position: center;
+    background-size: cover;
  }
 
  .road {
     background-image: url(../images/road.png);
+    background-position: center;
+    background-size: cover;
  }
 
  .night {
     background-image: url(../images/night.png);
+    background-position: center;
+    background-size: cover;
  }
 
 .snail {
     background-image: url(../images/snail.png);
+    background-position: center;
+    background-size: cover;
  }
 
  .hill {
     background-image: url(../images/hill.png);
+    background-position: center;
+    background-size: cover;
  }
 
   .tunnel {
     background-image: url(../images/tunnel.png);
+    background-position: center;
+    background-size: cover;
  }
 
   .grass {
     background-image: url(../images/grass.png);
+    background-position: center;
+    background-size: cover;
  }
 
   .girl {
     background-image: url(../images/girl.png);
+    background-position: center;
+    background-size: cover;
  }
 
 
