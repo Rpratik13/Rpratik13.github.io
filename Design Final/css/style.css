@@ -1,568 +1,434 @@
+.accordion-slider {
+  background-color: #f5f5f5;
+}
+
+.accordion-slider-green {
+  background-color: #caf0e9;
+}
+
+.creative,
+.creative-jellyfish {
+  color: #fff;
+  text-align: center;
+}
+
+.quote {
+  background-color: #f8f8f8;
+}
+
+.social-link {
+  background-color: #fce38a;
+}
+
+.social-link:hover {
+  background-color: #f38181;
+}
+
+.subscribe-btn {
+  background: #caf0e9;
+}
+
+.subscribe-btn:hover {
+  background: #4adbbf;
+}
+
+.subscribe-btn:active {
+  background: #119c81;
+}
+
+.testimonial-entry {
+  font-size: 14px;
+  line-height: 15px;
+}
+
+.stat-desc {
+  font-size: 10px;
+  text-align: center;
+}
+
+.quote-entry {
+  font-size: 14px;
+  line-height: 15px;
+}
+
+.services-desc {
+  line-height: 18px;
+}
+
+.learn-more {
+  color: #fff;
+}
+
+.input-email {
+  font-size: 15px
+}
+
+.follower-num {
+  font-size: 18px;
+}
+
+.follower-text {
+  font-size: 14px;
+}
+
+.description,
+.description-services2,
+.description-www {
+  line-height: 24px;
+}
+
+.date {
+  background-color: #95e1d3;
+}
+
 a:visited .view,
 a:visited .speech {
-    color: #999;
+  color: #999;
 }
 
 a:visited .blog2-heading {
-    color: #333;
+  color: #333;
 }
 
 a .blog2-heading:hover,
 .more-imgs:hover,
 .view:hover .view-count,
-.speech:hover .speech-count{
-    text-decoration: underline;
+.speech:hover .speech-count {
+  text-decoration: underline;
 }
 
 .accordion-details-text {
-    color: #acacac;
+  color: #acacac;
 }
 
 .welcome-to-mogo {
-    color: #fff;
-    font-size: 40px;
-  }
+  color: #fff;
+  font-size: 40px;
+}
+
 .creative-template {
-    color: #fff;
-    font-size: 22px;
+  color: #fff;
+  font-size: 22px;
 }
 
 .num {
-    font-size: 10px;
+  font-size: 10px;
 }
+
 .slider-value {
-    font-size: 8px;
+  font-size: 8px;
 }
 
 .services-desc {
-    font-size: 12px;
-    color: #999999;
+  font-size: 12px;
+  color: #999999;
 }
 
-
- .author-name,
- .testimonial-author-name {
-    font-size: 18px;
- }
-
-.wwd2{
-    background-image: url(../images/wwd2.png);
-    background-size: cover;
-    background-position: center;
+.author-name,
+.testimonial-author-name {
+  font-size: 18px;
 }
+
+.wwd2 {
+  background-image: url(../images/wwd2.png);
+  background-size: cover;
+  background-position: center;
+}
+
 .wwd3 {
-    background-image: url(../images/wwd3.png);
-    background-size: cover;
-    background-position: center;
+  background-image: url(../images/wwd3.png);
+  background-size: cover;
+  background-position: center;
 }
-  .wwd-img-left-top{
-    background-image: url(../images/wwd1.png);
-    background-size: cover;
-    background-position: center;
-  }
+
+.wwd-img-left-top {
+  background-image: url(../images/wwd1.png);
+  background-size: cover;
+  background-position: center;
+}
+
 .wwd1 {
-    background-color: #95e1d3   ;
+  background-color: #95e1d3;
 }
 
 .section-title {
-    font-size: 17px;
+  font-size: 17px;
 }
 
 .section-sub-title,
-.section-sub-title-wps{
-    font-size: 19px;
+.section-sub-title-wps {
+  font-size: 19px;
 }
 
-
- .by-line {
-    width: 30px;
-    height: 3px;
-    background-color: #f38181;
-    margin-top: 15px;
- }
-
-
-#arrow-up {
-    display: none;
-}
- .matthew-hover {
-    background-image: url(../images/matthew_hover.png);
+.matthew-hover {
+  background-image: url(../images/matthew_hover.png);
 }
 
- .christopher-hover {
-    background-image:  linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/christopher.png);
-    background-position-x: center;
-
+.christopher-hover {
+  background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/christopher.png);
+  background-position-x: center;
 }
 
- .michael-hover {
-    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/michael.png);
-    background-position-x: -110px;
+.michael-hover {
+  background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/michael.png);
+  background-position-x: -110px;
 }
-
-
 
 .michael {
-    background-image: url(../images/michael.png);
-    background-position-x: -110px;
+  background-image: url(../images/michael.png);
+  background-position-x: -110px;
 }
 
- .title {
-    font-size: 13px;
-    color: #c6c6c6;
- }
+.title {
+  font-size: 13px;
+  color: #c6c6c6;
+}
 
-
-  .name {
-    font-size: 14px;
-  }
+.name {
+  font-size: 14px;
+}
 
 .blog-title {
-    font-size: 12px;
+  font-size: 12px;
 }
-  .blogs2-title,
-  .insta-title{
-    font-size: 10px;
-  }
 
-  .blog2-date{
-    font-size: 10px;
-  }
+.blogs2-title,
+.insta-titlen,
+.blog2-date {
+  font-size: 10px;
+}
 
+.footer-bottom {
+  font-size: 14px;
+}
 
- .footer-bottom {
-    font-size: 14px;
- }
+.blog-desc {
+  font-size: 12px;
+  color: #999;
+  line-height: 16px;
+  padding-bottom: 17px;
+}
 
-
- .blog-desc {
-    font-size: 12px;
-    color: #999;
-    line-height: 16px;
-    padding-bottom: 17px;
- }
-
- .logo-gray {
-    color: #b0b0b0;
-    font-size: 26px;
+.logo-gray {
+  color: #b0b0b0;
+  font-size: 26px;
 }
 
 .blog2-heading {
-    font-size: 8px;
- }
-
- .footer-text {
-    color: #999;
-    font-size: 12px;
+  font-size: 8px;
 }
 
+.footer-text {
+  color: #999;
+  font-size: 12px;
+}
 
- .more-imgs {
-    color: #585858;
-    font-size: 10px;
- }
+.more-imgs {
+  color: #585858;
+  font-size: 10px;
+}
 
+.wps-say {
+  font-size: 12px;
+  color: #b0b0b0;
+}
 
- .wps-say {
-    font-size: 12px;
-    color: #b0b0b0;
- }
+a .nav-fcn {
+  text-decoration: none;
+  color: #fff;
+}
 
- a .nav-fcn{
-    text-decoration: none;
-    color: #fff;
- }
+a .nav-fcn:hover {
+  color: #fce38a;
+}
 
- a .nav-fcn:hover {
-    color: #fce38a;
- }
-
-
- .nav-fcn:hover {
-    border-bottom: 1px solid #fce38a;
-
-    padding: 5px 0px;
-  }
-
-  .man,
+.man,
 .roof,
 .bridge,
 .dome,
 .jellyfish,
 .window,
 .building {
-    background-size: cover;
-    background-position: center;
+  background-size: cover;
+  background-position: center;
 }
 
-
-
- .title {
-    font-size: 9px;
-    color: #c6c6c6;
- }
-
-
-  .name {
-    font-size: 10px;
-  }
-
-  .matthew,
-  .matthew-hover {
-    background-position-x: -20px;
-  }
-
- .man:hover .creative,
- .bridge:hover .creative,
- .roof:hover .creative,
- .jellyfish:hover .creative-jellyfish,
- .window:hover .creative,
- .building:hover .creative,
- .dome:hover .creative {
-    display: block;
- }
-
-.follow-icon:hover{
-    background: #4adbbf;
+.title {
+  font-size: 9px;
+  color: #c6c6c6;
 }
 
-
-.icon-hover,
-.follow-icon:hover .icon-regular{
-    display: none;
-}
-
-.follow-icon:hover .icon-hover{
-    display: initial;
-    background: #4adbbf;
-}
-
-
- .services-text{
-    font-size: 12px;
- }
-
- .quote-entry {
-    font-size: 10px;
- }
-
- .quote-image{
-    background: url(../images/quote_image.png) no-repeat;
-    background-position: center;
- }
-
-
-.quote-text,
-.testimonial-text{
-    color: #9f9f9f;
-}
-@media(min-width: 768px){
-
- .wps-say {
-    font-size: 15px;
- }
-
- .man,
-.man:hover,
-.roof,
-.roof:hover,
-.bridge,
-.bridge:hover,
-.dome,
-.dome:hover,
-.jellyfish,
-.jellyfish:hover,
-.window,
-.window:hover,
-.building,
-.building:hover{
-    background-position-x: center;
-}
-
-
-
-
-
-  .blogs2-title,
-  .insta-title{
-    font-size: 14px;
-  }
-
-
- .more-imgs {
-    font-size: 13px;
- }
-
- .blog2-date {
-    font-size: 13px;
-
- }
-
-.footer-text {
-    font-size: 15px;
-}
-
- .blog2-heading {
-    font-size: 12px;
- }
-
-.logo-gray {
-    font-size: 46px;
-}
-
- .blog-desc {
-    font-size: 15px;
-    line-height: 23px;
- }
-
-  .blog-title{
-    font-size: 14px;
- }
-
-    .welcome-to-mogo {
-    color: #fff;
-    font-size: 100px;
-  }
-
- .title {
-    font-size: 15px;
-    color: #c6c6c6;
- }
-
-  .name {
-    font-size: 14px;
-  }
-
- .by-line {
-    width: 60px;
-    height: 3px;
-    background-color: #f38181;
-    margin-top: 30px;
- }
-.creative-template {
-    color: #fff;
-    font-size: 57px;
-}
-
-
-.services-desc{
-    font-size: 15px;
-}
-
-.num {
-    font-size: 24px;
-}
-
-.slider-value {
-    font-size: 18px;
+.name {
+  font-size: 10px;
 }
 
 .matthew,
-.matthew-hover,
-.christopher,
-.christopher-hover
-.michael,
-.michael-hover {
-    background-position: center;
+.matthew-hover {
+  background-position-x: -20px;
 }
 
-.christopher {
-    background-image: url(../images/christopher.png);
+.man:hover .creative,
+.bridge:hover .creative,
+.roof:hover .creative,
+.jellyfish:hover .creative-jellyfish,
+.window:hover .creative,
+.building:hover .creative,
+.dome:hover .creative {
+  display: block;
 }
 
-.michael {
-    background-image: url(../images/michael.png);
+.follow-icon:hover {
+  background: #4adbbf;
 }
 
-
-.section-title {
-    font-size: 24px;
+.icon-hover,
+.follow-icon:hover .icon-regular {
+  display: none;
 }
 
-
-
-.section-sub-title,
-.section-sub-title-wps{
-    font-size: 29px;
+.follow-icon:hover .icon-hover {
+  display: initial;
+  background: #4adbbf;
 }
 
- .author-name,
- .testimonial-author-name {
-    font-size: 24px;
-     }
-
- .matthew-image {
-    background-image: url(../images/matthew.png);
-    background-position-x: left;
+.services-text {
+  font-size: 12px;
 }
 
-.michael {
-    background-position-x: center;
+.quote-entry {
+  font-size: 10px;
 }
 
-
-
-
+.quote-image {
+  background: url(../images/quote_image.png) no-repeat;
+  background-position: center;
 }
 
-.testimonial-image {
-    background-image: url(../images/testimonial_img.png);
-    background-size: cover;
+.quote-text,
+.testimonial-text {
+  color: #9f9f9f;
 }
-@media(min-width: 1280px){
-    .welcome-to-mogo {
-    color: #fff;
-    font-size: 150px;
-  }
-
-.creative-template {
-    color: #fff;
-    font-size: 72px;
-}
-}
-
 
 .services2-img {
   background-image: url(../images/services2_img.png);
 }
 
 .christopher {
-    background-image: url(../images/christopher.png);
-    background-position-x: center;
+  background-image: url(../images/christopher.png);
+  background-position-x: center;
 }
 
 .blog1 {
-    background-image: url(../images/blog1.png);
-    background-size: cover;
-    background-position-x: center;;
+  background-image: url(../images/blog1.png);
+  background-size: cover;
+  background-position-x: center;
+  ;
 }
 
 .blog2 {
-    background-image: url(../images/blog2.png);
-    background-size: cover;
-    background-position-x: center;
+  background-image: url(../images/blog2.png);
+  background-size: cover;
+  background-position-x: center;
 }
 
 .blog3 {
-    background-image: url(../images/blog3.png);
-    background-size: cover;
-    background-position-x: center;
+  background-image: url(../images/blog3.png);
+  background-size: cover;
+  background-position-x: center;
 }
 
-
-
-
-
 .candle {
-    background-image: url(../images/candle.png);
-    background-position-x: center;
-    background-size: cover;
+  background-image: url(../images/candle.png);
+  background-position-x: center;
+  background-size: cover;
 }
 
 .wave {
-    background-image: url(../images/wave.png);
-    background-position-x: center;
-    background-size: cover;
+  background-image: url(../images/wave.png);
+  background-position-x: center;
+  background-size: cover;
 }
-
 
 .guitar {
-    background-image: url(../images/guitar.png);
-    background-position-x: center;
-    background-size: cover;
+  background-image: url(../images/guitar.png);
+  background-position-x: center;
+  background-size: cover;
 }
 
-
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a.blog-link:hover,
-a.underline:hover{
-    text-decoration: underline;
+a.underline:hover {
+  text-decoration: underline;
 }
 
 a.fcn-link {
-    text-decoration: none;
-    color: #fff;
+  text-decoration: none;
+  color: #fff;
 }
 
 a.fcn-link:hover,
 .learn-more:hover {
-    color: #fce38a;
+  color: #fce38a;
 }
 
 .left-button:hover,
 .right-button:hover,
 .testimonial-left-button:hover,
-.testimonial-right-button:hover{
-    cursor: pointer;
-}
-
-.accordion-box:hover{
-    border: 1px solid #95e1d3;
-    cursor: pointer;
-}
-
-
+.testimonial-right-button:hover,
 .icon-fcn:hover {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.accordion-box:hover {
+  border: 1px solid #95e1d3;
+  cursor: pointer;
 }
 
 header {
-    background-color: transparent ;
-}
-.logo {
-    color: #fff;
-    font-size: 29.5px;
+  background-color: transparent;
 }
 
+.logo {
+  color: #fff;
+  font-size: 29.5px;
+}
 
 .montserrat-bold {
-    font-family: 'Montserrat';
-    font-weight: 700;
-}
-
-
-#accordion-details2 {
-    display: none;
-    border: 1px solid #e5e5e5;
-    border-top: 0px;
-    width: 100%;
-
-}
-
-#arrow-up1 {
-    display: none;
+  font-family: 'Montserrat';
+  font-weight: 700;
 }
 
 .accordion-details-open {
-    font-size: 14.49px;
+  font-size: 14.49px;
 }
 
 .montserrat-regular {
-    font-family: 'Montserrat';
-    font-weight: 400;
+  font-family: 'Montserrat';
+  font-weight: 400;
 }
 
 .roboto-regular {
-    font-family: 'Roboto';
-    font-weight: 400;
+  font-family: 'Roboto';
+  font-weight: 400;
 }
 
 .roboto-light-italic {
-    font-family: 'Roboto';
-    font-weight: 300;
-    font-style: italic;
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-style: italic;
 }
 
 .kaushanscript-regular {
-    font-family: 'Kaushan Script';
-    font-weight: 400;
+  font-family: 'Kaushan Script';
+  font-weight: 400;
 }
+
 .text-fcn {
-    color: #fff;
-    font-size: 13.5px;
+  color: #fff;
+  font-size: 13.5px;
 }
 
 .ipad {
@@ -571,14 +437,14 @@ header {
 }
 
 .iphone {
-    background-image: url(../images/iphone.png);
-    background-size: cover;
+  background-image: url(../images/iphone.png);
+  background-size: cover;
 }
 
-.banner{
-    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.73), rgba(252, 227, 128, 0.52)), url(../images/eagle_background.png);
-    background-position: center;
-    text-align: center;
+.banner {
+  background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.73), rgba(252, 227, 128, 0.52)), url(../images/eagle_background.png);
+  background-position: center;
+  text-align: center;
 }
 
 .description,
@@ -587,50 +453,48 @@ header {
 .section-title,
 .section-sub-title,
 .section-sub-title-wps {
-    text-align: center;
+  text-align: center;
 }
 
 .description,
 .description-services2,
 .description-www {
-    color: #999;
-    font-size: 15px;
+  color: #999;
+  font-size: 15px;
 }
 
 .white {
-    color: #fff;
+  color: #fff;
 }
-
-
 
 .matthew:hover,
 .christopher:hover,
 .michael:hover,
 .wwd-img-left:hover,
 .wwd-img:hover {
-    background-color: #95e1d3;
-    background-image: url("");
+  background-color: #95e1d3;
+  background-image: url("");
 }
 
 .wwd-img-left {
-    background-image: url(../images/wwd1.png);
-    background-position: center;
+  background-image: url(../images/wwd1.png);
+  background-position: center;
 }
 
 .wwd-img-left-top {
-    background-image: url(../images/wwd1_hover.png);
-    background-position: center;
+  background-image: url(../images/wwd1_hover.png);
+  background-position: center;
 }
 
 .wwd-img-wwd2 {
-    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.9), rgba(252, 227, 128, 0.8)), url(../images/wwd2.png);
-    background-size: cover;
-    background-position: center;
+  background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.9), rgba(252, 227, 128, 0.8)), url(../images/wwd2.png);
+  background-size: cover;
+  background-position: center;
 }
 
 .wwd-img-wwd3 {
-    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.9), rgba(252, 227, 128, 0.8)), url(../images/wwd3.png);
-    background-position: center;
+  background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.9), rgba(252, 227, 128, 0.8)), url(../images/wwd3.png);
+  background-position: center;
 }
 
 .wwd-img-left:hover .wwd-img-left-top,
@@ -639,262 +503,404 @@ header {
 .wwd-img:hover .super-team,
 .wwd-img:hover .wwd-img-wwd3,
 .wwd-img:hover .super-team {
-    display: initial;
+  display: initial;
 }
 
-
-
-
 .matthew {
-    background-image: url(../images/matthew.png);
+  background-image: url(../images/matthew.png);
 }
 
 .christopher {
-    background-image: url(../images/christopher.png);
+  background-image: url(../images/christopher.png);
 }
 
 .michael {
-    background-image: url(../images/michael.png);
+  background-image: url(../images/michael.png);
 }
-.super-team{
+
+.super-team {
   text-align: center;
   color: #fff;
 }
 
-
-
 .fad {
-    background-image: url("../images/unique_design.png");
+  background-image: url("../images/unique_design.png");
 }
 
 .accordion-text {
-    font-size: 14px;
- }
+  font-size: 14px;
+}
 
+.name-title,
+.name-title-matthew {
+  text-align: center;
+}
 
+.blog-title {
+  color: #000;
+}
 
+.wps-name {
+  font-size: 13px;
+}
 
- .name-title,
- .name-title-matthew {
-    text-align: center;
- }
+.logo-background,
+.logos-tablet,
+.logo-wrapper {
+  background-color: #f8f8f8;
+}
 
+.wps-title {
+  font-size: 15px;
+  color: #585858;
+}
 
+.wps {
+  background-image: url(../images/mountain.png);
+  background-size: cover;
+}
 
+.date {
+  text-align: center;
+  color: #fff;
+}
 
- .blog-title {
-    color: #000;
- }
+.date-num {
+  font-size: 30px;
+}
 
- .wps-name {
-    font-size: 13px;
- }
-
-
- .logo-background,
- .logos-tablet,
- .logo-wrapper {
-    background-color: #f8f8f8;
- }
-
-  .wps-title {
-    font-size: 15px;
-    color: #585858;
- }
-
-
- .wps {
-    background-image: url(../images/mountain.png);
-    background-size: cover;
- }
-
- .date {
-    text-align: center;
-    color: #fff;
- }
-
- .date-num {
-    font-size: 30px;
- }
-
- .date-month,
- .blog-stats {
-    font-size: 15px;
- }
+.date-month,
+.blog-stats {
+  font-size: 15px;
+}
 
 .blog-stats {
-    color: #acacac;
+  color: #acacac;
 }
 
- .map {
-    background-image: url(../images/map.png);
-    text-align: center;
-    background-size: cover;
- }
+.map {
+  background-image: url(../images/map.png);
+  text-align: center;
+  background-size: cover;
+}
 
- .red {
-    color: #f38181;
- }
+.red {
+  color: #f38181;
+}
 
- .open-map {
-    font-size: 24px;
- }
+.open-map {
+  font-size: 24px;
+}
 
+.stone {
+  background-image: url(../images/stone.png);
+  background-position: center;
+  background-size: cover;
+}
 
+.couple {
+  background-image: url(../images/couple.png);
+  background-position: center;
+  background-size: cover;
+}
 
- .stone {
-    background-image: url(../images/stone.png);
-    background-position: center;
-    background-size: cover;
- }
+.road {
+  background-image: url(../images/road.png);
+  background-position: center;
+  background-size: cover;
+}
 
- .couple {
-    background-image: url(../images/couple.png);
-    background-position: center;
-    background-size: cover;
- }
-
- .road {
-    background-image: url(../images/road.png);
-    background-position: center;
-    background-size: cover;
- }
-
- .night {
-    background-image: url(../images/night.png);
-    background-position: center;
-    background-size: cover;
- }
+.night {
+  background-image: url(../images/night.png);
+  background-position: center;
+  background-size: cover;
+}
 
 .snail {
-    background-image: url(../images/snail.png);
-    background-position: center;
-    background-size: cover;
- }
+  background-image: url(../images/snail.png);
+  background-position: center;
+  background-size: cover;
+}
 
- .hill {
-    background-image: url(../images/hill.png);
-    background-position: center;
-    background-size: cover;
- }
+.hill {
+  background-image: url(../images/hill.png);
+  background-position: center;
+  background-size: cover;
+}
 
-  .tunnel {
-    background-image: url(../images/tunnel.png);
-    background-position: center;
-    background-size: cover;
- }
+.tunnel {
+  background-image: url(../images/tunnel.png);
+  background-position: center;
+  background-size: cover;
+}
 
-  .grass {
-    background-image: url(../images/grass.png);
-    background-position: center;
-    background-size: cover;
- }
+.grass {
+  background-image: url(../images/grass.png);
+  background-position: center;
+  background-size: cover;
+}
 
-  .girl {
-    background-image: url(../images/girl.png);
-    background-position: center;
-    background-size: cover;
- }
+.girl {
+  background-image: url(../images/girl.png);
+  background-position: center;
+  background-size: cover;
+}
 
+.man {
+  background-image: url(../images/man.png);
+  background-size: cover;
+  background-position-x: center;
+}
 
+.man:hover {
+  background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/man.png);
+}
 
+.roof {
+  background-image: url(../images/roof.png);
+  background-size: cover;
+  background-position-x: center;
+}
 
- .man {
-    background-image: url(../images/man.png);
-    background-size: cover;
-    background-position-x: center;
- }
-
- .man:hover{
-    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/man.png);
- }
-
- .roof {
-    background-image: url(../images/roof.png);
-    background-size: cover;
-    background-position-x: center;
- }
-
-  .roof:hover{
-    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/roof.png);
- }
-
+.roof:hover {
+  background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/roof.png);
+}
 
 .bridge {
-    background-image: url(../images/bridge.png);
-    background-size: cover;
-    background-position-x: center;
+  background-image: url(../images/bridge.png);
+  background-size: cover;
+  background-position-x: center;
 }
 
- .bridge:hover{
-    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/bridge.png);;
- }
-
+.bridge:hover {
+  background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/bridge.png);
+  ;
+}
 
 .dome {
-    background-image: url(../images/dome.png);
-    background-size: cover;
-    background-position-x: center;
+  background-image: url(../images/dome.png);
+  background-size: cover;
+  background-position-x: center;
 }
 
- .dome:hover{
-    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/dome.png);
-
- }
-
-
-
+.dome:hover {
+  background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/dome.png);
+}
 
 .jellyfish {
-    background-image: url(../images/jellyfish.png);
-    background-size: cover;
-    background-position-x: center;
-
+  background-image: url(../images/jellyfish.png);
+  background-size: cover;
+  background-position-x: center;
 }
 
- .jellyfish:hover{
-    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/jellyfish.png);;
- }
-
+.jellyfish:hover {
+  background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/jellyfish.png);
+  ;
+}
 
 .window {
-    background-image: url(../images/window.png);
-    background-size: cover;
-    background-position-x: center;
+  background-image: url(../images/window.png);
+  background-size: cover;
+  background-position-x: center;
 }
 
- .window:hover{
-    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/window.png);;
- }
-
+.window:hover {
+  background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/window.png);
+  ;
+}
 
 .building {
-    background-image: url(../images/building.png);
-    background-size: cover;
-    background-position-x: center;
+  background-image: url(../images/building.png);
+  background-size: cover;
+  background-position-x: center;
 }
 
- .building:hover{
-    background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/building.png);;
- }
+.building:hover {
+  background-image: linear-gradient(to bottom, rgba(243, 129, 129, 0.8), rgba(252, 227, 128, 0.8)), url(../images/building.png);
+  ;
+}
 
+.orange {
+  color: #facfcf;
+}
 
+.footer-bottom {
+  text-align: center;
+  padding-top: 22px;
+}
 
+.input-email:focus,
+.subscribe-btn:focus {
+  outline: none;
+}
 
+.testimonial-image {
+  background-image: url(../images/testimonial_img.png);
+  background-size: cover;
+}
 
- .orange{
-    color: #facfcf;
+@media(min-width: 768px) {
+  .stat-num {
+    font-size: 36px;
+  }
+  .wps-say {
+    font-size: 15px;
+  }
+  .services-desc {
+    line-height: 23px;
+  }
+  .stat-desc {
+    font-size: 13px;
+  }
+  .quote-entry {
+    line-height: 36px;
+    font-size: 24px;
+  }
+  .testimonial-entry {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .wps-say {
+    line-height: 24px;
+  }
+  .subscribe-btn {
+    font-size: 14px;
+  }
+  .man,
+  .man:hover,
+  .roof,
+  .roof:hover,
+  .bridge,
+  .bridge:hover,
+  .dome,
+  .dome:hover,
+  .jellyfish,
+  .jellyfish:hover,
+  .window,
+  .window:hover,
+  .building,
+  .building:hover {
+    background-position-x: center;
+  }
+  .blogs2-title,
+  .insta-title {
+    font-size: 14px;
+  }
+  .more-imgs {
+    font-size: 13px;
+  }
+  .blog2-date {
+    font-size: 13px;
+  }
+  .footer-text {
+    font-size: 15px;
+  }
+  .blog2-heading {
+    font-size: 12px;
+  }
+  .logo-gray {
+    font-size: 46px;
+  }
+  .blog-desc {
+    font-size: 15px;
+    line-height: 23px;
+  }
+  .blog-title {
+    font-size: 14px;
+  }
+  .welcome-to-mogo {
+    color: #fff;
+    font-size: 100px;
+  }
+  .title {
+    font-size: 15px;
+    color: #c6c6c6;
+  }
+  .name {
+    font-size: 14px;
+  }
+  .by-line {
+    background-color: #f38181;
+  }
+  .creative-template {
+    color: #fff;
+    font-size: 57px;
+  }
+  .services-desc {
+    font-size: 15px;
+  }
+  .num {
+    font-size: 24px;
+  }
+  .slider-value {
+    font-size: 18px;
+  }
+  .matthew,
+  .matthew-hover,
+  .christopher,
+  .christopher-hover .michael,
+  .michael-hover {
+    background-position: center;
+  }
+  .christopher {
+    background-image: url(../images/christopher.png);
+  }
+  .michael {
+    background-image: url(../images/michael.png);
+  }
+  .section-title {
+    font-size: 24px;
+  }
+  .section-sub-title,
+  .section-sub-title-wps {
+    font-size: 29px;
+  }
+  .author-name,
+  .testimonial-author-name {
+    font-size: 24px;
+  }
+  .matthew-image {
+    background-image: url(../images/matthew.png);
+    background-position-x: left;
+  }
+  .michael {
+    background-position-x: center;
+  }
+}
 
- }
-
- .footer-bottom {
-    text-align: center;
-    padding-top: 22px   ;
- }
-
- .input-email:focus,
- .subscribe-btn:focus {
-    outline:none;
- }
-
-
+@media(min-width: 1280px) {
+  .welcome-to-mogo {
+    color: #fff;
+    font-size: 150px;
+  }
+  .creative-template {
+    color: #fff;
+    font-size: 72px;
+  }
+  .cd,
+  .stat-desc {
+    font-size: 14px;
+  }
+  .lids {
+    font-size: 15px;
+  }
+  .welcome-to-mogo {
+    line-height: 141px;
+  }
+  .stat-num {
+    font-size: 72px;
+  }
+  #accordion-details2 {
+    line-height: 24px;
+  }
+  .testimonial-entry {
+    font-size: 22px;
+    line-height: 36px;
+  }
+  .testimonial-text {
+    color: #d9d9d9;
+  }
+  .blog2-date {
+    color: #b1b1b1;
+  }
+}

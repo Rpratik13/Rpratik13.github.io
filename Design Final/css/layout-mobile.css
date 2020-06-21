@@ -50,7 +50,6 @@ header {
 }
 
 .accordion-slider {
-  background-color: #f5f5f5;
   border-radius: 2px;
   height: 140px;
   margin: 20px 24px 19px 0px;
@@ -59,7 +58,6 @@ header {
 }
 
 .accordion-slider-green {
-  background-color: #caf0e9;
   border-radius: 2px;
   height: 90px;
   position: absolute;
@@ -80,6 +78,10 @@ header {
 .blog-content {
   margin: 0px 0px 20px 2.5%;
   width: 31.6666667%;
+}
+
+.blog-desc {
+  padding-bottom: 17px;
 }
 
 .blog-content:first-child {
@@ -194,6 +196,38 @@ header {
   display: initial;
 }
 
+#arrow-up {
+  display: none;
+}
+
+#accordion-details2 {
+  display: none;
+  border: 1px solid #e5e5e5;
+  border-top: 0px;
+  width: 100%;
+}
+
+#arrow-up1 {
+  display: none;
+}
+
+.nav-fcn:hover {
+  border-bottom: 1px solid #fce38a;
+  padding: 5px 0px;
+}
+
+.by-line {
+  width: 30px;
+  height: 3px;
+  margin-top: 15px;
+}
+
+#accordion-details-1 {
+  border: 1px solid #e5e5e5;
+  border-top: 0px;
+  display: none;
+}
+
 .company-logo {
   margin-left: 30px;
 }
@@ -203,15 +237,12 @@ header {
 }
 
 .creative {
-  color: #fff;
   display: none;
   margin: 0px auto;
   padding-top: 70px;
-  text-align: center;
 }
 
 .creative-jellyfish {
-  color: #fff;
   display: none;
   margin: 0px auto;
   padding-top: 140px;
@@ -219,7 +250,6 @@ header {
 }
 
 .date {
-  background-color: #95e1d3;
   bottom: 3px;
   height: 52px;
   left: -5px;
@@ -242,13 +272,11 @@ header {
 
 .description,
 .description-services2 {
-  line-height: 24px;
   margin: 20px auto 0px auto;
   width: 90%;
 }
 
 .description-www {
-  line-height: 24px;
   margin: 39px auto 0px auto;
   width: 90%;
 }
@@ -334,14 +362,6 @@ header {
   width: 80px;
 }
 
-.follower-num {
-  font-size: 18px;
-}
-
-.follower-text {
-  font-size: 14px;
-}
-
 .footer-bottom {
   border-top: 1px solid #999;
   padding-bottom: 20px;
@@ -387,7 +407,6 @@ header {
 
 .input-email {
   border: none;
-  font-size: 15px;
   height: 38px;
   padding-left: 10px;
   width: 90%;
@@ -443,7 +462,6 @@ header {
   background-color: transparent;
   background-repeat: no-repeat;
   border: 3px solid #fff;
-  color: #fff;
   cursor: pointer;
   height: 30px;
   margin: 30px auto 0px auto;
@@ -612,8 +630,6 @@ header {
 }
 
 .quote-entry {
-  font-size: 14px;
-  line-height: 15px;
   padding-top: 32px;
   width: calc(100% - 85px);
 }
@@ -723,16 +739,11 @@ header {
 }
 
 .social-link {
-  background-color: #fce38a;
   height: 41px;
   margin-right: 1px;
   padding-top: 15px;
   vertical-align: center;
   width: 55px;
-}
-
-.social-link:hover {
-  background-color: #f38181;
 }
 
 .social-links {
@@ -752,11 +763,6 @@ header {
 .work-images-left-top,
 .work-images-left-bottom {
   width: 100%;
-}
-
-.stat-desc {
-  font-size: 10px;
-  text-align: center;
 }
 
 .stat-num {
@@ -806,14 +812,6 @@ header {
   width: 100%;
 }
 
-.subscribe-btn:hover {
-  background: #4adbbf;
-}
-
-.subscribe-btn:active {
-  background: #119c81;
-}
-
 .subscribe-form {
   width: 90%;
   margin: 5px auto 0px auto;
@@ -853,8 +851,6 @@ header {
 }
 
 .testimonial-entry {
-  font-size: 14px;
-  line-height: 15px;
   padding-top: 16px;
   width: calc(100% - 110px);
 }
@@ -1059,7 +1055,6 @@ header {
   border: 1px solid #e5e5e5;
   border-top: 0px;
   display: none;
-  line-height: 20px;
   width: 100%;
 }
 

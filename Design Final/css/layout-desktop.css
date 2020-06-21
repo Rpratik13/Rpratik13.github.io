@@ -60,11 +60,9 @@
     padding-top: 161px;
   }
   .cd {
-    font-size: 14px;
     margin-top: 13px;
   }
   .lids {
-    font-size: 15px;
     margin-top: 10px;
   }
   .line-red-www {
@@ -82,7 +80,6 @@
   }
   .welcome-to-mogo {
     padding: 25px calc(50% - 457.5px) 0px calc(50% - 457.5px);
-    line-height: 141px;
   }
   .wwd {
     margin: 105px auto 0px auto;
@@ -150,11 +147,7 @@
     height: 270px;
   }
   .stat-num {
-    font-size: 72px;
     margin-top: 70px;
-  }
-  .stat-desc {
-    font-size: 14px;
   }
   .mogo-www {
     margin-top: 104px;
@@ -221,9 +214,6 @@
   .accordion-box {
     width: 598px;
     margin-top: 10px;
-  }
-  #accordion-details2 {
-    line-height: 24px;
   }
   .accordion-details-text {
     width: 525px;
@@ -300,8 +290,6 @@
   }
   .testimonial-entry {
     width: 767px;
-    font-size: 22px;
-    line-height: 36px;
     padding-top: 32px;
     margin-right: 23px;
     padding-left: 0px;
@@ -309,7 +297,6 @@
   .testimonial-text {
     padding-right: 33px;
     padding-left: 1px;
-    color: #d9d9d9;
   }
   .testimonial-author-name {
     margin-top: 11px;
@@ -416,9 +403,6 @@
     width: 200px;
     padding-top: 17px;
     padding-left: 19px;
-  }
-  .blog2-date {
-    color: #b1b1b1;
   }
   .blog2-heading {
     margin-bottom: 5px;
