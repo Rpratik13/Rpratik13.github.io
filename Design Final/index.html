@@ -5,6 +5,7 @@
       <meta http-equiv="content-type" content="text/html;charset=utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" type="text/css" href="css/reset.css">
+      <link rel="stylesheet" type="text/css" href="css/layout-mobile.css">
       <link rel="stylesheet" type="text/css" href="css/layout-tablet.css">
       <link rel="stylesheet" type="text/css" href="css/layout-desktop.css">
       <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -12,6 +13,7 @@
       <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet">
+      <script src="js/test.js"></script>
    </head>
    <body>
       <header class="fixed">
@@ -28,6 +30,10 @@
                   <li class="text-fcn inline"><a href="#" class="fcn-link">CONTACT</a></li>
                </ul>
                <div class="nav-icon-fcn right clearfix">
+                  <div class="icon-fcn left hamburger" onclick="navbar()">
+                     <img src="images/hamburger.png" class="regular-hamburger">
+                     <img src="images/hamburger_hover.png" class="hover-hamburger">
+                  </div>
                   <div class="icon-fcn left">
                      <img src="images/cart.png" class="regular-cart">
                      <img src="images/cart_hover.png" class="hover-cart">
@@ -38,11 +44,34 @@
                   </div>
                </div>
             </div>
-         </div>
+
+
+
+            </div>
       </header>
       <div class="main-container-wrapper">
+
          <div class="main-container">
             <div class="banner">
+               <div id="nav-bar-fcns">
+               <div class="nav-fcn-ham montserrat-regular">
+               <a href="#">
+                  <div class="nav-fcn">ABOUT</div>
+               </a>
+               <a href="#">
+                  <div class="nav-fcn">SERVICE</div>
+               </a>
+               <a href="#">
+                  <div class="nav-fcn">WORK</div>
+               </a>
+               <a href="#">
+                  <div class="nav-fcn">BLOG</div>
+               </a>
+               <a href="#">
+                  <div class="nav-fcn">CONTACT</div>
+               </a>
+              </div>
+           </div>
                <div class="welcome">
                   <h3 class="creative-template kaushanscript-regular  ">Creative Template</h3>
                   <h1 class="welcome-to-mogo montserrat-bold">WELCOME TO MOGO</h1>
@@ -82,12 +111,10 @@
                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                   </div>
                </div>
-               <div class="wwd-desktop">
+               <div class="wwd">
                  <div class="wwd-imgs clearfix">
-                  <div class="wwd-img-left left">
-                     <div class="wwd-img-left-top">
-                        <img src="images/wwd1.png">
-                     </div>
+                  <div class="wwd-img-left left wwd1">
+                     <div class="wwd-img-left-top"></div>
                      <a href="#">
                         <div class="super-team">
                            <img src="images/users.png"><br>
@@ -96,31 +123,29 @@
                      </a>
                   </div>
                   <div class="wwd-imgs-right right clearfix">
-                     <div class="wwd-img left">
-                        <img src="images/wwd2.png">
-                     </div>
-                     <div class="wwd-img right">
-                        <img src="images/wwd3.png">
-                     </div>
+                     <div class="wwd-img left wwd2">
+                     <div class="wwd-img-wwd2"></div>
+                     <a href="#">
+                        <div class="super-team">
+                           <img src="images/users.png"><br>
+                           <span class="montserrat-bold">SUPER TEAM</span>
+                        </div>
+                     </a>
+                  </div>
+                     <div class="wwd-img right wwd3">
+                     <div class="wwd-img-wwd3"></div>
+                     <a href="#">
+                        <div class="super-team">
+                           <img src="images/users.png"><br>
+                           <span class="montserrat-bold">SUPER TEAM</span>
+                        </div>
+                     </a>
+                  </div>
                   </div>
                  </div>
                </div>
-               <div class="wwd-tablet">
-                     <div class="wwd-img-top">
-                        <div class="wwd-img-top-cover"></div>
-                        <a href="#">
-                           <div class="super-team">
-                              <img src="images/users.png"><br>
-                              <span class="montserrat-bold">SUPER TEAM</span>
-                           </div>
-                        </a>
-                     </div>
-                     <div class="wwd-img-middle"></div>
-                  <div class="wwd-img-bottom"></div>
-               </div>
-               </div>
             </div>
-         </div>
+
 
 
             <div class="stats">
@@ -153,6 +178,7 @@
                   <h3 class="section-sub-title montserrat-bold">AMAZING SERVICES</h3>
                   <hr class="line-red-www">
                </div>
+
                <div class="services-container">
                   <div class="services-top-wrapper clearfix">
                      <div class="services-left-container left clearfix">
@@ -190,7 +216,7 @@
                   <div class="services-bottom-wrapper clearfix">
                      <div class="services-left-container left clearfix">
                         <div class="services-left left clearfix">
-                           <div class="services-icon left">
+                           <div class="services-icon left pad-left1">
                               <img src="images/book.png">
                            </div>
                            <div class="services-text right">
@@ -221,9 +247,8 @@
                      </div>
                   </div>
                </div>
-               <div class="services-container-tablet">
+               <div class="services-container-mobile">
                   <div class="services-top-wrapper clearfix">
-                     <div class="services-left-container left clearfix">
                         <div class="services-left left clearfix">
                            <div class="services-icon left">
                               <img src="images/alarm.png">
@@ -242,9 +267,10 @@
                               <div class="services-desc roboto-regular">Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
                            </div>
                         </div>
-                     </div>
-                     <div class="services-right-container right pad-left1">
-                        <div class="services-right clearfix">
+
+                  </div>
+                  <div class="services-top-wrapper clearfix">
+                        <div class="services-left left clearfix">
                            <div class="services-icon left">
                               <img src="images/computer.png">
                            </div>
@@ -253,11 +279,7 @@
                               <div class="services-desc roboto-regular">Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <div class="services-bottom-wrapper clearfix">
-                     <div class="services-left-container left clearfix">
-                        <div class="services-left left clearfix">
+                        <div class="services-left right clearfix">
                            <div class="services-icon left">
                               <img src="images/book.png">
                            </div>
@@ -266,7 +288,11 @@
                               <div class="services-desc roboto-regular">Lorem dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</div>
                            </div>
                         </div>
-                        <div class="services-left right clearfix pad-right1">
+
+                        </div>
+
+                  <div class="services-bottom-wrapper clearfix">
+                     <div class="services-left left clearfix ">
                            <div class="services-icon left">
                               <img src="images/home.png">
                            </div>
@@ -275,9 +301,8 @@
                               <div class="services-desc roboto-regular">Lorem dolor sit amet, consectetur adipiscing elit, sed do tempor.</div>
                            </div>
                         </div>
-                     </div>
-                     <div class="services-right-container right">
-                        <div class="services-right clearfix">
+
+                        <div class="services-left right clearfix">
                            <div class="services-icon left">
                               <img src="images/digital.png">
                            </div>
@@ -286,10 +311,9 @@
                               <div class="services-desc roboto-regular">Sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
                            </div>
                         </div>
-                     </div>
+                  </div>
                   </div>
                </div>
-            </div>
             <div class="fad">
                <div class="fad-title">
                   <h4 class="section-title kaushanscript-regular">For all devices</h4>
@@ -297,26 +321,24 @@
                   <hr class="line-red-fad">
                </div>
                <div class="ipad">
-                  <div class="iphone">
-                     <img src="images/iphone.png">
-                  </div>
+                  <div class="iphone"></div>
                </div>
             </div>
-            <div class="services2-desktop">
+            <div class="services2">
                <div class="services2-title">
                  <h4 class="section-title kaushanscript-regular">Service</h4>
                   <h3 class="section-sub-title montserrat-bold">WHAT WE DO</h3>
-                  <hr class="line-red-www">
+                  <hr class="line-red-fad">
                   <div class="description-services2 roboto-regular">
                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                   </div>
                </div>
-                  <div class="services2-details clearfix">
+               <div class="services2-tab-desk">
+                    <div class="services2-details clearfix">
                      <div class="services2-img left">
-                        <img src="images/services2_img.png">
                      </div>
                      <div class="services2-accordion right">
-                        <div class="accordion-box clearfix">
+                        <div class="accordion-box clearfix" onclick="accordionOpen1()">
                            <div class="accordion-title left clearfix">
                               <div class="accordion-img left">
                                  <img src="images/picture.png" class="inline">
@@ -326,9 +348,11 @@
                               </div>
                            </div>
                            <div class="accordion-down-btn right">
-                              <img src="images/arrow_down.png">
+                              <img src="images/arrow_down.png" id="arrow-down">
+                              <img src="images/arrow_up.png" id="arrow-up">
                            </div>
                         </div>
+                        <div id="accordion-details2">
                         <div class="accordion-details roboto-light-italic clearfix">
                            <div class="accordion-details-text left">
                               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -337,6 +361,7 @@
                               <div class="accordion-slider-green"></div>
                            </div>
                         </div>
+                     </div>
                         <div class="accordion-box clearfix">
                            <div class="accordion-title left clearfix">
                               <div class="accordion-img left">
@@ -364,23 +389,13 @@
                            </div>
                         </div>
                      </div>
+                    </div>
                </div>
-            </div>
-            <div class="services2-tablet">
-               <div class="services2-title">
-                  <h4 class="section-title kaushanscript-regular">Service</h4>
-                  <h3 class="section-sub-title montserrat-bold">WHAT WE DO</h3>
-                  <hr class="line-red-www">
-                  <div class="description-services2 roboto-regular">
-                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </div>
-               </div>
-                  <div class="services2-details">
+               <div class="services2-details-mobile">
                      <div class="services2-img">
-                        <img src="images/services2_img.png">
                      </div>
                      <div class="services2-accordion">
-                        <div class="accordion-box clearfix">
+                        <div class="accordion-box clearfix" onclick="accordionOpen()">
                            <div class="accordion-title left clearfix">
                               <div class="accordion-img left">
                                  <img src="images/picture.png" class="inline">
@@ -390,9 +405,11 @@
                               </div>
                            </div>
                            <div class="accordion-down-btn right">
-                              <img src="images/arrow_down.png">
+                              <img src="images/arrow_down.png" id="arrow-down">
+                              <img src="images/arrow_up.png" id="arrow-up">
                            </div>
                         </div>
+                        <div id="accordion-details-1">
                         <div class="accordion-details roboto-light-italic clearfix">
                            <div class="accordion-details-text left">
                               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -400,6 +417,7 @@
                            <div class="accordion-slider right">
                               <div class="accordion-slider-green"></div>
                            </div>
+                        </div>
                         </div>
                         <div class="accordion-box clearfix">
                            <div class="accordion-title left clearfix">
@@ -428,9 +446,8 @@
                            </div>
                         </div>
                      </div>
-                  </div>
+                 </div>
                </div>
-            </div>
             <div class="quote">
                <div class="quote-content">
                   <div class="left-button">
@@ -458,116 +475,175 @@
             <div class="wwa">
                <h4 class="section-title kaushanscript-regular">Who we are</h4>
                <h3 class="section-sub-title montserrat-bold">MEET OUR TEAM</h3>
-               <hr class="line-red-www">
+               <hr class="line-red-fad">
                <div class="description-www roboto-regular">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                </div>
                <div class="dev-imgs-container">
-                  <div class="dev-imgs-desktop clearfix">
+                  <div class="dev-imgs clearfix">
                      <div class="matthew-container left">
                         <div class="matthew">
-                           <div class="matthew-image">
-                              <img src="images/matthew.png">
-                           </div>
+                           <div class="matthew-hover"></div>
                            <div class="social-links clearfix">
                               <a href="#">
-                                 <div class="social-link left">
+                                 <div class="facebook left">
+                                 <div class="social-link facebook-regular">
                                     <img src="images/facebook.png">
                                  </div>
+                                 <div class="social-link facebook-hover">
+                                    <img src="images/facebook_hover.png">
+                                 </div>
+                              </div>
                               </a>
                               <a href="#">
-                                 <div class="social-link left">
+                                 <div class="twitter left">
+                                 <div class="social-link twitter-regular">
                                     <img src="images/twitter.png">
                                  </div>
+                                 <div class="social-link twitter-hover">
+                                    <img src="images/twitter_hover.png">
+                                 </div>
+                              </div>
                               </a>
                               <a href="#">
-                                 <div class="social-link left">
+                                 <div class="pinterest left">
+                                 <div class="social-link pinterest-regular">
                                     <img src="images/pinterest.png">
                                  </div>
+                                 <div class="social-link pinterest-hover">
+                                    <img src="images/pinterest_hover.png">
+                                 </div>
+                              </div>
                               </a>
                               <a href="#">
-                                 <div class="social-link left">
+                                 <div class="instagram left">
+                                 <div class="social-link instagram-regular">
                                     <img src="images/instagram.png">
                                  </div>
+                                 <div class="social-link instagram-hover">
+                                    <img src="images/instagram_hover.png">
+                                 </div>
+                              </div>
                               </a>
                            </div>
                         </div>
                         <div class="name-title-matthew">
                            <div class="name montserrat-regular">MATTHEW DIX</div>
-                           <div class="title roboto-light-italic"> Graphic Design</div>
+                           <div class="title roboto-light-italic">Graphic Design</div>
                         </div>
                      </div>
                      <div class="dev-imgs-right right clearfix">
-                        <div class="dev-img left">
-                           <img src="images/christopher.png">
-                           <div class="name-title">
-                              <div class="name montserrat-regular">CHRISTOPHER CAMPBELL</div>
-                              <div class="title roboto-light-italic">Branding/UX design</div>
+                        <div class="christopher-container left">
+                        <div class="christopher">
+                           <div class="christopher-hover"></div>
+                           <div class="social-links clearfix">
+                              <a href="#">
+                                 <div class="facebook left">
+                                 <div class="social-link facebook-regular">
+                                    <img src="images/facebook.png">
+                                 </div>
+                                 <div class="social-link facebook-hover">
+                                    <img src="images/facebook_hover.png">
+                                 </div>
+                              </div>
+                              </a>
+                              <a href="#">
+                                 <div class="twitter left">
+                                 <div class="social-link twitter-regular">
+                                    <img src="images/twitter.png">
+                                 </div>
+                                 <div class="social-link twitter-hover">
+                                    <img src="images/twitter_hover.png">
+                                 </div>
+                              </div>
+                              </a>
+                              <a href="#">
+                                 <div class="pinterest left">
+                                 <div class="social-link pinterest-regular">
+                                    <img src="images/pinterest.png">
+                                 </div>
+                                 <div class="social-link pinterest-hover">
+                                    <img src="images/pinterest_hover.png">
+                                 </div>
+                              </div>
+                              </a>
+                              <a href="#">
+                                 <div class="instagram left">
+                                 <div class="social-link instagram-regular">
+                                    <img src="images/instagram.png">
+                                 </div>
+                                 <div class="social-link instagram-hover">
+                                    <img src="images/instagram_hover.png">
+                                 </div>
+                              </div>
+                              </a>
                            </div>
                         </div>
-                        <div class="dev-img right">
-                           <img src="images/michael.png">
-                           <div class="name-title">
-                              <div class="name montserrat-regular">MICHAEL FERTIG</div>
-                              <div class="title roboto-light-italic">Developer</div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="dev-imgs-tablet">
-                  <div class="matthew-container">
-                     <div class="matthew">
-                        <div class="matthew-image">
-                           <img src="images/matthew.png">
-                        </div>
-                        <div class="social-links clearfix">
-                           <a href="#">
-                              <div class="social-link left">
-                                 <img src="images/facebook.png">
-                              </div>
-                           </a>
-                           <a href="#">
-                              <div class="social-link left">
-                                 <img src="images/twitter.png">
-                              </div>
-                           </a>
-                           <a href="#">
-                              <div class="social-link left">
-                                 <img src="images/pinterest.png">
-                              </div>
-                           </a>
-                           <a href="#">
-                              <div class="social-link left">
-                                 <img src="images/instagram.png">
-                              </div>
-                           </a>
-                        </div>
-                     </div>
-                     <div class="name-title-matthew">
-                        <div class="name montserrat-regular">MATTHEW DIX</div>
-                        <div class="title roboto-light-italic"> Graphic Design</div>
-                     </div>
-                  </div>
-                     <div class="dev-img">
-                        <img src="images/christopher.png">
-                        <div class="name-title">
+                        <div class="name-title-matthew">
                            <div class="name montserrat-regular">CHRISTOPHER CAMPBELL</div>
                            <div class="title roboto-light-italic">Branding/UX design</div>
                         </div>
-                     </div>
-                     <div class="dev-imgs-middle">
-                        <img src="images/michael.png">
-                        <div class="name-title">
+
+                  </div>
+
+
+                  <div class="michael-container right">
+                        <div class="michael">
+                           <div class="michael-hover "></div>
+                           <div class="social-links clearfix">
+                              <a href="#">
+                                 <div class="facebook left">
+                                 <div class="social-link facebook-regular">
+                                    <img src="images/facebook.png">
+                                 </div>
+                                 <div class="social-link facebook-hover">
+                                    <img src="images/facebook_hover.png">
+                                 </div>
+                              </div>
+                              </a>
+                              <a href="#">
+                                 <div class="twitter left">
+                                 <div class="social-link twitter-regular">
+                                    <img src="images/twitter.png">
+                                 </div>
+                                 <div class="social-link twitter-hover">
+                                    <img src="images/twitter_hover.png">
+                                 </div>
+                              </div>
+                              </a>
+                              <a href="#">
+                                 <div class="pinterest left">
+                                 <div class="social-link pinterest-regular">
+                                    <img src="images/pinterest.png">
+                                 </div>
+                                 <div class="social-link pinterest-hover">
+                                    <img src="images/pinterest_hover.png">
+                                 </div>
+                              </div>
+                              </a>
+                              <a href="#">
+                                 <div class="instagram left">
+                                 <div class="social-link instagram-regular">
+                                    <img src="images/instagram.png">
+                                 </div>
+                                 <div class="social-link instagram-hover">
+                                    <img src="images/instagram_hover.png">
+                                 </div>
+                              </div>
+                              </a>
+                           </div>
+                        </div>
+                        <div class="name-title-matthew">
                            <div class="name montserrat-regular">MICHAEL FERTIG</div>
                            <div class="title roboto-light-italic">Developer</div>
                         </div>
-                     </div>
-                  </div>
-               </div>
 
+                     </div>
+               </div>
+               </div>
             </div>
-            </div>
+         </div>
+
 
             <div class="logos-desktop">
                <div class="logo-background">
@@ -603,7 +679,7 @@
                      </a>
                   </div>
                </div>
-            </div>
+              </div>
             </div>
 
             <div class="logos-tablet">
@@ -644,10 +720,51 @@
                </div>
                </div>
             </div>
+
+            <div class="logos-mobile">
+               <div class="logo-wrapper">
+                  <div class="logo-top-wrapper clearfix">
+                  <div class="company-logo left">
+                     <a href="#">
+                     <img src="images/barber1.png">
+                     </a>
+                  </div>
+                  <div class="company-logo left">
+                     <a href="#">
+                     <img src="images/abcd.png">
+                     </a>
+                  </div>
+               </div>
+               <div class="logo-middle-wrapper clearfix">
+                  <div class="company-logo left">
+                     <a href="#">
+                     <img src="images/design.png">
+                     </a>
+                  </div>
+                  <div class="company-logo left">
+                     <a href="#">
+                     <img src="images/barber2.png">
+                     </a>
+                  </div>
+               </div>
+               <div class="logo-bottom-wrapper clearfix">
+                  <div class="company-logo left">
+                     <a href="#">
+                     <img src="images/barber3.png">
+                     </a>
+                  </div>
+                  <div class="company-logo left">
+                     <a href="#">
+                     <img src="images/studio.png">
+                     </a>
+                  </div>
+               </div>
+               </div>
+            </div>
             <div class="wwd">
                <h4 class="section-title kaushanscript-regular">What we do</h4>
                <h3 class="section-sub-title montserrat-bold">SOME OF OUR WORK</h3>
-               <hr class="line-red-www">
+               <hr class="line-red-fad">
                <div class="description-www roboto-regular">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                </div>
@@ -655,61 +772,127 @@
                <div class="some-work-images clearfix">
                   <div class="work-images left clearfix">
                      <div class="work-images-left-top clearfix">
-                        <div class="work-image left man">
+                        <div class="work-image left man"><div class="creative">
+                           <img src="images/creative.png">
+                           <div class="montserrat-regular cd">CREATIVELY DESIGNED</div>
+                           <div class="roboto-light-italic lids">Lorem ipsum dolor sit</div>
                         </div>
-                        <div class="work-image right roof">
+                        </div>
+                        <div class="work-image right roof"><div class="creative">
+                           <img src="images/creative.png">
+                           <div class="montserrat-regular cd">CREATIVELY DESIGNED</div>
+                           <div class="roboto-light-italic lids">Lorem ipsum dolor sit</div>
+                        </div>
                         </div>
                      </div>
-                     <div class="work-images-left-bottom clearfix">
-                        <div class="work-image left bridge">
+                     <div class="work-images-left-bottom clearfix"><div class="creative">
+                           <img src="images/creative.png">
+                           <div class="montserrat-regular cd">CREATIVELY DESIGNED</div>
+                           <div class="roboto-light-italic lids">Lorem ipsum dolor sit</div>
                         </div>
-                        <div class="work-image right dome">
+                        <div class="work-image left bridge"><div class="creative">
+                           <img src="images/creative.png">
+                           <div class="montserrat-regular cd">CREATIVELY DESIGNED</div>
+                           <div class="roboto-light-italic lids">Lorem ipsum dolor sit</div>
+                        </div>
+                        </div>
+                        <div class="work-image right dome"><div class="creative">
+                           <img src="images/creative.png">
+                           <div class="montserrat-regular cd">CREATIVELY DESIGNED</div>
+                           <div class="roboto-light-italic lids">Lorem ipsum dolor sit</div>
+                        </div>
+
                         </div>
                      </div>
                   </div>
                   <div class="work-images right clearfix">
-                     <div class="work-image left jellyfish">
+                     <div class="work-image left jellyfish"><div class="creative-jellyfish">
+                           <img src="images/creative.png">
+                           <div class="montserrat-regular cd">CREATIVELY DESIGNED</div>
+                           <div class="roboto-light-italic lids">Lorem ipsum dolor sit</div>
+                        </div>
                      </div>
                      <div class="work-image right">
-                        <div class="work-image-right-top window">
+                        <div class="work-image-right-top window"><div class="creative">
+                           <img src="images/creative.png">
+                           <div class="montserrat-regular cd">CREATIVELY DESIGNED</div>
+                           <div class="roboto-light-italic lids">Lorem ipsum dolor sit</div>
                         </div>
-                        <div class="work-image-right-bottom building">
+                     </div>
+                        <div class="work-image-right-bottom building"><div class="creative">
+                           <img src="images/creative.png">
+                           <div class="montserrat-regular">CREATIVELY DESIGNED</div>
+                           <div class="roboto-light-italic">Lorem ipsum dolor sit</div>
+                        </div>
                         </div>
                      </div>
                   </div>
                </div>
-            </div>
 
+
+            </div>
             <div class="wwd-tablet">
                <div class="img-top-wrapper clearfix">
-                  <div class="work-image left man"></div>
-                  <div class="work-image right roof"></div>
+                  <div class="work-image left man">
+                     <div class="creative">
+                           <img src="images/creative.png">
+                           <div class="montserrat-regular">CREATIVELY DESIGNED</div>
+                           <div class="roboto-light-italic">Lorem ipsum dolor sit</div>
+                        </div>
+                  </div>
+                  <div class="work-image right roof">
+                     <div class="creative">
+                           <img src="images/creative.png">
+                           <div class="montserrat-regular">CREATIVELY DESIGNED</div>
+                           <div class="roboto-light-italic">Lorem ipsum dolor sit</div>
+                        </div>
+                  </div>
                </div>
                <div class="img-middle-wrapper clearfix">
-                  <div class="work-image left bridge"></div>
-                  <div class="work-image right dome"></div>
+                  <div class="work-image left bridge"><div class="creative">
+                           <img src="images/creative.png">
+                           <div class="montserrat-regular">CREATIVELY DESIGNED</div>
+                           <div class="roboto-light-italic">Lorem ipsum dolor sit</div>
+                        </div></div>
+                  <div class="work-image right dome">
+                     <div class="creative">
+                           <img src="images/creative.png">
+                           <div class="montserrat-regular">CREATIVELY DESIGNED</div>
+                           <div class="roboto-light-italic">Lorem ipsum dolor sit</div>
+                        </div>
+                     </div>
                </div>
                <div class="img-top-wrapper clearfix">
-                  <div class="work-image left jellyfish"></div>
+                  <div class="work-image left jellyfish"><div class="creative-jellyfish">
+                           <img src="images/creative.png">
+                           <div class="montserrat-regular">CREATIVELY DESIGNED</div>
+                           <div class="roboto-light-italic">Lorem ipsum dolor sit</div>
+                        </div></div>
                   <div class="work-image right">
 
-                     <div class="work-image-right left window"></div>
-                     <div class="work-image-right right building"></div>
+                     <div class="work-image-right left window"><div class="creative">
+                           <img src="images/creative.png">
+                           <div class="montserrat-regular">CREATIVELY DESIGNED</div>
+                           <div class="roboto-light-italic">Lorem ipsum dolor sit</div>
+                        </div></div>
+                     <div class="work-image-right right building"><div class="creative">
+                           <img src="images/creative.png">
+                           <div class="montserrat-regular">CREATIVELY DESIGNED</div>
+                           <div class="roboto-light-italic">Lorem ipsum dolor sit</div>
+                        </div></div>
                   </div>
                </div>
 
-               </div>
             </div>
          </div>
-            <div class="testimonial">
+
+             <div class="testimonial">
                <div class="testimonial-content">
                   <div class="testimonial-left-button">
                      <img src="images/arrow_left.png">
                   </div>
                   <div class="testimonial-details clearfix">
-                     <div class="testimonial-image left">
-                        <img src="images/testimonial_img.png">
-                     </div>
+                     <div class="testimonial-image left"></div>
                      <div class="testimonial-entry right">
                         <div class="testimonial-text roboto-light-italic">
                            “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.”
@@ -728,8 +911,9 @@
             <div class="wps">
                <h4 class="section-title kaushanscript-regular">Happy Clients</h4>
                <h3 class="section-sub-title-wps montserrat-bold">WHAT PEOPLE SAY</h3>
-               <hr class="line-red-www">
-               <div class="wps-content">
+               <hr class="line-red-fad">
+               <div class="wps-tab-desk">
+                 <div class="wps-content">
                   <div class="wps-top-wrapper clearfix">
                      <div class="wps-left left clearfix">
                         <div class="wps-profile-pic left">
@@ -758,8 +942,8 @@
                         </div>
                      </div>
                   </div>
-               </div>
-               <div class="wps-bottom-wrapper clearfix">
+
+                 <div class="wps-bottom-wrapper clearfix">
                   <div class="wps-left left clearfix">
                      <div class="wps-profile-pic left">
                         <img src="images/jaelynn.png">
@@ -786,25 +970,84 @@
                         </div>
                      </div>
                   </div>
+                 </div>
                </div>
+                                </div>
+
+               <div class="wps-mobile">
+                 <div class="wps-content">
+                     <div class="wps-profile clearfix">
+                        <div class="wps-profile-pic left">
+                           <img src="images/matthew_wps.png">
+                        </div>
+                        <div class="wps-text right">
+                           <div class="wps-name montserrat-regular">MATTHEW DIX</div>
+                           <div class="wps-title roboto-light-italic">Graphic Design</div>
+                           <hr class="line-red-wps-text">
+                           <div class="wps-say roboto-regular">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.
+                           </div>
+                        </div>
+                     </div>
+                     <div class="wps-profile clearfix">
+                        <div class="wps-profile-pic left">
+                           <img src="images/nick.png">
+                        </div>
+                        <div class="wps-text right">
+                           <div class="wps-name montserrat-regular">NICK KARVOUNIS</div>
+                           <div class="wps-title roboto-light-italic">Graphic Design</div>
+                           <hr class="line-red-wps-text">
+                           <div class="wps-say roboto-regular">
+                              Sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                           </div>
+                        </div>
+                     </div>
+                  <div class="wps-profile clearfix">
+                     <div class="wps-profile-pic left">
+                        <img src="images/jaelynn.png">
+                     </div>
+                     <div class="wps-text right">
+                        <div class="wps-name montserrat-regular">JAELYNN CASTILLO</div>
+                        <div class="wps-title roboto-light-italic">Graphic Design</div>
+                        <hr class="line-red-wps-text">
+                        <div class="wps-say roboto-regular">
+                           Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                        </div>
+                     </div>
+                  </div>
+                  <div class="wps-profile clearfix">
+                     <div class="wps-profile-pic left">
+                        <img src="images/mike.png">
+                     </div>
+                     <div class="wps-text right">
+                        <div class="wps-name montserrat-regular">MIKE PETRUCCI</div>
+                        <div class="wps-title roboto-light-italic">Graphic Design</div>
+                        <hr class="line-red-wps-text">
+                        <div class="wps-say roboto-regular">
+                           Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.
+                        </div>
+                     </div>
+                  </div>
+               </div>
+              </div>
             </div>
+
             <div class="stories">
 
                <h4 class="section-title kaushanscript-regular">Our stories</h4>
                <h3 class="section-sub-title montserrat-bold">LATEST BLOG</h3>
-               <hr class="line-red-www">
-               <div class="stories-desktop">
+               <hr class="line-red-fad">
+               <div class="stories-content">
                   <div class="blogs-wrapper clearfix">
                   <div class="blog-content left">
-                     <div class="blog-image-wrapper clearfix">
-                        <a href="#">
-                        <img src="images/blog1.png">
-                        </a>
+                     <a href="#">
+                     <div class="blog-image-wrapper clearfix blog1">
                         <div class="date">
                            <div class="date-num montserrat-bold">15</div>
                            <div class="date-month roboto-light-italic month">Jan</div>
                         </div>
                      </div>
+                  </a>
                      <div class="blog-text">
                         <a href="#" class="blog-link">
                            <div class="blog-title montserrat-regular">LOREM IPSUM DOLOR SIT AMET</div>
@@ -832,15 +1075,14 @@
 
                   </div>
                   <div class="blog-content left">
-                     <div class="blog-image-wrapper clearfix">
-                        <a href="#">
-                        <img src="images/blog2.png">
-                        </a>
+                     <a href="#">
+                     <div class="blog-image-wrapper clearfix blog2">
                         <div class="date">
                            <div class="date-num montserrat-bold">14</div>
                            <div class="date-month roboto-light-italic month">Jan</div>
                         </div>
                      </div>
+                  </a>
                      <div class="blog-text">
                         <a href="#" class="blog-link">
                            <div class="blog-title montserrat-regular">
@@ -869,15 +1111,14 @@
                      </a>
                   </div>
                   <div class="blog-content left">
-                     <div class="blog-image-wrapper clearfix">
                         <a href="#">
-                        <img src="images/blog3.png">
-                        </a>
+                     <div class="blog-image-wrapper clearfix blog3">
                         <div class="date">
                            <div class="date-num montserrat-bold">12</div>
                            <div class="date-month roboto-light-italic month">Jan</div>
                         </div>
                      </div>
+                        </a>
                      <div class="blog-text">
                         <a href="#" class="blog-link">
                            <div class="blog-title montserrat-regular">INCIDIDUNT UI LABORE ET DOLORE</div>
@@ -905,118 +1146,7 @@
                   </div>
                    </div>
                </div>
-               <div class="stories-tablet">
-                  <div class="blogs-wrapper">
-                  <div class="blog-content">
-                     <div class="blog-image-wrapper clearfix">
-                        <a href="#">
-                        <img src="images/blog1.png">
-                        </a>
-                        <div class="date">
-                           <div class="date-num montserrat-bold">15</div>
-                           <div class="date-month roboto-light-italic month">Jan</div>
-                        </div>
-                     </div>
-                     <div class="blog-text">
-                        <a href="#" class="blog-link">
-                           <div class="blog-title montserrat-regular">LOREM IPSUM DOLOR SIT AMET</div>
-                        </a>
-                        <div class="blog-desc roboto-regular">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-                     </div>
-                     <div class="blog-stats roboto-light-italic clearfix">
-                        <a href="#">
-                           <div class="view clearfix left">
-                              <div class="view-icon left">
-                                 <img src="images/view.png">
-                              </div>
-                              <div class="view-count right">542</div>
-                           </div>
-                        </a>
-                        <a href="#">
-                           <div class="speech clearfix right">
-                              <div class="speech-icon left">
-                                 <img src="images/speech.png">
-                              </div>
-                              <div class="speech-count right">17</div>
-                           </div>
-                        </a>
-                     </div>
 
-                  </div>
-                  <div class="blog-content">
-                     <div class="blog-image-wrapper clearfix">
-                        <a href="#">
-                        <img src="images/blog2.png">
-                        </a>
-                        <div class="date">
-                           <div class="date-num montserrat-bold">14</div>
-                           <div class="date-month roboto-light-italic month">Jan</div>
-                        </div>
-                     </div>
-                     <div class="blog-text">
-                        <a href="#" class="blog-link">
-                           <div class="blog-title montserrat-regular">
-                              SED DO EIUSMOD TEMPOR
-                           </div>
-                        </a>
-                        <div class="blog-desc roboto-regular">Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-                     </div>
-                     <div class="blog-stats roboto-light-italic clearfix">
-                        <a href="#">
-                           <div class="view clearfix left">
-                              <div class="view-icon left">
-                                 <img src="images/view.png">
-                              </div>
-                              <div class="view-count right">992</div>
-                           </div>
-                        </a>
-                        <a href="#">
-                           <div class="speech clearfix right">
-                              <div class="speech-icon left">
-                                 <img src="images/speech.png">
-                              </div>
-                              <div class="speech-count right">42</div>
-                           </div>
-                     </div>
-                     </a>
-                  </div>
-                  <div class="blog-content">
-                     <div class="blog-image-wrapper clearfix">
-                        <a href="#">
-                        <img src="images/blog3.png">
-                        </a>
-                        <div class="date">
-                           <div class="date-num montserrat-bold">12</div>
-                           <div class="date-month roboto-light-italic month">Jan</div>
-                        </div>
-                     </div>
-                     <div class="blog-text">
-                        <a href="#" class="blog-link">
-                           <div class="blog-title montserrat-regular">INCIDIDUNT UI LABORE ET DOLORE</div>
-                        </a>
-                        <div class="blog-desc roboto-regular">Elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-                     </div>
-                     <div class="blog-stats roboto-light-italic clearfix">
-                        <a href="#">
-                           <div class="view clearfix left">
-                              <div class="view-icon left">
-                                 <img src="images/view.png">
-                              </div>
-                              <div class="view-count right">1560</div>
-                           </div>
-                        </a>
-                        <a href="#">
-                           <div class="speech clearfix right">
-                              <div class="speech-icon left">
-                                 <img src="images/speech.png">
-                              </div>
-                              <div class="speech-count right">98</div>
-                           </div>
-                        </a>
-                     </div>
-                  </div>
-                   </div>
-               </div>
             </div>
             <div class="map">
                <a href="#">
@@ -1028,6 +1158,8 @@
          </div>
       </div>
       </div>
+   </div>
+
       <footer>
          <div class="footer-container-top clearfix">
             <div class="subscribe left">
@@ -1040,13 +1172,106 @@
                   <span class="montserrat-regular follower-text">followers</span>
                </div>
                <div class="subscribe-bottom">
+                  <div class="follow clearfix">
+                  <div class="roboto-light-italic follow-us left">Follow Us:</div>
+                  <div class="follow-icons left">
+                     <a href="#">
+                        <div class="follow-icon left">
+                           <img src="images/facebook_sub.png">
+                        </div>
+                     </a>
+                     <a href="#">
+                        <div class="follow-icon left">
+                           <img src="images/twitter_sub.png">
+                        </div>
+                     </a>
+                     <a href="#">
+                        <div class="follow-icon left">
+                           <img src="images/instagram_sub.png">
+                        </div>
+                     </a>
+                     <a href="#">
+                        <div class="follow-icon left">
+                           <img src="images/pinterest_sub.png">
+                        </div>
+                     </a>
+                     <a href="#">
+                        <div class="follow-icon left">
+                           <img src="images/google.png">
+                        </div>
+                     </a>
+                     <a href="#">
+                        <div class="follow-icon left">
+                           <img src="images/youtube.png">
+                        </div>
+                     </a>
+                     <a href="#">
+                        <div class="follow-icon left">
+                           <img src="images/dribble.png">
+                        </div>
+                     </a>
+                     <a href="#">
+                        <div class="follow-icon left">
+                           <img src="images/tumblr.png">
+                        </div>
+                     </a>
+                  </div>
+                  </div>
+                  <div class="follow-mobile">
                   <div class="roboto-light-italic follow-us">Follow Us:</div>
+                  <div class="follow-icons">
+                     <div class="follow-top clearfix">
+                     <a href="#">
+                        <div class="follow-icon left">
+                           <img src="images/facebook_sub.png">
+                        </div>
+                     </a>
+                     <a href="#">
+                        <div class="follow-icon left">
+                           <img src="images/twitter_sub.png">
+                        </div>
+                     </a>
+                     <a href="#">
+                        <div class="follow-icon left">
+                           <img src="images/instagram_sub.png">
+                        </div>
+                     </a>
+                     <a href="#">
+                        <div class="follow-icon left">
+                           <img src="images/pinterest_sub.png">
+                        </div>
+                     </a>
+                  </div>
+                  <div class="follow-bottom clearfix">
+                     <a href="#">
+                        <div class="follow-icon left">
+                           <img src="images/google.png">
+                        </div>
+                     </a>
+                     <a href="#">
+                        <div class="follow-icon left">
+                           <img src="images/youtube.png">
+                        </div>
+                     </a>
+                     <a href="#">
+                        <div class="follow-icon left">
+                           <img src="images/dribble.png">
+                        </div>
+                     </a>
+                     <a href="#">
+                        <div class="follow-icon left">
+                           <img src="images/tumblr.png">
+                        </div>
+                     </a>
+                  </div>
+                  </div>
+                  </div>
                   <form action="">
                      <div class="subscribe-form clearfix">
                         <div class="text-field left">
                            <input type="text" placeholder="Your Email..." class="roboto-light-italic input-email">
                         </div>
-                        <div class="right">
+                        <div class="sub-btn right">
                            <button class="subscribe-btn montserrat-bold white">SUBSCRIBE</button>
                         </div>
                      </div>
@@ -1057,11 +1282,10 @@
                <div class="blogs2 left">
                   <div class="blogs2-title montserrat-regular">BLOGS</div>
                   <div class="blog2-post clearfix">
-                     <div class="blog2-img left">
-                        <a href="#">
-                        <img src="images/candle.png">
-                        </a>
+                     <a href="#">
+                     <div class="blog2-img left candle">
                      </div>
+                  </a>
                      <div class="blog2-text right">
                         <a href="#">
                            <div class="blog2-heading montserrat-regular">LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING</div>
@@ -1069,12 +1293,11 @@
                         <div class="blog2-date roboto-light-italic">Jan 9, 2016</div>
                      </div>
                   </div>
-                  <div class="blog2-post clearfix">
-                     <div class="blog2-img left">
                         <a href="#">
-                        <img src="images/wave.png">
-                        </a>
+                  <div class="blog2-post clearfix">
+                     <div class="blog2-img left wave">
                      </div>
+                        </a>
                      <div class="blog2-text right">
                         <a href="#">
                            <div class="blog2-heading montserrat-regular">CONSECTETUR ADIPISCING ELIT, SED DO EIUSMOD TEMPOR</div>
@@ -1082,12 +1305,11 @@
                         <div class="blog2-date roboto-light-italic">Jan 9, 2016</div>
                      </div>
                   </div>
-                  <div class="blog2-post clearfix">
-                     <div class="blog2-img left">
                         <a href="#">
-                        <img src="images/guitar.png">
-                        </a>
+                  <div class="blog2-post clearfix">
+                     <div class="blog2-img left guitar">
                      </div>
+                        </a>
                      <div class="blog2-text right">
                         <a href="#">
                            <div class="blog2-heading montserrat-regular">SED DO EIUSMOD TEMPOR INCIDUNT UT LABORE</div>
