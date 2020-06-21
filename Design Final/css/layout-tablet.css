@@ -3,6 +3,7 @@
     display: none;
   }
 
+  .follow-mobile,
   .dev-imgs-desktop,
   .logos-desktop,
   .services2-desktop,
@@ -730,6 +731,10 @@
     top: 133px;
     right: 25px;
 }
+
+.testimonial-author-name {
+    margin-top: 12px;
+ }
 
 
 .social-links {

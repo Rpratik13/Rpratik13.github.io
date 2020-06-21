@@ -26,7 +26,7 @@
   }
 
   .services2-title {
-    margin-top: 120px;
+    margin-top: 0px;
   }
 
   .logos-desktop,
@@ -46,7 +46,7 @@
 
  .description-services2 {
     /*padding-left: 17.7083333%;*/
-    margin: 40px auto 0px auto;
+    margin: 39px auto 0px auto;
     width: 954px;
     line-height: 24px;
   }
@@ -71,7 +71,8 @@
 
   .slider {
     width: 1210px;
-    margin: 157px auto 28px auto;
+    margin: 157px  auto 28px auto;
+    padding-left: 10px;
 
   }
 
@@ -133,10 +134,20 @@
 
   .creative {
     display: none;
-    padding-top: 150px;
+    padding-top: 161px;
     text-align: center;
     margin: 0px auto;
     color: #fff;
+  }
+
+  .cd {
+    font-size: 14px;
+    margin-top: 13px;
+  }
+
+  .lids{
+    font-size: 15px;
+    margin-top: 10px;
   }
 
   .learn-more {
@@ -172,7 +183,7 @@
     .line-red-www {
     border-top: 3px solid #f38181;
     width: 58px;
-    margin: 36px auto 0px auto;
+    margin: 35px auto 0px auto;
   }
 
 
@@ -208,7 +219,7 @@
   }
 
   .nav-icon-fcn {
-    padding-top: 37px;
+    padding-top: 36px;
     margin-left: 11px;
   }
 
@@ -232,7 +243,7 @@
   }
 
   .wwd {
-    margin:20px auto 0px auto;
+    margin: 105px auto 0px auto;
   }
 
   .section-sub-title {
@@ -245,8 +256,8 @@
 
   /*.wwd-img {}*/
   .wwd-imgs{
-    width: 1210px;
-    margin: 98px auto 106px auto;
+    width: 1200px;
+    margin: 97px auto 110px auto;
   }
 
   .wwd-img-left{
@@ -272,7 +283,7 @@
 
 .dev-imgs-container{
   width: 1200px;
-  margin: 30px auto 0px auto;
+  margin: 89px auto 0px auto;
 }
 
 .dev-imgs-desktop {
@@ -359,7 +370,7 @@
   .matthew-hover {
     position: absolute;
     width: 380px;
-    bottom: 6px;
+    bottom: 10px;
     right: 10px;
     height: 470px;
   }
@@ -380,8 +391,9 @@
 
   }
   .stats-container {
-    width: 1210px;
+    width: 1202px;
     margin: 0px auto;
+    padding-right: 1px;
   }
 
   .stats-value {
@@ -407,7 +419,7 @@
   }
 
   .mogo-www {
-    margin-top: 105px;
+    margin-top: 104px;
   }
 
   .services-container {
@@ -420,7 +432,7 @@
    padding-bottom: 47px;
    width: 1200px;
    /*margin-left: 1px;*/
-   margin: 50px auto 0px auto;
+   margin: 62px auto 0px auto;
   }
 
   .services-bottom-wrapper {
@@ -430,12 +442,16 @@
   }
 
   .services-left-container {
-    width: 783px;
+    width: 763px;
+    margin-left: 30px;
   }
 
   .services-left {
     width: 362px;
   }
+ .pad-left1{
+  padding-left: 1px;
+ }
 
   .services-text {
     width: calc(100% - 60px);
@@ -446,12 +462,13 @@
   }
 
   .services-right-container {
-    width: 360px;
+    width: 370px;
   }
 
   .services-desc {
     line-height: 23px;
     padding-top: 13px;
+    width: 280px;
   }
 
   .pad-right1{
@@ -465,18 +482,18 @@
   .fad {
     width: 100%;
     max-width: 1920px;
-    margin: 72px auto 0px auto;
+    margin: 118px auto 0px auto;
     height: 850px;
 }
 
 .fad-title {
-    padding-top: 105px;
+    padding-top: 104px;
 }
 
 .ipad {
     position: relative;
     margin-top:6px;
-    margin-left: 27.2916667%;
+    margin-left: 33.8541667%;
     width: 570px;
 }
 .iphone {
@@ -492,7 +509,7 @@
 .services2-details {
     margin-top: 88px;
     width: 1200px;
-    margin: 30px auto 0px auto;
+    margin: 89px auto 0px auto;
 
 }
 .services2-desktop{
@@ -504,6 +521,9 @@
     padding-left: 14px;
 }
 
+.services2 {
+  margin-top: 104px;
+}
 .services2-accordion {
     width: 600px;
     margin: 0px;
@@ -569,9 +589,9 @@
 }
 
 .quote {
-    height: 290px;
+    height: 270px;
     background-color: #f8f8f8;
-    margin-top: 116px;
+    margin-top: 100px;
     margin-bottom: 94px;
 }
 
@@ -583,7 +603,7 @@
 
 .quote-details{
     padding: 0px 90px 0px 110px;
-    width: 1000px;
+    width: 1014px;
 }
 
 .quote-image {
@@ -610,18 +630,19 @@
 
 .left-button{
     position: absolute;
-    top: 133px;
-    left: 23px;
+    top: 134px;
+    left: 30px;
 }
 
 .right-button{
     position: absolute;
-    top: 133px;
-    right: 25px;
+    top: 134px;
+    right: 32px;
 }
 
 .wwa{
     height: 849px;
+    margin-bottom: 106px;
 }
 
 .social-links {
@@ -667,7 +688,8 @@
 .logo-wrapper {
     width: 1200px;
     margin: 0px auto;
-    padding-top: 20px;
+    padding-top: 62px;
+    height: 168px;
 }
 
 .company-logo{
@@ -719,7 +741,7 @@
 
 .testimonial {
     height: 290px;
-    margin-top: 92px;
+    margin-top: 100px;
     margin-bottom: 50px;
 }
 
@@ -734,12 +756,12 @@
 }*/
 
 .testimonial-details{
-    padding: 0px 90px 0px 110px;
-    width: 1000px;
+    padding: 0px 90px 0px 80px;
+    width: 1030px;
 }
 
 .testimonial-entry {
-    width: 750px;
+    width: 767px;
     font-size: 22px;
     line-height: 36px;
     padding-top: 32px;
@@ -748,8 +770,13 @@
 }
 
 .testimonial-text {
-    padding-right: 43px;
+    padding-right: 33px;
     padding-left: 1px;
+    color: #d9d9d9;
+}
+
+.testimonial-author-name {
+  margin-top: 11px;
 }
 
 .testimonial-author {
@@ -770,7 +797,7 @@
 
 .wps {
     padding-top: 105px;
-    height:725px;
+    height:690px;
 }
 
 .wps-left {
@@ -790,7 +817,7 @@
 }
 
 .wps-name{
-    margin-bottom: 10px;
+    margin-bottom: 11px;
 }
 
 .wps-title{
@@ -800,7 +827,7 @@
 .wps-text{
     margin-left: 10px;
     width: 390px;
-    margin-top: 9px;
+    margin-top: 8px;
 }
 
 .wps-say {
@@ -816,7 +843,7 @@
  }
 
  .stories {
-    padding-top: 104px;
+    padding-top: 84px;
  }
 
 .blogs-wrapper {
@@ -840,8 +867,8 @@
 
  .date {
     position: absolute;
-    bottom: 14px;
-    right: 330px;
+    bottom: 10px;
+    left: -10px;
     width: 60px;
     height: 62px;
     padding-top: 8px;
@@ -862,10 +889,15 @@
 
  .blog-text{
     width: 380px;
+    height: 92px;
+ }
+
+ .blog-desc {
+  margin-top: 10px;
  }
 
  .blog-title{
-    margin-top: 12px;
+    margin-top: 17px;
  }
 
  .month {
@@ -884,7 +916,7 @@
  }
 
  .map {
-    margin-top: 112px;
+    margin-top: 62px;
     padding-top: 57px;
     height: 143px;
  }
@@ -894,7 +926,7 @@
  }
 
  .footer-container-top {
-    width: 1200px;
+    width: 1208px;
     margin: 0px auto;
     padding-bottom: 65px;
     border-bottom: 1px solid #f2f2f2;
@@ -912,7 +944,8 @@
  }
 
  .blogs-insta {
-    width: 690px;
+    width: 694px;
+    padding-right: 4px;
  }
 
  footer {
@@ -923,11 +956,13 @@
     padding-right: 5px;
     line-height: 24px;
     padding-top: 26px;
+    padding-left: 4px;
     margin-bottom: 42px;
  }
 
  .follower-num {
     font-size: 18px;
+    margin-left: 5px;
  }
 
  .follower-text {
@@ -935,7 +970,7 @@
  }
 
  .subscribe-form {
-    width: 379px;
+    width: 324px;
  }
 
  .subscribe {
@@ -950,7 +985,14 @@
  .follow-us {
     margin-top: 15px;
     margin-bottom: 36px;
+    margin-left: 5px;
  }
+
+.follow-icon {
+  margin-top: 16px;
+  margin-left: 16px;
+  margin-right: 0px;
+}
 
  .input-email{
     border: none;
@@ -963,7 +1005,8 @@
  .text-field {
     border: 1px solid #e5e5e5;
     border-right:none;
-    width: 228px;
+    width: 227px;
+    margin-left: 5px;
  }
 
  .subscribe-btn {
@@ -971,6 +1014,7 @@
     width: 150px;
     border: none;
     background: #caf0e9;
+    font-size: 14px;
  }
 
  .subscribe-btn:hover{
@@ -978,9 +1022,13 @@
  }
 
  .blog2-text {
-    width: 210px;
+    width: 200px;
     padding-top: 17px;
     padding-left: 19px;
+ }
+
+ .blog2-date {
+  color: #b1b1b1 ;
  }
 
  .blog2-heading {
@@ -989,11 +1037,20 @@
     padding-left: 1px;
  }
 
+ .blog2-img {
+  width:120px;
+  height: 80px;
+ }
+
  .blogs2,
  .insta {
-    padding-top: 77px;
+    padding-top: 30px;
     height: 357px;
     width: 349px;
+ }
+
+ .blogs2 {
+  width: 419px;
  }
 
  .insta {
@@ -1001,16 +1058,22 @@
  }
 
  .blog2-post {
-    margin-top: 26px;
+    margin-top: 30px;
+    padding-left: 4px;
+    width: 340px;
  }
 
  .insta-title,
  .blogs2-title {
     margin-bottom: 35px;
  }
-  .blog2-text {
-    width: 40%;
-    padding-left: 0px;
+
+ .blogs2-title {
+  padding-left: 3px;
+ }
+
+ .insta-imgs-container{
+  padding-left: 0px;
  }
 
  .insta-img {

@@ -880,6 +880,11 @@
     width: 125px;
 }
 
+.testimonial-author-name,
+.author-name {
+  margin-top: 10px;
+}
+
 .testimonial-left-button{
     position: absolute;
     top: 40%;
@@ -1093,6 +1098,7 @@
     border-bottom: 1px solid #e5e5e5;
     padding-bottom: 14px;
  }
+
 
  .follow-us {
     margin-top: 15px;
