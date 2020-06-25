@@ -4,16 +4,22 @@
   <head>
     <meta charset="UTF-8">
     <title>Image Slider</title>
+    <script src="js/index.js"></script>
   </head>
 
   <body>
+
+
     <div class='carousel-container'>
       <img src='images/photo1.jpg' alt='Images'>
       <img src='images/photo2.jpg' alt='Images'>
       <img src='images/photo3.jpg' alt='Images'>
       <img src='images/photo4.jpg' alt='Images'>
     </div>
-    <script src="js/index.js"></script>
+
+    <script>
+      var carousel = new Carousel('carousel-container');
+    </script>
   </body>
 
 </html>
