@@ -156,6 +156,7 @@ function Carousel(elemId, transitionTime, holdTime) {
         clearInterval(interval);
         initSlider();
       }
+
     }, 10);
   }
 
