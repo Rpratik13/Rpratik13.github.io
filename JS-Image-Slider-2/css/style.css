@@ -1,0 +1,95 @@
+@media (min-width: 320px) {
+  .carousel-container {
+    height: 300px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .carousel-container {
+    max-width: 500px;
+    width: 50%;
+  }
+}
+
+#carousel1,
+#carousel3 {
+  float: left;
+}
+
+#carousel2,
+#carousel4 {
+  float: right;
+}
+
+.carousels {
+  margin: 0px auto;
+  max-width: 1000px;
+  height: 600px
+}
+
+.img-container,
+.slide-container {
+  height: 100%;
+  width: 100%;
+  float: left;
+}
+
+.img-container {
+  position: absolute;
+}
+
+.indicator-dot {
+  border: 1px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-block;
+  height: 10px;
+  margin-right: 5px;
+  width: 10px;
+}
+
+.indicator-dot:hover {
+  border: 1px solid #888;
+}
+
+.indicator-dots-container {
+  bottom: 0px;
+  height: 20px;
+  position: absolute;
+  z-index: 10;
+}
+
+.left-btn,
+.right-btn {
+  height: 100%;
+  padding-left: 6px;
+  position: absolute;
+  width: 18px;
+  z-index: 10;
+}
+
+.left-btn:hover,
+.right-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.left-image-container,
+.right-image-container {
+  margin-top: 139px;
+}
+
+.right-btn {
+  right: 0px;
+}
+
+.slide-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.img-container>img {
+  height: 100%;
+  width: 100%;
+}
