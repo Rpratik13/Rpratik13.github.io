@@ -25,8 +25,8 @@ function Car(position) {
   this.powerUp = function (power) {
     if (power[0]) {
       if ((power[2] > 500 && power[2] < 590) &&
-        (((power[1] <= 20 + 80 * car.position) && (power[1] + 30 >= 20 + 80 * car.position)) ||
-          ((power[1] <= 20 + 80 * car.position + 30) && (power[1] + 30 >= 20 + 80 * car.position + 30)))) {
+        (((20 + 80 * power[1] <= 20 + 80 * car.position) && (20 + 80 * power[1] + 30 >= 20 + 80 * car.position)) ||
+          ((20 + 80 * power[1] <= 20 + 80 * car.position + 30) && (20 + 80 * power[1] + 30 >= 20 + 80 * car.position + 30)))) {
         car.bullet += 5;
         return true;
       }

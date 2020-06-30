@@ -5,7 +5,7 @@ function Game(idx) {
   var carGame = document.getElementById('car-lane' + idx);
   carGame.style.position = 'absolute';
   carGame.style.top = '10px'
-  carGame.style.left = 10 + 240 * idx + 'px';
+  carGame.style.left = 10 + 400 * idx + 'px';
   carGame.appendChild(canvas);
   var ctx = canvas.getContext("2d");
   var interval;
@@ -301,6 +301,7 @@ function Game(idx) {
 
   var endGame = function () {
     powerupCounter = 0;
+    powerup = [false, 0, -30];
     gameState = 2;
     ctx.clearRect(0, 0, 230, 600);
     drawLanes()
