@@ -70,7 +70,7 @@ var checkAntCollision = function (i) {
   center1y = parseFloat(antsArray[i].ant.style.top) + (parseFloat(antsArray[i].ant.style.height) / 2);
   radius1 = (parseFloat(antsArray[i].ant.style.height) + parseFloat(antsArray[i].ant.style.width)) / 4;
   for (var j = 0; j < antsArray.length; j++) {
-    if (i != j) {
+    if (i != j && antAlive[j]) {
 
       center2x = parseFloat(antsArray[j].ant.style.left) + (parseFloat(antsArray[j].ant.style.width) / 2);
       center2y = parseFloat(antsArray[j].ant.style.top) + (parseFloat(antsArray[j].ant.style.height) / 2);
