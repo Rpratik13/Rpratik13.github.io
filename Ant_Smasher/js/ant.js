@@ -8,39 +8,25 @@ document.body.appendChild(boundary);
 var antsArray = [];
 var antAlive = []
 var movement;
+var x = 10
+var y = 30
 
 function getRandomNumber(max, min) {
   return parseInt(Math.random() * (max - min) + min)
 }
 
 function getRandomPosition(ant) {
-  var check = true;
 
-  while (check) {
-    var x = getRandomNumber(1310, 20)
-    var y = getRandomNumber(583, 20)
-    var i = 0;
-    for (var i = 0; i < antsArray.length; i++) {
-      if (antsArray[i].left - antsArray[i].size - 5 < x &&
-        (antsArray[i].left + antsArray[i].size + 5 > x) ||
-        (antsArray[i].left - antsArray[i].size - 5 < x + ant.size) &&
-        (antsArray[i].left + antsArray[i].size + 5 > x + ant.size)) {
-        break
-      }
 
-      if (antsArray[i].top - antsArray[i].size - 5 < y &&
-        (antsArray[i].top + antsArray[i].size + 5 > y) ||
-        (antsArray[i].top - antsArray[i].size - 5 < y + ant.size) &&
-        (antsArray[i].top + antsArray[i].size + 5 > y + ant.size)) {
-        break
-      }
+  x += 210;
 
-    }
-
-    if (i == antsArray.length) {
-      return [x, y]
-    }
+  if (x > parseFloat(boundary.style.width)) {
+    x = 30;
+    y += 100
   }
+
+
+  return [x, y]
 }
 
 var checkMarginCollision = function (idx) {
@@ -79,36 +65,35 @@ var checkMarginCollision = function (idx) {
   antsArray[idx].ant.style.transform = 'rotate(' + (-antsArray[idx].angle_deg + 90) + 'deg)';
 }
 
-var checkAntCollision = function (idx) {
-
-  center1x = parseFloat(antsArray[idx].ant.style.left) + parseFloat(antsArray[idx].ant.style.width) / 2;
-  center1y = parseFloat(antsArray[idx].ant.style.top) + parseFloat(antsArray[idx].ant.style.height) / 2;
+var checkAntCollision = function (i) {
+  center1x = parseFloat(antsArray[i].ant.style.left) + (parseFloat(antsArray[i].ant.style.width) / 2);
+  center1y = parseFloat(antsArray[i].ant.style.top) + (parseFloat(antsArray[i].ant.style.height) / 2);
+  radius1 = (parseFloat(antsArray[i].ant.style.height) + parseFloat(antsArray[i].ant.style.width)) / 4;
   for (var j = 0; j < antsArray.length; j++) {
-    if (j != idx && antAlive[j]) {
-      dx = (antsArray[idx].speed * Math.cos(antsArray[idx].angle) * 0.017)
-      dy = (antsArray[idx].speed * Math.sin(antsArray[idx].angle) * 0.017)
+    if (i != j) {
 
-      center2x = parseFloat(antsArray[j].ant.style.left) + parseFloat(antsArray[j].ant.style.width) / 2;
-      center2y = parseFloat(antsArray[j].ant.style.top) + parseFloat(antsArray[j].ant.style.height) / 2;
-
+      center2x = parseFloat(antsArray[j].ant.style.left) + (parseFloat(antsArray[j].ant.style.width) / 2);
+      center2y = parseFloat(antsArray[j].ant.style.top) + (parseFloat(antsArray[j].ant.style.height) / 2);
+      radius2 = (parseFloat(antsArray[j].ant.style.height) + parseFloat(antsArray[j].ant.style.width)) / 4;
       distance = Math.sqrt((center1x - center2x) * (center1x - center2x) + (center1y - center2y) * (center1y - center2y));
+      radius_distance = (radius1 + radius2)
+      if (distance <= radius_distance) {
 
-
-      if (distance < 30) {
-
-        antsArray[idx].angle_deg = (antsArray[idx].angle_deg + 180) % 360;
-        antsArray[idx].angle = antsArray[idx].angle_deg * (Math.PI / 180);
-        antsArray[idx].dx = (antsArray[idx].speed * Math.cos(antsArray[idx].angle) * 0.017)
-        antsArray[idx].dy = (antsArray[idx].speed * Math.sin(antsArray[idx].angle) * 0.017)
+        // if
+        antsArray[i].angle_deg = (antsArray[i].angle_deg + 180) % 360;
+        antsArray[i].angle = antsArray[i].angle_deg * (Math.PI / 180);
+        antsArray[i].dx = (antsArray[i].speed * Math.cos(antsArray[i].angle) * 0.017);
+        antsArray[i].dy = (antsArray[i].speed * Math.sin(antsArray[i].angle) * 0.017);
         antsArray[j].angle_deg = (antsArray[j].angle_deg + 180) % 360;
         antsArray[j].angle = antsArray[j].angle_deg * (Math.PI / 180);
-        antsArray[j].dx = (antsArray[j].speed * Math.cos(antsArray[j].angle) * 0.017)
-        antsArray[j].dy = (antsArray[j].speed * Math.sin(antsArray[j].angle) * 0.017)
+        antsArray[j].dx = (antsArray[j].speed * Math.cos(antsArray[j].angle) * 0.017);
+        antsArray[j].dy = (antsArray[j].speed * Math.sin(antsArray[j].angle) * 0.017);
 
       }
     }
   }
 }
+
 
 
 function Ant(size) {
