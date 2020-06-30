@@ -6,10 +6,16 @@
   </head>
 
   <body>
-    <div class='car-lane'></div>
+    <div class='car-lane' id='car-lane0'></div><br>
+    <div class='car-lane' id='car-lane1'></div><br>
     <script src='js/car.js'></script>
     <script src='js/enemy.js'></script>
     <script src='js/game.js'></script>
+
+    <script>
+      var carLane = new Game(0);
+      var carLane = new Game(1);
+    </script>
   </body>
 
 </html>

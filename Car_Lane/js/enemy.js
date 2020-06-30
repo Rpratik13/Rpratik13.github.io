@@ -22,4 +22,16 @@ function Enemy(lane) {
     }
     return 15;
   }
+
+  this.checkBulletCollision = function (bullets) {
+    for (var i = 0; i < bullets.length; i++) {
+      if (bullets[i][1] < enemy.y + 60 && bullets[i][2] == enemy.lane) {
+        enemy.inGame = false;
+        enemy.y = -60;
+
+        return (i + 1);
+      }
+    }
+    return 0;
+  }
 }
