@@ -346,6 +346,7 @@ function Game(idx) {
   var endGame = function () {
     powerupCounter = 0;
     powerup = [false, 0, -30];
+    laneDividers = [-125, 0, 125, 250, 375, 500];
     gameState = 2;
     ctx.clearRect(0, 0, 230, 600);
     drawLanes();

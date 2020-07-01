@@ -8,7 +8,7 @@ function Car(position) {
   var car = this;
   this.image = 'images/player.png';
   this.position = position;
-  this.bullet = 10;
+  this.bullet = 5;
   this.goLeft = false;
   this.goRight = false;
 
