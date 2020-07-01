@@ -136,8 +136,8 @@ function Game(idx) {
 
 
   var checkSpeed = function () {
-    if (score != 0 && score % 10 == 0 && Math.round(speed * 100) / 100 != 1 + 0.25 * score / 10) {
-      speed += 0.25;
+    if (score != 0 && score % 10 == 0 && Math.round(speed * 100) / 100 != 1 + score / 10) {
+      speed += 1;
     }
   }
 
@@ -148,7 +148,7 @@ function Game(idx) {
   }
 
   var createEnemy = function () {
-    counter += 1;
+    counter += speed;
     if (counter > checkCounter) {
       checkCounter = enemies[index].generateEnemy(speed);
       enemiesInGame = [enemies[0].inGame, enemies[1].inGame, enemies[2].inGame, enemies[3].inGame, enemies[4].inGame, enemies[5].inGame]

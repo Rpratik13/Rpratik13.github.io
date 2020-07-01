@@ -11,16 +11,16 @@ function Enemy(lane) {
 
   this.generateEnemy = function (speed) {
 
-    if (Math.random() > 0.5) {
+    if (Math.random() > 0.2) {
       count = (count + 1) % 3;
       enemy.inGame = true;
       if (count == 2) {
         count = 0;
-        return Math.floor(80 / speed);
+        return 80;
       }
-      return Math.floor(parseInt(Math.random() * (60 - 40) + 40) / speed);
+      return Math.floor(parseInt(Math.random() * (60 - 50) + 50));
     }
-    return 15;
+    return 70;
   }
 
   this.checkBulletCollision = function (bullets) {
