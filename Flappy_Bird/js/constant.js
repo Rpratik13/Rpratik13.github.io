@@ -1,0 +1,12 @@
+const CANVAS_WIDTH = 576;
+const CANVAS_HEIGHT = 615;
+const TUNNEL_WIDTH = 100;
+const TUNNEL_GAP = 110;
+const TUNNEL_GAP_X = 138;
+const PLAYER_X = 20;
+const TUNNEL_MAX_HEIGHT = 400;
+const TUNNEL_MIN_HEIGHT = 220;
+const JUMP_HEIGHT = 45;
+const BIRD_WIDTH = 52;
+const BIRD_HEIGHT = 36;
+const TO_RADIAN = Math.PI / 180;
