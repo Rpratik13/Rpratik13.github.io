@@ -47,8 +47,10 @@ function Game(idx) {
 
   var enemies = [new Enemy(0), new Enemy(1), new Enemy(2), new Enemy(0), new Enemy(1), new Enemy(2)];
   var enemiesInGame = [enemies[0].inGame, enemies[1].inGame, enemies[2].inGame, enemies[3].inGame, enemies[4].inGame, enemies[5].inGame];
-  var eimg = new Image;
-  eimg.src = 'images/enemy.png';
+  var eimg = [new Image, new Image, new Image, new Image, new Image, new Image]
+  for (var i = 0; i < eimg.length; i++) {
+    eimg[i].src = 'images/enemy' + i + '.png';
+  }
   var counter = 0;
   var checkCounter = -1;
   var index = 0;
@@ -208,7 +210,7 @@ function Game(idx) {
       };
       enemiesInGame = [enemies[0].inGame, enemies[1].inGame, enemies[2].inGame, enemies[3].inGame, enemies[4].inGame, enemies[5].inGame]
       if (enemiesInGame[i]) {
-        ctx.drawImage(eimg, enemies[i].x, enemies[i].y);
+        ctx.drawImage(eimg[i], enemies[i].x, enemies[i].y);
         enemies[i].y += speed;
 
         if (enemies[i].y > 600) {
