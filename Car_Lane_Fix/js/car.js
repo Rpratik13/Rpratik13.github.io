@@ -1,3 +1,9 @@
+/**
+ * It creates the player cars.
+ * 
+ * @param {number} position Holds the lane number where the player should be in the beginning.
+ */
+
 function Car(position) {
   var car = this;
   this.image = 'images/player.png';
@@ -6,7 +12,13 @@ function Car(position) {
   this.goLeft = false;
   this.goRight = false;
 
-
+  /**
+   * It checks collision of player with enemy.
+   * 
+   * @param {array} enemies Holds the position of enemies.
+   * @param {number} score Holds the score obtained.
+   * @param {number} idx Holds the player number.
+   */
   this.checkCollision = function (enemies, score, idx) {
     for (var i = 0; i < enemies.length; i++) {
       if ((enemies[i].y >= 470 && enemies[i].y <= 590) &&
@@ -21,6 +33,12 @@ function Car(position) {
       }
     }
   }
+
+  /**
+   * It checks collision of player with powerup.
+   * 
+   * @param {array} power Holds the position of powerup generated. 
+   */
 
   this.powerUp = function (power) {
     if (power[0]) {

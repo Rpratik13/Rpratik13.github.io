@@ -1,5 +1,10 @@
 var count = 0;
 
+/**
+ * It creates the enemy car.
+ * 
+ * @param {number} lane Holds the value of the lane the enemy is to be placed in 
+ */
 function Enemy(lane) {
   var enemy = this;
   this.image = 'images/enemy.png';
@@ -9,7 +14,10 @@ function Enemy(lane) {
   this.inGame = false;
 
 
-  this.generateEnemy = function (speed) {
+  /**
+   * It generates the enemy position.
+   */
+  this.generateEnemy = function () {
 
     if (Math.random() > 0.2) {
       count = (count + 1) % 3;
@@ -22,6 +30,12 @@ function Enemy(lane) {
     }
     return 70;
   }
+
+  /**
+   * It checks the collision of enemy with bullets.
+   * 
+   * @param {array} bullets Holds the position of fired bullets. 
+   */
 
   this.checkBulletCollision = function (bullets) {
     for (var i = 0; i < bullets.length; i++) {

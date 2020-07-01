@@ -1,23 +1,29 @@
-function Game(idx) {
+/**
+ * It creates the car lane game.
+ * 
+ * @param {number} idx It holds the index of the div to be turned into car lane game. 
+ */
 
+function Game(idx) {
+  // Create canvas
   var canvas = document.createElement('canvas');
   canvas.setAttribute('class', 'canvas');
   var carGame = document.getElementById('car-lane' + idx);
   carGame.style.position = 'absolute';
-  carGame.style.top = '10px'
+  carGame.style.top = '10px';
   carGame.style.left = 10 + 400 * idx + 'px';
   carGame.appendChild(canvas);
   var ctx = canvas.getContext("2d");
-  var interval;
-  canvas.width = 230
+  canvas.width = 230;
   canvas.height = 600;
+
+
+
   var destp1;
   var destp2;
-
-
-
-  var laneDividers = [-125, 0, 125, 250, 375, 500]
-  var bullets = []
+  var interval;
+  var laneDividers = [-125, 0, 125, 250, 375, 500];
+  var bullets = [];
   var tempBullets;
   var bimg = new Image;
   bimg.src = 'images/bullet.png';
@@ -39,8 +45,8 @@ function Game(idx) {
   }
   var powerupCounter = 0;
 
-  var enemies = [new Enemy(0), new Enemy(1), new Enemy(2), new Enemy(0), new Enemy(1), new Enemy(2)]
-  var enemiesInGame = [enemies[0].inGame, enemies[1].inGame, enemies[2].inGame, enemies[3].inGame, enemies[4].inGame, enemies[5].inGame]
+  var enemies = [new Enemy(0), new Enemy(1), new Enemy(2), new Enemy(0), new Enemy(1), new Enemy(2)];
+  var enemiesInGame = [enemies[0].inGame, enemies[1].inGame, enemies[2].inGame, enemies[3].inGame, enemies[4].inGame, enemies[5].inGame];
   var eimg = new Image;
   eimg.src = 'images/enemy.png';
   var counter = 0;
@@ -48,7 +54,9 @@ function Game(idx) {
   var index = 0;
   var speed = 1;
 
-
+  /**
+   * It listens to keypress events.
+   */
   var logKey = function (e) {
 
     if (e.code == 'ArrowLeft' && gameState == 1) {
@@ -67,7 +75,7 @@ function Game(idx) {
 
     if (e.code == 'ArrowUp' && player.bullet > 0 && gameState == 1 && !player.goLeft && !player.goRight) {
       player.bullet -= 1;
-      bullets.push([20 + 80 * player.position, 530, player.position])
+      bullets.push([20 + 80 * player.position, 530, player.position]);
     }
     if (e.code == 'KeyA' && gameState == 1) {
       if (player2.position > 0 && !player2.goLeft && !player2.goRight) {
@@ -85,19 +93,21 @@ function Game(idx) {
 
     if (e.code == 'KeyW' && player2.bullet > 0 && gameState == 1 && !player2.goLeft && !player2.goRight) {
       player2.bullet -= 1;
-      bullets.push([20 + 80 * player2.position, 530, player2.position])
+      bullets.push([20 + 80 * player2.position, 530, player2.position]);
     }
   }
 
   carGame.addEventListener('keydown', logKey);
 
-
+  /*
+   * It creates lanes at the start screen and the game over screen. 
+   */
   var drawLanes = function () {
     for (var i = 0; i < laneDividers.length; i++) {
-      ctx.rect(70, laneDividers[i], 10, 100)
-      ctx.rect(150, laneDividers[i], 10, 100)
+      ctx.rect(70, laneDividers[i], 10, 100);
+      ctx.rect(150, laneDividers[i], 10, 100);
       ctx.fillStyle = '#fff';
-      ctx.fill()
+      ctx.fill();
     }
   }
 
@@ -110,8 +120,8 @@ function Game(idx) {
 
   ctx.fillStyle = 'green';
   ctx.beginPath();
-  ctx.rect(45, 200, 140, 80)
-  ctx.fill()
+  ctx.rect(45, 200, 140, 80);
+  ctx.fill();
   ctx.fillStyle = 'white';
   ctx.fillText('Start', 85, 250);
   ctx.fillStyle = "blue";
@@ -119,57 +129,74 @@ function Game(idx) {
   ctx.fillText('P2: WASD', 50, 410);
 
   ctx.fillStyle = "green";
-  ctx.fillText('High Score: ' + highscore, 20, 530);
+  ctx.fillText('High Score', 50, 530);
+  ctx.fillText(highscore, 100, 560);
 
-
+  /*
+   * It takes position of mouse click and checks if the mouse was clicked on start or replay button.
+   */
   carGame.onmousedown = function (e) {
     carGame.setAttribute('tabIndex', -1);
     var cursorX = e.pageX - parseFloat(carGame.style.left);
     var cursorY = e.pageY - parseFloat(carGame.style.top);
     if (gameState == 0 || gameState == 2) {
-      if (cursorX <= 192 && cursorX >= 45 && cursorY >= 200 && cursorY <= 287) {
+      if (cursorX <= 185 && cursorX >= 45 && cursorY >= 200 && cursorY <= 280) {
         gameState = 1;
         move();
       }
     }
   }
 
-
+  /*
+   * It increases the speed of the game based on the points scored. 
+   */
   var checkSpeed = function () {
     if (score != 0 && score % 10 == 0 && Math.round(speed * 100) / 100 != 1 + score / 10) {
       speed += 1;
     }
   }
 
+  /*
+   * It draws player cars;
+   */
   var drawPlayer = function () {
-    ctx.beginPath()
+    ctx.beginPath();
     ctx.drawImage(img, 20 + 80 * player.position, 530);
     ctx.drawImage(imgp2, 20 + 80 * player2.position, 530);
   }
 
+  /*
+   * It generates enemy positions. 
+   */
   var createEnemy = function () {
     counter += speed;
     if (counter > checkCounter) {
       checkCounter = enemies[index].generateEnemy(speed);
-      enemiesInGame = [enemies[0].inGame, enemies[1].inGame, enemies[2].inGame, enemies[3].inGame, enemies[4].inGame, enemies[5].inGame]
+      enemiesInGame = [enemies[0].inGame, enemies[1].inGame, enemies[2].inGame, enemies[3].inGame, enemies[4].inGame, enemies[5].inGame];
       counter = 0;
       if (checkCounter != 80) {
-        index = (index + 1) % 6
+        index = (index + 1) % 6;
       }
     }
   }
 
+  /*
+   * It creates the image of fired bullet. 
+   */
   var fireBullet = function () {
     tempBullets = bullets;
     for (var i = 0; i < bullets.length; i++) {
       ctx.drawImage(bimg, bullets[i][0], bullets[i][1]);
       bullets[i][1] -= 1;
       if (bullets[i][1] < -30) {
-        tempBullets.shift()
+        tempBullets.shift();
       }
     }
   }
 
+  /*
+   * It draws the enemy car and removes it when it is out of view. 
+   */
   var drawEnemy = function () {
     for (var i = 0; i < enemies.length; i++) {
       var bulletIndex = enemies[i].checkBulletCollision(bullets);
@@ -177,7 +204,7 @@ function Game(idx) {
         if (bullets[bulletIndex - 1][1] > 0) {
           score += 1;
         }
-        bullets.splice(bulletIndex - 1, 1)
+        bullets.splice(bulletIndex - 1, 1);
       };
       enemiesInGame = [enemies[0].inGame, enemies[1].inGame, enemies[2].inGame, enemies[3].inGame, enemies[4].inGame, enemies[5].inGame]
       if (enemiesInGame[i]) {
@@ -195,12 +222,16 @@ function Game(idx) {
     bullets = tempBullets;
   }
 
+  /*
+   * It creates the lane divider and moves it.
+   */
+
   var createLanes = function () {
     for (var i = 0; i < laneDividers.length; i++) {
-      ctx.rect(70, laneDividers[i], 10, 100)
-      ctx.rect(150, laneDividers[i], 10, 100)
+      ctx.rect(70, laneDividers[i], 10, 100);
+      ctx.rect(150, laneDividers[i], 10, 100);
       ctx.fillStyle = '#fff';
-      ctx.fill()
+      ctx.fill();
       laneDividers[i] += speed;
       if (laneDividers[i] > 600) {
         laneDividers[i] = -149;
@@ -208,12 +239,15 @@ function Game(idx) {
     }
   }
 
+  /* 
+   * It generates bullet powerup every 30 seconds.
+   */
   var createPowerUp = function () {
     if (!powerup[0]) {
-      powerupCounter += 1
+      powerupCounter += 1;
     }
 
-    if (powerupCounter > 900) {
+    if (powerupCounter > 1800) {
       var powerLane = Math.floor(Math.random() * 2);
       if (enemies[powerLane].y > 60 || enemies[powerLane].y < 0) {
         powerup = [true, powerLane, -30];
@@ -234,6 +268,9 @@ function Game(idx) {
     };
   }
 
+  /*
+   * It creates the lane change animation.
+   */
   var changeLane = function () {
     var dest;
     var current = player.position;
@@ -243,7 +280,7 @@ function Game(idx) {
       if (Math.ceil(player.position) == destp1) {
         player.position = destp1;
         player.goLeft = false;
-        img.src = 'images/player.png'
+        img.src = 'images/player.png';
       }
     } else if (player.goRight) {
       player.position += 0.1;
@@ -251,7 +288,7 @@ function Game(idx) {
       if (Math.floor(player.position) == destp1) {
         player.position = destp1;
         player.goRight = false;
-        img.src = 'images/player.png'
+        img.src = 'images/player.png';
       }
     }
 
@@ -261,7 +298,7 @@ function Game(idx) {
       if (Math.ceil(player2.position) == destp2) {
         player2.position = destp2;
         player2.goLeft = false;
-        imgp2.src = 'images/player2.png'
+        imgp2.src = 'images/player2.png';
       }
     } else if (player2.goRight) {
       player2.position += 0.1;
@@ -269,11 +306,14 @@ function Game(idx) {
       if (Math.floor(player2.position) == destp2) {
         player2.position = destp2;
         player2.goRight = false;
-        imgp2.src = 'images/player2.png'
+        imgp2.src = 'images/player2.png';
       }
     }
   }
 
+  /*
+   * It runs the game.
+   */
   function move() {
     interval = setInterval(function () {
         ctx.clearRect(0, 0, 230, 600);
@@ -298,14 +338,16 @@ function Game(idx) {
   }
 
 
-
+  /*
+   * It shows obtained score and resets the variables after the game has ended.
+   */
   var endGame = function () {
     powerupCounter = 0;
     powerup = [false, 0, -30];
     gameState = 2;
     ctx.clearRect(0, 0, 230, 600);
-    drawLanes()
-    bullets = []
+    drawLanes();
+    bullets = [];
     start = false;
     player.position = 2;
     player2.position = 0;
@@ -316,20 +358,20 @@ function Game(idx) {
     player2.goLeft = false;
     player2.goRight = false;
     img.src = 'images/player.png';
-    imgp2.src = 'images/player2.png'
+    imgp2.src = 'images/player2.png';
     destp1 = 2;
     destp2 = 0;
     speed = 1;
-    enemies = [new Enemy(0), new Enemy(1), new Enemy(2), new Enemy(0), new Enemy(1), new Enemy(2)]
-    enemiesInGame = [enemies[0].inGame, enemies[1].inGame, enemies[2].inGame, enemies[3].inGame, enemies[4].inGame, enemies[5].inGame]
+    enemies = [new Enemy(0), new Enemy(1), new Enemy(2), new Enemy(0), new Enemy(1), new Enemy(2)];
+    enemiesInGame = [enemies[0].inGame, enemies[1].inGame, enemies[2].inGame, enemies[3].inGame, enemies[4].inGame, enemies[5].inGame];
     ctx.font = "30px Arial ";
     ctx.fillStyle = "red";
     ctx.fillText('Game', 75, 50);
     ctx.fillText('Over', 80, 80);
     ctx.fillStyle = 'green';
     ctx.beginPath();
-    ctx.rect(45, 200, 140, 80)
-    ctx.fill()
+    ctx.rect(45, 200, 140, 80);
+    ctx.fill();
     ctx.fillStyle = 'white';
     ctx.fillText('Replay?', 65, 250);
 
@@ -350,4 +392,3 @@ link.setAttribute('rel', 'stylesheet');
 link.setAttribute('type', 'text/css');
 link.setAttribute('href', 'css/style.css');
 document.head.appendChild(link);
-// move();
