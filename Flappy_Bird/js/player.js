@@ -84,21 +84,21 @@ function Flappy() {
     }
   }
 
-  this.storeScore = function () {
-    if (window.localStorage.getItem('score') == null || (parseInt(window.localStorage.getItem('score')) < that.score)) {
-      window.localStorage.setItem('score', that.score);
+  this.storeScore = function (idx) {
+    if (window.localStorage.getItem('score' + idx) == null || (parseInt(window.localStorage.getItem('score' + idx)) < that.score)) {
+      window.localStorage.setItem('score' + idx, that.score);
     }
   }
 
 
-  this.checkTunnelCollision = function (tunnels) {
+  this.checkTunnelCollision = function (tunnels, idx) {
     for (var i = 0; i < tunnels.length; i++) {
       if ((that.y + that.angle / 2 <= tunnels[i].height || that.y + BIRD_HEIGHT + that.angle / 2 >= tunnels[i].height + TUNNEL_GAP)) {
         if ((((PLAYER_X + BIRD_WIDTH >= tunnels[i].x && PLAYER_X + BIRD_WIDTH <= tunnels[i].x + TUNNEL_WIDTH) ||
             (PLAYER_X >= tunnels[i].x && PLAYER_X <= tunnels[i].x + TUNNEL_WIDTH)) && that.angle <= 0) ||
           (((PLAYER_X + BIRD_WIDTH - Math.abs(that.angle) >= tunnels[i].x && PLAYER_X + BIRD_WIDTH - Math.abs(that.angle) <= tunnels[i].x + TUNNEL_WIDTH) ||
             (PLAYER_X - Math.abs(that.angle) >= tunnels[i].x && PLAYER_X - Math.abs(that.angle) <= tunnels[i].x + TUNNEL_WIDTH)) && that.angle > 0)) {
-          that.storeScore();
+          that.storeScore(idx, );
           return true;
         }
       }

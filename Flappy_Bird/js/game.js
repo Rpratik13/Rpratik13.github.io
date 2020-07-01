@@ -6,7 +6,7 @@ function Game(idx) {
   let base = [0, 144, 288, 432, 576];
   let flappyDiv = document.getElementById('flappy' + idx);
   flappyDiv.style.top = '10px';
-  flappyDiv.style.left = 10 + 400 * idx + 'px';
+  flappyDiv.style.left = 10 + (CANVAS_WIDTH + 20) * idx + 'px';
   let startInterval;
   let gameInterval;
   let endInterval;
@@ -130,7 +130,7 @@ function Game(idx) {
       moveBase();
       player.addScore(tunnels);
       displayScore();
-      if (player.checkWallCollision() || player.checkTunnelCollision(tunnels)) {
+      if (player.checkWallCollision() || player.checkTunnelCollision(tunnels, idx)) {
         endGame();
       }
     }, 17)
@@ -146,7 +146,7 @@ function Game(idx) {
       ctx.drawImage(sprite.img, sprite.numSmall[num][0], sprite.numSmall[num][1], sprite.numSmall[num][2], sprite.numSmall[num][3], numDist, 360, sprite.numSmall[num][2] * 2, sprite.numSmall[num][3] * 2);
       numDist -= 13;
     }
-    var scoreString = window.localStorage.getItem('score').toString();
+    var scoreString = window.localStorage.getItem('score' + idx).toString();
     numDist = 365;
     for (var i = scoreString.length - 1; i >= 0; i--) {
       let num = parseInt(scoreString[i]);
