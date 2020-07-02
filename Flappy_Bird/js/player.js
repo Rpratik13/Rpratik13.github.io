@@ -15,8 +15,8 @@ function Flappy() {
 
   this.checkWallCollision = function () {
     var distTop = that.y;
-    var distBottom = 603 - that.y;
-    if (distTop <= BIRD_HEIGHT / 2 || distBottom <= BIRD_HEIGHT) {
+    var distBottom = 600 - that.y;
+    if (distTop <= 0 || distBottom <= BIRD_HEIGHT) {
       that.storeScore();
       return true;
     }
@@ -74,6 +74,7 @@ function Flappy() {
     that.angle = 0;
     that.angleUp = 0;
     that.moveUp = 5;
+    that.upAngle = false;
   }
 
   this.addScore = function (tunnels) {
@@ -93,7 +94,7 @@ function Flappy() {
 
   this.checkTunnelCollision = function (tunnels, idx) {
     for (var i = 0; i < tunnels.length; i++) {
-      if ((that.y + that.angle / 2 <= tunnels[i].height || that.y + BIRD_HEIGHT + that.angle / 2 >= tunnels[i].height + TUNNEL_GAP)) {
+      if ((that.y <= tunnels[i].height || that.y + BIRD_HEIGHT - Math.abs(that.angle) / 3 >= tunnels[i].height + TUNNEL_GAP)) {
         if ((((PLAYER_X + BIRD_WIDTH >= tunnels[i].x && PLAYER_X + BIRD_WIDTH <= tunnels[i].x + TUNNEL_WIDTH) ||
             (PLAYER_X >= tunnels[i].x && PLAYER_X <= tunnels[i].x + TUNNEL_WIDTH)) && that.angle <= 0) ||
           (((PLAYER_X + BIRD_WIDTH - Math.abs(that.angle) >= tunnels[i].x && PLAYER_X + BIRD_WIDTH - Math.abs(that.angle) <= tunnels[i].x + TUNNEL_WIDTH) ||

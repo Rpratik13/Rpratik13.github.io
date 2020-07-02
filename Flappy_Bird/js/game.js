@@ -2,6 +2,8 @@ function Game(idx) {
   let gameState = 0;
   let sprite = new Sprite();
   let player = new Flappy();
+  let preloader = new Preloader();
+  preloader.load();
   var tunnels = [new Tunnel(0), new Tunnel(1), new Tunnel(2), new Tunnel(3)]
   let base = [0, 144, 288, 432, 576];
   let flappyDiv = document.getElementById('flappy' + idx);
@@ -61,9 +63,9 @@ function Game(idx) {
     }
     let wing = sprite.flappy[player.wingPosition];
     ctx.save()
-    ctx.translate(PLAYER_X, player.y);
+    ctx.translate(PLAYER_X + BIRD_WIDTH / 2, player.y + BIRD_HEIGHT / 2);
     ctx.rotate(player.angle * TO_RADIAN)
-    ctx.drawImage(sprite.img, wing[0], wing[1], wing[2], wing[3], 0, 0, BIRD_WIDTH, BIRD_HEIGHT);
+    ctx.drawImage(sprite.img, wing[0], wing[1], wing[2], wing[3], -BIRD_WIDTH / 2, -BIRD_HEIGHT / 2, BIRD_WIDTH, BIRD_HEIGHT);
     ctx.restore();
     if (wingCounter == 13) {
       player.wingPosition += player.wingDirection;
@@ -178,6 +180,8 @@ function Game(idx) {
     ctx.beginPath();
     ctx.drawImage(sprite.img, sprite.gameOver[0], sprite.gameOver[1], sprite.gameOver[2], sprite.gameOver[3], 197, 125, 182, 48);
     ctx.drawImage(sprite.img, sprite.start[0], sprite.start[1], sprite.start[2], sprite.start[3], 262, 225, 52, 29);
+    base = [0, 144, 288, 432, 576];
+    wingCounter = 0;
 
   }
 
