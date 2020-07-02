@@ -25,13 +25,14 @@ function Flappy() {
 
 
   this.fallDown = function () {
-    if (that.angle <= 20) {
-      that.angle += 0.5;
+    if (that.angle <= 30) {
+      that.angle += 1;
     }
     that.y += that.fallSpeed;
-    that.fallSpeed += 0.2;
-    if (that.fallSpeed > 4)
-      that.fallSpeed = 4;
+    console.log(that.y);
+    that.fallSpeed += 0.5;
+    if (that.fallSpeed > 8)
+      that.fallSpeed = 8;
   }
 
   this.jumpUp = function () {
