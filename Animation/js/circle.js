@@ -1,14 +1,14 @@
 function Circle(idx, color, x) {
-  this.size = GROWTH_SIZE * idx;
+  this.size = 6 + GROWTH_SIZE * (idx - 3);
   this.color = color;
   this.sizeCounter = idx;
   this.y = -idx * 10;
   this.x = x;
 
   this.changeSize = function () {
-    if (this.sizeCounter < 30) {
+    if (this.sizeCounter < 3 || this.sizeCounter > 152) {
       this.size += GROWTH_SIZE;
-    } else if (this.sizeCounter >= 70 && this.sizeCounter < 100) {
+    } else if (this.sizeCounter >= 85 && this.sizeCounter < 115) {
       this.size -= GROWTH_SIZE;
     }
     this.sizeCounter = (this.sizeCounter + 1) % 180;

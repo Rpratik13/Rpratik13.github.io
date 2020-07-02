@@ -6,9 +6,10 @@ function Column(idx) {
   this.angle = 0;
 
   if (idx < 16) {
-    this.draw = -(idx) * 5;
+    this.draw = -Math.sin((idx / 16) * 90 * TO_RADIAN) * 7;
   } else {
-    this.draw = -(idx % 16 + 9) * 8;
+    // this.draw = -(idx % 16) * 5 - 90;
+    this.draw = -Math.sin(((idx % 16) / 16) * 90 * TO_RADIAN) * 7 - Math.sin(90 * TO_RADIAN / 16) * 90;
   }
 
   for (var i = 0; i < 11; i++) {
@@ -22,13 +23,13 @@ function Column(idx) {
   }
 
   this.drawColumn = function (ctx) {
-    if (this.draw == 0) {
+    if (this.draw >= 0) {
       for (var i = 0; i < 11; i++) {
         this.circles[i].draw(ctx, this.y);
       }
       this.moveDown();
     } else {
-      this.draw += 1;
+      this.draw += Math.sin(90 * TO_RADIAN / 16);
     }
   }
 }
