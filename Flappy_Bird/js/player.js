@@ -29,7 +29,6 @@ function Flappy() {
       that.angle += 1;
     }
     that.y += that.fallSpeed;
-    console.log(that.y);
     that.fallSpeed += 0.5;
     if (that.fallSpeed > 8)
       that.fallSpeed = 8;

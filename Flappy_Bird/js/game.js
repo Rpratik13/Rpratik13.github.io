@@ -148,6 +148,7 @@ function Game(idx) {
       ctx.drawImage(sprite.img, sprite.numSmall[num][0], sprite.numSmall[num][1], sprite.numSmall[num][2], sprite.numSmall[num][3], numDist, 360, sprite.numSmall[num][2] * 2, sprite.numSmall[num][3] * 2);
       numDist -= 13;
     }
+    if (window.localStorage.getItem('score' + idx) == null) { window.localStorage.setItem('score' + idx, 0) };
     var scoreString = window.localStorage.getItem('score' + idx).toString();
     numDist = 365;
     for (var i = scoreString.length - 1; i >= 0; i--) {
