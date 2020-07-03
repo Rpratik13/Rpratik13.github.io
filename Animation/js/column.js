@@ -6,10 +6,10 @@ function Column(idx) {
   this.angle = 0;
 
   if (idx < 16) {
-    this.draw = -Math.sin((idx / 16) * 90 * TO_RADIAN) * 7;
+    this.draw = -Math.sin((idx / 16) * 90 * TO_RADIAN) * 20;
   } else {
     // this.draw = -(idx % 16) * 5 - 90;
-    this.draw = -Math.sin(((idx % 16) / 16) * 90 * TO_RADIAN) * 7 - Math.sin(90 * TO_RADIAN / 16) * 90;
+    this.draw = -Math.sin(((idx % 16) / 16) * 90 * TO_RADIAN) * 20 - Math.sin(90 * TO_RADIAN / 16) * 160;
   }
 
   for (var i = 0; i < 11; i++) {

@@ -1,17 +1,15 @@
 function Circle(idx, color, x) {
-  this.size = 6 + GROWTH_SIZE * (idx - 3);
+  this.size = 3
   this.color = color;
   this.sizeCounter = idx;
-  this.y = -idx * 10;
+  this.y = -idx * 10 + 60;
   this.x = x;
+  this.angle = 0;
 
   this.changeSize = function () {
-    if (this.sizeCounter < 3 || this.sizeCounter > 152) {
-      this.size += GROWTH_SIZE;
-    } else if (this.sizeCounter >= 85 && this.sizeCounter < 115) {
-      this.size -= GROWTH_SIZE;
-    }
-    this.sizeCounter = (this.sizeCounter + 1) % 180;
+    this.angle = (this.angle + 1) % 360;
+    this.size = 3 + 3 * Math.cos(this.angle * TO_RADIAN);
+    this.y = -idx * 10 + 60 + (30 * Math.sin(this.angle * TO_RADIAN));
   }
 
   this.checkNegative = function (val) {
@@ -25,7 +23,7 @@ function Circle(idx, color, x) {
   this.draw = function (ctx, y) {
     ctx.beginPath();
     ctx.fillStyle = this.color;
-    ctx.arc(this.x, this.y + y, this.checkNegative(this.size), 0, 2 * Math.PI);
+    ctx.arc(this.x, this.y, this.checkNegative(this.size), 0, 2 * Math.PI);
     ctx.fill();
     ctx.closePath();
     this.changeSize();
