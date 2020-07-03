@@ -1,3 +1,5 @@
+/* Creates animation canvas. */
+
 function Animation() {
   let canvas = document.createElement('canvas');
   canvas.setAttribute('class', 'canvas');
@@ -15,18 +17,14 @@ function Animation() {
     columns.push(new Column(i));
   }
 
-  function checkNegative(num) {
-    if (num < 0) { return 0 }
-    return num;
-  }
-
+  /* Draws the columns and circles. */
   function drawAnimation() {
     animationInterval = setInterval(function () {
       ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
       for (var i = 0; i < columns.length; i++) {
         columns[i].drawColumn(ctx);
       }
-    }, 20);
+    }, 1000 / 60);
   }
 
   drawAnimation();

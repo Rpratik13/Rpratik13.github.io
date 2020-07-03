@@ -1,3 +1,5 @@
+/* Creates columns using the circle objects. */
+
 function Column(idx) {
   this.circles = [];
   this.x = 250 - (idx % 16) * 15
@@ -9,11 +11,15 @@ function Column(idx) {
     this.angle += 360;
   }
 
-
   for (var i = 0; i < 11; i++) {
     this.circles.push(new Circle(-i, COLORS[i], this.x))
   }
 
+  /* 
+   * Draws the columns.
+   *
+   * @param {canvasContext} ctx Used for drawing on the canvas.
+   */
   this.drawColumn = function (ctx) {
 
     for (var i = 0; i < 11; i++) {
