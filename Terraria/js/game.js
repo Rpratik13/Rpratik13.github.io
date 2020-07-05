@@ -8,15 +8,21 @@ function Game() {
   canvas.height = CANVAS_HEIGHT;
   let world = new World();
   let player = new Player();
+  ctx.font = "10px Arial";
+  ctx.fillStyle = 'white';
 
   game.onmousedown = function (e) {
     var cursorX = e.pageX;
     var cursorY = e.pageY;
-    player.swinging = true;
-    world.clicked(cursorX, cursorY, player.x, player.y);
+    if (player.showInventory) {
+      player.inventory.clicked(cursorX, cursorY);
+    } else {
+      player.swinging = true;
+      world.clicked(cursorX, cursorY, player);
+    }
   }
 
-  game.addEventListener('keydown', function (e) {
+  document.addEventListener('keydown', function (e) {
     if (e.key == 'd') {
       player.left = false;
       player.moveRight(world.world);
@@ -26,9 +32,11 @@ function Game() {
     }
   })
 
-  game.addEventListener('keyup', function (e) {
+  document.addEventListener('keyup', function (e) {
     if (e.key == ' ') {
       player.jumping = true;
+    } else if (e.key == 'i') {
+      player.showInventory = !player.showInventory;
     }
   })
 
@@ -44,6 +52,11 @@ function Game() {
     } else if (player.swinging) {
       player.swing();
     }
+
+    if (player.showInventory) {
+      player.inventory.display(ctx);
+    }
+    player.itemPickup(world);
     requestAnimationFrame(run);
   }
   run()

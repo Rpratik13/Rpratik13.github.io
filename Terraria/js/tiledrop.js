@@ -1,4 +1,5 @@
 function Tile(type, x, y) {
+  this.type = type;
   this.tileX = x;
   this.tileY = y;
   this.img = new Image
@@ -23,5 +24,20 @@ function Tile(type, x, y) {
   this.moveDown = function () {
     this.y += 1;
     this.tileY = Math.floor(this.y / 16) + 1;
+  }
+
+  this.moveUp = function () {
+    this.y -= 1;
+    this.tileY = Math.ceil(this.y / 16) - 1;
+  }
+
+  this.moveRight = function () {
+    this.x += 1;
+    this.tileX = Math.floor(this.x / 16) + 1;
+  }
+
+  this.moveLeft = function () {
+    this.x -= 1;
+    this.tileX = Math.floor(this.x / 16) + 1;
   }
 }
