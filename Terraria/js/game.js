@@ -50,7 +50,7 @@ function Game() {
     } else if (player.jumping) {
       player.jump(world.world);
     } else if (player.swinging) {
-      player.swing();
+      player.swing(ctx);
     }
 
     if (player.showInventory) {

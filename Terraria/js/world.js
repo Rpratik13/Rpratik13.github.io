@@ -277,7 +277,7 @@ function World() {
   }
 
   this.notOnPlayer = function (x, y, player) {
-    if ((x == player.x + 1 || x == player.x + 2) && (y == player.y + 1 || y == player.y + 2 || y == player.y + 3)) {
+    if ((x == Math.floor(player.x + 1) || x == Math.floor(player.x + 2)) && (y == player.y + 1 || y == player.y + 2 || y == player.y + 3)) {
       return false;
     }
     return true;
@@ -302,28 +302,40 @@ function World() {
           this.world[tileY][tileX] = 2;
           this.tileHealth[tileY][tileX] = 4;
           player.items['dirt'] -= 1;
-          if (player.items['dirt'] == 0) { player.weapon = undefined; }
+          if (player.items['dirt'] == 0) {
+            player.weapon = undefined;
+            player.checkPower();
+          }
         }
-      } else if (player.weapon == 'wood' && player.items['wood'] > 0) {
+      } else if (player.weapon == 'wood' && player.items['wood'] > 0 && this.notOnPlayer(tileX, tileY, player)) {
         if (tileVal == 0) {
           this.world[tileY][tileX] = 36;
           this.tileHealth[tileY][tileX] = 4;
           player.items['wood'] -= 1;
-          if (player.items['wood'] == 0) { player.weapon = undefined; }
+          if (player.items['wood'] == 0) {
+            player.weapon = undefined;
+            player.checkPower();
+          }
         }
-      } else if (player.weapon == 'gold' && player.items['gold'] > 0) {
+      } else if (player.weapon == 'gold' && player.items['gold'] > 0 && this.notOnPlayer(tileX, tileY, player)) {
         if (tileVal == 0) {
           this.world[tileY][tileX] = 3;
           this.tileHealth[tileY][tileX] = 4;
           player.items['gold'] -= 1;
-          if (player.items['gold'] == 0) { player.weapon = undefined; }
+          if (player.items['gold'] == 0) {
+            player.weapon = undefined;
+            player.checkPower();
+          }
         }
-      } else if (player.weapon == 'silver' && player.items['silver'] > 0) {
+      } else if (player.weapon == 'silver' && player.items['silver'] > 0 && this.notOnPlayer(tileX, tileY, player)) {
         if (tileVal == 0) {
           this.world[tileY][tileX] = 4;
           this.tileHealth[tileY][tileX] = 4;
           player.items['silver'] -= 1;
-          if (player.items['silver'] == 0) { player.weapon = undefined; }
+          if (player.items['silver'] == 0) {
+            player.weapon = undefined;
+            player.checkPower();
+          }
         }
       } else if (tileVal != 0 && (tileVal < 9 || tileVal > 32) && (this.world[tileY - 1][tileX] != 5 && this.world[tileY - 1][tileX] != 6 && this.world[tileY - 1][tileX] != 7)) {
         this.hitTile(tileVal, tileX, tileY, player);
