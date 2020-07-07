@@ -10,6 +10,8 @@ function Game() {
   let player = new Player();
   ctx.font = "10px Arial";
   ctx.fillStyle = 'white';
+  let enemies = [];
+  let timer = 0;
 
   game.onmousedown = function (e) {
     var cursorX = e.pageX;
@@ -25,10 +27,12 @@ function Game() {
   document.addEventListener('keydown', function (e) {
     if (e.key == 'd') {
       player.left = false;
-      player.moveRight(world.world);
+      player.goRight = true;
+      player.goLeft = false;
     } else if (e.key == 'a') {
       player.left = true;
-      player.moveLeft(world.world);
+      player.goLeft = true;
+      player.goRight = false;
     }
   })
 
@@ -37,11 +41,18 @@ function Game() {
       player.jumping = true;
     } else if (e.key == 'i') {
       player.showInventory = !player.showInventory;
+    } else if (e.key == 'd') {
+      player.goRight = false;
+      player.pose = 0;
+    } else if (e.key == 'a') {
+      player.goLeft = false;
+      player.pose = 0;
     }
   })
 
   function run() {
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
     world.drawWorld(ctx);
     world.drawDroppedTiles(ctx);
     player.draw(ctx, world.world);
@@ -52,11 +63,25 @@ function Game() {
     } else if (player.swinging) {
       player.swing(ctx);
     }
-
+    player.displayHealth(ctx);
+    if (player.goLeft) {
+      player.moveLeft(world.world);
+    } else if (player.goRight) {
+      player.moveRight(world.world);
+    }
     if (player.showInventory) {
       player.inventory.display(ctx);
     }
     player.itemPickup(world);
+    // slime.draw(player, world);
+    timer += 1;
+    if (timer % 500 == 0) {
+      enemies.push(new Slime(ctx, Math.floor(Math.random() * (45 - 2) + 2), 0))
+    }
+
+    for (var i = 0; i < enemies.length; i++) {
+      enemies[i].draw(player, world);
+    }
     requestAnimationFrame(run);
   }
   run()
