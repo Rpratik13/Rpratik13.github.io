@@ -1,4 +1,5 @@
 function Player() {
+  this.health = 100;
   this.img = new Image;
   this.img.src = 'images/player.png';
   this.x = 20;
@@ -24,6 +25,8 @@ function Player() {
   this.pickPower = 1;
   this.axePower = 1;
   this.damage = 5;
+  this.goLeft = false;
+  this.goRight = false;
 
   this.chestImg = [new Image, new Image];
   this.chestImg[0].src = 'images/silver_chest.png'
@@ -52,12 +55,18 @@ function Player() {
   this.weapons[9].src = 'images/craft1.png';
   this.weapons[10].src = 'images/craft2.png';
 
+
+  this.displayHealth = function (ctx) {
+    ctx.fillText(this.health + '/100', 700, 100);
+  }
+
   this.draw = function (ctx, tiles) {
     ctx.save()
     if (this.left) {
       ctx.translate(CANVAS_WIDTH, 0);
       ctx.scale(-1, 1);
-      ctx.drawImage(this.img, this.playerPositions[this.pose][0], this.playerPositions[this.pose][1], 16, 24, CANVAS_WIDTH - 30 - this.x * 16, this.y * 16, 32, 48);
+      ctx.drawImage(this.img, this.playerPositions[this.pose][0], this.playerPositions[this.pose][1], 16, 24,
+        CANVAS_WIDTH - 30 - this.x * 16, this.y * 16, 32, 48);
       ctx.restore();
     } else {
       ctx.drawImage(this.img, this.playerPositions[this.pose][0], this.playerPositions[this.pose][1], 16, 24, this.x * 16, this.y * 16, 32, 48)
@@ -70,26 +79,26 @@ function Player() {
   }
 
   this.moveLeft = function (tiles) {
-    if (!this.falling && !this.swinging) {
+    if (!this.falling && !this.swinging && !this.jumping) {
       this.pose = (this.pose + 1) % 11;
     }
     if (this.x > 0 &&
       ((tiles[Math.floor(this.y) + 3][Math.ceil(this.x)] > 4 || tiles[Math.floor(this.y) + 3][Math.ceil(this.x)] < 1) && tiles[Math.floor(this.y) + 3][Math.ceil(this.x)] != 36) &&
       ((tiles[Math.floor(this.y) + 2][Math.ceil(this.x)] > 4 || tiles[Math.floor(this.y) + 2][Math.ceil(this.x)] < 1) && tiles[Math.floor(this.y) + 2][Math.ceil(this.x)] != 36) &&
       ((tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] > 4 || tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] < 1) && tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] != 36)) {
-      this.x -= 1 / 4;
+      this.x -= 1 / 8;
     }
   }
 
   this.moveRight = function (tiles) {
-    if (!this.falling && !this.swinging) {
+    if (!this.falling && !this.swinging && !this.jumping) {
       this.pose = (this.pose + 1) % 11;
     }
     if (this.x < 48 &&
       ((tiles[Math.floor(this.y) + 3][Math.floor(this.x) + 3] > 4 || tiles[Math.floor(this.y) + 3][Math.floor(this.x) + 3] < 1) && tiles[Math.floor(this.y) + 3][Math.floor(this.x) + 3] != 36) &&
       ((tiles[Math.floor(this.y) + 2][Math.floor(this.x) + 3] > 4 || tiles[Math.floor(this.y) + 2][Math.floor(this.x) + 3] < 1) && tiles[Math.floor(this.y) + 2][Math.floor(this.x) + 3] != 36) &&
       ((tiles[Math.floor(this.y) + 1][Math.floor(this.x) + 3] > 4 || tiles[Math.floor(this.y) + 1][Math.floor(this.x) + 3] < 1) && tiles[Math.floor(this.y) + 1][Math.floor(this.x) + 3] != 36)) {
-      this.x += 1 / 4;
+      this.x += 1 / 8;
     }
   }
 
