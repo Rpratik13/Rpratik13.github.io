@@ -10,7 +10,7 @@ function Game() {
   let player = new Player();
   ctx.font = "10px Arial";
   ctx.fillStyle = 'white';
-  let enemies = [];
+  let enemies = [new Eye(ctx, 18, 14), new Eye(ctx, 28, 14)];
   let timer = 0;
 
   game.onmousedown = function (e) {
@@ -75,9 +75,9 @@ function Game() {
     player.itemPickup(world);
     // slime.draw(player, world);
     timer += 1;
-    if (timer % 500 == 0) {
-      enemies.push(new Slime(ctx, Math.floor(Math.random() * (45 - 2) + 2), 0))
-    }
+    // if (timer == 100) {
+    //   enemies.push(new Zombie(ctx, Math.floor(Math.random() * (45 - 2) + 2), 0))
+    // }
 
     for (var i = 0; i < enemies.length; i++) {
       enemies[i].draw(player, world);

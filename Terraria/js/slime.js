@@ -28,12 +28,12 @@ function Slime(ctx, x, y) {
       if (this.left) {
         this.moveLeft(world.world);
       } else {
-        this.moveRight();
+        this.moveRight(world.world);
       }
     }
   }
 
-  this.moveRight = function () {
+  this.moveRight = function (tiles) {
     this.x += 1 / 50;
     this.checkDeath();
   }
@@ -69,6 +69,8 @@ function Slime(ctx, x, y) {
       this.knockback = true;
     }
   }
+
+
 
   this.knock = function () {
     if (this.left) {
