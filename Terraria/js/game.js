@@ -7,19 +7,15 @@ function Game() {
   let ctx = canvas.getContext("2d");
   canvas.width = CANVAS_WIDTH;
   canvas.height = CANVAS_HEIGHT;
-  let world = new World();
-  let player = new Player();
   ctx.font = "10px Arial";
   ctx.fillStyle = 'white';
   let enemies = [];
   let timer = 0;
   let enemiesDead = [];
-
-  let background = [new Image, new Image];
-  background[0].src = 'images/bg0.png';
-  background[1].src = 'images/bg1.png';
-  let bg_under = new Image;
-  bg_under.src = 'images/bg2.png';
+  var world;
+  var player;
+  var background;
+  var bg_under;
   let bg_num = 0;
   let sound = document.createElement("audio");
   sound.src = 'audio/bg.mp3';
@@ -30,9 +26,18 @@ function Game() {
   this.die = sound;
   this.die.load();
   this.preloader = new Preloader();
-  this.preloader.load(ctx, run);
+  this.preloader.load(ctx, start);
 
-
+  function start() {
+    world = new World();
+    player = new Player();
+    background = [new Image, new Image];
+    background[0].src = 'images/bg0.png';
+    background[1].src = 'images/bg1.png';
+    bg_under = new Image;
+    bg_under.src = 'images/bg2.png';
+    run();
+  }
   document.onmousedown = function (e) {
     console.log(this)
     that.die.play();

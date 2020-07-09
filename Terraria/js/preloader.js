@@ -151,7 +151,7 @@ function Preloader() {
         'images/zombie'
     ];
 
-  this.load = function (ctx, run) {
+  this.load = function (ctx, start) {
     for (var i = 0; i < this.images.length; i++) {
       var img = new Image;
       img.src = this.images[i] + '.png';
@@ -165,6 +165,6 @@ function Preloader() {
 
       }
     }
-    run();
+    start();
   }
 }
