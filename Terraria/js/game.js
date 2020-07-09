@@ -29,6 +29,8 @@ function Game() {
   document.body.appendChild(sound);
   this.die = sound;
   this.die.load();
+  this.preloader = new Preloader();
+  this.preloader.load(ctx, run);
 
 
   document.onmousedown = function (e) {
@@ -121,5 +123,4 @@ function Game() {
     enemiesDead = [];
     requestAnimationFrame(run);
   }
-  run()
 }
