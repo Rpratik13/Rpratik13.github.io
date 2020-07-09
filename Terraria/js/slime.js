@@ -1,4 +1,5 @@
-function Slime(ctx, x, y) {
+function Slime(ctx, x, y, sound) {
+  this.sound = sound;
   this.ctx = ctx;
   this.type = 'slime';
   this.health = 20;
@@ -69,9 +70,10 @@ function Slime(ctx, x, y) {
         Math.floor(this.y) == Math.floor(player.y + 2) || Math.floor(this.y) + 1 == Math.floor(player.y + 2) ||
         Math.floor(this.y) == Math.floor(player.y + 3) || Math.floor(this.y) + 1 == Math.floor(player.y + 3))) {
       this.health -= 2;
-      console.log(player.armor);
       player.health = Math.floor(player.health - 10 * (1 - player.armor / 20));
       this.knockback = true;
+      this.sound.playPlayerHurt();
+      this.sound.playSlimeHit();
     }
   }
 
@@ -97,6 +99,7 @@ function Slime(ctx, x, y) {
   this.checkDeath = function () {
     if (this.health < 0 || this.x < 0 || this.x > 50) {
       this.alive = false;
+      this.sound.playSlimeKilled();
     }
   }
 
