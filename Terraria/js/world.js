@@ -248,7 +248,6 @@ function World() {
       this.tileHealth[y][x] -= player.pickPower;
     } else if (tileVal == 5 || tileVal == 6 || tileVal == 7 || tileVal == 8) {
       this.tileHealth[y][x] -= player.axePower;
-      console.log(player.axePower);
     }
   }
 

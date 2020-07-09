@@ -1,4 +1,5 @@
-function Eye(ctx, x, y) {
+function Eye(ctx, x, y, sound) {
+  this.sound = sound;
   this.ctx = ctx;
   this.health = 10;
   this.type = 'eye';
@@ -65,6 +66,8 @@ function Eye(ctx, x, y) {
         this.health -= 2;
         player.health = Math.floor(player.health - 10 * (1 - player.armor / 20));
         this.knockback = true;
+        this.sound.playSlimeHit();
+
       }
     } else if ((Math.floor(this.x) + 2 == Math.floor(player.x + 1) || Math.floor(this.x) + 2 == Math.floor(player.x + 2) ||
         Math.floor(this.x) + 1 == Math.floor(player.x + 1) || Math.floor(this.x) + 1 == Math.floor(player.x + 2)) &&
@@ -74,6 +77,8 @@ function Eye(ctx, x, y) {
       this.health -= 2;
       player.health -= 5;
       this.knockback = true;
+      this.sound.playSlimeHit();
+
     }
   }
 
@@ -99,6 +104,7 @@ function Eye(ctx, x, y) {
   this.checkDeath = function () {
     if (this.health < 0 || this.x < 0 || this.x > 50) {
       this.alive = false;
+      this.sound.playSlimeKilled();
     }
   }
 

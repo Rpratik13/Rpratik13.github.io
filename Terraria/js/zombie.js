@@ -1,4 +1,5 @@
-function Zombie(ctx, x, y) {
+function Zombie(ctx, x, y, sound) {
+  this.sound = sound;
   this.ctx = ctx;
   this.health = 70;
   this.type = 'zombie';
@@ -99,6 +100,8 @@ function Zombie(ctx, x, y) {
         this.health -= 2;
         player.health -= 20;
         this.knockback = true;
+        this.sound.playPlayerHurt();
+        this.sound.playZombieHit();
       }
     } else if ((Math.floor(this.x) + 2 == Math.floor(player.x + 1) || Math.floor(this.x) + 2 == Math.floor(player.x + 2) ||
         Math.floor(this.x) + 1 == Math.floor(player.x + 1) || Math.floor(this.x) + 1 == Math.floor(player.x + 2)) &&
@@ -108,6 +111,8 @@ function Zombie(ctx, x, y) {
       this.health -= 2;
       player.health = Math.floor(player.health - 20 * (1 - player.armor / 20));
       this.knockback = true;
+      this.sound.playPlayerHurt();
+      this.sound.playZombieHit();
     }
   }
 
@@ -133,6 +138,7 @@ function Zombie(ctx, x, y) {
   this.checkDeath = function () {
     if (this.health < 0 || this.x < 0 || this.x > 50) {
       this.alive = false;
+      this.sound.playZombieKilled();
     }
   }
 

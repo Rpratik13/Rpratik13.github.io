@@ -1,4 +1,5 @@
-function Player() {
+function Player(sound) {
+  this.sound = sound;
   this.health = 100;
   this.img = new Image;
   this.img.src = 'images/player.png';
@@ -134,6 +135,9 @@ function Player() {
     }
   }
   this.swing = function (ctx, enemies) {
+    this.sound.playSwing();
+    var playerX = Math.round(this.x);
+    var playerY = Math.round(this.y);
     if (this.pose < 12) {
       this.pose = 12;
     } else {
@@ -151,21 +155,25 @@ function Player() {
             this.weapon == 'gold_pick' ||
             this.weapon == 'gold_axe') {
             for (var i = 0; i < enemies.length; i++) {
+              var enemiesX = Math.round(enemies[i].x);
+              var enemiesY = Math.round(enemies[i].y);
               if (enemies[i].type == 'slime' || enemies[i].type == 'eye') {
-                if (((this.left && (Math.round(enemies[i].x) == Math.round(this.x) - 4 || Math.round(enemies[i].x) == Math.round(this.x) - 2 || Math.round(enemies[i].x) == Math.round(this.x) - 3)) ||
-                    (!this.left && (Math.round(enemies[i].x) == Math.round(this.x) + 2 || Math.round(enemies[i].x) == Math.round(this.x) + 1 || Math.round(enemies[i].x) == Math.round(this.x) + 3))) &&
-                  (Math.round(enemies[i].y) == Math.round(this.y) - 1 || Math.round(enemies[i].y) == Math.round(this.y) - 2 || Math.round(enemies[i].y) == Math.round(this.y) + 1 || Math.round(enemies[i].y) == Math.round(this.y) + 2 || Math.round(enemies[i].y) == Math.round(this.y))) {
+                if ((this.left && (playerX - 4 <= enemiesX && enemiesX <= playerX) ||
+                    (!this.left && (playerX <= enemiesX && enemiesX <= playerX + 3))) &&
+                  (playerY - 2 <= enemiesY && enemiesY <= playerY + 2)) {
                   enemies[i].knockback = true;
                   enemies[i].health -= this.damage;
+                  this.sound.playSlimeHit();
                 }
               } else if (enemies[i].type == 'zombie') {
-                if (((this.left && (Math.round(enemies[i].x) == Math.round(this.x) - 4 || Math.round(enemies[i].x) == Math.round(this.x) - 2 || Math.round(enemies[i].x) == Math.round(this.x) - 3)) ||
-                    (!this.left && (Math.round(enemies[i].x) == Math.round(this.x) + 2 || Math.round(enemies[i].x) == Math.round(this.x) + 1 || Math.round(enemies[i].x) == Math.round(this.x) + 3))) &&
+                if (((this.left && (playerX - 4 <= enemiesX && enemiesX <= player - 2)) ||
+                    (!this.left && (playerX + 1 <= enemiesX && enemiesX <= player + 3))) &&
                   ((Math.round(enemies[i].y) == Math.round(this.y) - 1 || Math.round(enemies[i].y) == Math.round(this.y) - 2 || Math.round(enemies[i].y) == Math.round(this.y) + 1 || Math.round(enemies[i].y) == Math.round(this.y) + 2 || Math.round(enemies[i].y) == Math.round(this.y)) ||
-                    (Math.round(enemies[i].y) + 1 == Math.round(this.y) - 1 || Math.round(enemies[i].y) + 1 == Math.round(this.y) - 2 || Math.round(enemies[i].y + 1) == Math.round(this.y) + 1 || Math.round(enemies[i].y) + 1 == Math.round(this.y) + 2) || Math.round(enemies[i].y) + 1 == Math.round(this.y)) ||
-                  (Math.round(enemies[i].y) + 2 == Math.round(this.y) - 1 || Math.round(enemies[i].y) + 2 == Math.round(this.y) - 2 || Math.round(enemies[i].y + 2) == Math.round(this.y) + 1 || Math.round(enemies[i].y) + 2 == Math.round(this.y) + 2) || Math.round(enemies[i].y) + 2 == Math.round(this.y)) {
+                    (Math.round(enemies[i].y) + 1 == Math.round(this.y) - 1 || Math.round(enemies[i].y) + 1 == Math.round(this.y) - 2 || Math.round(enemies[i].y + 1) == Math.round(this.y) + 1 || Math.round(enemies[i].y) + 1 == Math.round(this.y) + 2) || Math.round(enemies[i].y) + 1 == Math.round(this.y) ||
+                    (Math.round(enemies[i].y) + 2 == Math.round(this.y) - 1 || Math.round(enemies[i].y) + 2 == Math.round(this.y) - 2 || Math.round(enemies[i].y + 2) == Math.round(this.y) + 1 || Math.round(enemies[i].y) + 2 == Math.round(this.y) + 2) || Math.round(enemies[i].y) + 2 == Math.round(this.y))) {
                   enemies[i].knockback = true;
                   enemies[i].health -= this.damage;
+                  this.sound.playZombieHit();
 
                 }
               }
@@ -518,11 +526,6 @@ function Player() {
       start_height = this.y * 16 + 10;
       end_width = 27;
       end_height = 28;
-    } else if (this.pose == 14) {
-      start_width = this.x * 16 + 2;
-      start_height = this.y * 16 + 17;
-      end_width = 25;
-      end_height = 19;
     } else if (this.pose == 14) {
       start_width = this.x * 16 + 2;
       start_height = this.y * 16 + 17;
