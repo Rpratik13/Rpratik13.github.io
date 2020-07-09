@@ -1,6 +1,7 @@
 function Zombie(ctx, x, y) {
   this.ctx = ctx;
   this.health = 70;
+  this.type = 'zombie';
   this.img = new Image;
   this.img.src = 'images/zombie.png';
   this.imgPos = [0, 48, 96];
@@ -47,7 +48,7 @@ function Zombie(ctx, x, y) {
     }
     this.playerCollision(player)
     if (this.knockback) {
-      this.knock();
+      this.knock(player);
     } else {
       this.fall(world.world);
       if (this.left) {
@@ -105,15 +106,15 @@ function Zombie(ctx, x, y) {
         Math.floor(this.y) == Math.floor(player.y + 2) || Math.floor(this.y) + 1 == Math.floor(player.y + 2) || Math.floor(this.y) + 2 == Math.floor(player.y + 1) ||
         Math.floor(this.y) == Math.floor(player.y + 3) || Math.floor(this.y) + 1 == Math.floor(player.y + 3) || Math.floor(this.y) + 2 == Math.floor(player.y + 1))) {
       this.health -= 2;
-      player.health -= 20;
+      player.health = Math.floor(player.health - 20 * (1 - player.armor / 20));
       this.knockback = true;
     }
   }
 
 
 
-  this.knock = function () {
-    if (this.left) {
+  this.knock = function (player) {
+    if (this.x > player.x) {
       this.x += 1 / 4;
     } else {
       this.x -= 1 / 4;

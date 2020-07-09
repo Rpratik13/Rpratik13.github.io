@@ -1,6 +1,7 @@
 function Eye(ctx, x, y) {
   this.ctx = ctx;
   this.health = 10;
+  this.type = 'eye';
   this.img = new Image;
   this.img.src = 'images/eye.png';
   this.imgDirection = 1;
@@ -34,18 +35,10 @@ function Eye(ctx, x, y) {
       }
       ctx.restore();
     }
-    this.poseCounter = (this.poseCounter + 1) % 4;
-    if (this.poseCounter == 0) {
-      this.pose += this.imgDirection;
-    }
-    if (this.pose == 0) {
-      this.imgDirection = 1;
-    } else if (this.pose == 2) {
-      this.imgDirection = -1;
-    }
+
     this.playerCollision(player)
     if (this.knockback) {
-      this.knock();
+      this.knock(player);
     } else {
       if (this.left) {
         this.x -= 1 / 50;
@@ -62,16 +55,6 @@ function Eye(ctx, x, y) {
     }
   }
 
-  this.moveRight = function (tiles) {
-    this.x += 1 / 50;
-    this.checkDeath();
-  }
-
-  this.moveLeft = function (tiles) {
-    this.x -= 1 / 50;
-    this.checkDeath();
-  }
-
   this.playerCollision = function (player) {
     if (!this.left) {
       if ((Math.floor(this.x) + 3 == Math.floor(player.x + 1) || Math.floor(this.x) + 3 == Math.floor(player.x + 2) ||
@@ -80,7 +63,7 @@ function Eye(ctx, x, y) {
           Math.floor(this.y) == Math.floor(player.y + 2) || Math.floor(this.y) + 1 == Math.floor(player.y + 2) || Math.floor(this.y) + 2 == Math.floor(player.y + 1) ||
           Math.floor(this.y) == Math.floor(player.y + 3) || Math.floor(this.y) + 1 == Math.floor(player.y + 3) || Math.floor(this.y) + 2 == Math.floor(player.y + 1))) {
         this.health -= 2;
-        player.health -= 20;
+        player.health = Math.floor(player.health - 10 * (1 - player.armor / 20));
         this.knockback = true;
       }
     } else if ((Math.floor(this.x) + 2 == Math.floor(player.x + 1) || Math.floor(this.x) + 2 == Math.floor(player.x + 2) ||
@@ -96,8 +79,8 @@ function Eye(ctx, x, y) {
 
 
 
-  this.knock = function () {
-    if (this.left) {
+  this.knock = function (player) {
+    if (this.x > player.x) {
       this.x += 1 / 4;
     } else {
       this.x -= 1 / 4;

@@ -1,5 +1,6 @@
 function Slime(ctx, x, y) {
   this.ctx = ctx;
+  this.type = 'slime';
   this.health = 20;
   this.img = new Image;
   this.img.src = 'images/slime.png';
@@ -22,7 +23,7 @@ function Slime(ctx, x, y) {
     }
     this.playerCollision(player)
     if (this.knockback) {
-      this.knock();
+      this.knock(player);
     } else {
       this.fall(world.world);
       if (this.left) {
@@ -34,7 +35,10 @@ function Slime(ctx, x, y) {
   }
 
   this.moveRight = function (tiles) {
-    this.x += 1 / 50;
+    if (((tiles[Math.floor(this.y)][Math.ceil(this.x) + 2] > 4 || tiles[Math.floor(this.y)][Math.ceil(this.x) + 2] < 1) && tiles[Math.floor(this.y)][Math.ceil(this.x) + 2] != 36) &&
+      ((tiles[Math.floor(this.y) + 1][Math.ceil(this.x) + 2] > 4 || tiles[Math.floor(this.y) + 1][Math.ceil(this.x) + 2] < 1) && tiles[Math.floor(this.y) + 1][Math.ceil(this.x) + 2] != 36)) {
+      this.x += 1 / 50;
+    }
     this.checkDeath();
   }
 
@@ -65,15 +69,16 @@ function Slime(ctx, x, y) {
         Math.floor(this.y) == Math.floor(player.y + 2) || Math.floor(this.y) + 1 == Math.floor(player.y + 2) ||
         Math.floor(this.y) == Math.floor(player.y + 3) || Math.floor(this.y) + 1 == Math.floor(player.y + 3))) {
       this.health -= 2;
-      player.health -= 10;
+      console.log(player.armor);
+      player.health = Math.floor(player.health - 10 * (1 - player.armor / 20));
       this.knockback = true;
     }
   }
 
 
 
-  this.knock = function () {
-    if (this.left) {
+  this.knock = function (player) {
+    if (this.x > player.x) {
       this.x += 1 / 4;
     } else {
       this.x -= 1 / 4;

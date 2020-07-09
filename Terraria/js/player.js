@@ -133,7 +133,7 @@ function Player() {
       }
     }
   }
-  this.swing = function (ctx) {
+  this.swing = function (ctx, enemies) {
     if (this.pose < 12) {
       this.pose = 12;
     } else {
@@ -143,14 +143,42 @@ function Player() {
 
         if (this.pose == 0) {
           this.swinging = false;
+          if (this.weapon == 'sword' ||
+            this.weapon == 'silver_sword' ||
+            this.weapon == 'silver_axe' ||
+            this.weapon == 'silver_pick' ||
+            this.weapon == 'gold_sword' ||
+            this.weapon == 'gold_pick' ||
+            this.weapon == 'gold_axe') {
+            for (var i = 0; i < enemies.length; i++) {
+              if (enemies[i].type == 'slime' || enemies[i].type == 'eye') {
+                if (((this.left && (Math.round(enemies[i].x) == Math.round(this.x) - 4 || Math.round(enemies[i].x) == Math.round(this.x) - 2 || Math.round(enemies[i].x) == Math.round(this.x) - 3)) ||
+                    (!this.left && (Math.round(enemies[i].x) == Math.round(this.x) + 2 || Math.round(enemies[i].x) == Math.round(this.x) + 1 || Math.round(enemies[i].x) == Math.round(this.x) + 3))) &&
+                  (Math.round(enemies[i].y) == Math.round(this.y) - 1 || Math.round(enemies[i].y) == Math.round(this.y) - 2 || Math.round(enemies[i].y) == Math.round(this.y) + 1 || Math.round(enemies[i].y) == Math.round(this.y) + 2 || Math.round(enemies[i].y) == Math.round(this.y))) {
+                  enemies[i].knockback = true;
+                  enemies[i].health -= this.damage;
+                }
+              } else if (enemies[i].type == 'zombie') {
+                if (((this.left && (Math.round(enemies[i].x) == Math.round(this.x) - 4 || Math.round(enemies[i].x) == Math.round(this.x) - 2 || Math.round(enemies[i].x) == Math.round(this.x) - 3)) ||
+                    (!this.left && (Math.round(enemies[i].x) == Math.round(this.x) + 2 || Math.round(enemies[i].x) == Math.round(this.x) + 1 || Math.round(enemies[i].x) == Math.round(this.x) + 3))) &&
+                  ((Math.round(enemies[i].y) == Math.round(this.y) - 1 || Math.round(enemies[i].y) == Math.round(this.y) - 2 || Math.round(enemies[i].y) == Math.round(this.y) + 1 || Math.round(enemies[i].y) == Math.round(this.y) + 2 || Math.round(enemies[i].y) == Math.round(this.y)) ||
+                    (Math.round(enemies[i].y) + 1 == Math.round(this.y) - 1 || Math.round(enemies[i].y) + 1 == Math.round(this.y) - 2 || Math.round(enemies[i].y + 1) == Math.round(this.y) + 1 || Math.round(enemies[i].y) + 1 == Math.round(this.y) + 2) || Math.round(enemies[i].y) + 1 == Math.round(this.y)) ||
+                  (Math.round(enemies[i].y) + 2 == Math.round(this.y) - 1 || Math.round(enemies[i].y) + 2 == Math.round(this.y) - 2 || Math.round(enemies[i].y + 2) == Math.round(this.y) + 1 || Math.round(enemies[i].y) + 2 == Math.round(this.y) + 2) || Math.round(enemies[i].y) + 2 == Math.round(this.y)) {
+                  enemies[i].knockback = true;
+                  enemies[i].health -= this.damage;
+
+                }
+              }
+            }
+          }
         }
       }
-    }
-    if (this.pose != 0) {
-      this.displayWeapon(ctx);
-    }
-    this.swingCounter += 1;
+      if (this.pose != 0) {
+        this.displayWeapon(ctx);
+      }
+      this.swingCounter += 1;
 
+    }
   }
 
 
