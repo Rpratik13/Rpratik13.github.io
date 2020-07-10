@@ -47,7 +47,7 @@ function Zombie(ctx, x, y, sound) {
     } else if (this.pose == 2) {
       this.imgDirection = -1;
     }
-    this.playerCollision(player)
+    this.playerCollision(player, world)
     if (this.knockback) {
       this.knock(player);
     } else {
@@ -90,7 +90,7 @@ function Zombie(ctx, x, y, sound) {
     }
   }
 
-  this.playerCollision = function (player) {
+  this.playerCollision = function (player, world) {
     if (!this.left) {
       if ((Math.floor(this.x) + 3 == Math.floor(player.x + 1) || Math.floor(this.x) + 3 == Math.floor(player.x + 2) ||
           Math.floor(this.x) + 2 == Math.floor(player.x + 1) || Math.floor(this.x) + 2 == Math.floor(player.x + 2)) &&
@@ -114,6 +114,7 @@ function Zombie(ctx, x, y, sound) {
       this.sound.playPlayerHurt();
       this.sound.playZombieHit();
     }
+    this.checkDeath(world);
   }
 
 
@@ -135,10 +136,13 @@ function Zombie(ctx, x, y, sound) {
   }
 
 
-  this.checkDeath = function () {
+  this.checkDeath = function (world) {
     if (this.health < 0 || this.x < 0 || this.x > 50) {
       this.alive = false;
       this.sound.playZombieKilled();
+      if (Math.random() > 0.8) {
+        world.droppedTiles.push(new Tile('zombie_drop', this.x, this.y))
+      }
     }
   }
 

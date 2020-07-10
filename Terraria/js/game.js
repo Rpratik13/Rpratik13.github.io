@@ -9,7 +9,7 @@ function Game() {
   canvas.height = CANVAS_HEIGHT;
   ctx.font = "40px Arial";
   ctx.fillStyle = 'white';
-  let enemies = [];
+  this.enemies = [];
   let timer = 0;
   let enemiesDead = [];
   var world;
@@ -26,7 +26,7 @@ function Game() {
 
   function start() {
     sound = new Sound();
-    world = new World();
+    world = new World(sound);
     player = new Player(sound);
     background = [new Image, new Image];
     background[0].src = 'images/bg0.png';
@@ -107,13 +107,14 @@ function Game() {
     ctx.drawImage(bg_under, 0, 300, CANVAS_WIDTH, 620)
     world.drawWorld(ctx);
     world.drawDroppedTiles(ctx);
-    player.draw(ctx, world.world);
+
+    player.draw(ctx, world.world, that);
     if (player.falling) {
       player.fall(world.world);
     } else if (player.jumping) {
       player.jump(world.world);
     } else if (player.swinging) {
-      player.swing(ctx, enemies);
+      player.swing(ctx, that.enemies, world);
     }
     player.displayHealth(ctx);
     if (player.goLeft) {
@@ -127,19 +128,19 @@ function Game() {
     player.itemPickup(world);
     timer = (timer + 1) % 20000;
     if (timer % 500 == 0) {
-      if (timer > 10000) {
-        enemies.push(new Slime(ctx, Math.floor(Math.random() * (45 - 2) + 2), 0, sound))
+      if (timer < 10000) {
+        that.enemies.push(new Slime(ctx, Math.floor(Math.random() * (45 - 2) + 2), 0, sound))
         bg_num = 0;
       } else {
-        enemies.push(new Eye(ctx, Math.floor(Math.random() * (45 - 2) + 2), 0, sound))
-          // enemies.push(new Zombie(ctx, Math.floor(Math.random() * (45 - 2) + 2), 0, sound))
+        that.enemies.push(new Eye(ctx, Math.floor(Math.random() * (45 - 2) + 2), 0, sound))
+        that.enemies.push(new Zombie(ctx, Math.floor(Math.random() * (45 - 2) + 2), 0, sound))
         bg_num = 1;
       }
     }
 
-    for (var i = 0; i < enemies.length; i++) {
-      enemies[i].draw(player, world);
-      if (!enemies[i].alive) {
+    for (var i = 0; i < that.enemies.length; i++) {
+      that.enemies[i].draw(player, world);
+      if (!that.enemies[i].alive) {
         enemiesDead.push(i)
       }
     }

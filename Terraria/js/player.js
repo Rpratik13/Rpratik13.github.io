@@ -29,6 +29,9 @@ function Player(sound) {
   this.goLeft = false;
   this.goRight = false;
 
+  this.heart = new Image;
+  this.heart.src = 'images/heart.png';
+
   this.chestImg = [new Image, new Image];
   this.chestImg[0].src = 'images/silver_chest.png'
   this.chestImg[1].src = 'images/gold_chest.png'
@@ -58,10 +61,12 @@ function Player(sound) {
 
 
   this.displayHealth = function (ctx) {
-    ctx.fillText(this.health + '/100', 700, 100);
+    ctx.font = '20px Arial'
+    ctx.drawImage(this.heart, 670, 123);
+    ctx.fillText(this.health, 700, 140);
   }
 
-  this.draw = function (ctx, tiles) {
+  this.draw = function (ctx, tiles, game) {
     ctx.save()
     if (this.left) {
       ctx.translate(CANVAS_WIDTH, 0);
@@ -77,6 +82,7 @@ function Player(sound) {
     if (tiles[Math.floor(this.y) + 4][Math.floor(this.x) + 1] == 0 && tiles[Math.floor(this.y) + 4][Math.floor(this.x) + 2] == 0 && !this.jumping) {
       this.falling = true;
     }
+    this.checkDeath(game);
   }
 
   this.moveLeft = function (tiles) {
@@ -134,7 +140,7 @@ function Player(sound) {
       }
     }
   }
-  this.swing = function (ctx, enemies) {
+  this.swing = function (ctx, enemies, world) {
     this.sound.playSwing();
     var playerX = Math.round(this.x);
     var playerY = Math.round(this.y);
@@ -166,8 +172,8 @@ function Player(sound) {
                   this.sound.playSlimeHit();
                 }
               } else if (enemies[i].type == 'zombie') {
-                if (((this.left && (playerX - 4 <= enemiesX && enemiesX <= player - 2)) ||
-                    (!this.left && (playerX + 1 <= enemiesX && enemiesX <= player + 3))) &&
+                if (((this.left && (playerX - 4 <= enemiesX && enemiesX <= playerX - 2)) ||
+                    (!this.left && (playerX + 1 <= enemiesX && enemiesX <= playerX + 3))) &&
                   ((Math.round(enemies[i].y) == Math.round(this.y) - 1 || Math.round(enemies[i].y) == Math.round(this.y) - 2 || Math.round(enemies[i].y) == Math.round(this.y) + 1 || Math.round(enemies[i].y) == Math.round(this.y) + 2 || Math.round(enemies[i].y) == Math.round(this.y)) ||
                     (Math.round(enemies[i].y) + 1 == Math.round(this.y) - 1 || Math.round(enemies[i].y) + 1 == Math.round(this.y) - 2 || Math.round(enemies[i].y + 1) == Math.round(this.y) + 1 || Math.round(enemies[i].y) + 1 == Math.round(this.y) + 2) || Math.round(enemies[i].y) + 1 == Math.round(this.y) ||
                     (Math.round(enemies[i].y) + 2 == Math.round(this.y) - 1 || Math.round(enemies[i].y) + 2 == Math.round(this.y) - 2 || Math.round(enemies[i].y + 2) == Math.round(this.y) + 1 || Math.round(enemies[i].y) + 2 == Math.round(this.y) + 2) || Math.round(enemies[i].y) + 2 == Math.round(this.y))) {
@@ -177,6 +183,7 @@ function Player(sound) {
 
                 }
               }
+              enemies[i].checkDeath(world);
             }
           }
         }
@@ -664,5 +671,16 @@ function Player(sound) {
 
     }
     ctx.restore();
+  }
+
+  this.checkDeath = function (game) {
+    if (this.health <= 0) {
+      game.enemies = [];
+      this.health = 100;
+      this.x = 20;
+      this.y = 1;
+      this.falling = true;
+    }
+
   }
 }

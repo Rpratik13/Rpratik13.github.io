@@ -23,6 +23,12 @@ function Inventory(player) {
   this.craftingSelected = -1;
   this.shield = new Image;
   this.shield.src = 'images/shield.png';
+  this.gel = new Image;
+  this.gel.src = 'images/gel.png';
+  this.zombieDrop = new Image;
+  this.zombieDrop.src = 'images/zombie_drop.png';
+  this.lens = new Image;
+  this.lens.src = 'images/lens.png';
 
   for (var i = 0; i < 14; i++) {
     this.craft.push(new Image);
@@ -69,8 +75,16 @@ function Inventory(player) {
       ctx.drawImage(this.craft[10], x + 5, y + 5, 20, 20);
     } else if (type == 'gold_boot' && player.items['gold_boot'] > 0) {
       ctx.drawImage(this.craft[11], x + 5, y + 5, 20, 20);
+    } else if (type == 'gel' && player.items['gel'] > 0) {
+      ctx.drawImage(this.gel, x + 5, y + 5, 20, 20);
+    } else if (type == 'zombie_drop' && player.items['zombie_drop'] > 0) {
+      ctx.drawImage(this.zombieDrop, x + 5, y + 5, 20, 20);
+    } else if (type == 'lens' && player.items['lens'] > 0) {
+      ctx.drawImage(this.lens, x + 5, y + 5, 20, 20);
     }
+
     if (player.items[type] > 0 && textFlag) {
+      ctx.font = '10px Arial';
       ctx.fillText(player.items[type], x + 2, y + 10);
     }
   }
