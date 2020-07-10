@@ -146,7 +146,7 @@ function Game() {
     }
 
     for (var i = 0; i < enemiesDead.length; i++) {
-      enemies.splice(enemiesDead[i], 1);
+      that.enemies.splice(enemiesDead[i], 1);
     }
     enemiesDead = [];
     requestAnimationFrame(run);
