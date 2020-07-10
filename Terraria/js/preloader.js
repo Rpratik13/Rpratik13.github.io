@@ -148,7 +148,11 @@ function Preloader() {
         'images/wood14',
         'images/wood15',
 
-        'images/zombie'
+        'images/zombie',
+        'images/zombie_drop',
+        'images/lens',
+        'images/gel',
+
     ];
 
   this.loadedImages = 0;

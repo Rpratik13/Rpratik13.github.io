@@ -1,5 +1,6 @@
-function World() {
+function World(sound) {
   this.world = tilemap;
+  this.sound = sound;
 
   this.tileHealth = [];
   this.droppedTiles = [];
@@ -246,8 +247,10 @@ function World() {
   this.hitTile = function (tileVal, x, y, player) {
     if (tileVal == 1 || tileVal == 2 || tileVal == 3 || tileVal == 4) {
       this.tileHealth[y][x] -= player.pickPower;
+      this.sound.playDig();
     } else if (tileVal == 5 || tileVal == 6 || tileVal == 7 || tileVal == 8) {
       this.tileHealth[y][x] -= player.axePower;
+      this.sound.playTreeHit();
     }
   }
 

@@ -11,6 +11,12 @@ function Tile(type, x, y) {
     this.img.src = 'images/silver_drop.png';
   } else if (type == 'wood') {
     this.img.src = 'images/wood_drop.png';
+  } else if (type == 'lens') {
+    this.img.src = 'images/lens.png';
+  } else if (type == 'zombie_drop') {
+    this.img.src = 'images/zombie_drop.png';
+  } else if (type == 'gel') {
+    this.img.src = 'images/gel.png';
   }
 
 

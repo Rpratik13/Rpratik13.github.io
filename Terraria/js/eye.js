@@ -52,7 +52,7 @@ function Eye(ctx, x, y, sound) {
       } else {
         this.y -= 1 / 50
       }
-      this.checkDeath();
+      this.checkDeath(world);
     }
   }
 
@@ -85,9 +85,9 @@ function Eye(ctx, x, y, sound) {
 
 
   this.knock = function (player) {
-    if (this.x > player.x) {
+    if (this.x > player.x && this.x < 50) {
       this.x += 1 / 4;
-    } else {
+    } else if (this.x < player.x && this.x > 0) {
       this.x -= 1 / 4;
     }
     this.y -= 1 / 4;
@@ -101,10 +101,14 @@ function Eye(ctx, x, y, sound) {
   }
 
 
-  this.checkDeath = function () {
-    if (this.health < 0 || this.x < 0 || this.x > 50) {
+  this.checkDeath = function (world) {
+    if (this.health < 0) {
       this.alive = false;
       this.sound.playSlimeKilled();
+
+      if (Math.random() > 0.7) {
+        world.droppedTiles.push(new Tile('lens', this.x, this.y))
+      }
     }
   }
 

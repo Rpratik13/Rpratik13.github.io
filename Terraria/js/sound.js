@@ -78,7 +78,31 @@ function Sound() {
     that.zombieKilled.load();
   }
 
+  var initDig = function () {
+    let sound = document.createElement("audio");
+    sound.setAttribute("preload", "auto");
+    sound.setAttribute("controls", "none");
+    sound.style.display = "none";
+    document.body.appendChild(sound);
+    sound.src = 'audio/dig.wav';
+    that.dig = sound;
+    that.dig.load();
+  }
 
+
+  var initTreeHit = function () {
+    let sound = document.createElement("audio");
+    sound.setAttribute("preload", "auto");
+    sound.setAttribute("controls", "none");
+    sound.style.display = "none";
+    document.body.appendChild(sound);
+    sound.src = 'audio/tree_hit.wav';
+    that.treeHit = sound;
+    that.treeHit.load();
+  }
+
+  initDig();
+  initTreeHit();
   initBackground();
   initSwing();
   initPlayerHurt();
@@ -112,5 +136,13 @@ function Sound() {
 
   this.playZombieKilled = function () {
     this.zombieKilled.play();
+  }
+
+  this.playDig = function () {
+    this.dig.play();
+  }
+
+  this.playTreeHit = function () {
+    this.treeHit.play();
   }
 }

@@ -18,6 +18,7 @@ function Slime(ctx, x, y, sound) {
   this.knockbackCount = 0;
 
   this.draw = function (player, world) {
+    this.world = world;
     if (this.alive) {
       this.ctx.drawImage(this.img, this.imgPos[this.pose][0], this.imgPos[this.pose][1], this.imgPos[this.pose][2], this.imgPos[this.pose][3],
         this.x * 16, this.y * 16, 32, 16);
@@ -28,27 +29,27 @@ function Slime(ctx, x, y, sound) {
     } else {
       this.fall(world.world);
       if (this.left) {
-        this.moveLeft(world.world);
+        this.moveLeft(world.world, world);
       } else {
-        this.moveRight(world.world);
+        this.moveRight(world.world, world);
       }
     }
   }
 
-  this.moveRight = function (tiles) {
+  this.moveRight = function (tiles, world) {
     if (((tiles[Math.floor(this.y)][Math.ceil(this.x) + 2] > 4 || tiles[Math.floor(this.y)][Math.ceil(this.x) + 2] < 1) && tiles[Math.floor(this.y)][Math.ceil(this.x) + 2] != 36) &&
       ((tiles[Math.floor(this.y) + 1][Math.ceil(this.x) + 2] > 4 || tiles[Math.floor(this.y) + 1][Math.ceil(this.x) + 2] < 1) && tiles[Math.floor(this.y) + 1][Math.ceil(this.x) + 2] != 36)) {
       this.x += 1 / 50;
     }
-    this.checkDeath();
+    this.checkDeath(world);
   }
 
-  this.moveLeft = function (tiles) {
+  this.moveLeft = function (tiles, world) {
     if (((tiles[Math.floor(this.y)][Math.ceil(this.x)] > 4 || tiles[Math.floor(this.y)][Math.ceil(this.x)] < 1) && tiles[Math.floor(this.y)][Math.ceil(this.x)] != 36) &&
       ((tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] > 4 || tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] < 1) && tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] != 36)) {
       this.x -= 1 / 50;
     }
-    this.checkDeath();
+    this.checkDeath(world);
   }
 
   this.fall = function (tiles) {
@@ -96,10 +97,14 @@ function Slime(ctx, x, y, sound) {
   }
 
 
-  this.checkDeath = function () {
+  this.checkDeath = function (world) {
     if (this.health < 0 || this.x < 0 || this.x > 50) {
       this.alive = false;
       this.sound.playSlimeKilled();
+
+      if (Math.random() > 0.5) {
+        world.droppedTiles.push(new Tile('gel', this.x, this.y))
+      }
     }
   }
 
