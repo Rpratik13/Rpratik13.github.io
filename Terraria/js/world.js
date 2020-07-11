@@ -1,12 +1,13 @@
 function World(sound) {
   this.world = tilemap;
   this.sound = sound;
+  this.translated = -CANVAS_WIDTH;
 
   this.tileHealth = [];
   this.droppedTiles = [];
-  for (var i = 0; i < 41; i++) {
+  for (var i = 0; i < this.world.length; i++) {
     var row = [];
-    for (var j = 0; j < 52; j++) {
+    for (var j = 0; j < this.world[0].length; j++) {
       if (this.world[i][j] != 0) {
         row.push(4);
       } else { row.push(0); }
@@ -255,7 +256,7 @@ function World(sound) {
   }
 
   this.clicked = function (x, y, player) {
-    var tileX = Math.floor(x / TILE_SIZE) + 1;
+    var tileX = Math.floor((x - this.translated) / TILE_SIZE) + 1;
     var tileY = Math.floor(y / TILE_SIZE) + 1;
     var tileVal = this.world[tileY][tileX];
     if (Math.abs(tileX - player.x - 1) < 3 && Math.abs(tileY - 2 - player.y) < 3) {

@@ -1,9 +1,10 @@
-function Player(sound) {
+function Player(sound, world) {
+  this.world = world;
   this.sound = sound;
   this.health = 100;
   this.img = new Image;
   this.img.src = 'images/player.png';
-  this.x = 20;
+  this.x = 75;
   this.y = 14;
   this.playerPositions = [[34, 65], [34, 156], [56, 155], [79, 155], [105, 155], [131, 156], [157, 156], [182, 156], [208, 156], [235, 155], [263, 155], [34, 123], [34, 93], [56, 93], [80, 93], [104, 93]];
   this.pose = 0;
@@ -14,8 +15,8 @@ function Player(sound) {
   this.swinging = false;
   this.swingCounter = 0;
   this.showInventory = false;
-  this.items = { 'sword': 1 };
-  this.itemsName = ['sword'];
+  this.items = { 'fire_sword': 1 };
+  this.itemsName = ['fire_sword'];
   this.tilesCollected = [];
   this.inventory = new Inventory(this);
   this.weapon;
@@ -46,7 +47,7 @@ function Player(sound) {
    [14, 714, 14, 12], [12, 770, 18, 12], [10, 826, 22, 12], [10, 882, 22, 12], [8, 322, 28, 12], [12, 42, 18, 12], [12, 42, 18, 12], [12, 42, 18, 12], [12, 42, 18, 12]];
 
 
-  this.weapons = [new Image, new Image, new Image, new Image, new Image, new Image, new Image, new Image, new Image, new Image, new Image];
+  this.weapons = [new Image, new Image, new Image, new Image, new Image, new Image, new Image, new Image, new Image, new Image, new Image, new Image];
   this.weapons[0].src = 'images/dirt_drop.png';
   this.weapons[1].src = 'images/wood_drop.png';
   this.weapons[2].src = 'images/gold_drop.png';
@@ -58,12 +59,15 @@ function Player(sound) {
   this.weapons[8].src = 'images/craft0.png';
   this.weapons[9].src = 'images/craft1.png';
   this.weapons[10].src = 'images/craft2.png';
+  this.weapons[11].src = 'images/fire_sword.png';
 
 
   this.displayHealth = function (ctx) {
+    var playerX = this.x * TILE_SIZE
     ctx.font = '20px Arial'
-    ctx.drawImage(this.heart, 670, 123);
-    ctx.fillText(this.health, 700, 140);
+
+    ctx.drawImage(this.heart, playerX + 250, 123);
+    ctx.fillText(this.health, playerX + 275, 140);
   }
 
   this.draw = function (ctx, tiles, game) {
@@ -82,40 +86,50 @@ function Player(sound) {
     if (tiles[Math.floor(this.y) + 4][Math.floor(this.x) + 1] == 0 && tiles[Math.floor(this.y) + 4][Math.floor(this.x) + 2] == 0 && !this.jumping) {
       this.falling = true;
     }
-    this.checkDeath(game);
+    this.checkDeath(game, ctx);
   }
 
-  this.moveLeft = function (tiles) {
+  this.moveLeft = function (tiles, ctx) {
+    var thisX = Math.ceil(this.x);
+    var thisY = Math.floor(this.y);
     if (!this.falling && !this.swinging && !this.jumping) {
       this.pose = (this.pose + 1) % 11;
     }
     if (this.x > 0 &&
-      ((tiles[Math.floor(this.y) + 3][Math.ceil(this.x)] > 4 || tiles[Math.floor(this.y) + 3][Math.ceil(this.x)] < 1) && tiles[Math.floor(this.y) + 3][Math.ceil(this.x)] != 36) &&
-      ((tiles[Math.floor(this.y) + 2][Math.ceil(this.x)] > 4 || tiles[Math.floor(this.y) + 2][Math.ceil(this.x)] < 1) && tiles[Math.floor(this.y) + 2][Math.ceil(this.x)] != 36) &&
-      ((tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] > 4 || tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] < 1) && tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] != 36)) {
+      ((tiles[thisY + 3][thisX] > 4 || tiles[thisY + 3][thisX] < 1) && tiles[thisY + 3][thisX] != 36) &&
+      ((tiles[thisY + 2][thisX] > 4 || tiles[thisY + 2][thisX] < 1) && tiles[thisY + 2][thisX] != 36) &&
+      ((tiles[thisY + 1][thisX] > 4 || tiles[thisY + 1][thisX] < 1) && tiles[thisY + 1][thisX] != 36)) {
       this.x -= 1 / 8;
+      ctx.translate(2, 0);
+      this.world.translated += 2;
     }
   }
 
-  this.moveRight = function (tiles) {
+  this.moveRight = function (tiles, ctx) {
+    var thisX = Math.floor(this.x);
+    var thisY = Math.floor(this.y);
     if (!this.falling && !this.swinging && !this.jumping) {
       this.pose = (this.pose + 1) % 11;
     }
-    if (this.x < 48 &&
-      ((tiles[Math.floor(this.y) + 3][Math.floor(this.x) + 3] > 4 || tiles[Math.floor(this.y) + 3][Math.floor(this.x) + 3] < 1) && tiles[Math.floor(this.y) + 3][Math.floor(this.x) + 3] != 36) &&
-      ((tiles[Math.floor(this.y) + 2][Math.floor(this.x) + 3] > 4 || tiles[Math.floor(this.y) + 2][Math.floor(this.x) + 3] < 1) && tiles[Math.floor(this.y) + 2][Math.floor(this.x) + 3] != 36) &&
-      ((tiles[Math.floor(this.y) + 1][Math.floor(this.x) + 3] > 4 || tiles[Math.floor(this.y) + 1][Math.floor(this.x) + 3] < 1) && tiles[Math.floor(this.y) + 1][Math.floor(this.x) + 3] != 36)) {
+    if (this.x < 152 &&
+      ((tiles[thisY + 3][thisX + 3] > 4 || tiles[thisY + 3][thisX + 3] < 1) && tiles[thisY + 3][thisX + 3] != 36) &&
+      ((tiles[thisY + 2][thisX + 3] > 4 || tiles[thisY + 2][thisX + 3] < 1) && tiles[thisY + 2][thisX + 3] != 36) &&
+      ((tiles[thisY + 1][thisX + 3] > 4 || tiles[thisY + 1][thisX + 3] < 1) && tiles[thisY + 1][thisX + 3] != 36)) {
       this.x += 1 / 8;
+      ctx.translate(-2, 0);
+      this.world.translated -= 2;
     }
   }
 
   this.fall = function (tiles) {
+    var thisX = Math.floor(this.x);
+    var thisY = Math.floor(this.y);
     this.pose = 11;
     if (this.y < 36 &&
-      (tiles[Math.floor(this.y) + 4][Math.floor(this.x) + 1] != 36) &&
-      (tiles[Math.floor(this.y) + 4][Math.floor(this.x) + 2] != 36) &&
-      (tiles[Math.floor(this.y) + 4][Math.floor(this.x) + 1] == 0 || tiles[Math.floor(this.y) + 4][Math.floor(this.x) + 1] > 4) &&
-      (tiles[Math.floor(this.y) + 4][Math.floor(this.x) + 2] == 0 || tiles[Math.floor(this.y) + 4][Math.floor(this.x) + 2] > 4)) {
+      (tiles[thisY + 4][thisX + 1] != 36) &&
+      (tiles[thisY + 4][thisX + 2] != 36) &&
+      (tiles[thisY + 4][thisX + 1] == 0 || tiles[thisY + 4][thisX + 1] > 4) &&
+      (tiles[thisY + 4][thisX + 2] == 0 || tiles[thisY + 4][thisX + 2] > 4)) {
       this.y += 1 / 4;
     } else {
       this.pose = 0;
@@ -124,23 +138,25 @@ function Player(sound) {
   }
 
   this.jump = function (tiles) {
+    var thisX = Math.round(this.x);
+    var thisY = Math.ceil(this.y);
     if (!this.falling) {
       this.pose = 11;
       this.jumping = true;
       this.y -= 1 / 4;
       this.jumpCounter += 1;
       if (this.jumpCounter == 16 ||
-        (tiles[Math.ceil(this.y)][Math.round(this.x) + 2] == 36) ||
-        (tiles[Math.ceil(this.y)][Math.round(this.x) + 1] == 36) ||
-        (tiles[Math.ceil(this.y)][Math.round(this.x) + 2] > 0 && tiles[Math.ceil(this.y)][Math.round(this.x) + 2] < 5) ||
-        (tiles[Math.ceil(this.y)][Math.round(this.x) + 1] > 0 && tiles[Math.ceil(this.y)][Math.round(this.x) + 1] < 5)) {
+        (tiles[thisY][thisX + 2] == 36) ||
+        (tiles[thisY][thisX + 1] == 36) ||
+        (tiles[thisY][thisX + 2] > 0 && tiles[thisY][thisX + 2] < 5) ||
+        (tiles[thisY][thisX + 1] > 0 && tiles[thisY][thisX + 1] < 5)) {
         this.jumpCounter = 0;
         this.jumping = false;
         this.falling = true;
       }
     }
   }
-  this.swing = function (ctx, enemies, world) {
+  this.swing = function (ctx, enemies, world, game) {
     this.sound.playSwing();
     var playerX = Math.round(this.x);
     var playerY = Math.round(this.y);
@@ -159,14 +175,15 @@ function Player(sound) {
             this.weapon == 'silver_pick' ||
             this.weapon == 'gold_sword' ||
             this.weapon == 'gold_pick' ||
-            this.weapon == 'gold_axe') {
+            this.weapon == 'gold_axe' ||
+            this.weapon == 'fire_sword') {
             for (var i = 0; i < enemies.length; i++) {
               var enemiesX = Math.round(enemies[i].x);
               var enemiesY = Math.round(enemies[i].y);
               if (enemies[i].type == 'slime' || enemies[i].type == 'eye') {
                 if ((this.left && (playerX - 4 <= enemiesX && enemiesX <= playerX) ||
                     (!this.left && (playerX <= enemiesX && enemiesX <= playerX + 3))) &&
-                  (playerY - 2 <= enemiesY && enemiesY <= playerY + 2)) {
+                  (playerY - 2 <= enemiesY && enemiesY <= playerY + 3)) {
                   enemies[i].knockback = true;
                   enemies[i].health -= this.damage;
                   this.sound.playSlimeHit();
@@ -174,9 +191,9 @@ function Player(sound) {
               } else if (enemies[i].type == 'zombie') {
                 if (((this.left && (playerX - 4 <= enemiesX && enemiesX <= playerX - 2)) ||
                     (!this.left && (playerX + 1 <= enemiesX && enemiesX <= playerX + 3))) &&
-                  ((Math.round(enemies[i].y) == Math.round(this.y) - 1 || Math.round(enemies[i].y) == Math.round(this.y) - 2 || Math.round(enemies[i].y) == Math.round(this.y) + 1 || Math.round(enemies[i].y) == Math.round(this.y) + 2 || Math.round(enemies[i].y) == Math.round(this.y)) ||
-                    (Math.round(enemies[i].y) + 1 == Math.round(this.y) - 1 || Math.round(enemies[i].y) + 1 == Math.round(this.y) - 2 || Math.round(enemies[i].y + 1) == Math.round(this.y) + 1 || Math.round(enemies[i].y) + 1 == Math.round(this.y) + 2) || Math.round(enemies[i].y) + 1 == Math.round(this.y) ||
-                    (Math.round(enemies[i].y) + 2 == Math.round(this.y) - 1 || Math.round(enemies[i].y) + 2 == Math.round(this.y) - 2 || Math.round(enemies[i].y + 2) == Math.round(this.y) + 1 || Math.round(enemies[i].y) + 2 == Math.round(this.y) + 2) || Math.round(enemies[i].y) + 2 == Math.round(this.y))) {
+                  ((enemiesY == playerY - 1 || enemiesY == playerY - 2 || enemiesY == playerY + 1 || enemiesY == playerY + 2 || enemiesY == playerY) ||
+                    (enemiesY + 1 == playerY - 1 || enemiesY + 1 == playerY - 2 || enemiesY + 1 == playerY + 1 || enemiesY + 1 == playerY + 2 || enemiesY + 1 == playerY + 3) || enemiesY + 1 == playerY ||
+                    (enemiesY + 2 == playerY - 1 || enemiesY + 2 == playerY - 2 || enemiesY + 2 == playerY + 1 || enemiesY + 2 == playerY + 2 || enemiesY + 2 == playerY + 3) || enemiesY + 2 == playerY)) {
                   enemies[i].knockback = true;
                   enemies[i].health -= this.damage;
                   this.sound.playZombieHit();
@@ -184,6 +201,10 @@ function Player(sound) {
                 }
               }
               enemies[i].checkDeath(world);
+
+            }
+            if (this.weapon == 'fire_sword') {
+              game.fireBalls.push(new Fireball(this, enemies, game.cursorX, game.cursorY, this.world))
             }
           }
         }
@@ -216,7 +237,8 @@ function Player(sound) {
           this.weapon == 'gold_axe' ||
           this.weapon == 'silver_sword' ||
           this.weapon == 'silver_pick' ||
-          this.weapon == 'silver_axe') {
+          this.weapon == 'silver_axe' ||
+          this.weapon == 'fire_sword') {
           ctx.translate(this.x * 16, this.y * 16 - 20);
           start_width = -17;
           start_height = -3
@@ -246,7 +268,8 @@ function Player(sound) {
           this.weapon == 'gold_axe' ||
           this.weapon == 'silver_sword' ||
           this.weapon == 'silver_pick' ||
-          this.weapon == 'silver_axe') {
+          this.weapon == 'silver_axe' ||
+          this.weapon == 'fire_sword') {
           ctx.translate(this.x * 16, this.y * 16 - 20);
           start_width = 25;
           start_height = -3
@@ -273,7 +296,8 @@ function Player(sound) {
           this.weapon == 'gold_axe' ||
           this.weapon == 'silver_sword' ||
           this.weapon == 'silver_pick' ||
-          this.weapon == 'silver_axe') {
+          this.weapon == 'silver_axe' ||
+          this.weapon == 'fire_sword') {
           ctx.translate(this.x * 16, this.y * 16 - 20);
           ctx.rotate(Math.PI / 4);
           start_width = 55;
@@ -302,7 +326,8 @@ function Player(sound) {
           this.weapon == 'gold_axe' ||
           this.weapon == 'silver_sword' ||
           this.weapon == 'silver_pick' ||
-          this.weapon == 'silver_axe') {
+          this.weapon == 'silver_axe' ||
+          this.weapon == 'fire_sword') {
           ctx.translate(this.x * 16, this.y * 16 - 20);
           ctx.rotate(Math.PI / 2);
           start_width = 55;
@@ -341,6 +366,8 @@ function Player(sound) {
         image = this.weapons[9]
       } else if (this.weapon == 'silver_axe') {
         image = this.weapons[10]
+      } else if (this.weapon == 'fire_sword') {
+        image = this.weapons[11]
       }
 
       ctx.drawImage(image, start_width, start_height, end_width, end_height);
@@ -450,6 +477,10 @@ function Player(sound) {
       this.damage = 6;
       this.pickPower = 0;
       this.axePower = 4;
+    } else if (this.weapon == 'fire_sword') {
+      this.damage = 9;
+      this.pickPower = 0;
+      this.axePower = 0;
     } else {
       this.damage = 5;
       this.pickPower = 0;
@@ -673,13 +704,16 @@ function Player(sound) {
     ctx.restore();
   }
 
-  this.checkDeath = function (game) {
+  this.checkDeath = function (game, ctx) {
     if (this.health <= 0) {
       game.enemies = [];
       this.health = 100;
-      this.x = 20;
+      this.x = 75;
       this.y = 1;
       this.falling = true;
+      ctx.translate(-this.world.translated, 0);
+      this.world.translated = -CANVAS_WIDTH;
+      ctx.translate(this.world.translated, 0);
     }
 
   }

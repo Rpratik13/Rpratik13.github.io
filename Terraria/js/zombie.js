@@ -61,29 +61,36 @@ function Zombie(ctx, x, y, sound) {
   }
 
   this.moveRight = function (tiles) {
-    if (((tiles[Math.floor(this.y) + 3][Math.ceil(this.x) + 2] > 4 || tiles[Math.floor(this.y) + 3][Math.ceil(this.x) + 2] < 1) && tiles[Math.floor(this.y)][Math.ceil(this.x)] != 36) &&
-      ((tiles[Math.floor(this.y) + 1][Math.ceil(this.x) + 2] > 4 || tiles[Math.floor(this.y) + 1][Math.ceil(this.x) + 2] < 1) && tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] != 36) &&
-      ((tiles[Math.floor(this.y) + 2][Math.ceil(this.x) + 2] > 4 || tiles[Math.floor(this.y) + 2][Math.ceil(this.x) + 2] < 1) && tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] != 36)) {
+    var thisX = Math.ceil(this.x);
+    var thisY = Math.floor(this.y);
+
+    if (((tiles[thisY + 3][thisX + 2] > 4 || tiles[thisY + 3][thisX + 2] < 1) && tiles[thisY][thisX] != 36) &&
+      ((tiles[thisY + 1][thisX + 2] > 4 || tiles[thisY + 1][thisX + 2] < 1) && tiles[thisY + 1][thisX] != 36) &&
+      ((tiles[thisY + 2][thisX + 2] > 4 || tiles[thisY + 2][thisX + 2] < 1) && tiles[thisY + 1][thisX] != 36)) {
       this.x += 1 / 50;
     }
     this.checkDeath();
   }
 
   this.moveLeft = function (tiles) {
-    if (((tiles[Math.floor(this.y) + 3][Math.ceil(this.x)] > 4 || tiles[Math.floor(this.y) + 3][Math.ceil(this.x)] < 1) && tiles[Math.floor(this.y)][Math.ceil(this.x)] != 36) &&
-      ((tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] > 4 || tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] < 1) && tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] != 36) &&
-      ((tiles[Math.floor(this.y) + 2][Math.ceil(this.x)] > 4 || tiles[Math.floor(this.y) + 2][Math.ceil(this.x)] < 1) && tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] != 36)) {
+    var thisX = Math.ceil(this.x);
+    var thisY = Math.floor(this.y);
+    if (((tiles[thisY + 3][thisX] > 4 || tiles[thisY + 3][thisX] < 1) && tiles[thisY][thisX] != 36) &&
+      ((tiles[thisY + 1][thisX] > 4 || tiles[thisY + 1][thisX] < 1) && tiles[thisY + 1][thisX] != 36) &&
+      ((tiles[thisY + 2][thisX] > 4 || tiles[thisY + 2][thisX] < 1) && tiles[thisY + 1][thisX] != 36)) {
       this.x -= 1 / 50;
     }
     this.checkDeath();
   }
 
   this.fall = function (tiles) {
+    var thisX = Math.floor(this.x);
+    var thisY = Math.floor(this.y);
     if (this.y < 39 &&
-      (tiles[Math.floor(this.y) + 4][Math.floor(this.x) + 1] != 36) &&
-      (tiles[Math.floor(this.y) + 4][Math.floor(this.x) + 2] != 36) &&
-      (tiles[Math.floor(this.y) + 4][Math.floor(this.x) + 1] == 0 || tiles[Math.floor(this.y) + 4][Math.floor(this.x) + 1] > 4) &&
-      (tiles[Math.floor(this.y) + 4][Math.floor(this.x) + 2] == 0 || tiles[Math.floor(this.y) + 4][Math.floor(this.x) + 2] > 4)) {
+      (tiles[thisY + 4][thisX + 1] != 36) &&
+      (tiles[thisY + 4][thisX + 2] != 36) &&
+      (tiles[thisY + 4][thisX + 1] == 0 || tiles[thisY + 4][thisX + 1] > 4) &&
+      (tiles[thisY + 4][thisX + 2] == 0 || tiles[thisY + 4][thisX + 2] > 4)) {
       this.y += 1 / 4;
     } else {
       this.falling = false;
@@ -91,23 +98,27 @@ function Zombie(ctx, x, y, sound) {
   }
 
   this.playerCollision = function (player, world) {
+    var thisX = Math.floor(this.x);
+    var thisY = Math.floor(this.y);
+    var playerX = Math.floor(player.x);
+    var playerY = Math.floor(player.y);
     if (!this.left) {
-      if ((Math.floor(this.x) + 3 == Math.floor(player.x + 1) || Math.floor(this.x) + 3 == Math.floor(player.x + 2) ||
-          Math.floor(this.x) + 2 == Math.floor(player.x + 1) || Math.floor(this.x) + 2 == Math.floor(player.x + 2)) &&
-        (Math.floor(this.y) == Math.floor(player.y + 1) || Math.floor(this.y) + 1 == Math.floor(player.y + 1) || Math.floor(this.y) + 2 == Math.floor(player.y + 1) ||
-          Math.floor(this.y) == Math.floor(player.y + 2) || Math.floor(this.y) + 1 == Math.floor(player.y + 2) || Math.floor(this.y) + 2 == Math.floor(player.y + 1) ||
-          Math.floor(this.y) == Math.floor(player.y + 3) || Math.floor(this.y) + 1 == Math.floor(player.y + 3) || Math.floor(this.y) + 2 == Math.floor(player.y + 1))) {
+      if ((thisX + 3 == playerX + 1 || thisX + 3 == playerX + 2 ||
+          thisX + 2 == playerX + 2 || thisX + 2 == playerX + 2) &&
+        (thisY == playerY + 1 || thisY + 1 == playerY + 1 || thisY + 2 == playerY + 1 ||
+          thisY == playerY + 2 || thisY + 1 == playerY + 2 || thisY + 2 == playerY + 2 ||
+          thisY == playerY + 3 || thisY + 1 == playerY + 3 || thisY + 2 == playerY + 3)) {
         this.health -= 2;
         player.health -= 20;
         this.knockback = true;
         this.sound.playPlayerHurt();
         this.sound.playZombieHit();
       }
-    } else if ((Math.floor(this.x) + 2 == Math.floor(player.x + 1) || Math.floor(this.x) + 2 == Math.floor(player.x + 2) ||
-        Math.floor(this.x) + 1 == Math.floor(player.x + 1) || Math.floor(this.x) + 1 == Math.floor(player.x + 2)) &&
-      (Math.floor(this.y) == Math.floor(player.y + 1) || Math.floor(this.y) + 1 == Math.floor(player.y + 1) || Math.floor(this.y) + 2 == Math.floor(player.y + 1) ||
-        Math.floor(this.y) == Math.floor(player.y + 2) || Math.floor(this.y) + 1 == Math.floor(player.y + 2) || Math.floor(this.y) + 2 == Math.floor(player.y + 1) ||
-        Math.floor(this.y) == Math.floor(player.y + 3) || Math.floor(this.y) + 1 == Math.floor(player.y + 3) || Math.floor(this.y) + 2 == Math.floor(player.y + 1))) {
+    } else if ((thisX + 2 == playerX + 1 || thisX + 2 == playerX + 2 ||
+        thisX + 1 == playerX + 1 || thisX + 1 == playerX + 2) &&
+      (thisY == playerY + 1 || thisY + 1 == playerY + 1 || thisY + 2 == playerY + 1 ||
+        thisY == playerY + 2 || thisY + 1 == playerY + 2 || thisY + 2 == playerY + 2 ||
+        thisY == playerY + 3 || thisY + 1 == playerY + 3 || thisY + 2 == playerY + 3)) {
       this.health -= 2;
       player.health = Math.floor(player.health - 20 * (1 - player.armor / 20));
       this.knockback = true;
@@ -137,7 +148,7 @@ function Zombie(ctx, x, y, sound) {
 
 
   this.checkDeath = function (world) {
-    if (this.health < 0 || this.x < 0 || this.x > 50) {
+    if (this.health < 0 || this.x < 0 || this.x > 154) {
       this.alive = false;
       this.sound.playZombieKilled();
       if (Math.random() > 0.8) {
