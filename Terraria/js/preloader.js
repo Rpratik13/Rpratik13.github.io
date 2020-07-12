@@ -153,6 +153,10 @@ function Preloader() {
         'images/lens',
         'images/gel',
 
+        'images/logo',
+        'images/fire_sword',
+        'images/fireball'
+
     ];
 
   this.loadedImages = 0;

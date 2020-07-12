@@ -49,16 +49,18 @@ function Fireball(player, enemies, x, y, world) {
       var enemyX = Math.round(enemies[i].x);
       var enemyY = Math.round(enemies[i].y);
       if (enemies[i].type == 'slime' || enemies[i].type == 'eye') {
-        if ((enemyX <= thisX && thisX <= enemyX + 1) && thisY == enemyY) {
+        if (((enemies[i].x <= thisX && thisX <= enemies[i].x + 2) || (enemies[i].x <= thisX + 1 && thisX + 1 <= enemies[i].x + 2)) && ((enemies[i].y <= this.y && this.y <= enemies[i].y + 1) || (enemies[i].y <= this.y + 1 && this.y + 1 <= enemies[i].y + 1))) {
           enemies[i].knockback = true;
           enemies[i].health -= 10;
           this.active = false;
+          break;
         }
       } else if (enemies[i].type == 'zombie') {
-        if ((enemyX <= thisX && thisX <= enemyX + 1) && (enemyY <= thisY && thisY <= enemyY + 3)) {
+        if (((enemies[i].x <= thisX && thisX <= enemies[i].x + 1) || (enemies[i].x <= thisX + 1 && thisX + 1 <= enemies[i].x + 1)) && ((enemies[i].y <= this.y && this.y <= enemies[i].y + 3) || (enemies[i].y <= this.y + 1 && this.y + 1 <= enemies[i].y + 3))) {
           enemies[i].knockback = true;
           enemies[i].health -= 10;
           this.active = false;
+          break;
         }
       }
     }

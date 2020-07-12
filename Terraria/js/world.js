@@ -249,7 +249,7 @@ function World(sound) {
     if (tileVal == 1 || tileVal == 2 || tileVal == 3 || tileVal == 4) {
       this.tileHealth[y][x] -= player.pickPower;
       this.sound.playDig();
-    } else if (tileVal == 5 || tileVal == 6 || tileVal == 7 || tileVal == 8) {
+    } else if (tileVal == 5 || tileVal == 6 || tileVal == 7 || tileVal == 8 || tileVal == 36) {
       this.tileHealth[y][x] -= player.axePower;
       this.sound.playTreeHit();
     }
@@ -302,7 +302,8 @@ function World(sound) {
         }
       } else if (tileVal != 0 && (tileVal < 9 || tileVal > 32) && (this.world[tileY - 1][tileX] != 5 && this.world[tileY - 1][tileX] != 6 && this.world[tileY - 1][tileX] != 7)) {
         this.hitTile(tileVal, tileX, tileY, player);
-
+        console.log(tileVal);
+        console.log(this.tileHealth[tileY][tileX]);
         if (this.tileHealth[tileY][tileX] <= 0) {
           if (tileVal == 1 || tileVal == 2) {
             this.droppedTiles.push(new Tile('dirt', tileX, tileY));
@@ -316,12 +317,12 @@ function World(sound) {
             } else if (tileVal == 7) {
               if (this.world[tileY][tileX + 1] == 5) {
                 this.droppedTiles.push(new Tile('wood', tileX + 1, tileY));
-                this.tileHealth[tileX][tileX + 1] = 0;
+                this.tileHealth[tileY][tileX + 1] = 0;
                 this.world[tileY][tileX + 1] = 0;
               }
               if (this.world[tileY][tileX - 1] == 6) {
                 this.droppedTiles.push(new Tile('wood', tileX - 1, tileY));
-                this.tileHealth[tileX][tileX - 1] = 0;
+                this.tileHealth[tileY][tileX - 1] = 0;
                 this.world[tileY][tileX - 1] = 0;
               }
               this.droppedTiles.push(new Tile('wood', tileX, tileY));

@@ -96,6 +96,7 @@ function Slime(ctx, x, y, sound) {
     } else {
       this.x -= 1 / 4;
     }
+
     this.y -= 1 / 4;
 
     this.knockbackCount = (this.knockbackCount + 1) % 10;
