@@ -37,27 +37,33 @@ function Slime(ctx, x, y, sound) {
   }
 
   this.moveRight = function (tiles, world) {
-    if (((tiles[Math.floor(this.y)][Math.ceil(this.x) + 2] > 4 || tiles[Math.floor(this.y)][Math.ceil(this.x) + 2] < 1) && tiles[Math.floor(this.y)][Math.ceil(this.x) + 2] != 36) &&
-      ((tiles[Math.floor(this.y) + 1][Math.ceil(this.x) + 2] > 4 || tiles[Math.floor(this.y) + 1][Math.ceil(this.x) + 2] < 1) && tiles[Math.floor(this.y) + 1][Math.ceil(this.x) + 2] != 36)) {
+    var thisX = Math.ceil(this.x);
+    var thisY = Math.floor(this.y);
+    if (((tiles[thisY][thisX + 2] > 4 || tiles[thisY][thisX + 2] < 1) && tiles[thisY][thisX + 2] != 36) &&
+      ((tiles[thisY + 1][thisX + 2] > 4 || tiles[thisY + 1][thisX + 2] < 1) && tiles[thisY + 1][thisX + 2] != 36)) {
       this.x += 1 / 50;
     }
     this.checkDeath(world);
   }
 
   this.moveLeft = function (tiles, world) {
-    if (((tiles[Math.floor(this.y)][Math.ceil(this.x)] > 4 || tiles[Math.floor(this.y)][Math.ceil(this.x)] < 1) && tiles[Math.floor(this.y)][Math.ceil(this.x)] != 36) &&
-      ((tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] > 4 || tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] < 1) && tiles[Math.floor(this.y) + 1][Math.ceil(this.x)] != 36)) {
+    var thisX = Math.ceil(this.x);
+    var thisY = Math.floor(this.y);
+    if (((tiles[thisY][thisX] > 4 || tiles[thisY][thisX] < 1) && tiles[thisY][thisX] != 36) &&
+      ((tiles[thisY + 1][thisX] > 4 || tiles[thisY + 1][thisX] < 1) && tiles[thisY + 1][thisX] != 36)) {
       this.x -= 1 / 50;
     }
     this.checkDeath(world);
   }
 
   this.fall = function (tiles) {
+    var thisX = Math.floor(this.x);
+    var thisY = Math.floor(this.y);
     if (this.y < 39 &&
-      (tiles[Math.floor(this.y) + 2][Math.floor(this.x) + 1] != 36) &&
-      (tiles[Math.floor(this.y) + 2][Math.floor(this.x) + 2] != 36) &&
-      (tiles[Math.floor(this.y) + 2][Math.floor(this.x) + 1] == 0 || tiles[Math.floor(this.y) + 2][Math.floor(this.x) + 1] > 4) &&
-      (tiles[Math.floor(this.y) + 2][Math.floor(this.x) + 2] == 0 || tiles[Math.floor(this.y) + 2][Math.floor(this.x) + 2] > 4)) {
+      (tiles[thisY + 2][thisX + 1] != 36) &&
+      (tiles[thisY + 2][thisX + 2] != 36) &&
+      (tiles[thisY + 2][thisX + 1] == 0 || tiles[thisY + 2][thisX + 1] > 4) &&
+      (tiles[thisY + 2][thisX + 2] == 0 || tiles[thisY + 2][thisX + 2] > 4)) {
       this.y += 1 / 4;
     } else {
       this.falling = false;
@@ -65,11 +71,15 @@ function Slime(ctx, x, y, sound) {
   }
 
   this.playerCollision = function (player) {
-    if ((Math.floor(this.x) + 1 == Math.floor(player.x + 1) || Math.floor(this.x) + 1 == Math.floor(player.x + 2) ||
-        Math.floor(this.x) + 2 == Math.floor(player.x + 1) || Math.floor(this.x) + 2 == Math.floor(player.x + 2)) &&
-      (Math.floor(this.y) == Math.floor(player.y + 1) || Math.floor(this.y) + 1 == Math.floor(player.y + 1) ||
-        Math.floor(this.y) == Math.floor(player.y + 2) || Math.floor(this.y) + 1 == Math.floor(player.y + 2) ||
-        Math.floor(this.y) == Math.floor(player.y + 3) || Math.floor(this.y) + 1 == Math.floor(player.y + 3))) {
+    var thisX = Math.floor(this.x);
+    var thisY = Math.floor(this.y);
+    var playerX = Math.floor(player.x);
+    var playerY = Math.floor(player.y);
+    if ((thisX + 1 == playerX + 1 || thisX + 1 == playerX + 2 ||
+        thisX + 2 == playerX + 1 || thisX + 2 == playerX + 2) &&
+      (thisY == playerY + 1 || thisY + 1 == playerY + 1 ||
+        thisY == playerY + 2 || thisY + 1 == playerY + 2 ||
+        thisY == playerY + 3 || thisY + 1 == playerY + 3)) {
       this.health -= 2;
       player.health = Math.floor(player.health - 10 * (1 - player.armor / 20));
       this.knockback = true;
@@ -86,6 +96,7 @@ function Slime(ctx, x, y, sound) {
     } else {
       this.x -= 1 / 4;
     }
+
     this.y -= 1 / 4;
 
     this.knockbackCount = (this.knockbackCount + 1) % 10;
@@ -98,7 +109,7 @@ function Slime(ctx, x, y, sound) {
 
 
   this.checkDeath = function (world) {
-    if (this.health < 0 || this.x < 0 || this.x > 50) {
+    if (this.health < 0 || this.x < 0 || this.x > 154) {
       this.alive = false;
       this.sound.playSlimeKilled();
 

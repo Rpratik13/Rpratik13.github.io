@@ -1,12 +1,13 @@
 function World(sound) {
   this.world = tilemap;
   this.sound = sound;
+  this.translated = -CANVAS_WIDTH;
 
   this.tileHealth = [];
   this.droppedTiles = [];
-  for (var i = 0; i < 41; i++) {
+  for (var i = 0; i < this.world.length; i++) {
     var row = [];
-    for (var j = 0; j < 52; j++) {
+    for (var j = 0; j < this.world[0].length; j++) {
       if (this.world[i][j] != 0) {
         row.push(4);
       } else { row.push(0); }
@@ -248,14 +249,14 @@ function World(sound) {
     if (tileVal == 1 || tileVal == 2 || tileVal == 3 || tileVal == 4) {
       this.tileHealth[y][x] -= player.pickPower;
       this.sound.playDig();
-    } else if (tileVal == 5 || tileVal == 6 || tileVal == 7 || tileVal == 8) {
+    } else if (tileVal == 5 || tileVal == 6 || tileVal == 7 || tileVal == 8 || tileVal == 36) {
       this.tileHealth[y][x] -= player.axePower;
       this.sound.playTreeHit();
     }
   }
 
   this.clicked = function (x, y, player) {
-    var tileX = Math.floor(x / TILE_SIZE) + 1;
+    var tileX = Math.floor((x - this.translated) / TILE_SIZE) + 1;
     var tileY = Math.floor(y / TILE_SIZE) + 1;
     var tileVal = this.world[tileY][tileX];
     if (Math.abs(tileX - player.x - 1) < 3 && Math.abs(tileY - 2 - player.y) < 3) {
@@ -301,7 +302,8 @@ function World(sound) {
         }
       } else if (tileVal != 0 && (tileVal < 9 || tileVal > 32) && (this.world[tileY - 1][tileX] != 5 && this.world[tileY - 1][tileX] != 6 && this.world[tileY - 1][tileX] != 7)) {
         this.hitTile(tileVal, tileX, tileY, player);
-
+        console.log(tileVal);
+        console.log(this.tileHealth[tileY][tileX]);
         if (this.tileHealth[tileY][tileX] <= 0) {
           if (tileVal == 1 || tileVal == 2) {
             this.droppedTiles.push(new Tile('dirt', tileX, tileY));
@@ -315,12 +317,12 @@ function World(sound) {
             } else if (tileVal == 7) {
               if (this.world[tileY][tileX + 1] == 5) {
                 this.droppedTiles.push(new Tile('wood', tileX + 1, tileY));
-                this.tileHealth[tileX][tileX + 1] = 0;
+                this.tileHealth[tileY][tileX + 1] = 0;
                 this.world[tileY][tileX + 1] = 0;
               }
               if (this.world[tileY][tileX - 1] == 6) {
                 this.droppedTiles.push(new Tile('wood', tileX - 1, tileY));
-                this.tileHealth[tileX][tileX - 1] = 0;
+                this.tileHealth[tileY][tileX - 1] = 0;
                 this.world[tileY][tileX - 1] = 0;
               }
               this.droppedTiles.push(new Tile('wood', tileX, tileY));

@@ -17,6 +17,8 @@ function Inventory(player) {
   this.silver.src = 'images/silver_drop.png';
   this.sword = new Image;
   this.sword.src = 'images/sword.png';
+  this.fireSword = new Image;
+  this.fireSword.src = 'images/fire_sword.png';
   this.craft = [];
   this.craftBtn = new Image;
   this.craftBtn.src = 'images/craft_btn.png';
@@ -81,6 +83,8 @@ function Inventory(player) {
       ctx.drawImage(this.zombieDrop, x + 5, y + 5, 20, 20);
     } else if (type == 'lens' && player.items['lens'] > 0) {
       ctx.drawImage(this.lens, x + 5, y + 5, 20, 20);
+    } else if (type == 'fire_sword' && player.items['fire_sword'] > 0) {
+      ctx.drawImage(this.fireSword, x + 5, y + 5, 20, 20);
     }
 
     if (player.items[type] > 0 && textFlag) {
@@ -240,140 +244,145 @@ function Inventory(player) {
 
 
 
-  this.displayCraftMaterials = function (ctx) {
+  this.displayCraftMaterials = function (ctx, playerX) {
     if (this.craftingSelected == 0) {
-      ctx.drawImage(this.craft[13], 225, 355, 20, 20);
-      ctx.fillText(3, 222, 360);
+      ctx.drawImage(this.craft[13], playerX + 225, 355, 20, 20);
+      ctx.fillText(3, playerX + 222, 360);
     } else if (this.craftingSelected == 1) {
-      ctx.drawImage(this.craft[13], 225, 355, 20, 20);
-      ctx.fillText(2, 222, 360);
-      ctx.drawImage(this.wood, 255, 355, 20, 20);
-      ctx.fillText(2, 252, 360);
+      ctx.drawImage(this.craft[13], playerX + 225, 355, 20, 20);
+      ctx.fillText(2, playerX + 222, 360);
+      ctx.drawImage(this.wood, playerX + 255, 355, 20, 20);
+      ctx.fillText(2, playerX + 252, 360);
     } else if (this.craftingSelected == 2) {
-      ctx.drawImage(this.craft[13], 225, 355, 20, 20);
-      ctx.fillText(2, 222, 360);
-      ctx.drawImage(this.wood, 255, 355, 20, 20);
-      ctx.fillText(2, 252, 360);
+      ctx.drawImage(this.craft[13], playerX + 225, 355, 20, 20);
+      ctx.fillText(2, playerX + 222, 360);
+      ctx.drawImage(this.wood, playerX + 255, 355, 20, 20);
+      ctx.fillText(2, playerX + 252, 360);
     } else if (this.craftingSelected == 3) {
-      ctx.drawImage(this.craft[13], 225, 355, 20, 20);
-      ctx.fillText(4, 222, 360);
+      ctx.drawImage(this.craft[13], playerX + 225, 355, 20, 20);
+      ctx.fillText(4, playerX + 222, 360);
     } else if (this.craftingSelected == 4) {
-      ctx.drawImage(this.craft[13], 225, 355, 20, 20);
-      ctx.fillText(4, 222, 360);
+      ctx.drawImage(this.craft[13], playerX + 225, 355, 20, 20);
+      ctx.fillText(4, playerX + 222, 360);
     } else if (this.craftingSelected == 5) {
-      ctx.drawImage(this.craft[13], 225, 355, 20, 20);
-      ctx.fillText(4, 222, 360);
+      ctx.drawImage(this.craft[13], playerX + 225, 355, 20, 20);
+      ctx.fillText(4, playerX + 222, 360);
     } else if (this.craftingSelected == 6) {
-      ctx.drawImage(this.craft[12], 225, 355, 20, 20);
-      ctx.fillText(2, 222, 360);
+      ctx.drawImage(this.craft[12], playerX + 225, 355, 20, 20);
+      ctx.fillText(2, playerX + 222, 360);
     } else if (this.craftingSelected == 7) {
-      ctx.drawImage(this.craft[12], 225, 355, 20, 20);
-      ctx.fillText(2, 222, 360);
-      ctx.drawImage(this.wood, 255, 355, 20, 20);
-      ctx.fillText(2, 252, 360);
+      ctx.drawImage(this.craft[12], playerX + 225, 355, 20, 20);
+      ctx.fillText(2, playerX + 222, 360);
+      ctx.drawImage(this.wood, playerX + 255, 355, 20, 20);
+      ctx.fillText(2, playerX + 252, 360);
     } else if (this.craftingSelected == 8) {
-      ctx.drawImage(this.craft[12], 225, 355, 20, 20);
-      ctx.fillText(2, 222, 360);
-      ctx.drawImage(this.wood, 255, 355, 20, 20);
-      ctx.fillText(2, 252, 360);
+      ctx.drawImage(this.craft[12], playerX + 225, 355, 20, 20);
+      ctx.fillText(2, playerX + 222, 360);
+      ctx.drawImage(this.wood, playerX + 255, 355, 20, 20);
+      ctx.fillText(2, playerX + 252, 360);
     } else if (this.craftingSelected == 9) {
-      ctx.drawImage(this.craft[12], 225, 355, 20, 20);
-      ctx.fillText(4, 222, 360);
+      ctx.drawImage(this.craft[12], playerX + 225, 355, 20, 20);
+      ctx.fillText(4, playerX + 222, 360);
     } else if (this.craftingSelected == 10) {
-      ctx.drawImage(this.craft[12], 225, 355, 20, 20);
-      ctx.fillText(4, 222, 360);
+      ctx.drawImage(this.craft[12], playerX + 225, 355, 20, 20);
+      ctx.fillText(4, playerX + 222, 360);
     } else if (this.craftingSelected == 11) {
-      ctx.drawImage(this.craft[12], 225, 355, 20, 20);
-      ctx.fillText(4, 222, 360);
+      ctx.drawImage(this.craft[12], playerX + 225, 355, 20, 20);
+      ctx.fillText(4, playerX + 222, 360);
     } else if (this.craftingSelected == 12) {
-      ctx.drawImage(this.gold, 229, 359, 12, 12);
-      ctx.fillText(1, 222, 360);
+      ctx.drawImage(this.gold, playerX + 229, 359, 12, 12);
+      ctx.fillText(1, playerX + 222, 360);
     } else if (this.craftingSelected == 13) {
-      ctx.drawImage(this.silver, 229, 359, 12, 12);
-      ctx.fillText(1, 222, 360);
+      ctx.drawImage(this.silver, playerX + 229, 359, 12, 12);
+      ctx.fillText(1, playerX + 222, 360);
     }
 
   }
 
-  this.displayCrafting = function (ctx) {
+  this.displayCrafting = function (ctx, playerX) {
     for (var i = 0; i < 3; i++) {
       for (var j = 0; j < 5; j++) {
-        ctx.drawImage(this.invContainer, 50 + 30 * j, 350 + 30 * i, 30, 30);
+        ctx.drawImage(this.invContainer, playerX + 50 + 30 * j, 350 + 30 * i, 30, 30);
         if (this.craft.length > i * 5 + j) {
-          ctx.drawImage(this.craft[i * 5 + j], 55 + 30 * j, 355 + 30 * i, 20, 20);
+          ctx.drawImage(this.craft[i * 5 + j], playerX + 55 + 30 * j, 355 + 30 * i, 20, 20);
         }
       }
     }
 
-    ctx.drawImage(this.invContainer, 220, 350, 30, 30);
-    ctx.drawImage(this.invContainer, 250, 350, 30, 30);
-    ctx.drawImage(this.craftBtn, 230, 390, 30, 30);
-    this.displayCraftMaterials(ctx);
+    ctx.drawImage(this.invContainer, playerX + 220, 350, 30, 30);
+    ctx.drawImage(this.invContainer, playerX + 250, 350, 30, 30);
+    ctx.drawImage(this.craftBtn, playerX + 230, 390, 30, 30);
+    this.displayCraftMaterials(ctx, playerX);
   }
 
-  this.displayArmor = function (ctx) {
+  this.displayArmor = function (ctx, playerX) {
     if (this.player.helm == undefined) {
       ctx.drawImage(this.unequipped[0], this.unequippedPos[0][0], this.unequippedPos[0][1], this.unequippedPos[0][2], this.unequippedPos[0][3],
-        750 + (30 - this.unequippedPos[0][2]) / 2, 250 + (30 - this.unequippedPos[0][3]) / 2, this.unequippedPos[0][2], this.unequippedPos[0][3]);
+        playerX + 550 + (30 - this.unequippedPos[0][2]) / 2, 250 + (30 - this.unequippedPos[0][3]) / 2, this.unequippedPos[0][2], this.unequippedPos[0][3]);
     } else if (this.player.helm == 'silver_helm') {
-      ctx.drawImage(this.craft[3], 755, 255, 20, 20)
+      ctx.drawImage(this.craft[3], playerX + 555, 255, 20, 20)
     } else if (this.player.helm == 'gold_helm') {
-      ctx.drawImage(this.craft[9], 755, 255, 20, 20)
+      ctx.drawImage(this.craft[9], playerX + 555, 255, 20, 20)
     }
 
     if (this.player.chest == undefined) {
       ctx.drawImage(this.unequipped[1], this.unequippedPos[1][0], this.unequippedPos[1][1], this.unequippedPos[1][2], this.unequippedPos[1][3],
-        750 + (30 - this.unequippedPos[1][2]) / 2, 290 + (30 - this.unequippedPos[1][3]) / 2, this.unequippedPos[1][2], this.unequippedPos[1][3]);
+        playerX + 550 + (30 - this.unequippedPos[1][2]) / 2, 290 + (30 - this.unequippedPos[1][3]) / 2, this.unequippedPos[1][2], this.unequippedPos[1][3]);
     } else if (this.player.chest == 'silver_chest') {
-      ctx.drawImage(this.craft[4], 755, 295, 20, 20)
+      ctx.drawImage(this.craft[4], playerX + 555, 295, 20, 20)
     } else if (this.player.chest == 'gold_chest') {
-      ctx.drawImage(this.craft[10], 755, 295, 20, 20)
+      ctx.drawImage(this.craft[10], playerX + 555, 295, 20, 20)
     }
 
     if (this.player.boot == undefined) {
       ctx.drawImage(this.unequipped[2], this.unequippedPos[2][0], this.unequippedPos[2][1], this.unequippedPos[2][2], this.unequippedPos[2][3],
-        750 + (30 - this.unequippedPos[2][2]) / 2, 330 + (30 - this.unequippedPos[2][3]) / 2, this.unequippedPos[2][2], this.unequippedPos[2][3]);
+        playerX + 550 + (30 - this.unequippedPos[2][2]) / 2, 330 + (30 - this.unequippedPos[2][3]) / 2, this.unequippedPos[2][2], this.unequippedPos[2][3]);
     } else if (this.player.boot == 'silver_boot') {
-      ctx.drawImage(this.craft[5], 755, 335, 20, 20)
+      ctx.drawImage(this.craft[5], playerX + 555, 335, 20, 20)
     } else if (this.player.boot == 'gold_boot') {
-      ctx.drawImage(this.craft[11], 755, 335, 20, 20)
+      ctx.drawImage(this.craft[11], playerX + 555, 335, 20, 20)
     }
   }
 
   this.display = function (ctx) {
+    var playerX = this.player.x * 16 - 250
+    ctx.font = '20px Arial';
+    ctx.fillText('Inventory', playerX + 50, 140);
+    ctx.fillText('Crafting Menu', playerX + 50, 340);
+    ctx.fillText('Equipped', playerX + 500, 240);
     for (var i = 0; i < 5; i++) {
       for (var j = 0; j < 5; j++) {
-        ctx.drawImage(this.invContainer, 50 + 30 * j, 50 + 30 * i, 30, 30);
+        ctx.drawImage(this.invContainer, playerX + 50 + 30 * j, 150 + 30 * i, 30, 30);
         if (this.player.itemsName.length > i * 5 + j) {
-          this.drawTile(ctx, this.player.itemsName[i * 5 + j], 50 + 30 * j, 50 + 30 * i, true);
+          this.drawTile(ctx, this.player.itemsName[i * 5 + j], playerX + 50 + 30 * j, 150 + 30 * i, true);
         }
       }
     }
 
-    this.displayCrafting(ctx);
+    this.displayCrafting(ctx, playerX);
 
     for (var i = 0; i < 3; i++) {
-      ctx.drawImage(this.invContainer, 750, 250 + 40 * i, 30, 30);
+      ctx.drawImage(this.invContainer, playerX + 550, 250 + 40 * i, 30, 30);
     }
 
-    this.displayArmor(ctx);
-    ctx.drawImage(this.invContainer, 710, 290, 30, 30);
+    this.displayArmor(ctx, playerX);
+    ctx.drawImage(this.invContainer, playerX + 510, 290, 30, 30);
     if (this.player.weapon != undefined) {
-      this.drawTile(ctx, this.player.weapon, 710, 290, false);
+      this.drawTile(ctx, this.player.weapon, playerX + 510, 290, false);
     }
 
-    ctx.drawImage(this.shield, 750, 400, 32, 26);
+    ctx.drawImage(this.shield, playerX + 550, 400, 32, 26);
     if (this.player.armor.toString().length == 1) {
-      ctx.fillText(this.player.armor, 762, 417);
+      ctx.fillText(this.player.armor, playerX + 562, 417);
     } else {
-      ctx.fillText(this.player.armor, 759, 417);
+      ctx.fillText(this.player.armor, playerX + 559, 417);
     }
   }
 
   this.clicked = function (x, y) {
-    var i = Math.floor((x - 50) / 30);
-    var j = Math.floor((y - 50) / 30);
-    if (50 < x && x < 200 && 50 < y && y < 200) {
+    var i = Math.floor((x - 50) / 30) - 5;
+    var j = Math.floor((y - 50) / 30) - 3;
+    if (200 <= x && x <= 350 && 150 <= y && y <= 300) {
       if (this.player.itemsName[i + 5 * j] == 'dirt' ||
         this.player.itemsName[i + 5 * j] == 'wood' ||
         this.player.itemsName[i + 5 * j] == 'gold' ||
@@ -384,7 +393,8 @@ function Inventory(player) {
         this.player.itemsName[i + 5 * j] == 'silver_sword' ||
         this.player.itemsName[i + 5 * j] == 'silver_pick' ||
         this.player.itemsName[i + 5 * j] == 'silver_axe' ||
-        this.player.itemsName[i + 5 * j] == 'sword') {
+        this.player.itemsName[i + 5 * j] == 'sword' ||
+        this.player.itemsName[i + 5 * j] == 'fire_sword') {
         this.player.weapon = this.player.itemsName[i + 5 * j];
         this.player.checkPower();
       } else if (this.player.itemsName[i + 5 * j] == 'gold_helm' ||
@@ -402,29 +412,29 @@ function Inventory(player) {
       }
     }
 
-    if (710 < x && x < 740 && 290 < y && y < 320) {
+    if (660 < x && x < 690 && 290 < y && y < 320) {
       this.player.weapon = undefined;
       this.player.checkPower();
     }
 
-    if (750 < x && x < 780 && 250 < y && y < 280) {
+    if (700 < x && x < 730 && 250 < y && y < 280) {
       this.player.helm = undefined;
       this.player.checkArmor();
     }
-    if (750 < x && x < 780 && 290 < y && y < 320) {
+    if (700 < x && x < 730 && 290 < y && y < 320) {
       this.player.chest = undefined;
       this.player.checkArmor();
     }
-    if (750 < x && x < 780 && 330 < y && y < 360) {
+    if (700 < x && x < 730 && 330 < y && y < 360) {
       this.player.boot = undefined;
       this.player.checkArmor();
     }
 
 
-    if (50 < x && x < 200 && 350 < y && y < 440) {
-      this.craftingSelected = (j - 10) * 5 + i;
+    if (200 < x && x < 350 && 350 < y && y < 440) {
+      this.craftingSelected = (j - 7) * 5 + i;
     }
-    if (230 < x && x < 260 && 390 < y && y < 420) {
+    if (380 < x && x < 410 && 390 < y && y < 420) {
       this.craftItem();
     }
   }

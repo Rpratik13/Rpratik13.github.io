@@ -57,23 +57,28 @@ function Eye(ctx, x, y, sound) {
   }
 
   this.playerCollision = function (player) {
+    var thisX = Math.floor(this.x);
+    var thisY = Math.floor(this.y);
+    var playerX = Math.floor(player.x);
+    var playerY = Math.floor(player.y);
+
     if (!this.left) {
-      if ((Math.floor(this.x) + 3 == Math.floor(player.x + 1) || Math.floor(this.x) + 3 == Math.floor(player.x + 2) ||
-          Math.floor(this.x) + 2 == Math.floor(player.x + 1) || Math.floor(this.x) + 2 == Math.floor(player.x + 2)) &&
-        (Math.floor(this.y) == Math.floor(player.y + 1) || Math.floor(this.y) + 1 == Math.floor(player.y + 1) || Math.floor(this.y) + 2 == Math.floor(player.y + 1) ||
-          Math.floor(this.y) == Math.floor(player.y + 2) || Math.floor(this.y) + 1 == Math.floor(player.y + 2) || Math.floor(this.y) + 2 == Math.floor(player.y + 1) ||
-          Math.floor(this.y) == Math.floor(player.y + 3) || Math.floor(this.y) + 1 == Math.floor(player.y + 3) || Math.floor(this.y) + 2 == Math.floor(player.y + 1))) {
+      if ((thisX + 3 == playerX + 1 || thisX + 3 == playerX + 2 ||
+          thisX + 2 == playerX + 1 || thisX + 2 == playerX + 2) &&
+        (thisY == playerY + 1 || thisY + 1 == playerY + 1 || thisY + 2 == playerY + 1 ||
+          thisY == playerY + 2 || thisY + 1 == playerY + 2 || thisY + 2 == playerY + 1 ||
+          thisY == playerY + 3 || thisY + 1 == playerY + 3 || thisY + 2 == playerY + 1)) {
         this.health -= 2;
         player.health = Math.floor(player.health - 10 * (1 - player.armor / 20));
         this.knockback = true;
         this.sound.playSlimeHit();
 
       }
-    } else if ((Math.floor(this.x) + 2 == Math.floor(player.x + 1) || Math.floor(this.x) + 2 == Math.floor(player.x + 2) ||
-        Math.floor(this.x) + 1 == Math.floor(player.x + 1) || Math.floor(this.x) + 1 == Math.floor(player.x + 2)) &&
-      (Math.floor(this.y) == Math.floor(player.y + 1) || Math.floor(this.y) + 1 == Math.floor(player.y + 1) || Math.floor(this.y) + 2 == Math.floor(player.y + 1) ||
-        Math.floor(this.y) == Math.floor(player.y + 2) || Math.floor(this.y) + 1 == Math.floor(player.y + 2) || Math.floor(this.y) + 2 == Math.floor(player.y + 1) ||
-        Math.floor(this.y) == Math.floor(player.y + 3) || Math.floor(this.y) + 1 == Math.floor(player.y + 3) || Math.floor(this.y) + 2 == Math.floor(player.y + 1))) {
+    } else if ((thisX + 2 == playerX + 1 || thisX + 2 == playerX + 2 ||
+        thisX + 1 == playerX + 1 || thisX + 1 == playerX + 2) &&
+      (thisY == playerY + 1 || thisY + 1 == playerY + 1 || thisY + 2 == playerY + 1 ||
+        thisY == playerY + 2 || thisY + 1 == playerY + 2 || thisY + 2 == playerY + 1 ||
+        thisY == playerY + 3 || thisY + 1 == playerY + 3 || thisY + 2 == playerY + 1)) {
       this.health -= 2;
       player.health -= 5;
       this.knockback = true;
@@ -102,7 +107,7 @@ function Eye(ctx, x, y, sound) {
 
 
   this.checkDeath = function (world) {
-    if (this.health < 0) {
+    if (this.health < 0 || this.x < 0 || this.x > 154) {
       this.alive = false;
       this.sound.playSlimeKilled();
 
