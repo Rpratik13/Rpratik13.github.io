@@ -2,6 +2,9 @@ function Player(sound, world) {
   this.world = world;
   this.sound = sound;
   this.health = 100;
+  this.mana = 100;
+  this.healthRegen = 0;
+  this.manaRegen = 0;
   this.img = new Image;
   this.img.src = 'images/player.png';
   this.x = 75;
@@ -15,10 +18,10 @@ function Player(sound, world) {
   this.swinging = false;
   this.swingCounter = 0;
   this.showInventory = false;
-  this.items = { 'fire_sword': 1 };
-  this.itemsName = ['fire_sword'];
+  this.items = { 'fire_sword': 1, 'cloud': 1, 'rocket': 1 };
+  this.itemsName = ['fire_sword', 'cloud', 'rocket'];
   this.tilesCollected = [];
-  this.inventory = new Inventory(this);
+  this.inventory = new Inventory(this, this.world);
   this.weapon;
   this.helm;
   this.chest;
@@ -29,9 +32,13 @@ function Player(sound, world) {
   this.damage = 5;
   this.goLeft = false;
   this.goRight = false;
-
+  this.totalJumps = 1;
+  this.jumps = 0;
+  this.flyTime = 0;
   this.heart = new Image;
   this.heart.src = 'images/heart.png';
+  this.star = new Image;
+  this.star.src = 'images/mana.png';
 
   this.chestImg = [new Image, new Image];
   this.chestImg[0].src = 'images/silver_chest.png'
@@ -61,6 +68,23 @@ function Player(sound, world) {
   this.weapons[10].src = 'images/craft2.png';
   this.weapons[11].src = 'images/fire_sword.png';
 
+  this.healthRegeneration = function () {
+    if (this.health < 100) {
+      this.healthRegen = (this.healthRegen + 1) % 70;
+      if (this.healthRegen == 0) {
+        this.health += 1;
+      }
+    }
+  }
+
+  this.manaRegeneration = function () {
+    if (this.mana < 100) {
+      this.manaRegen = (this.manaRegen + 1) % 50;
+      if (this.manaRegen == 0) {
+        this.mana += 1;
+      }
+    }
+  }
 
   this.displayHealth = function (ctx) {
     var playerX = this.x * TILE_SIZE
@@ -68,6 +92,16 @@ function Player(sound, world) {
 
     ctx.drawImage(this.heart, playerX + 250, 123);
     ctx.fillText(this.health, playerX + 275, 140);
+    this.healthRegeneration();
+  }
+
+  this.displayMana = function (ctx) {
+    var playerX = this.x * TILE_SIZE
+    ctx.font = '20px Arial'
+
+    ctx.drawImage(this.star, playerX + 250, 143);
+    ctx.fillText(this.mana, playerX + 275, 165);
+    this.manaRegeneration();
   }
 
   this.draw = function (ctx, tiles, game) {
@@ -134,6 +168,8 @@ function Player(sound, world) {
     } else {
       this.pose = 0;
       this.falling = false;
+      this.jumps = 0;
+      this.flyTime = 0;
     }
   }
 
@@ -143,7 +179,10 @@ function Player(sound, world) {
     if (!this.falling) {
       this.pose = 11;
       this.jumping = true;
-      this.y -= 1 / 4;
+      this.flyTime += 1;
+      if (this.y > 0) {
+        this.y -= 1 / 4;
+      }
       this.jumpCounter += 1;
       if (this.jumpCounter == 16 ||
         (tiles[thisY][thisX + 2] == 36) ||
@@ -203,7 +242,8 @@ function Player(sound, world) {
               enemies[i].checkDeath(world);
 
             }
-            if (this.weapon == 'fire_sword') {
+            if (this.weapon == 'fire_sword' && this.mana >= 20) {
+              this.mana -= 20;
               game.fireBalls.push(new Fireball(this, enemies, game.cursorX, game.cursorY, this.world))
             }
           }
@@ -478,7 +518,7 @@ function Player(sound, world) {
       this.pickPower = 0;
       this.axePower = 4;
     } else if (this.weapon == 'fire_sword') {
-      this.damage = 9;
+      this.damage = 2;
       this.pickPower = 0;
       this.axePower = 0;
     } else {
@@ -716,5 +756,15 @@ function Player(sound, world) {
       ctx.translate(this.world.translated, 0);
     }
 
+  }
+
+  this.checkAccessory = function () {
+    if (this.accessory == 'cloud') {
+      this.totalJumps = 2;
+    } else if (this.accessory == 'rocket') {
+      this.totalJumps = 3;
+    } else {
+      this.totalJumps = 1;
+    }
   }
 }

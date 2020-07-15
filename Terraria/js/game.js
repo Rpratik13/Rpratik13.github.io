@@ -52,6 +52,13 @@ function Game() {
   }
 
 
+  game.onmousemove = function (e) {
+    if (gameState == 1 && player.showInventory) {
+      player.inventory.mouseX = e.pageX;
+      player.inventory.mouseY = e.pageY;
+    }
+  }
+
   document.onmousedown = function (e) {
 
     var cursorX = e.pageX;
@@ -84,14 +91,21 @@ function Game() {
         player.left = true;
         player.goLeft = true;
         player.goRight = false;
+      } else if (e.key == ' ' && player.totalJumps == 3 && player.flyTime < 50) {
+        player.jumping = true;
+        player.falling = false
+        player.jumpCounter = 0;
       }
+
     }
   })
 
   document.addEventListener('keyup', function (e) {
     if (gameState == 1) {
-      if (e.key == ' ') {
+      if (e.key == ' ' && player.jumps < player.totalJumps && player.totalJumps < 3) {
         player.jumping = true;
+        player.falling = false;
+        player.jumps += 1;
       } else if (e.key == 'i') {
         player.showInventory = !player.showInventory;
       } else if (e.key == 'd') {
@@ -145,6 +159,7 @@ function Game() {
       player.swing(ctx, that.enemies, world, that);
     }
     player.displayHealth(ctx);
+    player.displayMana(ctx);
     if (player.goLeft) {
       player.moveLeft(world.world, ctx);
     } else if (player.goRight) {

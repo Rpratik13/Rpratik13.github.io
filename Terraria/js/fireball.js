@@ -1,4 +1,5 @@
 function Fireball(player, enemies, x, y, world) {
+  this.sound = player.sound;
   this.world = world;
   this.player = player;
   this.enemies = enemies;
@@ -53,6 +54,7 @@ function Fireball(player, enemies, x, y, world) {
           enemies[i].knockback = true;
           enemies[i].health -= 10;
           this.active = false;
+          this.sound.playSlimeHit();
           break;
         }
       } else if (enemies[i].type == 'zombie') {
@@ -60,6 +62,7 @@ function Fireball(player, enemies, x, y, world) {
           enemies[i].knockback = true;
           enemies[i].health -= 10;
           this.active = false;
+          this.sound.playZombieHit();
           break;
         }
       }

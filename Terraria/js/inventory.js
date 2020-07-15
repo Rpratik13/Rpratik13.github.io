@@ -1,5 +1,8 @@
-function Inventory(player) {
+function Inventory(player, world) {
+  this.world = world;
   this.player = player;
+  this.mouseX = 0;
+  this.mouseY = 0;
   this.invContainer = new Image;
   this.invContainer.src = 'images/inv.png';
   this.unequipped = [new Image, new Image, new Image, new Image];
@@ -31,6 +34,10 @@ function Inventory(player) {
   this.zombieDrop.src = 'images/zombie_drop.png';
   this.lens = new Image;
   this.lens.src = 'images/lens.png';
+  this.cloud = new Image;
+  this.cloud.src = 'images/cloud.png';
+  this.rocket = new Image;
+  this.rocket.src = 'images/rocket.png';
 
   for (var i = 0; i < 14; i++) {
     this.craft.push(new Image);
@@ -39,7 +46,7 @@ function Inventory(player) {
 
 
   this.drawTile = function (ctx, type, x, y, textFlag) {
-    if (type == 'sword') {
+    if (type == 'sword' && player.items['sword'] > 0) {
       ctx.drawImage(this.sword, x + 5, y + 5, 20, 20)
     } else if (type == 'dirt' && player.items['dirt'] > 0) {
       ctx.drawImage(this.dirt, x + 9, y + 9, 12, 12);
@@ -85,6 +92,10 @@ function Inventory(player) {
       ctx.drawImage(this.lens, x + 5, y + 5, 20, 20);
     } else if (type == 'fire_sword' && player.items['fire_sword'] > 0) {
       ctx.drawImage(this.fireSword, x + 5, y + 5, 20, 20);
+    } else if (type == 'cloud' && player.items['cloud'] > 0) {
+      ctx.drawImage(this.cloud, x + 5, y + 5, 20, 20);
+    } else if (type == 'rocket' && player.items['rocket'] > 0) {
+      ctx.drawImage(this.rocket, x + 5, y + 5, 20, 20);
     }
 
     if (player.items[type] > 0 && textFlag) {
@@ -242,7 +253,88 @@ function Inventory(player) {
     }
   }
 
+  this.displayItemDetails = function (ctx) {
+    var i = Math.floor((this.mouseX - 200) / 30);
+    var j = Math.floor((this.mouseY - 150) / 30);
+    ctx.font = '20px Arial';
+    if (this.player.itemsName[i + 5 * j] == 'dirt') {
+      ctx.fillText('Dirt', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Can be placed', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'wood' ||
+      ((this.craftingSelected == 1 || this.craftingSelected == 2 || this.craftingSelected == 7 || this.craftingSelected == 8) && (400 < this.mouseX && this.mouseX < 430 && 350 < this.mouseY && this.mouseY < 380))) {
+      ctx.fillText('Wood', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Can be placed', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'gold' ||
+      ((this.craftingSelected == 12) && (370 < this.mouseX && this.mouseX < 400 && 350 < this.mouseY && this.mouseY < 380))) {
+      ctx.fillText('Gold', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Can be placed', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'silver' ||
+      ((this.craftingSelected == 13) && (370 < this.mouseX && this.mouseX < 400 && 350 < this.mouseY && this.mouseY < 380))) {
+      ctx.fillText('Silver', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Can be placed', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'sword') {
+      ctx.fillText('Wooden Sword', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Damage: 7', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'silver_sword' || (200 < this.mouseX && this.mouseX < 230 && 350 < this.mouseY && this.mouseY < 380)) {
+      ctx.fillText('Silver Sword', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Damage: 9', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'silver_pick' || (230 < this.mouseX && this.mouseX < 260 && 350 < this.mouseY && this.mouseY < 380)) {
+      ctx.fillText('Silver Pickaxe', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Pick Power: 2', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'silver_axe' || (260 < this.mouseX && this.mouseX < 290 && 350 < this.mouseY && this.mouseY < 380)) {
+      ctx.fillText('Silver Axe', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Axe Power: 2', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'silver_helm' || (290 < this.mouseX && this.mouseX < 320 && 350 < this.mouseY && this.mouseY < 380)) {
+      ctx.fillText('Silver Helmet', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Armor: 3', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'silver_chest' || (320 < this.mouseX && this.mouseX < 350 && 350 < this.mouseY && this.mouseY < 380)) {
+      ctx.fillText('Silver Chest', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Armor: 3', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'silver_boot' || (200 < this.mouseX && this.mouseX < 230 && 380 < this.mouseY && this.mouseY < 410)) {
+      ctx.fillText('Silver Boots', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Armor: 3', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'gold_sword' || (230 < this.mouseX && this.mouseX < 260 && 380 < this.mouseY && this.mouseY < 410)) {
+      ctx.fillText('Gold Sword', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Damage: 15', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'gold_pick' || (260 < this.mouseX && this.mouseX < 290 && 380 < this.mouseY && this.mouseY < 410)) {
+      ctx.fillText('Gold Pickaxe', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Pick Power: 4', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'gold_axe' || (290 < this.mouseX && this.mouseX < 320 && 380 < this.mouseY && this.mouseY < 410)) {
+      ctx.fillText('Gold Axe', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Axe Power: 4', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'gold_helm' || (320 < this.mouseX && this.mouseX < 350 && 380 < this.mouseY && this.mouseY < 410)) {
+      ctx.fillText('Gold Helmet', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Armor: 5', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'gold_chest' || (200 < this.mouseX && this.mouseX < 230 && 410 < this.mouseY && this.mouseY < 440)) {
+      ctx.fillText('Gold Chest', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Armor: 5', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'gold_boot' || (230 < this.mouseX && this.mouseX < 260 && 410 < this.mouseY && this.mouseY < 440)) {
+      ctx.fillText('Gold Boots', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Armor: 5', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'gold_bar' ||
+      (260 < this.mouseX && this.mouseX < 290 && 410 < this.mouseY && this.mouseY < 440) ||
+      ((6 <= this.craftingSelected && this.craftingSelected < 11) && (370 < this.mouseX && this.mouseX < 400 && 350 < this.mouseY && this.mouseY < 380))) {
+      ctx.fillText('Gold Bar', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+    } else if (this.player.itemsName[i + 5 * j] == 'silver_bar' ||
+      (290 < this.mouseX && this.mouseX < 320 && 410 < this.mouseY && this.mouseY < 440) ||
+      ((0 <= this.craftingSelected && this.craftingSelected < 6) && (370 < this.mouseX && this.mouseX < 400 && 350 < this.mouseY && this.mouseY < 380))) {
+      ctx.fillText('Silver Bar', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+    } else if (this.player.itemsName[i + 5 * j] == 'cloud') {
+      ctx.fillText('Cloud in a Bottle', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Allows double jump', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'rocket') {
+      ctx.fillText('Rocket Boot', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Allows flight for a short time', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+    } else if (this.player.itemsName[i + 5 * j] == 'fire_sword') {
+      ctx.fillText('Fire Staff', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+      ctx.fillText('Can throw fireball', -this.world.translated + this.mouseX + 20, this.mouseY + 30);
+      ctx.fillText('Damage: 10', -this.world.translated + this.mouseX + 20, this.mouseY + 50);
+      ctx.fillText('Mana Cost: 20', -this.world.translated + this.mouseX + 20, this.mouseY + 70);
 
+    }
+
+
+  }
 
   this.displayCraftMaterials = function (ctx, playerX) {
     if (this.craftingSelected == 0) {
@@ -367,8 +459,13 @@ function Inventory(player) {
 
     this.displayArmor(ctx, playerX);
     ctx.drawImage(this.invContainer, playerX + 510, 290, 30, 30);
+    ctx.drawImage(this.invContainer, playerX + 510, 330, 30, 30);
     if (this.player.weapon != undefined) {
       this.drawTile(ctx, this.player.weapon, playerX + 510, 290, false);
+    }
+
+    if (this.player.accessory != undefined) {
+      this.drawTile(ctx, this.player.accessory, playerX + 510, 330, false);
     }
 
     ctx.drawImage(this.shield, playerX + 550, 400, 32, 26);
@@ -377,6 +474,8 @@ function Inventory(player) {
     } else {
       ctx.fillText(this.player.armor, playerX + 559, 417);
     }
+
+    this.displayItemDetails(ctx);
   }
 
   this.clicked = function (x, y) {
@@ -409,12 +508,21 @@ function Inventory(player) {
         this.player.itemsName[i + 5 * j] == 'silver_boot') {
         this.player.boot = this.player.itemsName[i + 5 * j];
         this.player.checkArmor();
+      } else if (this.player.itemsName[i + 5 * j] == 'cloud' ||
+        this.player.itemsName[i + 5 * j] == 'rocket') {
+        this.player.accessory = this.player.itemsName[i + 5 * j];
+        this.player.checkAccessory();
       }
     }
 
     if (660 < x && x < 690 && 290 < y && y < 320) {
       this.player.weapon = undefined;
       this.player.checkPower();
+    }
+
+    if (660 < x && x < 690 && 330 < y && y < 370) {
+      this.player.accessory = undefined;
+      this.player.checkAccessory();
     }
 
     if (700 < x && x < 730 && 250 < y && y < 280) {
@@ -438,4 +546,7 @@ function Inventory(player) {
       this.craftItem();
     }
   }
+
+
+
 }
