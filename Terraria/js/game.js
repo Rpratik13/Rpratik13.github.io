@@ -219,7 +219,7 @@ function Game() {
       game.style.backgroundColor = '#1d2855';
     }
     if (timer % 500 == 0 && !that.bossBattle) {
-      if (timer > 10000) {
+      if (timer < 10000) {
         that.enemies.push(new Slime(ctx, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0, sound, that))
       } else {
         that.enemies.push(new Eye(ctx, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0, sound, that))

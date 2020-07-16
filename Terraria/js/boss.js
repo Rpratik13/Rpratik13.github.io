@@ -118,7 +118,7 @@ function Boss(ctx, x, y, sound, player, game) {
 
 
   this.checkDeath = function (world) {
-    if (this.health < 0 || this.x < 0 || this.x > 154) {
+    if (this.health <= 0 || this.x < 0 || this.x > 154) {
       this.alive = false;
       this.sound.playSlimeKilled();
       this.game.bossBattle = false;
