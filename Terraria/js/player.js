@@ -18,8 +18,8 @@ function Player(sound, world) {
   this.swinging = false;
   this.swingCounter = 0;
   this.showInventory = false;
-  this.items = { 'fire_sword': 1, 'cloud': 1, 'rocket': 1 };
-  this.itemsName = ['fire_sword', 'cloud', 'rocket'];
+  this.items = { 'fire_sword': 1, 'cloud': 1, 'rocket': 1, 'gold_bar': 50 };
+  this.itemsName = ['fire_sword', 'cloud', 'rocket', 'gold_bar'];
   this.tilesCollected = [];
   this.inventory = new Inventory(this, this.world);
   this.weapon;
@@ -88,15 +88,25 @@ function Player(sound, world) {
 
   this.displayHealth = function (ctx) {
     var playerX = this.x * TILE_SIZE
+    if (this.x < 25) {
+      playerX = 25 * TILE_SIZE;
+    } else if (this.x > 128) {
+      playerX = 128 * TILE_SIZE;
+    }
     ctx.font = '20px Arial'
 
     ctx.drawImage(this.heart, playerX + 250, 123);
-    ctx.fillText(this.health, playerX + 275, 140);
+    ctx.fillText(Math.floor(this.health), playerX + 275, 140);
     this.healthRegeneration();
   }
 
   this.displayMana = function (ctx) {
     var playerX = this.x * TILE_SIZE
+    if (this.x < 25) {
+      playerX = 25 * TILE_SIZE;
+    } else if (this.x > 128) {
+      playerX = 128 * TILE_SIZE;
+    }
     ctx.font = '20px Arial'
 
     ctx.drawImage(this.star, playerX + 250, 143);
@@ -124,7 +134,7 @@ function Player(sound, world) {
   }
 
   this.moveLeft = function (tiles, ctx) {
-    var thisX = Math.ceil(this.x);
+    var thisX = Math.round(this.x);
     var thisY = Math.floor(this.y);
     if (!this.falling && !this.swinging && !this.jumping) {
       this.pose = (this.pose + 1) % 11;
@@ -134,24 +144,27 @@ function Player(sound, world) {
       ((tiles[thisY + 2][thisX] > 4 || tiles[thisY + 2][thisX] < 1) && tiles[thisY + 2][thisX] != 36) &&
       ((tiles[thisY + 1][thisX] > 4 || tiles[thisY + 1][thisX] < 1) && tiles[thisY + 1][thisX] != 36)) {
       this.x -= 1 / 8;
-      ctx.translate(2, 0);
-      this.world.translated += 2;
+      if (thisX > 25 && thisX < 128) {
+        this.world.cameraMove(ctx, 2);
+      }
     }
   }
 
+
   this.moveRight = function (tiles, ctx) {
-    var thisX = Math.floor(this.x);
+    var thisX = Math.round(this.x);
     var thisY = Math.floor(this.y);
     if (!this.falling && !this.swinging && !this.jumping) {
       this.pose = (this.pose + 1) % 11;
     }
-    if (this.x < 152 &&
-      ((tiles[thisY + 3][thisX + 3] > 4 || tiles[thisY + 3][thisX + 3] < 1) && tiles[thisY + 3][thisX + 3] != 36) &&
-      ((tiles[thisY + 2][thisX + 3] > 4 || tiles[thisY + 2][thisX + 3] < 1) && tiles[thisY + 2][thisX + 3] != 36) &&
-      ((tiles[thisY + 1][thisX + 3] > 4 || tiles[thisY + 1][thisX + 3] < 1) && tiles[thisY + 1][thisX + 3] != 36)) {
+    if (this.x < 151 &&
+      ((tiles[thisY + 3][thisX + 2] > 4 || tiles[thisY + 3][thisX + 2] < 1) && tiles[thisY + 3][thisX + 2] != 36) &&
+      ((tiles[thisY + 2][thisX + 2] > 4 || tiles[thisY + 2][thisX + 2] < 1) && tiles[thisY + 2][thisX + 2] != 36) &&
+      ((tiles[thisY + 1][thisX + 2] > 4 || tiles[thisY + 1][thisX + 2] < 1) && tiles[thisY + 1][thisX + 2] != 36)) {
       this.x += 1 / 8;
-      ctx.translate(-2, 0);
-      this.world.translated -= 2;
+      if (thisX < 128 && thisX > 25) {
+        this.world.cameraMove(ctx, -2);
+      }
     }
   }
 
@@ -195,6 +208,7 @@ function Player(sound, world) {
       }
     }
   }
+
   this.swing = function (ctx, enemies, world, game) {
     this.sound.playSwing();
     var playerX = Math.round(this.x);
@@ -220,8 +234,8 @@ function Player(sound, world) {
               var enemiesX = Math.round(enemies[i].x);
               var enemiesY = Math.round(enemies[i].y);
               if (enemies[i].type == 'slime' || enemies[i].type == 'eye') {
-                if ((this.left && (playerX - 4 <= enemiesX && enemiesX <= playerX) ||
-                    (!this.left && (playerX <= enemiesX && enemiesX <= playerX + 3))) &&
+                if ((this.left && (playerX - 4 <= enemiesX && enemiesX <= playerX + 1) ||
+                    (!this.left && (playerX - 1 <= enemiesX && enemiesX <= playerX + 3))) &&
                   (playerY - 2 <= enemiesY && enemiesY <= playerY + 3)) {
                   enemies[i].knockback = true;
                   enemies[i].health -= this.damage;
@@ -234,6 +248,18 @@ function Player(sound, world) {
                     (enemiesY + 1 == playerY - 1 || enemiesY + 1 == playerY - 2 || enemiesY + 1 == playerY + 1 || enemiesY + 1 == playerY + 2 || enemiesY + 1 == playerY + 3) || enemiesY + 1 == playerY ||
                     (enemiesY + 2 == playerY - 1 || enemiesY + 2 == playerY - 2 || enemiesY + 2 == playerY + 1 || enemiesY + 2 == playerY + 2 || enemiesY + 2 == playerY + 3) || enemiesY + 2 == playerY)) {
                   enemies[i].knockback = true;
+                  enemies[i].health -= this.damage;
+                  this.sound.playZombieHit();
+
+                }
+              } else if (enemies[i].type == 'boss') {
+                if (((this.left && (enemiesX <= playerX - 4 && playerX - 4 <= enemiesX + 9) || (
+                      enemiesX <= playerX - 2 && playerX - 2 <= enemiesX + 9)) ||
+                    (this.left && (enemiesX <= playerX + 1 && playerX + 1 <= enemiesX + 9) || (
+                      enemiesX <= playerX + 3 && playerX + 3 <= enemiesX + 9))) &&
+                  ((enemiesY <= playerY - 2 && playerY - 2 <= enemiesY + 6) ||
+                    (enemiesY <= playerY + 2 && playerY + 2 <= enemiesY + 6)
+                  )) {
                   enemies[i].health -= this.damage;
                   this.sound.playZombieHit();
 
@@ -256,6 +282,7 @@ function Player(sound, world) {
 
     }
   }
+
 
 
   this.displayWeapon = function (ctx) {
@@ -747,6 +774,7 @@ function Player(sound, world) {
   this.checkDeath = function (game, ctx) {
     if (this.health <= 0) {
       game.enemies = [];
+      game.bossBattle = false;
       this.health = 100;
       this.x = 75;
       this.y = 1;

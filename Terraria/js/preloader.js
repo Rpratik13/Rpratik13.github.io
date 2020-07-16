@@ -155,7 +155,8 @@ function Preloader() {
 
         'images/logo',
         'images/fire_sword',
-        'images/fireball'
+        'images/fireball',
+        'images/boss'
 
     ];
 

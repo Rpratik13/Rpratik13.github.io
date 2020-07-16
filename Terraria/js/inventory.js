@@ -331,6 +331,12 @@ function Inventory(player, world) {
       ctx.fillText('Damage: 10', -this.world.translated + this.mouseX + 20, this.mouseY + 50);
       ctx.fillText('Mana Cost: 20', -this.world.translated + this.mouseX + 20, this.mouseY + 70);
 
+    } else if (this.player.itemsName[i + 5 * j] == 'lens') {
+      ctx.fillText('Lens', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+    } else if (this.player.itemsName[i + 5 * j] == 'zombie_drop') {
+      ctx.fillText('Zombie Part', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
+    } else if (this.player.itemsName[i + 5 * j] == 'gel') {
+      ctx.fillText('Gel', -this.world.translated + this.mouseX + 20, this.mouseY + 10);
     }
 
 
@@ -438,6 +444,11 @@ function Inventory(player, world) {
 
   this.display = function (ctx) {
     var playerX = this.player.x * 16 - 250
+    if (this.player.x < 25) {
+      playerX = 25 * 16 - 250;
+    } else if (this.player.x > 128) {
+      playerX = 128 * 16 - 250;
+    }
     ctx.font = '20px Arial';
     ctx.fillText('Inventory', playerX + 50, 140);
     ctx.fillText('Crafting Menu', playerX + 50, 340);
