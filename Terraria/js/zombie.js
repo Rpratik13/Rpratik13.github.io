@@ -157,7 +157,7 @@ function Zombie(ctx, x, y, sound, game) {
 
 
   this.checkDeath = function (world) {
-    if (this.health < 0 || this.x < 0 || this.x > 154) {
+    if (this.health <= 0 || this.x < 0 || this.x > 154) {
       this.alive = false;
       this.sound.playZombieKilled();
       if (Math.random() > 0.8) {
