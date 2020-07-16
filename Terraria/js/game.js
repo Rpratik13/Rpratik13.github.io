@@ -5,6 +5,13 @@ function Game() {
   let canvas = document.createElement('canvas');
   canvas.setAttribute('class', 'canvas');
   game.appendChild(canvas);
+
+  let bossBtn = document.createElement('button');
+  bossBtn.setAttribute('class', 'boss');
+  bossBtn.innerHTML = 'Boss Battle';
+  document.body.appendChild(bossBtn);
+  this.bossBattle = false;
+
   let ctx = canvas.getContext("2d");
   canvas.width = CANVAS_WIDTH;
   canvas.height = CANVAS_HEIGHT;
@@ -24,6 +31,8 @@ function Game() {
   this.removeFireballs = [];
   this.preloader = new Preloader();
   this.preloader.load(ctx, start);
+  this.mouseX = 0;
+  this.mouseY = 0;
 
   function start() {
     sound = new Sound();
@@ -36,6 +45,7 @@ function Game() {
     logo = new Image;
     logo.src = 'images/logo.png';
     drawStartScreen();
+
   }
 
   function drawStartScreen() {
@@ -52,14 +62,33 @@ function Game() {
   }
 
 
-  game.onmousemove = function (e) {
-    if (gameState == 1 && player.showInventory) {
-      player.inventory.mouseX = e.pageX;
-      player.inventory.mouseY = e.pageY;
+  bossBtn.onmousedown = function (e) {
+    if (gameState == 1) {
+      if (!that.bossBattle) {
+
+        var minDist = Math.max(player.x - 20, 0);
+        var maxDist = Math.min(player.x + 20, 150);
+        that.enemies.push(new Boss(ctx, Math.floor(Math.random() * (maxDist - minDist) + minDist), 8, sound, player, that));
+
+      }
+      sound.playRoar();
+      that.bossBattle = true;
     }
   }
 
-  document.onmousedown = function (e) {
+  game.onmousemove = function (e) {
+    if (gameState == 1) {
+      if (player.showInventory) {
+        player.inventory.mouseX = e.pageX;
+        player.inventory.mouseY = e.pageY;
+      } else {
+        that.mouseX = -world.translated + e.pageX;
+        that.mouseY = e.pageY;
+      }
+    }
+  }
+
+  game.onmousedown = function (e) {
 
     var cursorX = e.pageX;
     var cursorY = e.pageY;
@@ -125,7 +154,15 @@ function Game() {
     minutes = Math.floor(seconds / 60);
     seconds = Math.floor(seconds - minutes * 60);
     ctx.font = '20px Arial'
-    ctx.fillText(hours + ':' + minutes, player.x * 16, 40);
+    var x;
+    if (player.x < 25) {
+      x = 25 * 16;
+    } else if (player.x > 128) {
+      x = 128 * 16
+    } else {
+      x = player.x * 16
+    }
+    ctx.fillText(hours + ':' + minutes, x, 40);
   }
 
   function run() {
@@ -181,12 +218,12 @@ function Game() {
     } else {
       game.style.backgroundColor = '#1d2855';
     }
-    if (timer % 500 == 0) {
-      if (timer < 10000) {
-        that.enemies.push(new Slime(ctx, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0, sound))
+    if (timer % 500 == 0 && !that.bossBattle) {
+      if (timer > 10000) {
+        that.enemies.push(new Slime(ctx, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0, sound, that))
       } else {
-        that.enemies.push(new Eye(ctx, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0, sound))
-        that.enemies.push(new Zombie(ctx, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0, sound))
+        that.enemies.push(new Eye(ctx, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0, sound, that))
+        that.enemies.push(new Zombie(ctx, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0, sound, that))
       }
     }
 

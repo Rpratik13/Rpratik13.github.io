@@ -101,6 +101,17 @@ function Sound() {
     that.treeHit.load();
   }
 
+  var initRoar = function () {
+    let sound = document.createElement("audio");
+    sound.setAttribute("preload", "auto");
+    sound.setAttribute("controls", "none");
+    sound.style.display = "none";
+    document.body.appendChild(sound);
+    sound.src = 'audio/roar.wav';
+    that.roar = sound;
+    that.roar.load();
+  }
+
   initDig();
   initTreeHit();
   initBackground();
@@ -110,9 +121,14 @@ function Sound() {
   initSlimeKilled();
   initZombieHit();
   initZombieKilled();
+  initRoar();
 
   this.playBackground = function () {
     this.bg.play();
+  }
+
+  this.playRoar = function () {
+    this.roar.play();
   }
 
   this.playSwing = function () {

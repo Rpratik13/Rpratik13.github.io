@@ -40,6 +40,18 @@ function World(sound) {
   }
 
 
+  this.cameraMove = function (ctx, val) {
+    ctx.translate(-this.translated, 0);
+    this.translated += val;
+
+    if (this.translated > 0) {
+      this.translated = -0;
+    } else if (this.translated < -1648) {
+      this.translated = -1648;
+    }
+
+    ctx.translate(this.translated, 0);
+  }
 
   this.drawTree = function (ctx, i, j) {
     var tree = this.world[i][j];

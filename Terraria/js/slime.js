@@ -1,4 +1,5 @@
-function Slime(ctx, x, y, sound) {
+function Slime(ctx, x, y, sound, game) {
+  this.game = game;
   this.sound = sound;
   this.ctx = ctx;
   this.type = 'slime';
@@ -10,9 +11,7 @@ function Slime(ctx, x, y, sound) {
   this.falling = false;
   this.x = x;
   this.y = y;
-  if (this.x < 25) {
-    this.left = false;
-  } else { this.left = true; }
+  this.left = Math.random() > 0.5 ? true : false;
   this.knockback = false;
   this.alive = true;
   this.knockbackCount = 0;
@@ -33,6 +32,15 @@ function Slime(ctx, x, y, sound) {
       } else {
         this.moveRight(world.world, world);
       }
+    }
+
+    this.showDetails();
+  }
+
+  this.showDetails = function () {
+    if (this.x * TILE_SIZE <= this.game.mouseX && this.game.mouseX <= (this.x + 2) * TILE_SIZE &&
+      this.y * TILE_SIZE <= this.game.mouseY && this.game.mouseY <= (this.y + 1) * TILE_SIZE) {
+      this.ctx.fillText('Slime: ' + Math.floor(this.health), this.game.mouseX, this.game.mouseY);
     }
   }
 
@@ -71,10 +79,10 @@ function Slime(ctx, x, y, sound) {
   }
 
   this.playerCollision = function (player) {
-    var thisX = Math.floor(this.x);
-    var thisY = Math.floor(this.y);
-    var playerX = Math.floor(player.x);
-    var playerY = Math.floor(player.y);
+    var thisX = Math.round(this.x);
+    var thisY = Math.round(this.y);
+    var playerX = Math.round(player.x);
+    var playerY = Math.round(player.y);
     if ((thisX + 1 == playerX + 1 || thisX + 1 == playerX + 2 ||
         thisX + 2 == playerX + 1 || thisX + 2 == playerX + 2) &&
       (thisY == playerY + 1 || thisY + 1 == playerY + 1 ||

@@ -65,6 +65,14 @@ function Fireball(player, enemies, x, y, world) {
           this.sound.playZombieHit();
           break;
         }
+      } else if (enemies[i].type == 'boss') {
+        if (((enemies[i].x <= thisX && thisX <= enemies[i].x + 9) || (enemies[i].x <= thisX + 1 && thisX + 1 <= enemies[i].x + 9)) && ((enemies[i].y <= this.y && this.y <= enemies[i].y + 6) || (enemies[i].y <= this.y + 1 && this.y + 1 <= enemies[i].y + 6))) {
+          enemies[i].knockback = true;
+          enemies[i].health -= 10;
+          this.active = false;
+          this.sound.playZombieHit();
+          break;
+        }
       }
     }
   }

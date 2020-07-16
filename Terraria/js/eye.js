@@ -1,4 +1,5 @@
-function Eye(ctx, x, y, sound) {
+function Eye(ctx, x, y, sound, game) {
+  this.game = game;
   this.sound = sound;
   this.ctx = ctx;
   this.health = 10;
@@ -20,9 +21,9 @@ function Eye(ctx, x, y, sound) {
   this.draw = function (player, world) {
     if (this.alive) {
       ctx.save();
-      if (player.x < this.x) {
+      if (player.x + 3 < this.x) {
         this.left = true;
-      } else {
+      } else if (player.x - 3 > this.x) {
         this.left = false;
       }
       if (this.left) {
@@ -54,13 +55,21 @@ function Eye(ctx, x, y, sound) {
       }
       this.checkDeath(world);
     }
+    this.showDetails();
+  }
+
+  this.showDetails = function () {
+    if (this.x * TILE_SIZE <= this.game.mouseX && this.game.mouseX <= (this.x + 2) * TILE_SIZE &&
+      this.y * TILE_SIZE <= this.game.mouseY && this.game.mouseY <= (this.y + 1) * TILE_SIZE) {
+      this.ctx.fillText('Demon Eye: ' + Math.floor(this.health), this.game.mouseX, this.game.mouseY);
+    }
   }
 
   this.playerCollision = function (player) {
-    var thisX = Math.floor(this.x);
-    var thisY = Math.floor(this.y);
-    var playerX = Math.floor(player.x);
-    var playerY = Math.floor(player.y);
+    var thisX = Math.round(this.x);
+    var thisY = Math.round(this.y);
+    var playerX = Math.round(player.x);
+    var playerY = Math.round(player.y);
 
     if (!this.left) {
       if ((thisX + 3 == playerX + 1 || thisX + 3 == playerX + 2 ||
@@ -90,9 +99,9 @@ function Eye(ctx, x, y, sound) {
 
 
   this.knock = function (player) {
-    if (this.x > player.x && this.x < 50) {
+    if (this.x > player.x) {
       this.x += 1 / 4;
-    } else if (this.x < player.x && this.x > 0) {
+    } else if (this.x < player.x) {
       this.x -= 1 / 4;
     }
     this.y -= 1 / 4;

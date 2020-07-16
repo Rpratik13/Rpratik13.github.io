@@ -1,4 +1,5 @@
-function Zombie(ctx, x, y, sound) {
+function Zombie(ctx, x, y, sound, game) {
+  this.game = game;
   this.sound = sound;
   this.ctx = ctx;
   this.health = 70;
@@ -58,6 +59,14 @@ function Zombie(ctx, x, y, sound) {
         this.moveRight(world.world);
       }
     }
+    this.showDetails();
+  }
+
+  this.showDetails = function () {
+    if (this.x * TILE_SIZE <= this.game.mouseX && this.game.mouseX <= (this.x + 2) * TILE_SIZE &&
+      this.y * TILE_SIZE <= this.game.mouseY && this.game.mouseY <= (this.y + 3) * TILE_SIZE) {
+      this.ctx.fillText('Zombie: ' + Math.floor(this.health), this.game.mouseX, this.game.mouseY);
+    }
   }
 
   this.moveRight = function (tiles) {
@@ -84,7 +93,7 @@ function Zombie(ctx, x, y, sound) {
   }
 
   this.fall = function (tiles) {
-    var thisX = Math.floor(this.x);
+    var thisX = Math.round(this.x);
     var thisY = Math.floor(this.y);
     if (this.y < 39 &&
       (tiles[thisY + 4][thisX + 1] != 36) &&
@@ -98,10 +107,10 @@ function Zombie(ctx, x, y, sound) {
   }
 
   this.playerCollision = function (player, world) {
-    var thisX = Math.floor(this.x);
-    var thisY = Math.floor(this.y);
-    var playerX = Math.floor(player.x);
-    var playerY = Math.floor(player.y);
+    var thisX = Math.round(this.x);
+    var thisY = Math.round(this.y);
+    var playerX = Math.round(player.x);
+    var playerY = Math.round(player.y);
     if (!this.left) {
       if ((thisX + 3 == playerX + 1 || thisX + 3 == playerX + 2 ||
           thisX + 2 == playerX + 2 || thisX + 2 == playerX + 2) &&
