@@ -1,7 +1,9 @@
 function Game() {
   let that = this;
+
   let game = document.getElementById('terraria');
   game.style.backgroundColor = '#00acea';
+
   let canvas = document.createElement('canvas');
   canvas.setAttribute('class', 'canvas');
   game.appendChild(canvas);
@@ -10,8 +12,8 @@ function Game() {
   bossBtn.setAttribute('class', 'boss');
   bossBtn.innerHTML = 'Boss Battle';
   document.body.appendChild(bossBtn);
-  this.bossBattle = false;
 
+  this.bossBattle = false;
   let ctx = canvas.getContext("2d");
   canvas.width = CANVAS_WIDTH;
   canvas.height = CANVAS_HEIGHT;
@@ -137,6 +139,7 @@ function Game() {
         player.jumps += 1;
       } else if (e.key == 'i') {
         player.showInventory = !player.showInventory;
+        player.inventory.craftingSelected = -1;
       } else if (e.key == 'd') {
         player.goRight = false;
         player.pose = 0;
@@ -156,26 +159,35 @@ function Game() {
     ctx.font = '20px Arial'
     var x;
     if (player.x < 25) {
-      x = 25 * 16;
+      x = 25 * TILE_SIZE;
     } else if (player.x > 128) {
-      x = 128 * 16
+      x = 128 * TILE_SIZE;
     } else {
-      x = player.x * 16
+      x = player.x * TILE_SIZE;
     }
     ctx.fillText(hours + ':' + minutes, x, 40);
   }
 
-  function run() {
+  function drawBackground() {
     ctx.clearRect(-CANVAS_WIDTH, -CANVAS_HEIGHT, 5 * CANVAS_WIDTH, 3 * CANVAS_HEIGHT);
     for (var i = -1; i < 4; i++) {
       ctx.drawImage(background, CANVAS_WIDTH * i, 0, CANVAS_WIDTH, 300)
       ctx.drawImage(bg_under, CANVAS_WIDTH * i, 300, CANVAS_WIDTH, 620);
     }
-    showTime(timer);
 
-    world.drawWorld(ctx);
-    world.drawDroppedTiles(ctx);
+    if (timer < 5000) {
+      game.style.backgroundColor = '#00acea';
+    } else if (timer < 10000) {
+      game.style.backgroundColor = '#9ed7f1';
+    } else if (timer < 15000) {
+      game.style.backgroundColor = '#ff8b59';
+    } else {
+      game.style.backgroundColor = '#1d2855';
+    }
 
+  }
+
+  function drawFireball() {
     for (var i = 0; i < that.fireBalls.length; i++) {
       that.fireBalls[i].throw(ctx);
       if (!that.fireBalls[i].active) {
@@ -187,7 +199,10 @@ function Game() {
       that.fireBalls.splice(that.removeFireballs[i], 1);
     }
     that.removeFireballs = [];
-    player.draw(ctx, world.world, that);
+  }
+
+
+  function movePlayer() {
     if (player.falling) {
       player.fall(world.world);
     } else if (player.jumping) {
@@ -195,38 +210,34 @@ function Game() {
     } else if (player.swinging) {
       player.swing(ctx, that.enemies, world, that);
     }
-    player.displayHealth(ctx);
-    player.displayMana(ctx);
     if (player.goLeft) {
       player.moveLeft(world.world, ctx);
     } else if (player.goRight) {
       player.moveRight(world.world, ctx);
     }
+  }
+
+  function drawInventory() {
     if (player.showInventory) {
       player.inventory.display(ctx);
     }
-    player.itemPickup(world);
-    timer = (timer + 1) % 20000;
+  }
+
+  function generateEnemies() {
     var minDist = Math.max(player.x - 20, 0);
     var maxDist = Math.min(player.x + 20, 150);
-    if (timer < 5000) {
-      game.style.backgroundColor = '#00acea';
-    } else if (timer < 10000) {
-      game.style.backgroundColor = '#9ed7f1';
-    } else if (timer < 15000) {
-      game.style.backgroundColor = '#ff8b59';
-    } else {
-      game.style.backgroundColor = '#1d2855';
-    }
+
     if (timer % 500 == 0 && !that.bossBattle) {
-      if (timer < 10000) {
+      if (timer > 10000) {
         that.enemies.push(new Slime(ctx, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0, sound, that))
       } else {
         that.enemies.push(new Eye(ctx, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0, sound, that))
         that.enemies.push(new Zombie(ctx, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0, sound, that))
       }
     }
+  }
 
+  function removeDeadEnemies() {
     for (var i = 0; i < that.enemies.length; i++) {
       that.enemies[i].draw(player, world);
       if (!that.enemies[i].alive) {
@@ -238,6 +249,31 @@ function Game() {
       that.enemies.splice(enemiesDead[i], 1);
     }
     enemiesDead = [];
+  }
+
+  function run() {
+    drawBackground();
+    showTime(timer);
+
+    world.drawWorld(ctx);
+    world.drawDroppedTiles(ctx);
+    drawFireball();
+
+
+    player.draw(ctx, world.world, that);
+    player.displayHealth(ctx);
+    player.displayMana(ctx);
+    player.itemPickup(world);
+    movePlayer();
+
+
+
+    timer = (timer + 1) % 20000;
+    generateEnemies();
+    removeDeadEnemies();
+
+
+    drawInventory();
     requestAnimationFrame(run);
   }
 }

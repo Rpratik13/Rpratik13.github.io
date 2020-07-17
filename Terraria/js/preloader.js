@@ -161,21 +161,25 @@ function Preloader() {
     ];
 
   this.loadedImages = 0;
+  this.audioLoader = new AudioLoader();
 
   this.load = function (ctx, start) {
     for (var i = 0; i < this.images.length; i++) {
+
       ctx.beginPath();
       ctx.rect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
       ctx.fillStyle = "black";
       ctx.fill();
       ctx.fillStyle = 'white';
       ctx.fillText("Loading", 300, 300);
+
+
       var img = new Image;
       img.src = this.images[i] + '.png';
       img.onload = () => {
         this.loadedImages += 1;
         if (this.loadedImages == this.images.length - 1) {
-          start();
+          this.audioLoader.loadAudios(start);
         }
       }
     }

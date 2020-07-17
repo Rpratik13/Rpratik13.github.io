@@ -6,8 +6,6 @@ function Slime(ctx, x, y, sound, game) {
   this.health = 20;
   this.img = new Image;
   this.img.src = 'images/slime.png';
-  this.imgPos = [[0, 2, 44, 30], [2, 34, 40, 32]];
-  this.pose = 0;
   this.falling = false;
   this.x = x;
   this.y = y;
@@ -19,12 +17,12 @@ function Slime(ctx, x, y, sound, game) {
   this.draw = function (player, world) {
     this.world = world;
     if (this.alive) {
-      this.ctx.drawImage(this.img, this.imgPos[this.pose][0], this.imgPos[this.pose][1], this.imgPos[this.pose][2], this.imgPos[this.pose][3],
-        this.x * 16, this.y * 16, 32, 16);
+      this.ctx.drawImage(this.img, SLIME_SPRITE[0], SLIME_SPRITE[1], SLIME_SPRITE[2], SLIME_SPRITE[3],
+        this.x * TILE_SIZE, this.y * TILE_SIZE, 32, 16);
     }
     this.playerCollision(player)
     if (this.knockback) {
-      this.knock(player);
+      this.knock(player, world.world);
     } else {
       this.fall(world.world);
       if (this.left) {
@@ -47,20 +45,24 @@ function Slime(ctx, x, y, sound, game) {
   this.moveRight = function (tiles, world) {
     var thisX = Math.ceil(this.x);
     var thisY = Math.floor(this.y);
-    if (((tiles[thisY][thisX + 2] > 4 || tiles[thisY][thisX + 2] < 1) && tiles[thisY][thisX + 2] != 36) &&
-      ((tiles[thisY + 1][thisX + 2] > 4 || tiles[thisY + 1][thisX + 2] < 1) && tiles[thisY + 1][thisX + 2] != 36)) {
+
+    if (WALKABLE_TILES.includes(tiles[thisY][thisX + 2]) &&
+      WALKABLE_TILES.includes(tiles[thisY + 1][thisX + 2])) {
       this.x += 1 / 50;
     }
+
     this.checkDeath(world);
   }
 
   this.moveLeft = function (tiles, world) {
     var thisX = Math.ceil(this.x);
     var thisY = Math.floor(this.y);
-    if (((tiles[thisY][thisX] > 4 || tiles[thisY][thisX] < 1) && tiles[thisY][thisX] != 36) &&
-      ((tiles[thisY + 1][thisX] > 4 || tiles[thisY + 1][thisX] < 1) && tiles[thisY + 1][thisX] != 36)) {
+
+    if (WALKABLE_TILES.includes(tiles[thisY][thisX]) &&
+      WALKABLE_TILES.includes(tiles[thisY + 1][thisX])) {
       this.x -= 1 / 50;
     }
+
     this.checkDeath(world);
   }
 
@@ -68,14 +70,34 @@ function Slime(ctx, x, y, sound, game) {
     var thisX = Math.floor(this.x);
     var thisY = Math.floor(this.y);
     if (this.y < 39 &&
-      (tiles[thisY + 2][thisX + 1] != 36) &&
-      (tiles[thisY + 2][thisX + 2] != 36) &&
-      (tiles[thisY + 2][thisX + 1] == 0 || tiles[thisY + 2][thisX + 1] > 4) &&
-      (tiles[thisY + 2][thisX + 2] == 0 || tiles[thisY + 2][thisX + 2] > 4)) {
+      WALKABLE_TILES.includes(tiles[thisY + 2][thisX + 1]) &&
+      WALKABLE_TILES.includes(tiles[thisY + 2][thisX + 2])) {
       this.y += 1 / 4;
     } else {
       this.falling = false;
     }
+  }
+
+  this.checkXCollision = function (thisX, playerX) {
+    for (var i = 1; i < 3; i++) {
+      for (var j = 1; j < 3; j++) {
+        if (thisX + i == playerX + j) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  this.checkYCollision = function (thisY, playerY) {
+    for (var i = 0; i < 2; i++) {
+      for (var j = 1; j < 4; j++) {
+        if (thisY + i == playerY + j) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   this.playerCollision = function (player) {
@@ -83,11 +105,7 @@ function Slime(ctx, x, y, sound, game) {
     var thisY = Math.round(this.y);
     var playerX = Math.round(player.x);
     var playerY = Math.round(player.y);
-    if ((thisX + 1 == playerX + 1 || thisX + 1 == playerX + 2 ||
-        thisX + 2 == playerX + 1 || thisX + 2 == playerX + 2) &&
-      (thisY == playerY + 1 || thisY + 1 == playerY + 1 ||
-        thisY == playerY + 2 || thisY + 1 == playerY + 2 ||
-        thisY == playerY + 3 || thisY + 1 == playerY + 3)) {
+    if (this.checkXCollision(thisX, playerX) && this.checkYCollision(thisY, playerY)) {
       this.health -= 2;
       player.health = Math.floor(player.health - 10 * (1 - player.armor / 20));
       this.knockback = true;
@@ -96,35 +114,41 @@ function Slime(ctx, x, y, sound, game) {
     }
   }
 
-
-
-  this.knock = function (player) {
+  this.knock = function (player, tiles) {
+    var thisX = Math.ceil(this.x);
+    var thisY = Math.floor(this.y);
     if (this.x > player.x) {
-      this.x += 1 / 4;
+      if (WALKABLE_TILES.includes(tiles[thisY][thisX + 2]) &&
+        WALKABLE_TILES.includes(tiles[thisY + 1][thisX + 2])) {
+        this.x += 1 / 4;
+      }
     } else {
-      this.x -= 1 / 4;
+      if (WALKABLE_TILES.includes(tiles[thisY][thisX]) &&
+        WALKABLE_TILES.includes(tiles[thisY + 1][thisX])) {
+        this.x -= 1 / 4;
+      }
     }
 
-    this.y -= 1 / 4;
+    if (WALKABLE_TILES.includes(tiles[thisY][thisX]) &&
+      WALKABLE_TILES.includes(tiles[thisY][thisX + 1])) {
+      this.y -= 1 / 4;
+    }
 
     this.knockbackCount = (this.knockbackCount + 1) % 10;
 
     if (this.knockbackCount == 0) {
       this.knockback = false;
     }
-
   }
-
 
   this.checkDeath = function (world) {
     if (this.health <= 0 || this.x < 0 || this.x > 154) {
       this.alive = false;
       this.sound.playSlimeKilled();
 
-      if (Math.random() > 0.5) {
+      if (Math.random() > 0.5 && this.health <= 0) {
         world.droppedTiles.push(new Tile('gel', this.x, this.y))
       }
     }
   }
-
 }

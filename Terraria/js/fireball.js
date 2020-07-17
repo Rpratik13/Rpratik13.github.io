@@ -12,19 +12,12 @@ function Fireball(player, enemies, x, y, world) {
 
 
   this.slope = (this.tileY - player.y) / (this.tileX - player.x);
+
   if (Math.abs(this.tileY - player.y) > Math.abs(this.tileX - player.x)) {
-    if (this.tileY < player.y) {
-      this.dy = -0.1;
-    } else {
-      this.dy = 0.1;
-    }
+    this.dy = this.tileY < player.y ? -0.1 : 0.1;
     this.dx = (1 / this.slope) * this.dy;
   } else {
-    if (this.tileX < player.x) {
-      this.dx = -0.1;
-    } else {
-      this.dx = 0.1;
-    }
+    this.dx = this.tileX < player.x ? -0.1 : 0.1;
     this.dy = this.slope * this.dx;
   }
 
@@ -45,12 +38,12 @@ function Fireball(player, enemies, x, y, world) {
 
   this.enemyCollision = function () {
     var thisX = Math.round(this.x);
-    var thisY = Math.round(this.y);
     for (var i = 0; i < this.enemies.length; i++) {
-      var enemyX = Math.round(enemies[i].x);
-      var enemyY = Math.round(enemies[i].y);
       if (enemies[i].type == 'slime' || enemies[i].type == 'eye') {
-        if (((enemies[i].x <= thisX && thisX <= enemies[i].x + 2) || (enemies[i].x <= thisX + 1 && thisX + 1 <= enemies[i].x + 2)) && ((enemies[i].y <= this.y && this.y <= enemies[i].y + 1) || (enemies[i].y <= this.y + 1 && this.y + 1 <= enemies[i].y + 1))) {
+        if (((enemies[i].x <= thisX && thisX <= enemies[i].x + 2) ||
+            (enemies[i].x <= thisX + 1 && thisX + 1 <= enemies[i].x + 2)) &&
+          ((enemies[i].y <= this.y && this.y <= enemies[i].y + 1) ||
+            (enemies[i].y <= this.y + 1 && this.y + 1 <= enemies[i].y + 1))) {
           enemies[i].knockback = true;
           enemies[i].health -= 10;
           this.active = false;
@@ -58,7 +51,10 @@ function Fireball(player, enemies, x, y, world) {
           break;
         }
       } else if (enemies[i].type == 'zombie') {
-        if (((enemies[i].x <= thisX && thisX <= enemies[i].x + 1) || (enemies[i].x <= thisX + 1 && thisX + 1 <= enemies[i].x + 1)) && ((enemies[i].y <= this.y && this.y <= enemies[i].y + 3) || (enemies[i].y <= this.y + 1 && this.y + 1 <= enemies[i].y + 3))) {
+        if (((enemies[i].x <= thisX && thisX <= enemies[i].x + 1) ||
+            (enemies[i].x <= thisX + 1 && thisX + 1 <= enemies[i].x + 1)) &&
+          ((enemies[i].y <= this.y && this.y <= enemies[i].y + 3) ||
+            (enemies[i].y <= this.y + 1 && this.y + 1 <= enemies[i].y + 3))) {
           enemies[i].knockback = true;
           enemies[i].health -= 10;
           this.active = false;
@@ -66,7 +62,10 @@ function Fireball(player, enemies, x, y, world) {
           break;
         }
       } else if (enemies[i].type == 'boss') {
-        if (((enemies[i].x <= thisX && thisX <= enemies[i].x + 9) || (enemies[i].x <= thisX + 1 && thisX + 1 <= enemies[i].x + 9)) && ((enemies[i].y <= this.y && this.y <= enemies[i].y + 6) || (enemies[i].y <= this.y + 1 && this.y + 1 <= enemies[i].y + 6))) {
+        if (((enemies[i].x <= thisX && thisX <= enemies[i].x + 9) ||
+            (enemies[i].x <= thisX + 1 && thisX + 1 <= enemies[i].x + 9)) &&
+          ((enemies[i].y <= this.y && this.y <= enemies[i].y + 6) ||
+            (enemies[i].y <= this.y + 1 && this.y + 1 <= enemies[i].y + 6))) {
           enemies[i].knockback = true;
           enemies[i].health -= 10;
           this.active = false;

@@ -18,27 +18,40 @@ function Eye(ctx, x, y, sound, game) {
   this.alive = true;
   this.knockbackCount = 0;
 
+
+  this.checkDirection = function (player) {
+    if (player.x + 3 < this.x) {
+      this.left = true;
+    } else if (player.x - 3 > this.x) {
+      this.left = false;
+    }
+  }
+
   this.draw = function (player, world) {
     if (this.alive) {
       ctx.save();
-      if (player.x + 3 < this.x) {
-        this.left = true;
-      } else if (player.x - 3 > this.x) {
-        this.left = false;
-      }
+
+      this.checkDirection(player);
+
       if (this.left) {
-        this.ctx.drawImage(this.img, 0, 0, 36, 22,
-          this.x * 16, this.y * 16, 32, 16);
+        this.ctx.drawImage(this.img, EYE_SPRITE[0], EYE_SPRITE[1], EYE_SPRITE[2], EYE_SPRITE[3],
+          this.x * TILE_SIZE, this.y * TILE_SIZE, 32, 16);
       } else {
         ctx.translate(CANVAS_WIDTH, 0);
         ctx.scale(-1, 1);
-        this.ctx.drawImage(this.img, 0, 0, 36, 22,
-          CANVAS_WIDTH - 35 - this.x * 16, this.y * 16, 32, 16);
+        this.ctx.drawImage(this.img, EYE_SPRITE[0], EYE_SPRITE[1], EYE_SPRITE[2], EYE_SPRITE[3],
+          CANVAS_WIDTH - 35 - this.x * TILE_SIZE, this.y * TILE_SIZE, 32, 16);
       }
       ctx.restore();
     }
 
     this.playerCollision(player)
+    this.move(player);
+    this.checkDeath(world);
+    this.showDetails();
+  }
+
+  this.move = function (player) {
     if (this.knockback) {
       this.knock(player);
     } else {
@@ -53,9 +66,7 @@ function Eye(ctx, x, y, sound, game) {
       } else {
         this.y -= 1 / 50
       }
-      this.checkDeath(world);
     }
-    this.showDetails();
   }
 
   this.showDetails = function () {
@@ -65,38 +76,47 @@ function Eye(ctx, x, y, sound, game) {
     }
   }
 
+  this.checkXCollision = function (thisX, playerX) {
+    if (!this.left) {
+      var x = [2, 3];
+    } else {
+      var x = [1, 2];
+    }
+
+    for (var i = 0; i < x.length; i++) {
+      for (var j = 1; j < 3; j++) {
+        if (thisX + x[i] == playerX + j) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  this.checkYCollision = function (thisY, playerY) {
+    for (var i = 0; i < 3; i++) {
+      for (var j = 1; j < 4; j++) {
+        if (thisY + i == playerY + j) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   this.playerCollision = function (player) {
     var thisX = Math.round(this.x);
     var thisY = Math.round(this.y);
     var playerX = Math.round(player.x);
     var playerY = Math.round(player.y);
 
-    if (!this.left) {
-      if ((thisX + 3 == playerX + 1 || thisX + 3 == playerX + 2 ||
-          thisX + 2 == playerX + 1 || thisX + 2 == playerX + 2) &&
-        (thisY == playerY + 1 || thisY + 1 == playerY + 1 || thisY + 2 == playerY + 1 ||
-          thisY == playerY + 2 || thisY + 1 == playerY + 2 || thisY + 2 == playerY + 1 ||
-          thisY == playerY + 3 || thisY + 1 == playerY + 3 || thisY + 2 == playerY + 1)) {
-        this.health -= 2;
-        player.health = Math.floor(player.health - 10 * (1 - player.armor / 20));
-        this.knockback = true;
-        this.sound.playSlimeHit();
-
-      }
-    } else if ((thisX + 2 == playerX + 1 || thisX + 2 == playerX + 2 ||
-        thisX + 1 == playerX + 1 || thisX + 1 == playerX + 2) &&
-      (thisY == playerY + 1 || thisY + 1 == playerY + 1 || thisY + 2 == playerY + 1 ||
-        thisY == playerY + 2 || thisY + 1 == playerY + 2 || thisY + 2 == playerY + 1 ||
-        thisY == playerY + 3 || thisY + 1 == playerY + 3 || thisY + 2 == playerY + 1)) {
+    if (this.checkXCollision(thisX, playerX) && this.checkYCollision(thisY, playerY)) {
       this.health -= 2;
-      player.health -= 5;
+      player.health = Math.floor(player.health - 10 * (1 - player.armor / 20));
       this.knockback = true;
       this.sound.playSlimeHit();
-
     }
   }
-
-
 
   this.knock = function (player) {
     if (this.x > player.x) {
@@ -114,13 +134,12 @@ function Eye(ctx, x, y, sound, game) {
 
   }
 
-
   this.checkDeath = function (world) {
     if (this.health <= 0 || this.x < 0 || this.x > 154) {
       this.alive = false;
       this.sound.playSlimeKilled();
 
-      if (Math.random() > 0.7) {
+      if (Math.random() > 0.7 && this.health <= 0) {
         world.droppedTiles.push(new Tile('lens', this.x, this.y))
       }
     }
