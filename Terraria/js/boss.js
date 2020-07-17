@@ -15,8 +15,8 @@ function Boss(ctx, x, y, sound, player, game) {
   this.alive = true;
   this.horizontalDirection = player.x < this.x ? -1 / 5 : 1 / 5;
   this.verticalDirection = player.y < this.y ? -1 / 5 : 1 / 5;
-  this.enemyCount = 0;
-  this.damage = 0.4;
+  this.enemyGenerateTime = 0;
+  this.damage = 0.3;
 
 
   this.checkDirection = function (player) {
@@ -27,13 +27,18 @@ function Boss(ctx, x, y, sound, player, game) {
     }
   }
 
-  this.draw = function (player, world) {
-    this.world = world;
-    this.checkDirection(player);
-    if (this.health < 250) {
+  this.checkBossState = function () {
+    if (this.health < 250 && this.pose == 0) {
       this.pose = 1;
       this.damage *= 2;
     }
+  }
+
+  this.draw = function (player, world) {
+    this.world = world;
+    this.checkDirection(player);
+    this.checkBossState();
+
     ctx.save();
     if (this.alive) {
       if (this.left) {
@@ -48,20 +53,9 @@ function Boss(ctx, x, y, sound, player, game) {
       }
     }
 
-    this.playerCollision(player)
-
-    if (player.x - 15 > this.x) {
-      this.horizontalDirection = 1 / 5;
-    } else if (player.x + 15 < this.x) {
-      this.horizontalDirection = -1 / 5
-    }
-    if (player.y - 7 > this.y) {
-      this.verticalDirection = 1 / 5;
-    } else if (player.y + 5 < this.y) {
-      this.verticalDirection = -1 / 5
-    }
-
-    this.move(world)
+    this.playerCollision(player);
+    this.checkMoveDirection(player);
+    this.move(world);
     this.generateEnemy();
     this.showDetails();
   }
@@ -73,19 +67,22 @@ function Boss(ctx, x, y, sound, player, game) {
     }
   }
 
+  this.checkMoveDirection = function (player) {
+    if (player.x - 15 > this.x) {
+      this.horizontalDirection = 1 / 5;
+    } else if (player.x + 15 < this.x) {
+      this.horizontalDirection = -1 / 5
+    }
+    if (player.y - 7 > this.y) {
+      this.verticalDirection = 1 / 5;
+    } else if (player.y + 5 < this.y) {
+      this.verticalDirection = -1 / 5
+    }
+  }
+
   this.move = function (world) {
     this.x += this.horizontalDirection;
     this.y += this.verticalDirection;
-    this.checkDeath(world);
-  }
-  this.moveRight = function (world) {
-    this.x += 1 / 5;
-    this.checkDeath(world);
-  }
-
-  this.moveLeft = function (world) {
-    this.x -= 1 / 5;
-
     this.checkDeath(world);
   }
 
@@ -101,24 +98,26 @@ function Boss(ctx, x, y, sound, player, game) {
         (thisY <= playerY + 3 && playerY + 3 <= thisY + 6)
       )) {
       player.health = player.health - this.damage * (1 - player.armor / 20);
+      console.log(player.health);
       this.sound.playPlayerHurt();
       this.sound.playSlimeHit();
     }
   }
 
-
   this.generateEnemy = function () {
     if (this.health > 250) {
-      this.enemyCount = (this.enemyCount + 1) % 200;
-      if (this.enemyCount == 0) {
+      this.enemyGenerateTime = (this.enemyGenerateTime + 1) % 200;
+      if (this.enemyGenerateTime == 0) {
         this.enemies.push(new Eye(this.ctx, this.x, this.y, this.sound, this.game));
       }
     }
   }
 
-
   this.checkDeath = function (world) {
     if (this.health <= 0 || this.x < 0 || this.x > 154) {
+      if (Math.random() > 0.95 && this.alive && this.health <= 0) {
+        world.droppedTiles.push(new Tile('fire_sword', this.x, this.y))
+      }
       this.alive = false;
       this.sound.playSlimeKilled();
       this.game.bossBattle = false;

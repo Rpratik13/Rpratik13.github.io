@@ -6,51 +6,68 @@ function Zombie(ctx, x, y, sound, game) {
   this.type = 'zombie';
   this.img = new Image;
   this.img.src = 'images/zombie.png';
-  this.imgPos = [0, 48, 96];
   this.imgDirection = 1;
   this.pose = 0;
   this.poseCounter = 0;
   this.falling = false;
   this.x = x;
   this.y = y;
-  if (this.x < 25) {
-    this.left = false;
-  } else { this.left = true; }
-  this.knockback = false;
+
   this.alive = true;
+  this.knockback = false;
   this.knockbackCount = 0;
 
-  this.draw = function (player, world) {
-    if (this.alive) {
-      ctx.save();
-      if (player.x < this.x) {
-        this.left = true;
-      } else {
-        this.left = false;
-      }
-      if (this.left) {
-        this.ctx.drawImage(this.img, 0, this.imgPos[this.pose], 34, 46,
-          this.x * 16, this.y * 16, 32, 48);
-      } else {
-        ctx.translate(CANVAS_WIDTH, 0);
-        ctx.scale(-1, 1);
-        this.ctx.drawImage(this.img, 0, this.imgPos[this.pose], 34, 46,
-          CANVAS_WIDTH - 35 - this.x * 16, this.y * 16, 32, 48);
-      }
-      ctx.restore();
-    }
+
+  this.checkZombiePose = function () {
     this.poseCounter = (this.poseCounter + 1) % 4;
     if (this.poseCounter == 0) {
       this.pose += this.imgDirection;
     }
+
     if (this.pose == 0) {
       this.imgDirection = 1;
     } else if (this.pose == 2) {
       this.imgDirection = -1;
     }
-    this.playerCollision(player, world)
+  }
+
+  this.checkDirection = function (player) {
+    if (player.x < this.x) {
+      this.left = true;
+    } else {
+      this.left = false;
+    }
+  }
+
+  this.draw = function (player, world) {
+    if (this.alive) {
+      ctx.save();
+
+      this.checkDirection(player);
+
+      if (this.left) {
+        this.ctx.drawImage(this.img, 0, ZOMBIE_SPRITE[this.pose], 34, 46,
+          this.x * TILE_SIZE, this.y * TILE_SIZE, 32, 48);
+      } else {
+        ctx.translate(CANVAS_WIDTH, 0);
+        ctx.scale(-1, 1);
+        this.ctx.drawImage(this.img, 0, ZOMBIE_SPRITE[this.pose], 34, 46,
+          CANVAS_WIDTH - 35 - this.x * TILE_SIZE, this.y * TILE_SIZE, 32, 48);
+      }
+
+      ctx.restore();
+    }
+
+    this.checkZombiePose();
+    this.playerCollision(player, world);
+    this.move(player, world);
+
+    this.showDetails();
+  }
+
+  this.move = function (player, world) {
     if (this.knockback) {
-      this.knock(player);
+      this.knock(player, world.world);
     } else {
       this.fall(world.world);
       if (this.left) {
@@ -59,7 +76,6 @@ function Zombie(ctx, x, y, sound, game) {
         this.moveRight(world.world);
       }
     }
-    this.showDetails();
   }
 
   this.showDetails = function () {
@@ -73,22 +89,24 @@ function Zombie(ctx, x, y, sound, game) {
     var thisX = Math.ceil(this.x);
     var thisY = Math.floor(this.y);
 
-    if (((tiles[thisY + 3][thisX + 2] > 4 || tiles[thisY + 3][thisX + 2] < 1) && tiles[thisY][thisX] != 36) &&
-      ((tiles[thisY + 1][thisX + 2] > 4 || tiles[thisY + 1][thisX + 2] < 1) && tiles[thisY + 1][thisX] != 36) &&
-      ((tiles[thisY + 2][thisX + 2] > 4 || tiles[thisY + 2][thisX + 2] < 1) && tiles[thisY + 1][thisX] != 36)) {
+    if (WALKABLE_TILES.includes(tiles[thisY + 1][thisX + 2]) &&
+      WALKABLE_TILES.includes(tiles[thisY + 2][thisX + 2]) &&
+      WALKABLE_TILES.includes(tiles[thisY + 3][thisX + 2])) {
       this.x += 1 / 50;
     }
+
     this.checkDeath();
   }
 
   this.moveLeft = function (tiles) {
     var thisX = Math.ceil(this.x);
     var thisY = Math.floor(this.y);
-    if (((tiles[thisY + 3][thisX] > 4 || tiles[thisY + 3][thisX] < 1) && tiles[thisY][thisX] != 36) &&
-      ((tiles[thisY + 1][thisX] > 4 || tiles[thisY + 1][thisX] < 1) && tiles[thisY + 1][thisX] != 36) &&
-      ((tiles[thisY + 2][thisX] > 4 || tiles[thisY + 2][thisX] < 1) && tiles[thisY + 1][thisX] != 36)) {
+    if (WALKABLE_TILES.includes(tiles[thisY + 1][thisX]) &&
+      WALKABLE_TILES.includes(tiles[thisY + 2][thisX]) &&
+      WALKABLE_TILES.includes(tiles[thisY + 3][thisX])) {
       this.x -= 1 / 50;
     }
+
     this.checkDeath();
   }
 
@@ -96,14 +114,40 @@ function Zombie(ctx, x, y, sound, game) {
     var thisX = Math.round(this.x);
     var thisY = Math.floor(this.y);
     if (this.y < 39 &&
-      (tiles[thisY + 4][thisX + 1] != 36) &&
-      (tiles[thisY + 4][thisX + 2] != 36) &&
-      (tiles[thisY + 4][thisX + 1] == 0 || tiles[thisY + 4][thisX + 1] > 4) &&
-      (tiles[thisY + 4][thisX + 2] == 0 || tiles[thisY + 4][thisX + 2] > 4)) {
+      WALKABLE_TILES.includes(tiles[thisY + 4][thisX + 1]) &&
+      WALKABLE_TILES.includes(tiles[thisY + 4][thisX + 2])) {
       this.y += 1 / 4;
     } else {
       this.falling = false;
     }
+  }
+
+  this.checkXCollision = function (thisX, playerX) {
+    if (!this.left) {
+      var x = [2, 3];
+    } else {
+      var x = [1, 2];
+    }
+
+    for (var i = 0; i < x.length; i++) {
+      for (var j = 1; j < 3; j++) {
+        if (thisX + x[i] == playerX + j) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  this.checkYCollision = function (thisY, playerY) {
+    for (var i = 1; i < 4; i++) {
+      for (var j = 1; j < 4; j++) {
+        if (thisY + i == playerY + j) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   this.playerCollision = function (player, world) {
@@ -111,25 +155,10 @@ function Zombie(ctx, x, y, sound, game) {
     var thisY = Math.round(this.y);
     var playerX = Math.round(player.x);
     var playerY = Math.round(player.y);
-    if (!this.left) {
-      if ((thisX + 3 == playerX + 1 || thisX + 3 == playerX + 2 ||
-          thisX + 2 == playerX + 2 || thisX + 2 == playerX + 2) &&
-        (thisY == playerY + 1 || thisY + 1 == playerY + 1 || thisY + 2 == playerY + 1 ||
-          thisY == playerY + 2 || thisY + 1 == playerY + 2 || thisY + 2 == playerY + 2 ||
-          thisY == playerY + 3 || thisY + 1 == playerY + 3 || thisY + 2 == playerY + 3)) {
-        this.health -= 2;
-        player.health -= 20;
-        this.knockback = true;
-        this.sound.playPlayerHurt();
-        this.sound.playZombieHit();
-      }
-    } else if ((thisX + 2 == playerX + 1 || thisX + 2 == playerX + 2 ||
-        thisX + 1 == playerX + 1 || thisX + 1 == playerX + 2) &&
-      (thisY == playerY + 1 || thisY + 1 == playerY + 1 || thisY + 2 == playerY + 1 ||
-        thisY == playerY + 2 || thisY + 1 == playerY + 2 || thisY + 2 == playerY + 2 ||
-        thisY == playerY + 3 || thisY + 1 == playerY + 3 || thisY + 2 == playerY + 3)) {
+
+    if (this.checkXCollision(thisX, playerX) && this.checkYCollision(thisY, playerY)) {
+      player.health -= (20 * (1 - player.armor / 20));
       this.health -= 2;
-      player.health = Math.floor(player.health - 20 * (1 - player.armor / 20));
       this.knockback = true;
       this.sound.playPlayerHurt();
       this.sound.playZombieHit();
@@ -137,15 +166,26 @@ function Zombie(ctx, x, y, sound, game) {
     this.checkDeath(world);
   }
 
-
-
-  this.knock = function (player) {
+  this.knock = function (player, tiles) {
+    var thisX = Math.ceil(this.x);
+    var thisY = Math.floor(this.y);
     if (this.x > player.x) {
-      this.x += 1 / 4;
+      if (WALKABLE_TILES.includes(tiles[thisY + 1][thisX + 2]) &&
+        WALKABLE_TILES.includes(tiles[thisY + 2][thisX + 2]) &&
+        WALKABLE_TILES.includes(tiles[thisY + 3][thisX + 2])) {
+        this.x += 1 / 4;
+      }
     } else {
-      this.x -= 1 / 4;
+      if (WALKABLE_TILES.includes(tiles[thisY + 1][thisX]) &&
+        WALKABLE_TILES.includes(tiles[thisY + 2][thisX]) &&
+        WALKABLE_TILES.includes(tiles[thisY + 3][thisX])) {
+        this.x -= 1 / 4;
+      }
     }
-    this.y -= 1 / 4;
+    if (WALKABLE_TILES.includes(tiles[thisY][thisX]) &&
+      WALKABLE_TILES.includes(tiles[thisY][thisX + 1])) {
+      this.y -= 1 / 4;
+    }
 
     this.knockbackCount = (this.knockbackCount + 1) % 10;
 
@@ -155,13 +195,17 @@ function Zombie(ctx, x, y, sound, game) {
 
   }
 
-
   this.checkDeath = function (world) {
     if (this.health <= 0 || this.x < 0 || this.x > 154) {
-      this.alive = false;
+
       this.sound.playZombieKilled();
-      if (Math.random() > 0.8) {
-        world.droppedTiles.push(new Tile('zombie_drop', this.x, this.y))
+      if (this.health <= 0) {
+        if (Math.random() > 0.7) {
+          world.droppedTiles.push(new Tile('zombie_drop', this.x, this.y))
+        } else if (Math.random() > 0.9 && this.alive) {
+          world.droppedTiles.push(new Tile('rocket', this.x, this.y))
+        }
+        this.alive = false;
       }
     }
   }

@@ -112,6 +112,17 @@ function Sound() {
     that.roar.load();
   }
 
+  var initFireball = function () {
+    let sound = document.createElement("audio");
+    sound.setAttribute("preload", "auto");
+    sound.setAttribute("controls", "none");
+    sound.style.display = "none";
+    document.body.appendChild(sound);
+    sound.src = 'audio/fireball.wav';
+    that.fireball = sound;
+    that.fireball.load();
+  }
+
   initDig();
   initTreeHit();
   initBackground();
@@ -122,6 +133,7 @@ function Sound() {
   initZombieHit();
   initZombieKilled();
   initRoar();
+  initFireball();
 
   this.playBackground = function () {
     this.bg.play();
@@ -160,5 +172,8 @@ function Sound() {
 
   this.playTreeHit = function () {
     this.treeHit.play();
+  }
+  this.playFireball = function () {
+    this.fireball.play();
   }
 }
