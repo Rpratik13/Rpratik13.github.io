@@ -1,15 +1,18 @@
 function AudioLoader() {
   this.numberOfLoadedAudios = 0;
   this.audios = [
-      'audio/bg.mp3',
+      'audio/bg.wav',
+      'audio/boss_battle',
       'audio/dig.wav',
       'audio/fireball.wav',
-      'audio/player_hurt.mp3',
+      'audio/night_bg.wav',
+      'audio/player_hurt.wav',
       'audio/roar.wav',
       'audio/slime_hit.wav',
       'audio/slime_killed.wav',
       'audio/swing.wav',
       'audio/tree_hit.wav',
+      'audio/zombie_create.wav',
       'audio/zombie_hit.wav',
       'audio/zombie_killed.wav'
     ];

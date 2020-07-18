@@ -18,6 +18,7 @@ function Zombie(game, x, y) {
   this.knockback = false;
   this.knockbackCount = 0;
 
+  playSound('zombie_create');
 
   this.checkZombiePose = function () {
     this.poseCounter = (this.poseCounter + 1) % 4;

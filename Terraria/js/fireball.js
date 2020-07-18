@@ -6,7 +6,7 @@ function Fireball(game, x, y) {
   this.active = true;
   this.img = new Image;
   this.img.src = 'images/fireball.png';
-  this.tileX = Math.floor((x - world.translated) / TILE_SIZE) + 1;
+  this.tileX = Math.floor((x - this.world.translated) / TILE_SIZE) + 1;
   this.tileY = Math.floor(y / TILE_SIZE) + 1;
   this.lifeTime = 0;
 
@@ -26,7 +26,7 @@ function Fireball(game, x, y) {
 
 
   this.throw = function () {
-    this.ctx.drawImage(this.img, this.x * 16, this.y * 16, TILE_SIZE, TILE_SIZE);
+    this.ctx.drawImage(this.img, this.x * TILE_SIZE, this.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
     this.enemyCollision();
     this.x += this.dx;
     this.y += this.dy;
@@ -38,6 +38,7 @@ function Fireball(game, x, y) {
 
   this.enemyCollision = function () {
     var thisX = Math.round(this.x);
+    var enemies = this.enemies;
     for (var i = 0; i < this.enemies.length; i++) {
       if (enemies[i].type == 'slime' || enemies[i].type == 'eye') {
         if (((enemies[i].x <= thisX && thisX <= enemies[i].x + 2) ||

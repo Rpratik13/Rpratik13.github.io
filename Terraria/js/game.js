@@ -13,6 +13,12 @@ function Game() {
   bossBtn.innerHTML = 'Boss Battle';
   document.body.appendChild(bossBtn);
 
+
+  let timeBtn = document.createElement('button');
+  timeBtn.setAttribute('class', 'time');
+  timeBtn.innerHTML = 'Add Time';
+  document.body.appendChild(timeBtn);
+
   this.ctx = canvas.getContext("2d");
   canvas.width = CANVAS_WIDTH;
   canvas.height = CANVAS_HEIGHT;
@@ -25,6 +31,7 @@ function Game() {
   var bg_under;
   var logo;
   var gameState = 0;
+  var runAnimation;
 
   this.bossBattle = false;
   this.fireBalls = [];
@@ -58,15 +65,28 @@ function Game() {
     ctx.fillText('Start', 400, 300);
     if (gameState == 0) {
       window.requestAnimationFrame(drawStartScreen);
-    } else {
+    } else if (gameState == 1) {
       ctx.translate(that.world.translated, 0);
       run();
+    }
+  }
+
+  function drawPauseScreen() {
+    var ctx = that.ctx;
+    ctx.fillText('Paused', -that.world.translated + 400, 300);
+    if (gameState == 1) {
+      run();
+    } else if (gameState == 2) {
+      window.requestAnimationFrame(drawPauseScreen);
     }
   }
 
 
   bossBtn.onmousedown = function (e) {
     if (gameState == 1) {
+      stopSound('bg');
+      stopSound('night_bg');
+      playSound('boss_battle');
       if (!that.bossBattle) {
 
         var minDist = Math.max(that.player.x - 20, 0);
@@ -76,6 +96,12 @@ function Game() {
       }
       playSound('roar');
       that.bossBattle = true;
+    }
+  }
+
+  timeBtn.onmousedown = function (e) {
+    if (gameState == 1) {
+      timer = (timer + 5000) % 20000;
     }
   }
 
@@ -99,7 +125,6 @@ function Game() {
       if (400 < cursorX && cursorX < 485 && 270 < cursorY && cursorY < 300) {
         gameState = 1;
         that.ctx.font = '10px Arial';
-        playSound('bg');
       }
     } else {
       if (that.player.showInventory) {
@@ -127,8 +152,18 @@ function Game() {
         that.player.jumping = true;
         that.player.falling = false
         that.player.jumpCounter = 0;
+      } else if (e.key == 'p') {
+        gameState = 2;
+        window.cancelAnimationFrame(runAnimation);
+        drawPauseScreen();
       }
 
+    } else if (gameState == 2) {
+      if (e.key == 'p') {
+        gameState = 1;
+        that.player.goLeft = false;
+        that.player.goRight = false;
+      }
     }
   })
 
@@ -150,6 +185,18 @@ function Game() {
       }
     }
   })
+
+  function playBackgroundMusic(timer) {
+    if (!that.bossBattle) {
+      if (timer < 10000) {
+        stopSound('night_bg');
+        playSound('bg');
+      } else {
+        stopSound('bg');
+        playSound('night_bg');
+      }
+    }
+  }
 
   function showTime(timer) {
     seconds = (timer / 20000) * 86400;
@@ -177,9 +224,9 @@ function Game() {
     }
 
     if (timer < 5000) {
-      game.style.backgroundColor = '#00acea';
-    } else if (timer < 10000) {
       game.style.backgroundColor = '#9ed7f1';
+    } else if (timer < 10000) {
+      game.style.backgroundColor = '#00acea';
     } else if (timer < 15000) {
       game.style.backgroundColor = '#ff8b59';
     } else {
@@ -190,7 +237,7 @@ function Game() {
 
   function drawFireball() {
     for (var i = 0; i < that.fireBalls.length; i++) {
-      that.fireBalls[i].throw(ctx);
+      that.fireBalls[i].throw();
       if (!that.fireBalls[i].active) {
         that.removeFireballs.push(i);
       }
@@ -229,7 +276,7 @@ function Game() {
     var maxDist = Math.min(that.player.x + 20, 150);
 
     if (timer % 500 == 0 && !that.bossBattle) {
-      if (timer > 10000) {
+      if (timer < 10000) {
         that.enemies.push(new Slime(that, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0))
       } else {
         that.enemies.push(new Eye(that, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0))
@@ -253,6 +300,7 @@ function Game() {
   }
 
   function run() {
+    playBackgroundMusic(timer);
     drawBackground();
     showTime(timer);
 
@@ -275,6 +323,6 @@ function Game() {
 
 
     drawInventory();
-    requestAnimationFrame(run);
+    runAnimation = window.requestAnimationFrame(run);
   }
 }

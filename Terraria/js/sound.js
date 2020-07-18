@@ -1,12 +1,15 @@
 var sounds = ['bg',
+              'boss_battle',
               'dig',
               'fireball',
+              'night_bg',
               'player_hurt',
               'roar',
               'slime_hit',
               'slime_killed',
               'swing',
               'tree_hit',
+              'zombie_create',
               'zombie_hit',
               'zombie_killed'
               ];
@@ -29,4 +32,9 @@ var initSounds = function () {
 initSounds();
 playSound = function (name) {
   sound[name].play();
+}
+
+stopSound = function (name) {
+  sound[name].pause();
+  sound[name].currentTime = 0;
 }

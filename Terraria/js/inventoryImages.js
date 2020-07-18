@@ -70,6 +70,8 @@ INV_CONTAINER = new Image;
 INV_CONTAINER.src = 'images/inv.png'
 INV_SELECTED = new Image;
 INV_SELECTED.src = 'images/inv_selected.png'
+INV_NOT_ENOUGH = new Image;
+INV_NOT_ENOUGH.src = 'images/inv_not.png';
 
 
 CRAFT_BTN = new Image;

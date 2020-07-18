@@ -74,6 +74,7 @@ function Preloader() {
 
         'images/heart',
         'images/inv',
+        'images/inv_not',
         'images/inv_selected',
         'images/lens',
         'images/logo',

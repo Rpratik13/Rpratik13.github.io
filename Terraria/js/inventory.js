@@ -96,6 +96,11 @@ function Inventory(player) {
     if (this.craftingSelected != -1) {
       var materials = CRAFTING_MATERIAL[this.craftingSelected];
       for (var i = 0; i < materials.length; i++) {
+        if (this.player.items[materials[i][0]] == undefined || this.player.items[materials[i][0]] < materials[i][1]) {
+          this.ctx.drawImage(INV_NOT_ENOUGH, playerX + 220 + i * INV_CONTAINER_SIZE, 350, INV_CONTAINER_SIZE, INV_CONTAINER_SIZE);
+        } else {
+          this.ctx.drawImage(INV_SELECTED, playerX + 220 + i * INV_CONTAINER_SIZE, 350, INV_CONTAINER_SIZE, INV_CONTAINER_SIZE);
+        }
         this.ctx.drawImage(INV_IMAGES[materials[i][0]], playerX + 225 + INV_CONTAINER_SIZE * i, 355, 20, 20);
         this.ctx.fillText(materials[i][1], playerX + 222 + INV_CONTAINER_SIZE * i, 360);
       }

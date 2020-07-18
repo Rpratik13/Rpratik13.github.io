@@ -197,14 +197,13 @@ function Player() {
   this.throwFireball = function () {
     if (this.weapon == 'fire_sword' && this.mana >= 20) {
       this.mana -= 20;
-      this.game.fireBalls.push(new Fireball(this.game))
+      this.game.fireBalls.push(new Fireball(this.game, this.game.cursorX, this.game.cursorY))
       playSound('fireball');
     }
   }
 
   this.swing = function () {
     var enemies = this.game.enemies;
-    var world = this.world
     playSound('swing');
     if (this.pose < 12) {
       this.pose = 12;
