@@ -1,9 +1,9 @@
 function Preloader() {
   this.images = [
         'images/bg0',
-        'images/bg1',
         'images/bg2',
-
+        'images/boss',
+        'images/cloud',
         'images/craft_btn',
         'images/craft0',
         'images/craft1',
@@ -39,6 +39,9 @@ function Preloader() {
         'images/dirt15',
 
         'images/eye',
+        'images/fire_sword',
+        'images/fireball',
+        'images/gel',
 
         'images/gold_boot',
         'images/gold_chest',
@@ -69,11 +72,18 @@ function Preloader() {
         'images/grass6',
         'images/grass7',
 
+        'images/heart',
         'images/inv',
+        'images/inv_selected',
+        'images/lens',
+        'images/logo',
+        'images/mana',
+
         'images/player',
         'images/player_head',
         'images/player_pant',
         'images/player_shirt',
+        'images/rocket',
         'images/shield',
 
         'images/silver_boot',
@@ -150,20 +160,13 @@ function Preloader() {
 
         'images/zombie',
         'images/zombie_drop',
-        'images/lens',
-        'images/gel',
-
-        'images/logo',
-        'images/fire_sword',
-        'images/fireball',
-        'images/boss'
-
     ];
 
   this.loadedImages = 0;
   this.audioLoader = new AudioLoader();
 
-  this.load = function (ctx, start) {
+  this.load = function (game, start) {
+    var ctx = game.ctx;
     for (var i = 0; i < this.images.length; i++) {
 
       ctx.beginPath();

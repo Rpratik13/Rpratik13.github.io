@@ -1,179 +1,32 @@
-function Sound() {
-  that = this;
+var sounds = ['bg',
+              'dig',
+              'fireball',
+              'player_hurt',
+              'roar',
+              'slime_hit',
+              'slime_killed',
+              'swing',
+              'tree_hit',
+              'zombie_hit',
+              'zombie_killed'
+              ];
 
-  var initBackground = function () {
-    let sound = document.createElement("audio");
-    sound.setAttribute("preload", "auto");
-    sound.setAttribute("controls", "none");
-    sound.style.display = "none";
-    document.body.appendChild(sound);
-    sound.src = 'audio/bg.mp3';
-    that.bg = sound;
-    that.bg.load();
-  }
+var sound = {};
 
-  var initSwing = function () {
-    let sound = document.createElement("audio");
-    sound.setAttribute("preload", "auto");
-    sound.setAttribute("controls", "none");
-    sound.style.display = "none";
-    document.body.appendChild(sound);
-    sound.src = 'audio/swing.wav';
-    that.swing = sound;
-    that.swing.load();
+var initSounds = function () {
+  for (var i = 0; i < sounds.length; i++) {
+    let audio = document.createElement("audio");
+    audio.setAttribute("preload", "auto");
+    audio.setAttribute("controls", "none");
+    audio.style.display = "none";
+    document.body.appendChild(audio);
+    sound[sounds[i]] = audio;
+    sound[sounds[i]].src = 'audio/' + sounds[i] + '.wav';
   }
-
-  var initPlayerHurt = function () {
-    let sound = document.createElement("audio");
-    sound.setAttribute("preload", "auto");
-    sound.setAttribute("controls", "none");
-    sound.style.display = "none";
-    document.body.appendChild(sound);
-    sound.src = 'audio/player_hurt.mp3';
-    that.playerHurt = sound;
-    that.playerHurt.load();
-  }
-
-  var initSlimeHit = function () {
-    let sound = document.createElement("audio");
-    sound.setAttribute("preload", "auto");
-    sound.setAttribute("controls", "none");
-    sound.style.display = "none";
-    document.body.appendChild(sound);
-    sound.src = 'audio/slime_hit.wav';
-    that.slimeHit = sound;
-    that.slimeHit.load();
-  }
-
-  var initSlimeKilled = function () {
-    let sound = document.createElement("audio");
-    sound.setAttribute("preload", "auto");
-    sound.setAttribute("controls", "none");
-    sound.style.display = "none";
-    document.body.appendChild(sound);
-    sound.src = 'audio/slime_killed.wav';
-    that.slimeKilled = sound;
-    that.slimeKilled.load();
-  }
-
-  var initZombieHit = function () {
-    let sound = document.createElement("audio");
-    sound.setAttribute("preload", "auto");
-    sound.setAttribute("controls", "none");
-    sound.style.display = "none";
-    document.body.appendChild(sound);
-    sound.src = 'audio/zombie_hit.wav';
-    that.zombieHit = sound;
-    that.zombieHit.load();
-  }
-
-  var initZombieKilled = function () {
-    let sound = document.createElement("audio");
-    sound.setAttribute("preload", "auto");
-    sound.setAttribute("controls", "none");
-    sound.style.display = "none";
-    document.body.appendChild(sound);
-    sound.src = 'audio/zombie_killed.wav';
-    that.zombieKilled = sound;
-    that.zombieKilled.load();
-  }
-
-  var initDig = function () {
-    let sound = document.createElement("audio");
-    sound.setAttribute("preload", "auto");
-    sound.setAttribute("controls", "none");
-    sound.style.display = "none";
-    document.body.appendChild(sound);
-    sound.src = 'audio/dig.wav';
-    that.dig = sound;
-    that.dig.load();
-  }
+}
 
 
-  var initTreeHit = function () {
-    let sound = document.createElement("audio");
-    sound.setAttribute("preload", "auto");
-    sound.setAttribute("controls", "none");
-    sound.style.display = "none";
-    document.body.appendChild(sound);
-    sound.src = 'audio/tree_hit.wav';
-    that.treeHit = sound;
-    that.treeHit.load();
-  }
-
-  var initRoar = function () {
-    let sound = document.createElement("audio");
-    sound.setAttribute("preload", "auto");
-    sound.setAttribute("controls", "none");
-    sound.style.display = "none";
-    document.body.appendChild(sound);
-    sound.src = 'audio/roar.wav';
-    that.roar = sound;
-    that.roar.load();
-  }
-
-  var initFireball = function () {
-    let sound = document.createElement("audio");
-    sound.setAttribute("preload", "auto");
-    sound.setAttribute("controls", "none");
-    sound.style.display = "none";
-    document.body.appendChild(sound);
-    sound.src = 'audio/fireball.wav';
-    that.fireball = sound;
-    that.fireball.load();
-  }
-
-  initDig();
-  initTreeHit();
-  initBackground();
-  initSwing();
-  initPlayerHurt();
-  initSlimeHit();
-  initSlimeKilled();
-  initZombieHit();
-  initZombieKilled();
-  initRoar();
-  initFireball();
-
-  this.playBackground = function () {
-    this.bg.play();
-  }
-
-  this.playRoar = function () {
-    this.roar.play();
-  }
-
-  this.playSwing = function () {
-    this.swing.play();
-  }
-
-  this.playPlayerHurt = function () {
-    this.playerHurt.play();
-  }
-  this.playSlimeHit = function () {
-    this.slimeHit.play();
-  }
-
-  this.playSlimeKilled = function () {
-    this.slimeKilled.play();
-  }
-
-  this.playZombieHit = function () {
-    this.zombieHit.play();
-  }
-
-  this.playZombieKilled = function () {
-    this.zombieKilled.play();
-  }
-
-  this.playDig = function () {
-    this.dig.play();
-  }
-
-  this.playTreeHit = function () {
-    this.treeHit.play();
-  }
-  this.playFireball = function () {
-    this.fireball.play();
-  }
+initSounds();
+playSound = function (name) {
+  sound[name].play();
 }

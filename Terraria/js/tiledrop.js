@@ -1,4 +1,5 @@
-function Tile(type, x, y) {
+function Tile(game, type, x, y) {
+  this.ctx = game.ctx;
   this.type = type;
   this.tileX = x;
   this.tileY = y;
@@ -17,8 +18,8 @@ function Tile(type, x, y) {
 
   this.setImageSource();
 
-  this.draw = function (ctx) {
-    ctx.drawImage(this.img, this.x, this.y, TILE_DROP_SIZE, TILE_DROP_SIZE);
+  this.draw = function () {
+    this.ctx.drawImage(this.img, this.x, this.y, TILE_DROP_SIZE, TILE_DROP_SIZE);
   }
 
   this.moveDown = function () {

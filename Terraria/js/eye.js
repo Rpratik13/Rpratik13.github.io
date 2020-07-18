@@ -1,8 +1,9 @@
-function Eye(ctx, x, y, sound, game) {
+function Eye(game, x, y) {
   this.game = game;
-  this.sound = sound;
-  this.ctx = ctx;
+  this.ctx = game.ctx;
+  this.player = game.player;
   this.health = 10;
+  this.world = game.world;
   this.type = 'eye';
   this.img = new Image;
   this.img.src = 'images/eye.png';
@@ -11,49 +12,46 @@ function Eye(ctx, x, y, sound, game) {
   this.falling = false;
   this.x = x;
   this.y = y;
-  if (this.x < 25) {
-    this.left = false;
-  } else { this.left = true; }
   this.knockback = false;
   this.alive = true;
   this.knockbackCount = 0;
 
 
-  this.checkDirection = function (player) {
-    if (player.x + 3 < this.x) {
+  this.checkDirection = function () {
+    if (this.player.x + 3 < this.x) {
       this.left = true;
-    } else if (player.x - 3 > this.x) {
+    } else if (this.player.x - 3 > this.x) {
       this.left = false;
     }
   }
 
-  this.draw = function (player, world) {
+  this.draw = function () {
     if (this.alive) {
-      ctx.save();
+      this.ctx.save();
 
-      this.checkDirection(player);
+      this.checkDirection();
 
       if (this.left) {
         this.ctx.drawImage(this.img, EYE_SPRITE[0], EYE_SPRITE[1], EYE_SPRITE[2], EYE_SPRITE[3],
           this.x * TILE_SIZE, this.y * TILE_SIZE, 32, 16);
       } else {
-        ctx.translate(CANVAS_WIDTH, 0);
-        ctx.scale(-1, 1);
+        this.ctx.translate(CANVAS_WIDTH, 0);
+        this.ctx.scale(-1, 1);
         this.ctx.drawImage(this.img, EYE_SPRITE[0], EYE_SPRITE[1], EYE_SPRITE[2], EYE_SPRITE[3],
           CANVAS_WIDTH - 35 - this.x * TILE_SIZE, this.y * TILE_SIZE, 32, 16);
       }
-      ctx.restore();
+      this.ctx.restore();
     }
 
-    this.playerCollision(player)
-    this.move(player);
-    this.checkDeath(world);
+    this.playerCollision()
+    this.move();
+    this.checkDeath();
     this.showDetails();
   }
 
-  this.move = function (player) {
+  this.move = function () {
     if (this.knockback) {
-      this.knock(player);
+      this.knock();
     } else {
       if (this.left) {
         this.x -= 1 / 50;
@@ -61,7 +59,7 @@ function Eye(ctx, x, y, sound, game) {
         this.x += 1 / 50;
       }
 
-      if (this.y < player.y) {
+      if (this.y < this.player.y) {
         this.y += 1 / 50
       } else {
         this.y -= 1 / 50
@@ -104,24 +102,24 @@ function Eye(ctx, x, y, sound, game) {
     return false;
   }
 
-  this.playerCollision = function (player) {
+  this.playerCollision = function () {
     var thisX = Math.round(this.x);
     var thisY = Math.round(this.y);
-    var playerX = Math.round(player.x);
-    var playerY = Math.round(player.y);
+    var playerX = Math.round(this.player.x);
+    var playerY = Math.round(this.player.y);
 
     if (this.checkXCollision(thisX, playerX) && this.checkYCollision(thisY, playerY)) {
       this.health -= 2;
-      player.health = Math.floor(player.health - 10 * (1 - player.armor / 20));
+      this.player.health = Math.floor(this.player.health - 10 * (1 - this.player.armor / 20));
       this.knockback = true;
-      this.sound.playSlimeHit();
+      playSound('slime_hit');
     }
   }
 
-  this.knock = function (player) {
-    if (this.x > player.x) {
+  this.knock = function () {
+    if (this.x > this.player.x) {
       this.x += 1 / 4;
-    } else if (this.x < player.x) {
+    } else if (this.x < this.player.x) {
       this.x -= 1 / 4;
     }
     this.y -= 1 / 4;
@@ -134,14 +132,44 @@ function Eye(ctx, x, y, sound, game) {
 
   }
 
-  this.checkDeath = function (world) {
+  this.checkDeath = function () {
     if (this.health <= 0 || this.x < 0 || this.x > 154) {
       this.alive = false;
-      this.sound.playSlimeKilled();
-
+      playSound('slime_killed');
       if (Math.random() > 0.7 && this.health <= 0) {
-        world.droppedTiles.push(new Tile('lens', this.x, this.y))
+        this.world.droppedTiles.push(new Tile(this.game, 'lens', this.x, this.y))
       }
+    }
+  }
+
+  this.checkSwingXHit = function () {
+    if (this.player.left) {
+      var range = [-3, 1];
+    } else {
+      var range = [0, 4];
+    }
+
+    for (var i = 0; i < 2; i++) {
+      if (this.player.x + range[0] <= this.x + i && this.x + i <= this.player.x + range[1]) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  this.checkSwingYHit = function () {
+    if (this.player.y - 2 <= this.y && this.y <= this.player.y + 3) {
+      return true;
+    }
+    return false;
+  }
+
+  this.checkSwingHit = function () {
+    if (this.checkSwingXHit() && this.checkSwingYHit()) {
+      this.knockback = true;
+      this.health -= this.player.damage;
+      playSound('slime_hit');
+      this.checkDeath();
     }
   }
 
