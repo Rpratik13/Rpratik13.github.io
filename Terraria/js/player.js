@@ -1,14 +1,10 @@
-function Player(sound, world) {
-  this.world = world;
-  this.sound = sound;
-  this.health = 100;
-  this.mana = 100;
-  this.healthRegen = 0;
-  this.manaRegen = 0;
-  this.img = new Image;
-  this.img.src = 'images/player.png';
-  this.x = 75;
-  this.y = 14;
+function Player() {
+  this.health = PLAYER_MAX_HEALTH;
+  this.mana = PLAYER_MAX_MANA;
+  this.healthRegenTimer = 0;
+  this.manaRegenTimer = 0;
+  this.x = PLAYER_START_X;
+  this.y = PLAYER_START_Y;
   this.pose = 0;
   this.falling = false;
   this.jumping = false;
@@ -17,10 +13,9 @@ function Player(sound, world) {
   this.swinging = false;
   this.swingCounter = 0;
   this.showInventory = false;
-  this.items = { 'gold_sword': 1, 'cloud': 1, 'rocket': 1, 'gold_bar': 50, 'gel': 10, 'fire_sword': 10, 'silver_bar': 50 };
-  this.itemsName = ['gold_sword', 'cloud', 'rocket', 'gold_bar', 'gel', 'fire_sword', 'silver_bar'];
+  this.items = { 'gold_sword': 1, 'cloud': 1, 'rocket': 1, 'gold_bar': 50, 'gel': 10, 'fire_sword': 1, 'silver_bar': 50 };
+  this.itemsName = Object.keys(this.items);
   this.tilesCollected = [];
-  this.inventory = new Inventory(this, this.world);
   this.weapon;
   this.helm;
   this.chest;
@@ -34,104 +29,80 @@ function Player(sound, world) {
   this.totalJumps = 1;
   this.jumps = 0;
   this.flyTime = 0;
-  this.heart = new Image;
-  this.heart.src = 'images/heart.png';
-  this.star = new Image;
-  this.star.src = 'images/mana.png';
 
-  this.playerPositions = [[34, 65], [34, 156], [56, 155], [79, 155], [105, 155], [131, 156], [157, 156], [182, 156], [208, 156], [235, 155], [263, 155], [34, 123], [34, 93], [56, 93], [80, 93], [104, 93]];
-  this.chestImg = [new Image, new Image];
-  this.chestImg[0].src = 'images/silver_chest.png'
-  this.chestImg[1].src = 'images/gold_chest.png'
-  this.chestPos = [[6, 24, 26, 20], [6, 360, 28, 18], [4, 414, 32, 20], [4, 470, 32, 20], [4, 526, 32, 20], [4, 584, 32, 20], [6, 640, 30, 18],
-   [6, 696, 28, 18], [6, 752, 28, 18], [6, 806, 28, 18], [6, 862, 26, 20], [6, 296, 28, 26], [6, 72, 28, 26], [6, 128, 26, 28], [6, 192, 26, 18],
-   [6, 248, 24, 20]];
+  this.init = function (game) {
+    this.game = game;
+    this.ctx = game.ctx;
+    this.world = game.world;
+    this.inventory = new Inventory(this);
 
-  this.bootImg = [new Image, new Image];
-  this.bootImg[0].src = 'images/silver_boot.png'
-  this.bootImg[1].src = 'images/gold_boot.png'
-  this.bootPos = [[12, 42, 18, 12], [14, 378, 14, 12], [10, 434, 20, 12], [10, 490, 22, 12], [10, 546, 22, 12], [10, 602, 20, 12], [12, 658, 18, 12],
-   [14, 714, 14, 12], [12, 770, 18, 12], [10, 826, 22, 12], [10, 882, 22, 12], [8, 322, 28, 12], [12, 42, 18, 12], [12, 42, 18, 12], [12, 42, 18, 12], [12, 42, 18, 12]];
-
-
-  this.weapons = [new Image, new Image, new Image, new Image, new Image, new Image, new Image, new Image, new Image, new Image, new Image, new Image];
-  this.weapons[0].src = 'images/dirt_drop.png';
-  this.weapons[1].src = 'images/wood_drop.png';
-  this.weapons[2].src = 'images/gold_drop.png';
-  this.weapons[3].src = 'images/silver_drop.png';
-  this.weapons[4].src = 'images/sword.png';
-  this.weapons[5].src = 'images/craft6.png';
-  this.weapons[6].src = 'images/craft7.png';
-  this.weapons[7].src = 'images/craft8.png';
-  this.weapons[8].src = 'images/craft0.png';
-  this.weapons[9].src = 'images/craft1.png';
-  this.weapons[10].src = 'images/craft2.png';
-  this.weapons[11].src = 'images/fire_sword.png';
+  }
 
   this.healthRegeneration = function () {
-    if (this.health < 100) {
-      this.healthRegen = (this.healthRegen + 1) % 70;
-      if (this.healthRegen == 0) {
+    if (this.health < PLAYER_MAX_HEALTH) {
+      this.healthRegenTimer = (this.healthRegenTimer + 1) % HEALTH_REGEN_TIME;
+      if (this.healthRegenTimer == 0) {
         this.health += 1;
       }
     }
   }
 
   this.manaRegeneration = function () {
-    if (this.mana < 100) {
-      this.manaRegen = (this.manaRegen + 1) % 50;
-      if (this.manaRegen == 0) {
+    if (this.mana < PLAYER_MAX_MANA) {
+      this.manaRegenTimer = (this.manaRegenTimer + 1) % MANA_REGEN_TIME;
+      if (this.manaRegenTimer == 0) {
         this.mana += 1;
       }
     }
   }
 
-  this.displayHealth = function (ctx) {
+  this.displayHealth = function () {
     var playerX = this.x * TILE_SIZE
     if (this.x < 25) {
       playerX = 25 * TILE_SIZE;
     } else if (this.x > 128) {
       playerX = 128 * TILE_SIZE;
     }
-    ctx.font = '20px Arial'
+    this.ctx.font = '20px Arial'
 
-    ctx.drawImage(this.heart, playerX + 250, 123);
-    ctx.fillText(Math.floor(this.health), playerX + 275, 140);
+    this.ctx.drawImage(HEART_IMG, playerX + 250, 123);
+    this.ctx.fillText(Math.floor(this.health), playerX + 275, 140);
     this.healthRegeneration();
   }
 
-  this.displayMana = function (ctx) {
+  this.displayMana = function () {
     var playerX = this.x * TILE_SIZE
     if (this.x < 25) {
       playerX = 25 * TILE_SIZE;
     } else if (this.x > 128) {
       playerX = 128 * TILE_SIZE;
     }
-    ctx.font = '20px Arial'
+    this.ctx.font = '20px Arial'
 
-    ctx.drawImage(this.star, playerX + 250, 143);
-    ctx.fillText(this.mana, playerX + 275, 165);
+    this.ctx.drawImage(MANA_IMG, playerX + 250, 143);
+    this.ctx.fillText(this.mana, playerX + 275, 165);
     this.manaRegeneration();
   }
 
-  this.draw = function (ctx, tiles, game) {
+  this.draw = function () {
+    var tiles = this.world.world;
     var thisX = Math.floor(this.x);
     var thisY = Math.floor(this.y);
-    ctx.save()
+    this.ctx.save()
 
     if (this.left) {
-      ctx.translate(CANVAS_WIDTH, 0);
-      ctx.scale(-1, 1);
-      ctx.drawImage(this.img, this.playerPositions[this.pose][0], this.playerPositions[this.pose][1], 16, 24,
+      this.ctx.translate(CANVAS_WIDTH, 0);
+      this.ctx.scale(-1, 1);
+      this.ctx.drawImage(PLAYER_IMG, PLAYER_SPRITE[this.pose][0], PLAYER_SPRITE[this.pose][1], 16, 24,
         CANVAS_WIDTH - 30 - this.x * TILE_SIZE, this.y * TILE_SIZE, 32, 48);
-      ctx.restore();
+      this.ctx.restore();
     } else {
-      ctx.drawImage(this.img, this.playerPositions[this.pose][0], this.playerPositions[this.pose][1], 16, 24,
+      this.ctx.drawImage(PLAYER_IMG, PLAYER_SPRITE[this.pose][0], PLAYER_SPRITE[this.pose][1], 16, 24,
         this.x * TILE_SIZE, this.y * TILE_SIZE, 32, 48)
     }
 
-    this.drawChest(ctx);
-    this.drawBoot(ctx);
+    this.drawChest(this.ctx);
+    this.drawBoot(this.ctx);
 
     if (!this.jumping &&
       WALKABLE_TILES.includes(tiles[thisY + 4][thisX + 1]) &&
@@ -139,11 +110,11 @@ function Player(sound, world) {
       this.falling = true;
     }
 
-    this.checkDeath(game, ctx);
+    this.checkDeath();
   }
 
-
-  this.moveLeft = function (tiles, ctx) {
+  this.moveLeft = function () {
+    var tiles = this.world.world;
     var thisX = Math.round(this.x);
     var thisY = Math.floor(this.y);
 
@@ -159,13 +130,13 @@ function Player(sound, world) {
       this.x -= 1 / 8;
 
       if (thisX > 25 && thisX < 128) {
-        this.world.cameraMove(ctx, 2);
+        this.world.cameraMove(2);
       }
     }
   }
 
-
-  this.moveRight = function (tiles, ctx) {
+  this.moveRight = function () {
+    var tiles = this.world.world;
     var thisX = Math.round(this.x);
     var thisY = Math.floor(this.y);
     if (!this.falling && !this.swinging && !this.jumping) {
@@ -179,13 +150,13 @@ function Player(sound, world) {
       this.x += 1 / 8;
 
       if (thisX < 128 && thisX > 25) {
-        this.world.cameraMove(ctx, -2);
+        this.world.cameraMove(-2);
       }
     }
   }
 
-
-  this.fall = function (tiles) {
+  this.fall = function () {
+    var tiles = this.world.world;
     var thisX = Math.floor(this.x);
     var thisY = Math.floor(this.y);
     this.pose = 11;
@@ -201,8 +172,8 @@ function Player(sound, world) {
     }
   }
 
-
-  this.jump = function (tiles) {
+  this.jump = function () {
+    var tiles = this.world.world;
     var thisX = Math.round(this.x);
     var thisY = Math.ceil(this.y);
     if (!this.falling) {
@@ -223,10 +194,18 @@ function Player(sound, world) {
     }
   }
 
-  this.swing = function (ctx, enemies, world, game) {
-    this.sound.playSwing();
-    var playerX = Math.round(this.x);
-    var playerY = Math.round(this.y);
+  this.throwFireball = function () {
+    if (this.weapon == 'fire_sword' && this.mana >= 20) {
+      this.mana -= 20;
+      this.game.fireBalls.push(new Fireball(this.game))
+      playSound('fireball');
+    }
+  }
+
+  this.swing = function () {
+    var enemies = this.game.enemies;
+    var world = this.world
+    playSound('swing');
     if (this.pose < 12) {
       this.pose = 12;
     } else {
@@ -238,165 +217,53 @@ function Player(sound, world) {
           this.swinging = false;
           if (ATTACK_WEAPONS.includes(this.weapon)) {
             for (var i = 0; i < enemies.length; i++) {
-              var enemiesX = Math.round(enemies[i].x);
-              var enemiesY = Math.round(enemies[i].y);
-              if (enemies[i].type == 'slime' || enemies[i].type == 'eye') {
-                if ((this.left && (playerX - 4 <= enemiesX && enemiesX <= playerX + 1) ||
-                    (!this.left && (playerX - 1 <= enemiesX && enemiesX <= playerX + 3))) &&
-                  (playerY - 2 <= enemiesY && enemiesY <= playerY + 3)) {
-                  enemies[i].knockback = true;
-                  enemies[i].health -= this.damage;
-                  this.sound.playSlimeHit();
-                }
-              } else if (enemies[i].type == 'zombie') {
-                if (((this.left && (playerX - 4 <= enemiesX && enemiesX <= playerX - 2)) ||
-                    (!this.left && (playerX + 1 <= enemiesX && enemiesX <= playerX + 3))) &&
-                  ((enemiesY == playerY - 1 || enemiesY == playerY - 2 || enemiesY == playerY + 1 || enemiesY == playerY + 2 || enemiesY == playerY) ||
-                    (enemiesY + 1 == playerY - 1 || enemiesY + 1 == playerY - 2 || enemiesY + 1 == playerY + 1 || enemiesY + 1 == playerY + 2 || enemiesY + 1 == playerY + 3) || enemiesY + 1 == playerY ||
-                    (enemiesY + 2 == playerY - 1 || enemiesY + 2 == playerY - 2 || enemiesY + 2 == playerY + 1 || enemiesY + 2 == playerY + 2 || enemiesY + 2 == playerY + 3) || enemiesY + 2 == playerY)) {
-                  enemies[i].knockback = true;
-                  enemies[i].health -= this.damage;
-                  this.sound.playZombieHit();
-
-                }
-              } else if (enemies[i].type == 'boss') {
-                if (((this.left && (enemiesX <= playerX - 4 && playerX - 4 <= enemiesX + 9) || (
-                      enemiesX <= playerX - 2 && playerX - 2 <= enemiesX + 9)) ||
-                    (this.left && (enemiesX <= playerX + 1 && playerX + 1 <= enemiesX + 9) || (
-                      enemiesX <= playerX + 3 && playerX + 3 <= enemiesX + 9))) &&
-                  ((enemiesY <= playerY - 2 && playerY - 2 <= enemiesY + 6) ||
-                    (enemiesY <= playerY + 2 && playerY + 2 <= enemiesY + 6)
-                  )) {
-                  enemies[i].health -= this.damage;
-                  this.sound.playZombieHit();
-
-                }
-              }
-              enemies[i].checkDeath(world);
-
+              enemies[i].checkSwingHit();
             }
-            if (this.weapon == 'fire_sword' && this.mana >= 20) {
-              this.mana -= 20;
-              game.fireBalls.push(new Fireball(this, enemies, game.cursorX, game.cursorY, this.world))
-              this.sound.playFireball();
-            }
+
+            this.throwFireball();
           }
         }
       }
       if (this.pose != 0) {
-        this.displayWeapon(ctx);
+        this.displayWeapon();
       }
       this.swingCounter += 1;
 
     }
   }
 
-
-
-  this.displayWeapon = function (ctx) {
-    var image = this.weapons[WEAPON_NUM[this.weapon]];
+  this.displayWeapon = function () {
     if (this.weapon != undefined) {
-      ctx.save();
-      if (this.pose == 12) {
-        if (PLACE_WEAPONS.includes(this.weapon)) {
-          start_width = this.x * TILE_SIZE;
-          start_height = this.y * TILE_SIZE;
-          end_width = 12;
-          end_height = 12;
-          if (this.left) {
-            start_width += 20;
-          }
-        } else if (ATTACK_WEAPONS.includes(this.weapon)) {
-          ctx.translate(this.x * TILE_SIZE, this.y * TILE_SIZE - 20);
-          start_width = -17;
-          start_height = -3
-          end_width = 32;
-          end_height = 32;
-          if (this.left) {
-            ctx.scale(-1, 1);
-            ctx.rotate(-Math.PI / 4);
-            start_width -= 22;
-            start_height -= 22;
-          } else {
-            ctx.rotate(-Math.PI / 4);
-          }
+      this.ctx.save();
+      if (PLACE_WEAPONS.includes(this.weapon)) {
+        start_width = this.x * TILE_SIZE + PLACE_WEAPONS_POS[this.pose][0];
+        start_height = this.y * TILE_SIZE + PLACE_WEAPONS_POS[this.pose][1];
+        end_width = TILE_DROP_SIZE;
+        end_height = TILE_DROP_SIZE;
+        if (this.left) {
+          start_width += PLACE_WEAPONS_LEFT_POS[this.pose];
         }
-      } else if (this.pose == 13) {
-        if (PLACE_WEAPONS.includes(this.weapon)) {
-          start_width = this.x * TILE_SIZE + 20;
-          start_height = this.y * TILE_SIZE;
-          end_width = 12;
-          end_height = 12;
-          if (this.left) {
-            start_width -= 20;
-          }
-        } else if (ATTACK_WEAPONS.includes(this.weapon)) {
-          ctx.translate(this.x * TILE_SIZE, this.y * TILE_SIZE - 20);
-          start_width = 25;
-          start_height = -3
-          end_width = 32;
-          end_height = 32;
-          if (this.left) {
-            ctx.scale(-1, 1);
-            start_width -= 32;
-            start_height -= 0;
-          }
+      } else if (ATTACK_WEAPONS.includes(this.weapon)) {
+        this.ctx.translate(this.x * TILE_SIZE, this.y * TILE_SIZE - 20);
+        this.ctx.rotate(ATTACK_WEAPON_ROTATE[this.pose]);
+        start_width = ATTACK_WEAPON_POS[this.pose][0];
+        start_height = ATTACK_WEAPON_POS[this.pose][1];
+        end_width = WEAPON_SIZE;
+        end_height = WEAPON_SIZE;
+        if (this.left) {
+          this.ctx.scale(ATTACK_WEAPON_SCALE[this.pose][0], ATTACK_WEAPON_SCALE[this.pose][1]);
+          start_width += ATTACK_WEAPONS_LEFT_POS[this.pose][0];
+          start_height += ATTACK_WEAPONS_LEFT_POS[this.pose][1];
         }
-      } else if (this.pose == 14) {
-        if (PLACE_WEAPONS.includes(this.weapon)) {
-          start_width = this.x * TILE_SIZE + 27;
-          start_height = this.y * TILE_SIZE + 22;
-          end_width = 12;
-          end_height = 12;
-          if (this.left) {
-            start_width -= 35;
-          }
-        } else if (ATTACK_WEAPONS.includes(this.weapon)) {
-          ctx.translate(this.x * TILE_SIZE, this.y * TILE_SIZE - 20);
-          ctx.rotate(Math.PI / 4);
-          start_width = 55;
-          start_height = -16;
-          end_width = 32;
-          end_height = 32;
-          if (this.left) {
-            ctx.scale(-1, -1);
-            start_width -= 92;
-            start_height -= 45;
-          }
-        }
-
-      } else if (this.pose == 15) {
-        if (PLACE_WEAPONS.includes(this.weapon)) {
-          start_width = this.x * TILE_SIZE + 25;
-          start_height = this.y * TILE_SIZE + 30;
-          end_width = 12;
-          end_height = 12;
-          if (this.left) {
-            start_width -= 33;
-          }
-        } else if (ATTACK_WEAPONS.includes(this.weapon)) {
-          ctx.translate(this.x * TILE_SIZE, this.y * TILE_SIZE - 20);
-          ctx.rotate(Math.PI / 2);
-          start_width = 55;
-          start_height = -55;
-          end_width = 32;
-          end_height = 32;
-          if (this.left) {
-            ctx.scale(1, -1);
-            start_height = -25;
-          }
-        }
-
       }
 
-      ctx.drawImage(image, start_width, start_height, end_width, end_height);
-      ctx.restore();
-
+      this.ctx.drawImage(WEAPON_IMGS[this.weapon], start_width, start_height, end_width, end_height);
+      this.ctx.restore();
     }
   }
 
-  this.itemPickup = function (world) {
-    var tiles = world.droppedTiles;
+  this.itemPickup = function () {
+    var tiles = this.world.droppedTiles;
     for (var i = 0; i < tiles.length; i++) {
       if (Math.floor(tiles[i].tileX) > this.x + 1 || Math.ceil(tiles[i].tileX) < this.x ||
         tiles[i].tileY > this.y + 2 || tiles[i].tileY < this.y) {
@@ -423,300 +290,93 @@ function Player(sound, world) {
     }
 
     for (var i = 0; i < this.tilesCollected.length; i++) {
-      world.droppedTiles.splice(this.tilesCollected[i], 1);
+      this.world.droppedTiles.splice(this.tilesCollected[i], 1);
       this.tilesCollected.shift();
     }
   }
 
-
   this.checkArmor = function () {
-    var chest;
-    var helm
-    var boot;
-
-    if (this.helm == undefined) {
-      helm = 0;
-    } else if (this.helm == 'silver_helm') {
-      helm = 3;
-    } else if (this.helm == 'gold_helm') {
-      helm = 5;
-    }
-
-    if (this.chest == undefined) {
-      chest = 0;
-    } else if (this.chest == 'silver_chest') {
-      chest = 3;
-    } else if (this.chest == 'gold_chest') {
-      chest = 5;
-    }
-
-    if (this.boot == undefined) {
-      boot = 0;
-    } else if (this.boot == 'silver_boot') {
-      boot = 3;
-    } else if (this.boot == 'gold_boot') {
-      boot = 5;
-    }
-
-
+    var helm = HELM_ARMOR[this.helm];
+    var chest = CHEST_ARMOR[this.chest];
+    var boot = BOOT_ARMOR[this.boot];
     this.armor = helm + chest + boot;
-
   }
 
   this.checkPower = function () {
-    if (this.weapon == undefined) {
-      this.damage = 5;
-      this.pickPower = 1;
-      this.axePower = 1;
-    } else if (this.weapon == 'sword') {
-      this.damage = 7;
-      this.pickPower = 0;
-      this.axePower = 0;
-    } else if (this.weapon == 'silver_sword') {
-      this.damage = 9;
-      this.pickPower = 0;
-      this.axePower = 0;
-    } else if (this.weapon == 'gold_sword') {
-      this.damage = 15;
-      this.pickPower = 0;
-      this.axePower = 0;
-    } else if (this.weapon == 'silver_pick') {
-      this.damage = 5;
-      this.pickPower = 2;
-      this.axePower = 0;
-    } else if (this.weapon == 'gold_pick') {
-      this.damage = 6;
-      this.pickPower = 4;
-      this.axePower = 0;
-    } else if (this.weapon == 'silver_axe') {
-      this.damage = 5;
-      this.pickPower = 0;
-      this.axePower = 2;
-    } else if (this.weapon == 'gold_axe') {
-      this.damage = 6;
-      this.pickPower = 0;
-      this.axePower = 4;
-    } else if (this.weapon == 'fire_sword') {
-      this.damage = 2;
-      this.pickPower = 0;
-      this.axePower = 0;
-    } else {
-      this.damage = 5;
-      this.pickPower = 0;
-      this.axePower = 0;
-    }
+    this.damage = WEAPON_DAMAGES[this.weapon][0]
+    this.pickPower = WEAPON_DAMAGES[this.weapon][1]
+    this.axePower = WEAPON_DAMAGES[this.weapon][2]
   }
 
-  this.drawChest = function (ctx) {
-    var start_width = this.x * TILE_SIZE + 1;
-    var start_height = this.y * TILE_SIZE + 18;
-    var end_width = 28;
-    var end_height = 19;
+  this.drawChest = function () {
+    if (this.chest) {
+      var start_width = this.x * TILE_SIZE + CHEST_EQUIP_POS[this.pose][0];
+      var start_height = this.y * TILE_SIZE + CHEST_EQUIP_POS[this.pose][1];
+      var end_width = CHEST_EQUIP_POS[this.pose][2]
+      var end_height = CHEST_EQUIP_POS[this.pose][3]
 
-    if (this.pose == 1) {
-      start_width += 1;
-      end_height -= 1;
-    } else if (this.pose == 2) {
-      end_width += 3;
-    } else if (this.pose == 3 || this.pose == 4) {
-      start_width -= 1;
-      end_width += 4;
-    } else if (this.pose == 5) {
-      start_width -= 1;
-      end_width += 4;
-      end_height += 1;
-    } else if (this.pose == 6) {
-      start_width += 1;
-      end_width += 2;
-      end_height -= 1;
-    } else if (this.pose == 7 || this.pose == 8 || this.pose == 9) {
-      start_width += 1;
-      end_height -= 1;
-    } else if (this.pose == 10) {
-      start_width += 1;
-      end_width -= 2;
-      end_height -= 1;
-    } else if (this.pose == 11) {
-      start_width += 1;
-      start_height -= 8;
-      end_height += 7;
-    } else if (this.pose == 12) {
-      start_width += 1;
-      start_height -= 8;
-      end_width -= 1;
-      end_height += 7;
-    } else if (this.pose == 13) {
-      start_width += 1;
-      start_height -= 8;
-      end_width -= 1;
-      end_height += 9;
-    } else if (this.pose == 14) {
-      start_width += 1;
-      start_height -= 1;
-      end_width -= 3;
-    } else if (this.pose == 15) {
-      start_width += 1;
-      end_width -= 4;
-      end_height += 1;
-    }
-
-    ctx.save();
-
-    if (this.left) {
-      if (this.pose == 0 || this.pose == 2 || this.pose == 5) {
-        start_width = CANVAS_WIDTH - 29 - start_width;
-      } else if (this.pose == 3 || this.pose == 4 || this.pose == 5) {
-        start_width = CANVAS_WIDTH - 30 - start_width;
-      } else {
-        start_width = CANVAS_WIDTH - 26 - start_width;
+      this.ctx.save();
+      if (this.left) {
+        start_width = getLeftChestEquipPos(this.pose) - start_width;
+        this.ctx.translate(CANVAS_WIDTH, 0);
+        this.ctx.scale(-1, 1);
       }
 
-      ctx.translate(CANVAS_WIDTH, 0);
-      ctx.scale(-1, 1);
-
-    }
-    var chest;
-    if (this.chest == 'silver_chest') {
-      chest = 0;
-    } else if (this.chest == 'gold_chest') {
-      chest = 1;
-    }
-    if (this.chest != undefined) {
-      ctx.drawImage(this.chestImg[chest], this.chestPos[this.pose][0], this.chestPos[this.pose][1], this.chestPos[this.pose][2], this.chestPos[this.pose][3],
+      this.ctx.drawImage(CHEST_IMG[this.chest],
+        CHEST_SPRITE[this.pose][0], CHEST_SPRITE[this.pose][1], CHEST_SPRITE[this.pose][2], CHEST_SPRITE[this.pose][3],
         start_width, start_height, end_width, end_height);
+      this.ctx.restore();
     }
-    ctx.restore();
   }
 
-  this.drawBoot = function (ctx) {
-    var start_width;
-    var start_height;
-    var end_width;
-    var end_height;
+  this.drawBoot = function () {
+    if (this.boot) {
+      var start_width = this.x * TILE_SIZE + BOOT_EQUIP_POS[this.pose][0];
+      var start_height = this.y * TILE_SIZE + BOOT_EQUIP_POS[this.pose][1];
+      var end_width = BOOT_EQUIP_POS[this.pose][2];
+      var end_height = BOOT_EQUIP_POS[this.pose][3];
 
-    if (this.pose == 0 || this.pose == 12 || this.pose == 13 || this.pose == 14 || this.pose == 15) {
-      start_width = this.x * 16 + 8;
-      start_height = this.y * 16 + 35;
-      end_width = 17;
-      end_height = 13;
-    } else if (this.pose == 1) {
-      start_width = this.x * 16 + 10;
-      start_height = this.y * 16 + 36;
-      end_width = 14;
-      end_height = 12;
-    } else if (this.pose == 2) {
-      start_width = this.x * 16 + 7;
-      start_height = this.y * 16 + 36;
-      end_width = 18;
-      end_height = 12;
-    } else if (this.pose == 3) {
-      start_width = this.x * 16 + 7;
-      start_height = this.y * 16 + 36;
-      end_width = 20;
-      end_height = 12;
-    } else if (this.pose == 4) {
-      start_width = this.x * 16 + 7;
-      start_height = this.y * 16 + 36;
-      end_width = 19;
-      end_height = 12;
-    } else if (this.pose == 5) {
-      start_width = this.x * 16 + 6;
-      start_height = this.y * 16 + 36;
-      end_width = 19;
-      end_height = 12;
-    } else if (this.pose == 6) {
-      start_width = this.x * 16 + 8;
-      start_height = this.y * 16 + 36;
-      end_width = 18;
-      end_height = 12;
-    } else if (this.pose == 7) {
-      start_width = this.x * 16 + 9;
-      start_height = this.y * 16 + 36;
-      end_width = 15;
-      end_height = 12;
-    } else if (this.pose == 8) {
-      start_width = this.x * 16 + 9;
-      start_height = this.y * 16 + 36;
-      end_width = 16;
-      end_height = 12;
-    } else if (this.pose == 9) {
-      start_width = this.x * 16 + 8;
-      start_height = this.y * 16 + 36;
-      end_width = 19;
-      end_height = 13;
-    } else if (this.pose == 10) {
-      start_width = this.x * 16 + 8;
-      start_height = this.y * 16 + 36;
-      end_width = 19;
-      end_height = 13;
-    } else if (this.pose == 11) {
-      start_width = this.x * 16 + 5;
-      start_height = this.y * 16 + 36;
-      end_width = 26;
-      end_height = 13;
-    }
-    ctx.save();
-    if (this.left) {
-      if (this.pose == 0 || this.pose == 12 || this.pose == 13 || this.pose == 14 || this.pose == 15) {
-        start_width = CANVAS_WIDTH - 13 - start_width;
-      } else if (this.pose == 2 || this.pose == 3 || this.pose == 4) {
-        start_width = CANVAS_WIDTH - 16 - start_width;
-      } else if (this.pose == 5) {
-        start_width = CANVAS_WIDTH - 17 - start_width;
-      } else if (this.pose == 6 || this.pose == 9 || this.pose == 10) {
-        start_width = CANVAS_WIDTH - 14 - start_width;
-      } else if (this.pose == 8) {
-        start_width = CANVAS_WIDTH - 12 - start_width;
-      } else if (this.pose == 11) {
-        start_width = CANVAS_WIDTH - 20 - start_width;
-      } else {
-        start_width = CANVAS_WIDTH - 10 - start_width;
+      this.ctx.save();
+      if (this.left) {
+        start_width = BOOT_LEFT_EQUIP_POS[this.pose] - start_width;
+        this.ctx.translate(CANVAS_WIDTH, 0);
+        this.ctx.scale(-1, 1);
       }
-      ctx.save();
-      ctx.translate(CANVAS_WIDTH, 0);
-      ctx.scale(-1, 1);
 
-    }
-    if (this.boot == 'silver_boot') {
-      var boot = 0;
-      ctx.drawImage(this.bootImg[boot], this.bootPos[this.pose][0], this.bootPos[this.pose][1], this.bootPos[this.pose][2], this.bootPos[this.pose][3],
+      this.ctx.drawImage(BOOT_IMG[this.boot],
+        BOOT_SPRITE[this.pose][0], BOOT_SPRITE[this.pose][1], BOOT_SPRITE[this.pose][2], BOOT_SPRITE[this.pose][3],
         start_width, start_height, end_width, end_height);
-    } else if (this.boot == 'gold_boot') {
-      var boot = 1;
-      ctx.drawImage(this.bootImg[boot], this.bootPos[this.pose][0], this.bootPos[this.pose][1], this.bootPos[this.pose][2], this.bootPos[this.pose][3],
-        start_width, start_height, end_width, end_height);
-
+      this.ctx.restore();
     }
-    ctx.restore();
   }
 
-  this.checkDeath = function (game, ctx) {
+  this.removeHalfItems = function () {
+    for (var i = 0; i < this.itemsName.length; i++) {
+      if (this.items[this.itemsName[i]] > 1) {
+        this.items[this.itemsName[i]] = Math.floor(this.items[this.itemsName[i]] / 2);
+      }
+    }
+  }
+
+  this.resetPlayer = function () {
+    this.health = PLAYER_MAX_HEALTH;
+    this.mana = PLAYER_MAX_MANA;
+    this.x = PLAYER_START_X;
+    this.y = 1;
+    this.falling = true;
+  }
+
+  this.checkDeath = function () {
     if (this.health <= 0) {
-      game.enemies = [];
-      game.bossBattle = false;
-      this.health = 100;
-      this.x = 75;
-      this.y = 1;
-      this.falling = true;
-      for (var i = 0; i < this.itemsName.length; i++) {
-        if (this.items[this.itemsName[i]] > 1) {
-          this.items[this.itemsName[i]] = Math.floor(this.items[this.itemsName[i]] / 2);
-        }
-      }
-      ctx.translate(-this.world.translated, 0);
-      this.world.translated = -CANVAS_WIDTH;
-      ctx.translate(this.world.translated, 0);
+      this.game.enemies = [];
+      this.game.bossBattle = false;
+      this.resetPlayer();
+      this.removeHalfItems();
+      this.world.resetCamera();
     }
-
   }
 
   this.checkAccessory = function () {
-    if (this.accessory == 'cloud') {
-      this.totalJumps = 2;
-    } else if (this.accessory == 'rocket') {
-      this.totalJumps = 3;
-    } else {
-      this.totalJumps = 1;
-    }
+    this.totalJumps = ACCESSORY_JUMPS[this.accessory];
   }
 }
