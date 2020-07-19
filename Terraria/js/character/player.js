@@ -456,6 +456,7 @@ function Player() {
       this.removeHalfItems();
       this.world.resetCamera();
       stopSound('boss_battle');
+      playSound('slime_killed');
 
     }
   }
