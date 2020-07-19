@@ -45,8 +45,8 @@ const CRAFT = {
 };
 
 const CRAFT_MATS = {
-  mat1X: 350,
-  mat2X: 380,
+  mat1X: 370,
+  mat2X: 400,
   matY: 350
 };
 
