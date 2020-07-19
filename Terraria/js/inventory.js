@@ -92,7 +92,7 @@ function Inventory(player) {
    * @param {string} item It holds the value of what item is being hovered on. 
    */
   this.displayInventoryItemDetails = function (item) {
-    if (item in ITEM_DETAILS) {
+    if (item in ITEM_DETAILS && player.items[item]) {
       var itemDetail = ITEM_DETAILS[item];
       this.drawDetailBackground(itemDetail);
       for (var i = 0; i < itemDetail.length; i++) {
@@ -346,7 +346,8 @@ function Inventory(player) {
    */
   this.itemEquip = function (x, y, item) {
     if (INVENTORY.x <= x && x <= INVENTORY.endX &&
-      INVENTORY.y <= y && y <= INVENTORY.endY) {
+      INVENTORY.y <= y && y <= INVENTORY.endY &&
+      player.items[item]) {
       if (WEAPON.placeWeapons.includes(item) || WEAPON.attackWeapons.includes(item)) {
         this.player.weapon = item;
         this.player.checkPower();
