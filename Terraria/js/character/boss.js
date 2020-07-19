@@ -168,6 +168,7 @@ function Boss(game, x) {
       }
       this.alive = false;
       playSound('slime_killed');
+      stopSound('boss_battle');
       this.game.bossBattle = false;
     }
   }
