@@ -30,8 +30,8 @@ function Player() {
   this.tilesCollected = [];
   this.weapon;
   this.helm;
-  this.chest = 'gold_chest';
-  this.boot = 'gold_boot';
+  this.chest;
+  this.boot;
   this.armor = 0;
   this.damage = WEAPON.damage[this.weapon][0];
   this.pickPower = WEAPON.damage[this.weapon][1];
