@@ -1,3 +1,10 @@
+/**
+ * It creates the slime enemy object.
+ *
+ * @param {game_object} game It is the main game object.
+ * @param {number} x It holds the horizontal tile position.
+ * @param {number} y It holds the vertical tile position.
+ */
 function Slime(game, x, y) {
   this.game = game;
   this.player = game.player;
@@ -11,10 +18,13 @@ function Slime(game, x, y) {
   this.x = x;
   this.y = y;
   this.left = Math.random() > 0.5 ? true : false;
-  this.knockback = false;
+  this.knockback = false; //Used to push enemy backward when it is hit or collides with the player.
   this.alive = true;
   this.knockbackCount = 0;
 
+  /**
+   * It draws the slime object.
+   */
   this.draw = function () {
     if (this.alive) {
       this.ctx.drawImage(this.img, SLIME.sprite[0], SLIME.sprite[1], SLIME.sprite[2], SLIME.sprite[3],
@@ -35,6 +45,9 @@ function Slime(game, x, y) {
     this.showDetails();
   }
 
+  /**
+   * It shows the name and current health of enemy when hovered.
+   */
   this.showDetails = function () {
     if (this.x * TILE.size <= this.game.mouseX && this.game.mouseX <= (this.x + SLIME.width) * TILE.size &&
       this.y * TILE.size <= this.game.mouseY && this.game.mouseY <= (this.y + SLIME.height) * TILE.size) {
@@ -42,6 +55,9 @@ function Slime(game, x, y) {
     }
   }
 
+  /**
+   * It moves the slime in right direction.
+   */
   this.moveRight = function () {
     var tiles = this.world.world;
     var thisX = Math.ceil(this.x);
@@ -55,6 +71,9 @@ function Slime(game, x, y) {
     this.checkDeath();
   }
 
+  /**
+   * It moves the slime in left direction.
+   */
   this.moveLeft = function () {
     var tiles = this.world.world;
     var thisX = Math.ceil(this.x);
@@ -67,6 +86,10 @@ function Slime(game, x, y) {
 
     this.checkDeath();
   }
+
+  /**
+   * It moves the slime downwards when there is not tile below it.
+   */
 
   this.fall = function () {
     var tiles = this.world.world;
@@ -81,6 +104,9 @@ function Slime(game, x, y) {
     }
   }
 
+  /**
+   * It checks horizontal collision with player.
+   */
   this.checkXCollision = function () {
     for (var j = 0; j <= PLAYER.width; j++) {
       if (this.x <= this.player.x + j && this.player.x + j <= this.x + SLIME.width) {
@@ -90,6 +116,9 @@ function Slime(game, x, y) {
     return false;
   }
 
+  /**
+   * It checks vertical collision with player.
+   */
   this.checkYCollision = function () {
     for (var j = 0; j <= PLAYER.height; j++) {
       if (this.y <= this.player.y + j && this.player.y + j <= this.y + SLIME.height) {
@@ -99,6 +128,9 @@ function Slime(game, x, y) {
     return false;
   }
 
+  /**
+   * It checks collision with player.
+   */
   this.playerCollision = function () {
     if (this.checkXCollision() && this.checkYCollision()) {
       this.health -= PLAYER.collisionDamage;
@@ -109,6 +141,9 @@ function Slime(game, x, y) {
     }
   }
 
+  /**
+   * It pushes the slime back when it collides with player or is hit.
+   */
   this.knock = function () {
     var tiles = this.world.world;
     var thisX = Math.ceil(this.x);
@@ -138,17 +173,23 @@ function Slime(game, x, y) {
     }
   }
 
+  /**
+   * It checks if the slime has died.
+   */
   this.checkDeath = function () {
     if (this.health <= 0 || this.x < 0 || this.x > TILE.mapWidth) {
       this.alive = false;
       playSound('slime_killed');
 
       if (Math.random() > DROP_CHANCE.gel && this.health <= 0) {
-        this.world.droppedTiles.push(new Tile(this.game, 'gel', this.x, this.y))
+        this.world.droppedTiles.push(new Tile(this.game, 'gel', this.x, this.y));
       }
     }
   }
 
+  /**
+   * It checks horizontal collision with player weapon.
+   */
   this.checkSwingXHit = function () {
     if (this.player.left) {
       var range = [-(PLAYER.width + WEAPON.size) + 1, 1];
@@ -164,6 +205,9 @@ function Slime(game, x, y) {
     return false;
   }
 
+  /**
+   * It checks vertical collision with player weapon.
+   */
   this.checkSwingYHit = function () {
     for (var i = 0; i <= SLIME.height; i++) {
       if (this.player.y - WEAPON.size <= this.y + i &&
@@ -174,6 +218,9 @@ function Slime(game, x, y) {
     return false;
   }
 
+  /**
+   * It checks collision with player weapon.
+   */
   this.checkSwingHit = function () {
     if (this.checkSwingXHit() && this.checkSwingYHit()) {
       this.knockback = true;

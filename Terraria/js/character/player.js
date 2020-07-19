@@ -1,3 +1,7 @@
+/**
+ * It creates the player object.
+ */
+
 function Player() {
   this.health = PLAYER.maxHealth;
   this.mana = PLAYER.maxMana;
@@ -5,31 +9,44 @@ function Player() {
   this.manaRegenTimer = 0;
   this.x = PLAYER.startX;
   this.y = PLAYER.startY;
-  this.pose = 0;
+  this.pose = 0; // Used to take right image from sprite.
   this.falling = false;
   this.jumping = false;
-  this.left = false;
+  this.left = false; // Current direction of player.
   this.jumpCounter = 0;
   this.swinging = false;
   this.swingCounter = 0;
   this.showInventory = false;
-  this.items = { 'gold_sword': 1, 'cloud': 1, 'rocket': 1, 'gold_bar': 50, 'gel': 10, 'fire_sword': 1, 'silver_bar': 50 };
+  this.items = {
+    'gold_sword': 1,
+    'cloud': 1,
+    'rocket': 1,
+    'gold_bar': 50,
+    'gel': 10,
+    'fire_sword': 1,
+    'silver_bar': 50
+  };
   this.itemsName = Object.keys(this.items);
   this.tilesCollected = [];
   this.weapon;
   this.helm;
-  this.chest;
-  this.boot;
+  this.chest = 'gold_chest';
+  this.boot = 'gold_boot';
   this.armor = 0;
-  this.damage = WEAPON.damage[this.weapon][0]
-  this.pickPower = WEAPON.damage[this.weapon][1]
-  this.axePower = WEAPON.damage[this.weapon][2]
+  this.damage = WEAPON.damage[this.weapon][0];
+  this.pickPower = WEAPON.damage[this.weapon][1];
+  this.axePower = WEAPON.damage[this.weapon][2];
   this.goLeft = false;
   this.goRight = false;
   this.totalJumps = 1;
   this.jumps = 0;
   this.flyTime = 0;
 
+  /**
+   * It initializes the player object.
+   *
+   * @param {game_object} game It is the main game object.
+   */
   this.init = function (game) {
     this.game = game;
     this.ctx = game.ctx;
@@ -38,6 +55,9 @@ function Player() {
 
   }
 
+  /**
+   * It regenerates the player health over time if player health not full.
+   */
   this.healthRegeneration = function () {
     if (this.health < PLAYER.maxHealth) {
       this.healthRegenTimer = (this.healthRegenTimer + 1) % PLAYER.healthRegenTime;
@@ -47,6 +67,9 @@ function Player() {
     }
   }
 
+  /**
+   * It regenerates the player mana over time if player health not full.
+   */
   this.manaRegeneration = function () {
     if (this.mana < PLAYER.maxMana) {
       this.manaRegenTimer = (this.manaRegenTimer + 1) % PLAYER.manaRegenTime;
@@ -56,40 +79,49 @@ function Player() {
     }
   }
 
+  /**
+   * It displays current health of player.
+   */
   this.displayHealth = function () {
-    var playerX = this.x * TILE.size
+    var playerX = this.x * TILE.size;
     if (this.x < MIN_DISPLAY_POS) {
       playerX = MIN_DISPLAY_POS * TILE.size;
     } else if (this.x > MAX_DISPLAY_POS) {
       playerX = MAX_DISPLAY_POS * TILE.size;
     }
 
-    this.ctx.font = '20px Arial'
+    this.ctx.font = '20px Arial';
 
     this.ctx.drawImage(STATS.heartImg, playerX + STATS.picPos, STATS.healthPicHeight);
     this.ctx.fillText(Math.floor(this.health), playerX + STATS.pos, STATS.healthHeight);
     this.healthRegeneration();
   }
 
+  /**
+   * It displays current mana of player.
+   */
   this.displayMana = function () {
-    var playerX = this.x * TILE.size
+    var playerX = this.x * TILE.size;
     if (this.x < MIN_DISPLAY_POS) {
       playerX = MIN_DISPLAY_POS * TILE.size;
     } else if (this.x > MAX_DISPLAY_POS) {
       playerX = MAX_DISPLAY_POS * TILE.size;
     }
-    this.ctx.font = '20px Arial'
+    this.ctx.font = '20px Arial';
 
     this.ctx.drawImage(STATS.manaImg, playerX + STATS.picPos, STATS.manaPicHeight);
     this.ctx.fillText(this.mana, playerX + STATS.pos, STATS.manaHeight);
     this.manaRegeneration();
   }
 
+  /**
+   * It draw the player object.
+   */
   this.draw = function () {
     var tiles = this.world.world;
     var thisX = Math.floor(this.x);
     var thisY = Math.floor(this.y);
-    this.ctx.save()
+    this.ctx.save();
 
     if (this.left) {
       this.ctx.translate(CANVAS_WIDTH, 0);
@@ -99,7 +131,7 @@ function Player() {
       this.ctx.restore();
     } else {
       this.ctx.drawImage(PLAYER.img, PLAYER.sprite.val[this.pose][0], PLAYER.sprite.val[this.pose][1], PLAYER.sprite.width, PLAYER.sprite.height,
-        this.x * TILE.size, this.y * TILE.size, PLAYER.width * TILE.size, PLAYER.height * TILE.size)
+        this.x * TILE.size, this.y * TILE.size, PLAYER.width * TILE.size, PLAYER.height * TILE.size);
     }
 
     this.drawChest(this.ctx);
@@ -114,6 +146,9 @@ function Player() {
     this.checkDeath();
   }
 
+  /**
+   * It moves player in the left direction.
+   */
   this.moveLeft = function () {
     var tiles = this.world.world;
     var thisX = Math.round(this.x);
@@ -139,6 +174,9 @@ function Player() {
     }
   }
 
+  /**
+   * It moves player in the right direction.
+   */
   this.moveRight = function () {
     var tiles = this.world.world;
     var thisX = Math.round(this.x);
@@ -161,6 +199,9 @@ function Player() {
     }
   }
 
+  /**
+   * It moves player downward when there are not tiles under the player.
+   */
   this.fall = function () {
     var tiles = this.world.world;
     var thisX = Math.floor(this.x);
@@ -178,6 +219,9 @@ function Player() {
     }
   }
 
+  /**
+   * It moves player upwards.
+   */
   this.jump = function () {
     var tiles = this.world.world;
     var thisX = Math.round(this.x);
@@ -200,14 +244,20 @@ function Player() {
     }
   }
 
+  /**
+   * It creates fireball if player is using fire staff and has enough mana.
+   */
   this.throwFireball = function () {
     if (this.weapon == 'fire_sword' && this.mana >= FIREBALL.manaCost) {
       this.mana -= FIREBALL.manaCost;
-      this.game.fireBalls.push(new Fireball(this.game, this.game.cursorX, this.game.cursorY))
+      this.game.fireBalls.push(new Fireball(this.game, this.game.cursorX, this.game.cursorY));
       playSound('fireball');
     }
   }
 
+  /**
+   * It swings the player weapon.
+   */
   this.swing = function () {
     var enemies = this.game.enemies;
     playSound('swing');
@@ -237,6 +287,9 @@ function Player() {
     }
   }
 
+  /**
+   * It displays player weapon when swinging.
+   */
   this.displayWeapon = function () {
     if (this.weapon != undefined) {
       this.ctx.save();
@@ -267,6 +320,9 @@ function Player() {
     }
   }
 
+  /**
+   * It pickups dropped tiles and items.
+   */
   this.itemPickup = function () {
     var tiles = this.world.droppedTiles;
     for (var i = 0; i < tiles.length; i++) {
@@ -300,6 +356,9 @@ function Player() {
     }
   }
 
+  /**
+   * It checks the current armor value of player.
+   */
   this.checkArmor = function () {
     var helm = ARMOR.helm[this.helm];
     var chest = ARMOR.chest[this.chest];
@@ -307,18 +366,24 @@ function Player() {
     this.armor = helm + chest + boot;
   }
 
+  /**
+   * It checks the damage, pickpower and axepower of player.
+   */
   this.checkPower = function () {
-    this.damage = WEAPON.damage[this.weapon][0]
-    this.pickPower = WEAPON.damage[this.weapon][1]
-    this.axePower = WEAPON.damage[this.weapon][2]
+    this.damage = WEAPON.damage[this.weapon][0];
+    this.pickPower = WEAPON.damage[this.weapon][1];
+    this.axePower = WEAPON.damage[this.weapon][2];
   }
 
+  /**
+   * It draws the chest armor on the player.
+   */
   this.drawChest = function () {
     if (this.chest) {
       var start_width = this.x * TILE.size + CHEST_EQUIP_POS[this.pose][0];
       var start_height = this.y * TILE.size + CHEST_EQUIP_POS[this.pose][1];
-      var end_width = CHEST_EQUIP_POS[this.pose][2]
-      var end_height = CHEST_EQUIP_POS[this.pose][3]
+      var end_width = CHEST_EQUIP_POS[this.pose][2];
+      var end_height = CHEST_EQUIP_POS[this.pose][3];
 
       this.ctx.save();
       if (this.left) {
@@ -334,6 +399,9 @@ function Player() {
     }
   }
 
+  /**
+   * It draws the boot armor on the player.
+   */
   this.drawBoot = function () {
     if (this.boot) {
       var start_width = this.x * TILE.size + BOOT_EQUIP_POS[this.pose][0];
@@ -355,6 +423,9 @@ function Player() {
     }
   }
 
+  /**
+   * It removes half of the player's items in the inventory.
+   */
   this.removeHalfItems = function () {
     for (var i = 0; i < this.itemsName.length; i++) {
       if (this.items[this.itemsName[i]] > 1) {
@@ -363,6 +434,9 @@ function Player() {
     }
   }
 
+  /**
+   * It resets the player's health, mana and position. 
+   */
   this.resetPlayer = function () {
     this.health = PLAYER.maxHealth;
     this.mana = PLAYER.maxMana;
@@ -371,6 +445,9 @@ function Player() {
     this.falling = true;
   }
 
+  /**
+   * It checks if player has died. 
+   */
   this.checkDeath = function () {
     if (this.health <= 0) {
       this.game.enemies = [];
@@ -383,6 +460,9 @@ function Player() {
     }
   }
 
+  /**
+   * It checks what accessory the player is wearing and its benefits. 
+   */
   this.checkAccessory = function () {
     this.totalJumps = ACCESSORY_JUMPS[this.accessory];
   }

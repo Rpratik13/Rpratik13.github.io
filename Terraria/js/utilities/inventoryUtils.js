@@ -21,7 +21,7 @@ const INVENTORY = {
     equipped: { x: 500, y: 240 }
 
   }
-}
+};
 
 
 
@@ -30,7 +30,7 @@ const ARMOR_CONTAINER = {
   containerX: 550,
   containerY: 250,
   marginY: 40
-}
+};
 
 const SHIELD = {
   img: new Image,
@@ -41,7 +41,7 @@ const SHIELD = {
   txt1X: 562,
   txt2X: 559,
   txtY: 417
-}
+};
 
 SHIELD.img.src = 'images/inventory/shield.png';
 
@@ -55,7 +55,7 @@ const EQUIPPED = {
     x: 510,
     y: 330
   }
-}
+};
 
 const UNEQUIP = {
   sprite: [[12, 12, 18, 18], [8, 24, 24, 20], [12, 42, 18, 12]],
@@ -64,4 +64,4 @@ const UNEQUIP = {
   helm: { x: 700, endX: 730, y: 250, endY: 280 },
   chest: { x: 700, endX: 730, y: 290, endY: 320 },
   boot: { x: 700, endX: 730, y: 330, endY: 360 },
-}
+};

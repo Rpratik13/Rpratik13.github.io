@@ -79,7 +79,7 @@ const WEAPON = {
     'gold': [0, 0, 0],
     'silver': [0, 0, 0]
   }
-}
+};
 
 
 WEAPON.imgs['dirt'].src = 'images/dirt/dirt_drop.png';

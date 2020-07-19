@@ -1,8 +1,16 @@
+/**
+ * It creates the world object.
+ */
 function World() {
   this.translated = -CANVAS_WIDTH;
   this.tileHealth = [];
   this.droppedTiles = [];
 
+  /**
+   * It initializes the world object.
+   * 
+   * @param {game_object} game It is the main game object.
+   */
   this.init = function (game) {
     this.game = game;
     this.world = tilemap;
@@ -11,6 +19,9 @@ function World() {
 
   }
 
+  /**
+   * It initializes the health of each tile.
+   */
   this.initTileHealth = function () {
     for (var i = 0; i < this.world.length; i++) {
       var row = [];
@@ -24,7 +35,11 @@ function World() {
   }
 
 
-
+  /**
+   * It moves the camera according to player movement.
+   * 
+   * @param {number} val It holds the value for how much the camera is to be moved. 
+   */
   this.cameraMove = function (val) {
     this.ctx.translate(-this.translated, 0);
     this.translated += val;
@@ -38,23 +53,40 @@ function World() {
     this.ctx.translate(this.translated, 0);
   }
 
+  /**
+   * It resets the camera to original position.
+   */
+
   this.resetCamera = function () {
     this.ctx.translate(-this.translated, 0);
     this.translated = -CANVAS_WIDTH;
     this.ctx.translate(this.translated, 0);
   }
 
+  /**
+   * It draws trees.
+   * 
+   * @param {number} i It holds vertical tile position of tree base.
+   * @param {number} j It holds horizontal tile position of tree base.
+   */
   this.drawTree = function (i, j) {
     var tree = this.world[i][j];
-    var treeNum = tree - 5;
-    if (tree == 8) {
-      if (this.world[i - 1][j] != 8 && this.world[i - 1][j] != 33) {
-        treeNum = 29;
+    var treeNum = tree - TREE.shift;
+    if (tree == TREE.trunk) {
+      if (this.world[i - 1][j] != TREE.trunk && this.world[i - 1][j] != TREE.treeTopBase) {
+        treeNum = TREE.treeTopStart;
       }
     }
-    this.ctx.drawImage(TILE_IMAGES['tree'][treeNum], TILE.size * (j - 1), TILE.size * (i - 1), TILE.size, TILE.size)
+    this.ctx.drawImage(TILE_IMAGES['tree'][treeNum], TILE.size * (j - 1), TILE.size * (i - 1), TILE.size, TILE.size);
   }
 
+  /**
+   * It draws the tiles according to tile map.
+   * 
+   * @param {number} i It holds the vertical tile position of the tile to be drawn. 
+   * @param {number} j It holds the horizontal tile position of the tile to be drawn.
+   * @param {string} type It holds what type of tile is to be drawn.
+   */
   this.drawTile = function (i, j, type) {
     if (type == 'wood') {
 
@@ -88,6 +120,9 @@ function World() {
     }
   }
 
+  /**
+   * It draws the world.
+   */
   this.drawWorld = function () {
     for (var i = 1; i < this.world.length - 1; i++) {
       for (var j = 1; j < this.world[0].length - 1; j++) {
@@ -100,12 +135,21 @@ function World() {
     }
   }
 
+  /**
+   * It draws the dropped tiles.
+   */
   this.drawDroppedTiles = function () {
     for (var i = 0; i < this.droppedTiles.length; i++) {
       this.droppedTiles[i].draw();
     }
   }
 
+  /**
+   * It removes trees if base is destroyed.
+   * 
+   * @param {number} x It holds the horizontal tile position of tree base. 
+   * @param {number} y It holds the vertical tile position of tree base.
+   */
   this.removeTree = function (x, y) {
     while (this.world[y][x] != TILE.treeTopStart && this.world[y][x] != 0) {
       this.droppedTiles.push(new Tile(this.game, 'wood', x, y));
@@ -124,6 +168,12 @@ function World() {
     }
   }
 
+  /**
+   * It checks if the placed tile is on player position.
+   * 
+   * @param {number} x It holds the horizontal tile position of placed tile. 
+   * @param {number} y It holds the vertical tile position of placed tile.
+   */
   this.notOnPlayer = function (x, y) {
     var player = this.player;
     if ((player.x <= x && x <= player.x + PLAYER.width) &&
@@ -133,6 +183,13 @@ function World() {
     return true;
   }
 
+  /**
+   * It reduces the health of tile when player hits a tile.
+   * 
+   * @param {number} tileVal It holds the type of the hit tile.
+   * @param {number} x It holds the horizontal tile position of the hit tile.
+   * @param {number} y It holds the vertical tile position of the hit tile.
+   */
   this.hitTile = function (tileVal, x, y) {
     var player = this.player;
     if (Math.abs(x - (player.x + PLAYER.width / 2)) < PLAYER.placeRange && Math.abs(y - (PLAYER.height / 2 + player.y)) < PLAYER.placeRange) {
@@ -146,6 +203,13 @@ function World() {
     }
   }
 
+  /**
+   * It places a tile if player is holding placable tile.
+   * 
+   * @param {number} tileX It holds horizontal tile position of placed tile.
+   * @param {number} tileY It holds vertical tile position of placed tile.
+   * @param {number} tileVal It holds the value of tile position where the tile is to be placed.
+   */
   this.placeTile = function (tileX, tileY, tileVal) {
     var player = this.player;
     if (Math.abs(tileX - (player.x + PLAYER.width / 2)) < PLAYER.placeRange &&
@@ -153,7 +217,7 @@ function World() {
       if (WEAPON.placeWeapons.includes(player.weapon) &&
         player.items[player.weapon] > 0 &&
         this.notOnPlayer(tileX, tileY, player) &&
-        tileVal == 0) {
+        tileVal == TILE.empty) {
         this.world[tileY][tileX] = TILE_PLACE_VAL[player.weapon];
         this.tileHealth[tileY][tileX] = TILE.fullHealth;
         player.items[player.weapon] -= 1;
@@ -166,6 +230,12 @@ function World() {
 
   }
 
+  /**
+   * It removes tile if tile health if zero.
+   * 
+   * @param {number} tileX It holds horizontal tile position of tile to be removed.
+   * @param {number} tileY It holds vertical tile position of tile to be removed.
+   */
   this.removeTile = function (tileX, tileY) {
     var tileVal = this.world[tileY][tileX];
     if (this.tileHealth[tileY][tileX] <= 0 && tileVal != TILE.empty) {
@@ -173,11 +243,11 @@ function World() {
       if (tileVal == TILE.treeBaseCenter) {
         if (this.world[tileY][tileX + 1] == TILE.treeBaseRight) {
           this.tileHealth[tileY][tileX + 1] = 0;
-          this.removeTile(tileX + 1, tileY)
+          this.removeTile(tileX + 1, tileY);
         }
         if (this.world[tileY][tileX - 1] == TILE.treeBaseLeft) {
           this.tileHealth[tileY][tileX - 1] = 0;
-          this.removeTile(tileX - 1, tileY)
+          this.removeTile(tileX - 1, tileY);
         }
         this.removeTree(tileX, tileY);
       } else if (tileVal == TILE.treeTrunk) {
@@ -190,6 +260,9 @@ function World() {
 
 
 
+  /*
+   * It performs place, hit and remove actions based on mouse click position. 
+   */
   this.clicked = function (x, y) {
     var tileX = Math.floor((x - this.translated) / TILE.size) + 1;
     var tileY = Math.floor(y / TILE.size) + 1;
@@ -198,6 +271,5 @@ function World() {
     this.placeTile(tileX, tileY, tileVal);
     this.hitTile(tileVal, tileX, tileY);
     this.removeTile(tileX, tileY);
-
   }
 }

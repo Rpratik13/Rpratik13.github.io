@@ -14,7 +14,7 @@ const CRAFTING_MATERIAL = {
   12: [['gold', 1]],
   13: [['silver', 1]],
   14: [['gel', 5], ['lens', 5]],
-}
+};
 
 const CRAFT_ITEM = {
   0: 'silver_sword',
@@ -32,7 +32,7 @@ const CRAFT_ITEM = {
   12: 'gold_bar',
   13: 'silver_bar',
   14: 'cloud',
-}
+};
 
 const CRAFT = {
   x: 200,
@@ -42,16 +42,16 @@ const CRAFT = {
   rowSize: 5,
   colSize: 3,
   craftBtn: { x: 380, endX: 410, y: 390, endY: 420 }
-}
+};
 
 const CRAFT_MATS = {
   mat1X: 350,
   mat2X: 380,
   matY: 350
-}
+};
 
 
 const CRAFT_MAT_CONTAINER = {
   x: 220,
   y: 350
-}
+};

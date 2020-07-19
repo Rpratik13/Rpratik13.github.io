@@ -1,3 +1,6 @@
+/**
+ * It creates a loader object that loads image files.
+ */
 function Preloader() {
   this.images = [
         'images/bg/bg0',
@@ -166,6 +169,9 @@ function Preloader() {
   this.loadedImages = 0;
   this.audioLoader = new AudioLoader();
 
+  /**
+   * It loads the required image files.
+   */
   this.load = function (game, start) {
     var ctx = game.ctx;
     for (var i = 0; i < this.images.length; i++) {

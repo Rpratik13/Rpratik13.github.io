@@ -24,7 +24,7 @@ const INV_IMAGES = {
   'fire_sword': new Image,
   'cloud': new Image,
   'rocket': new Image
-}
+};
 
 var craftItems = {
   'silver_sword': 'craft0',
@@ -42,7 +42,7 @@ var craftItems = {
   'gold_bar': 'craft12',
   'silver_bar': 'craft13'
 
-}
+};
 
 var keys = Object.keys(INV_IMAGES);
 const IMG_SOURCES = [
@@ -88,9 +88,9 @@ UNEQUIPPED_IMG['chest'].src = 'images/player/player_shirt.png';
 UNEQUIPPED_IMG['boot'].src = 'images/player/player_pant.png';
 
 INV_CONTAINER = new Image;
-INV_CONTAINER.src = 'images/inventory/inv.png'
+INV_CONTAINER.src = 'images/inventory/inv.png';
 INV_SELECTED = new Image;
-INV_SELECTED.src = 'images/inventory/inv_selected.png'
+INV_SELECTED.src = 'images/inventory/inv_selected.png';
 INV_NOT_ENOUGH = new Image;
 INV_NOT_ENOUGH.src = 'images/inventory/inv_not.png';
 

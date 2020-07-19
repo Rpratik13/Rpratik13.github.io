@@ -11,7 +11,7 @@ const FIREBALL = {
   life: 200,
   damage: 10,
   size: 1
-}
+};
 
 
 const FALL_SPEED = 1 / 4;
@@ -23,45 +23,45 @@ const DROP_CHANCE = {
   'lens': 0.3,
   'zombieDrop': 0.6,
   'rocket': 0.1
-}
+};
 
-const ACCESSORY = ['cloud', 'rocket']
+const ACCESSORY = ['cloud', 'rocket'];
 
 const LOGO = {
   x: 200,
   y: 100,
   width: 486,
   height: 142
-}
+};
 
 const START = {
   x: 400,
   y: 300,
   yAbove: 270,
   width: 485
-}
+};
 
 const PAUSED = {
   x: 400,
   y: 300
-}
+};
 
 const STATE = {
   startScreen: 0,
   running: 1,
   paused: 2
-}
+};
 
 const ENEMY_GEN_DIST = {
   range: 20,
   minMargin: 0,
   maxMargin: 150,
-}
+};
 
 const DAY = {
   quarter: 5000,
   full: 20000
-}
+};
 
 const SECONDS_IN_DAY = 86400;
 const TO_HOURS = 1 / 3600;
@@ -73,6 +73,6 @@ const BG_POS = {
   height: 300,
   yUnder: 300,
   heightUnder: 620
-}
+};
 
 const ENEMY_GEN_TIME = 500;

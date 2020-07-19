@@ -1,3 +1,10 @@
+/**
+ * It creates the demon eye enemy object.
+ *
+ * @param {game_object} game It is the main game object.
+ * @param {number} x It holds the horizontal tile position.
+ * @param {number} y It holds the vertical tile position.
+ */
 function Eye(game, x, y) {
   this.game = game;
   this.ctx = game.ctx;
@@ -9,11 +16,13 @@ function Eye(game, x, y) {
   this.img.src = 'images/enemy/eye.png';
   this.x = x;
   this.y = y;
-  this.knockback = false;
-  this.alive = true;
+  this.knockback = false; //Used to push enemy backward when it is hit or collides with the player.
   this.knockbackCount = 0;
+  this.alive = true;
 
-
+  /**
+   * It set the direction of the enemy based on player position.
+   */
   this.checkDirection = function () {
     if (this.player.x + EYE.width < this.x) {
       this.left = true;
@@ -22,6 +31,9 @@ function Eye(game, x, y) {
     }
   }
 
+  /**
+   * It draws the demon eye.
+   */
   this.draw = function () {
     if (this.alive) {
       this.ctx.save();
@@ -40,12 +52,15 @@ function Eye(game, x, y) {
       this.ctx.restore();
     }
 
-    this.playerCollision()
+    this.playerCollision();
     this.move();
     this.checkDeath();
     this.showDetails();
   }
 
+  /**
+   * It moves the demon eye.
+   */
   this.move = function () {
     if (this.knockback) {
       this.knock();
@@ -64,6 +79,9 @@ function Eye(game, x, y) {
     }
   }
 
+  /**
+   * It shows the name and current health of enemy when hovered.
+   */
   this.showDetails = function () {
     if (this.x * TILE.size <= this.game.mouseX && this.game.mouseX <= (this.x + EYE.width) * TILE.size &&
       this.y * TILE.size <= this.game.mouseY && this.game.mouseY <= (this.y + EYE.height) * TILE.size) {
@@ -71,6 +89,9 @@ function Eye(game, x, y) {
     }
   }
 
+  /**
+   * It checks horizontal collision with player.
+   */
   this.checkXCollision = function () {
     for (var j = 0; j <= PLAYER.width; j++) {
       if (this.x <= this.player.x + j && this.player.x + j <= this.x + EYE.width) {
@@ -80,6 +101,9 @@ function Eye(game, x, y) {
     return false;
   }
 
+  /**
+   * It checks vertical collision with player.
+   */
   this.checkYCollision = function () {
     for (var j = 0; j <= PLAYER.height; j++) {
       if (this.y <= this.player.y + j && this.player.y + j <= this.y + EYE.height) {
@@ -89,6 +113,9 @@ function Eye(game, x, y) {
     return false;
   }
 
+  /**
+   * It checks collision with player.
+   */
   this.playerCollision = function () {
     if (this.checkXCollision() && this.checkYCollision()) {
       this.health -= PLAYER.collisionDamage;
@@ -99,6 +126,9 @@ function Eye(game, x, y) {
     }
   }
 
+  /**
+   * It pushes the enemy back when it collides with player or is hit.
+   */
   this.knock = function () {
     if (this.x > this.player.x) {
       this.x += KNOCKBACK_SPEED;
@@ -115,16 +145,22 @@ function Eye(game, x, y) {
 
   }
 
+  /**
+   * It checks if the enemy has died.
+   */
   this.checkDeath = function () {
     if (this.health <= 0 || this.x < 0 || this.x > TILE.mapWidth) {
       this.alive = false;
       playSound('slime_killed');
       if (Math.random() < DROP_CHANCE.lens && this.health <= 0) {
-        this.world.droppedTiles.push(new Tile(this.game, 'lens', this.x, this.y))
+        this.world.droppedTiles.push(new Tile(this.game, 'lens', this.x, this.y));
       }
     }
   }
 
+  /**
+   * It checks horizontal collision with player weapon.
+   */
   this.checkSwingXHit = function () {
     if (this.player.left) {
       var range = [-(PLAYER.width + WEAPON.size) + 1, 1];
@@ -140,6 +176,9 @@ function Eye(game, x, y) {
     return false;
   }
 
+  /**
+   * It checks vertical collision with player weapon.
+   */
   this.checkSwingYHit = function () {
     for (var i = 0; i <= EYE.height; i++) {
       if (this.player.y - WEAPON.size <= this.y + i &&
@@ -150,6 +189,9 @@ function Eye(game, x, y) {
     return false;
   }
 
+  /**
+   * It checks collision with player weapon.
+   */
   this.checkSwingHit = function () {
     if (this.checkSwingXHit() && this.checkSwingYHit()) {
       this.knockback = true;

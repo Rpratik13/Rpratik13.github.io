@@ -1,3 +1,8 @@
+/**
+ * It creates the player inventory object.
+ * 
+ * @param {player_object} player It holds the player object. 
+ */
 function Inventory(player) {
   this.ctx = player.ctx;
   this.world = player.world;
@@ -6,10 +11,18 @@ function Inventory(player) {
   this.mouseY = 0;
   this.craftingSelected = -1;
 
+  /**
+   * It draws the inventory item image.
+   * 
+   * @param {string} type It holds the type of item. 
+   * @param {number} x It holds the horizontal position of item. 
+   * @param {number} y It holds the vertical position of item. 
+   * @param {boolean} textFlag It checks if text if to be written on item.
+   */
   this.drawTile = function (type, x, y, textFlag) {
     if (player.items[type] > 0) {
       this.ctx.drawImage(INV_IMAGES[type], x + INVENTORY.padding, y + INVENTORY.padding, INVENTORY.itemSize,
-        INVENTORY.itemSize)
+        INVENTORY.itemSize);
 
 
       if (player.items[type] > 0 && textFlag) {
@@ -19,6 +32,9 @@ function Inventory(player) {
     }
   }
 
+  /**
+   * It creates items if player has required materials
+   */
   this.craftItem = function () {
     if (this.craftingSelected != -1) {
       var item = CRAFT_ITEM[this.craftingSelected];
@@ -42,6 +58,11 @@ function Inventory(player) {
     }
   }
 
+  /**
+   * It finds the max length of string from given array of strings.
+   * 
+   * @param {array} arr It holds the strings. 
+   */
   this.findMaxStringLength = function (arr) {
     var maxLength = 0;
     for (var i = 0; i < arr.length; i++) {
@@ -52,6 +73,11 @@ function Inventory(player) {
     return maxLength;
   }
 
+  /**
+   * It creates the background for item details text.
+   * 
+   * @param {array} arr It holds the item detail strings. 
+   */
   this.drawDetailBackground = function (arr) {
     this.ctx.fillStyle = 'black';
     this.ctx.fillRect(-this.world.translated + this.mouseX + INVENTORY.detailsPad, this.mouseY - INVENTORY.detailsPad,
@@ -60,6 +86,11 @@ function Inventory(player) {
 
   }
 
+  /**
+   * It displays the details of given item.
+   * 
+   * @param {string} item It holds the value of what item is being hovered on. 
+   */
   this.displayInventoryItemDetails = function (item) {
     if (item in ITEM_DETAILS) {
       var itemDetail = ITEM_DETAILS[item];
@@ -71,6 +102,11 @@ function Inventory(player) {
     }
   }
 
+  /**
+   * It displays the details of crafting item.
+   * 
+   * @param {string} item It holds the value of what item is being hovered on. 
+   */
   this.displayCraftingItemDetails = function () {
     if (CRAFT.x < this.mouseX && this.mouseX < CRAFT.endX &&
       CRAFT.y < this.mouseY && this.mouseY < CRAFT.endY) {
@@ -88,6 +124,11 @@ function Inventory(player) {
     }
   }
 
+  /**
+   * It displays the details of crafting materials.
+   * 
+   * @param {string} item It holds the value of what item is being hovered on. 
+   */
   this.displayCraftMaterialDetails = function () {
     var material;
     if (this.craftingSelected != -1) {
@@ -110,6 +151,9 @@ function Inventory(player) {
     }
   }
 
+  /**
+   * It displays the details of given item.
+   */
   this.displayItemDetails = function () {
     var i = Math.floor((this.mouseX - INVENTORY.x) / INVENTORY.containerSize);
     var j = Math.floor((this.mouseY - INVENTORY.y) / INVENTORY.containerSize);
@@ -120,6 +164,11 @@ function Inventory(player) {
     this.displayCraftMaterialDetails();
   }
 
+  /**
+   * It displays crafting materials based on the crafting item selected.
+   * 
+   * @param {number} playerX It holds the horizontal position of player.
+   */
   this.displayCraftMaterials = function (playerX) {
     if (this.craftingSelected != -1) {
       var materials = CRAFTING_MATERIAL[this.craftingSelected];
@@ -139,6 +188,11 @@ function Inventory(player) {
     }
   }
 
+  /**
+   * It displays crafting table.
+   * 
+   * @param {number} playerX It holds the horizontal position of player.
+   */
   this.displayCrafting = function (playerX) {
     for (var i = 0; i < CRAFT.colSize; i++) {
       for (var j = 0; j < CRAFT.rowSize; j++) {
@@ -150,7 +204,8 @@ function Inventory(player) {
             INVENTORY.containerSize, INVENTORY.containerSize);
         }
 
-        this.ctx.drawImage(INV_IMAGES[CRAFT_ITEM[i * INVENTORY.rowSize + j]], playerX + INVENTORY.shift + INVENTORY.padding + INVENTORY.containerSize * j,
+        this.ctx.drawImage(INV_IMAGES[CRAFT_ITEM[i * INVENTORY.rowSize + j]],
+          playerX + INVENTORY.shift + INVENTORY.padding + INVENTORY.containerSize * j,
           CRAFT.y + INVENTORY.padding + INVENTORY.containerSize * i, INVENTORY.itemSize,
           INVENTORY.itemSize);
 
@@ -163,6 +218,11 @@ function Inventory(player) {
     this.displayCraftMaterials(playerX);
   }
 
+  /**
+   * It displays armor equipped by player.
+   * 
+   * @param {number} playerX It holds the horizontal position of player.
+   */
   this.displayArmor = function (playerX) {
     for (var i = 0; i < ARMOR_CONTAINER.num; i++) {
       this.ctx.drawImage(INV_CONTAINER, playerX + ARMOR_CONTAINER.containerX, ARMOR_CONTAINER.containerY + ARMOR_CONTAINER.marginY * i,
@@ -171,34 +231,36 @@ function Inventory(player) {
 
     if (this.player.helm == undefined) {
       this.ctx.drawImage(UNEQUIPPED_IMG['head'], UNEQUIP.sprite[0][0], UNEQUIP.sprite[0][1], UNEQUIP.sprite[0][2], UNEQUIP.sprite[0][3],
-        playerX + ARMOR_CONTAINER.containerX + (INVENTORY.containerSize - UNEQUIP.sprite[0][2]) / 2, ARMOR_CONTAINER.containerY + (INVENTORY.containerSize - UNEQUIP.sprite[0][3]) / 2,
+        playerX + ARMOR_CONTAINER.containerX + (INVENTORY.containerSize - UNEQUIP.sprite[0][2]) / 2,
+        ARMOR_CONTAINER.containerY + (INVENTORY.containerSize - UNEQUIP.sprite[0][3]) / 2,
         UNEQUIP.sprite[0][2], UNEQUIP.sprite[0][3]);
     } else {
-      this.ctx.drawImage(INV_IMAGES[this.player.helm], playerX + ARMOR_CONTAINER.containerX + INVENTORY.padding, ARMOR_CONTAINER.containerY + INVENTORY.padding,
-        INVENTORY.itemSize,
-        INVENTORY.itemSize)
+      this.ctx.drawImage(INV_IMAGES[this.player.helm], playerX + ARMOR_CONTAINER.containerX + INVENTORY.padding,
+        ARMOR_CONTAINER.containerY + INVENTORY.padding, INVENTORY.itemSize, INVENTORY.itemSize);
 
     }
 
     if (this.player.chest == undefined) {
       this.ctx.drawImage(UNEQUIPPED_IMG['chest'], UNEQUIP.sprite[1][0], UNEQUIP.sprite[1][1], UNEQUIP.sprite[1][2], UNEQUIP.sprite[1][3],
         playerX + ARMOR_CONTAINER.containerX + (INVENTORY.containerSize - UNEQUIP.sprite[1][2]) / 2,
-        ARMOR_CONTAINER.containerY + ARMOR_CONTAINER.marginY + (INVENTORY.containerSize - UNEQUIP.sprite[1][3]) / 2, UNEQUIP.sprite[1][2], UNEQUIP.sprite[1][3]);
+        ARMOR_CONTAINER.containerY + ARMOR_CONTAINER.marginY + (INVENTORY.containerSize - UNEQUIP.sprite[1][3]) / 2,
+        UNEQUIP.sprite[1][2], UNEQUIP.sprite[1][3]);
     } else {
       this.ctx.drawImage(INV_IMAGES[this.player.chest], playerX + ARMOR_CONTAINER.containerX + INVENTORY.padding,
         ARMOR_CONTAINER.containerY + ARMOR_CONTAINER.marginY + INVENTORY.padding, INVENTORY.itemSize,
-        INVENTORY.itemSize)
+        INVENTORY.itemSize);
 
     }
 
     if (this.player.boot == undefined) {
       this.ctx.drawImage(UNEQUIPPED_IMG['boot'], UNEQUIP.sprite[2][0], UNEQUIP.sprite[2][1], UNEQUIP.sprite[2][2], UNEQUIP.sprite[2][3],
         playerX + ARMOR_CONTAINER.containerX + (INVENTORY.containerSize - UNEQUIP.sprite[2][2]) / 2,
-        ARMOR_CONTAINER.containerY + ARMOR_CONTAINER.marginY * 2 + (INVENTORY.containerSize - UNEQUIP.sprite[2][3]) / 2, UNEQUIP.sprite[2][2], UNEQUIP.sprite[2][3]);
+        ARMOR_CONTAINER.containerY + ARMOR_CONTAINER.marginY * 2 + (INVENTORY.containerSize - UNEQUIP.sprite[2][3]) / 2,
+        UNEQUIP.sprite[2][2], UNEQUIP.sprite[2][3]);
     } else {
-      this.ctx.drawImage(INV_IMAGES[this.player.boot], playerX + ARMOR.containerX + INVENTORY.padding,
-        ARMOR.containerY + ARMOR.marginY * 2 + INVENTORY.padding, INVENTORY.itemSize,
-        INVENTORY.itemSize)
+      this.ctx.drawImage(INV_IMAGES[this.player.boot], playerX + ARMOR_CONTAINER.containerX + INVENTORY.padding,
+        ARMOR_CONTAINER.containerY + ARMOR_CONTAINER.marginY * 2 + INVENTORY.padding, INVENTORY.itemSize,
+        INVENTORY.itemSize);
 
     }
 
@@ -210,6 +272,11 @@ function Inventory(player) {
     }
   }
 
+  /**
+   * It displays weapon equipped by player.
+   * 
+   * @param {number} playerX It holds the horizontal position of player.
+   */
   this.displayWeapon = function (playerX) {
     this.ctx.drawImage(INV_CONTAINER, playerX + EQUIPPED.weapon.x, EQUIPPED.weapon.y, INVENTORY.containerSize, INVENTORY.containerSize);
     if (this.player.weapon != undefined) {
@@ -217,6 +284,11 @@ function Inventory(player) {
     }
   }
 
+  /**
+   * It displays accessory equipped by player.
+   * 
+   * @param {number} playerX It holds the horizontal position of player.
+   */
   this.displayAccessory = function (playerX) {
     this.ctx.drawImage(INV_CONTAINER, playerX + EQUIPPED.accessory.x, EQUIPPED.accessory.y, INVENTORY.containerSize, INVENTORY.containerSize);
     if (this.player.accessory != undefined) {
@@ -224,6 +296,11 @@ function Inventory(player) {
     }
   }
 
+  /**
+   * It displays inventory items.
+   * 
+   * @param {number} playerX It holds the horizontal position of player.
+   */
   this.displayInventoryItems = function (playerX) {
     for (var i = 0; i < INVENTORY.rowSize; i++) {
       for (var j = 0; j < INVENTORY.colSize; j++) {
@@ -235,6 +312,9 @@ function Inventory(player) {
     }
   }
 
+  /**
+   * It displays the inventory.
+   */
   this.display = function () {
     var playerX = this.player.x * TILE.size - INVENTORY.displayShift;
     if (this.player.x < MIN_DISPLAY_POS) {
@@ -256,6 +336,13 @@ function Inventory(player) {
     this.displayItemDetails();
   }
 
+  /**
+   * It equips items on the player.
+   * 
+   * @param {number} x It holds horizontal mouse click position. 
+   * @param {number} y It holds vertical mouse click position.
+   * @param {string} item It holds the type of item clicked.
+   */
   this.itemEquip = function (x, y, item) {
     if (INVENTORY.x <= x && x <= INVENTORY.endX &&
       INVENTORY.y <= y && y <= INVENTORY.endY) {
@@ -278,6 +365,12 @@ function Inventory(player) {
     }
   }
 
+  /**
+   * It unequips items from player.
+   * 
+   * @param {number} x It holds horizontal mouse click position.
+   * @param {number} y It holds vertical mouse click poistion.
+   */
   this.itemUnequip = function (x, y) {
     if (UNEQUIP.weapon.x < x && x < UNEQUIP.weapon.endX &&
       UNEQUIP.weapon.y < y && y < UNEQUIP.weapon.endY) {
@@ -307,6 +400,12 @@ function Inventory(player) {
 
   }
 
+  /**
+   * It performs equip, unequip and craft functions.
+   * 
+   * @param {number} x It holds horizontal mouse click position.
+   * @param {number} y It holds vertical mouse click poistion.
+   */
   this.clicked = function (x, y) {
     var i = Math.floor((x - INVENTORY.x) / INVENTORY.containerSize);
     var j = Math.floor((y - INVENTORY.y) / INVENTORY.containerSize);
