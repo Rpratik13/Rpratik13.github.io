@@ -49,9 +49,9 @@ function Game() {
     that.player.init(that);
     that.world.initTileHealth();
     background = new Image;
-    background.src = 'images/bg0.png';
+    background.src = 'images/bg/bg0.png';
     bg_under = new Image;
-    bg_under.src = 'images/bg2.png';
+    bg_under.src = 'images/bg/bg1.png';
     logo = new Image;
     logo.src = 'images/logo.png';
     drawStartScreen();
@@ -61,11 +61,11 @@ function Game() {
     var ctx = that.ctx;
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     ctx.drawImage(background, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    ctx.drawImage(logo, 200, 100, 486, 142);
-    ctx.fillText('Start', 400, 300);
-    if (gameState == 0) {
+    ctx.drawImage(logo, LOGO.x, LOGO.y, LOGO.width, LOGO.height);
+    ctx.fillText('Start', START.x, START.y);
+    if (gameState == STATE.startScreen) {
       window.requestAnimationFrame(drawStartScreen);
-    } else if (gameState == 1) {
+    } else if (gameState == STATE.running) {
       ctx.translate(that.world.translated, 0);
       run();
     }
@@ -73,25 +73,25 @@ function Game() {
 
   function drawPauseScreen() {
     var ctx = that.ctx;
-    ctx.fillText('Paused', -that.world.translated + 400, 300);
-    if (gameState == 1) {
+    ctx.fillText('Paused', -that.world.translated + PAUSED.x, PAUSED.y);
+    if (gameState == STATE.running) {
       run();
-    } else if (gameState == 2) {
+    } else if (gameState == STATE.paused) {
       window.requestAnimationFrame(drawPauseScreen);
     }
   }
 
 
   bossBtn.onmousedown = function (e) {
-    if (gameState == 1) {
+    if (gameState == STATE.running) {
       stopSound('bg');
       stopSound('night_bg');
       playSound('boss_battle');
       if (!that.bossBattle) {
 
-        var minDist = Math.max(that.player.x - 20, 0);
-        var maxDist = Math.min(that.player.x + 20, 150);
-        that.enemies.push(new Boss(that, Math.floor(Math.random() * (maxDist - minDist) + minDist), 8));
+        var minDist = Math.max(that.player.x - ENEMY_GEN_DIST.range, ENEMY_GEN_DIST.minMargin);
+        var maxDist = Math.min(that.player.x + ENEMY_GEN_DIST.range, ENEMY_GEN_DIST.maxMargin);
+        that.enemies.push(new Boss(that, Math.floor(Math.random() * (maxDist - minDist) + minDist)));
 
       }
       playSound('roar');
@@ -99,14 +99,14 @@ function Game() {
     }
   }
 
-  timeBtn.onmousedown = function (e) {
+  timeBtn.onmousedown = function () {
     if (gameState == 1) {
-      timer = (timer + 5000) % 20000;
+      timer = (timer + DAY.quarter) % DAY.full;
     }
   }
 
   game.onmousemove = function (e) {
-    if (gameState == 1) {
+    if (gameState == STATE.running) {
       if (that.player.showInventory) {
         that.player.inventory.mouseX = e.pageX;
         that.player.inventory.mouseY = e.pageY;
@@ -121,9 +121,9 @@ function Game() {
 
     var cursorX = e.pageX;
     var cursorY = e.pageY;
-    if (gameState == 0) {
-      if (400 < cursorX && cursorX < 485 && 270 < cursorY && cursorY < 300) {
-        gameState = 1;
+    if (gameState == STATE.startScreen) {
+      if (START.x < cursorX && cursorX < START.width && START.yAbove < cursorY && cursorY < START.y) {
+        gameState = STATE.running;
         that.ctx.font = '10px Arial';
       }
     } else {
@@ -139,7 +139,7 @@ function Game() {
   }
 
   document.addEventListener('keydown', function (e) {
-    if (gameState == 1) {
+    if (gameState == STATE.running) {
       if (e.key == 'd') {
         that.player.left = false;
         that.player.goRight = true;
@@ -148,19 +148,19 @@ function Game() {
         that.player.left = true;
         that.player.goLeft = true;
         that.player.goRight = false;
-      } else if (e.key == ' ' && that.player.totalJumps == 3 && that.player.flyTime < 50) {
+      } else if (e.key == ' ' && that.player.totalJumps == 3 && that.player.flyTime < PLAYER.totalFlyTime) {
         that.player.jumping = true;
         that.player.falling = false
         that.player.jumpCounter = 0;
       } else if (e.key == 'p') {
-        gameState = 2;
+        gameState = STATE.paused;
         window.cancelAnimationFrame(runAnimation);
         drawPauseScreen();
       }
 
-    } else if (gameState == 2) {
+    } else if (gameState == STATE.paused) {
       if (e.key == 'p') {
-        gameState = 1;
+        gameState = STATE.running;
         that.player.goLeft = false;
         that.player.goRight = false;
       }
@@ -168,7 +168,7 @@ function Game() {
   })
 
   document.addEventListener('keyup', function (e) {
-    if (gameState == 1) {
+    if (gameState == STATE.running) {
       if (e.key == ' ' && that.player.jumps < that.player.totalJumps && that.player.totalJumps < 3) {
         that.player.jumping = true;
         that.player.falling = false;
@@ -188,7 +188,7 @@ function Game() {
 
   function playBackgroundMusic(timer) {
     if (!that.bossBattle) {
-      if (timer < 10000) {
+      if (timer < DAY.full / 2) {
         stopSound('night_bg');
         playSound('bg');
       } else {
@@ -199,35 +199,35 @@ function Game() {
   }
 
   function showTime(timer) {
-    seconds = (timer / 20000) * 86400;
-    hours = Math.floor(seconds / 3600);
-    seconds = seconds - hours * 3600;
-    minutes = Math.floor(seconds / 60);
-    seconds = Math.floor(seconds - minutes * 60);
+    seconds = (timer / DAY.full) * SECONDS_IN_DAY;
+    hours = Math.floor(seconds * TO_HOURS);
+    seconds = seconds - hours / TO_HOURS;
+    minutes = Math.floor(seconds * TO_MINS);
+    seconds = Math.floor(seconds - minutes / TO_MINS);
     that.ctx.font = '20px Arial'
     var x;
-    if (that.player.x < 25) {
-      x = 25 * TILE_SIZE;
-    } else if (that.player.x > 128) {
-      x = 128 * TILE_SIZE;
+    if (that.player.x < MIN_DISPLAY_POS) {
+      x = MIN_DISPLAY_POS * TILE.size;
+    } else if (that.player.x > MAX_DISPLAY_POS) {
+      x = MAX_DISPLAY_POS * TILE.size;
     } else {
-      x = that.player.x * TILE_SIZE;
+      x = that.player.x * TILE.size;
     }
-    that.ctx.fillText(hours + ':' + minutes, x, 40);
+    that.ctx.fillText(hours + ':' + minutes, x, TIME_HEIGHT);
   }
 
   function drawBackground() {
     that.ctx.clearRect(-CANVAS_WIDTH, -CANVAS_HEIGHT, 5 * CANVAS_WIDTH, 3 * CANVAS_HEIGHT);
     for (var i = -1; i < 4; i++) {
-      that.ctx.drawImage(background, CANVAS_WIDTH * i, 0, CANVAS_WIDTH, 300)
-      that.ctx.drawImage(bg_under, CANVAS_WIDTH * i, 300, CANVAS_WIDTH, 620);
+      that.ctx.drawImage(background, CANVAS_WIDTH * i, BG_POS.y, CANVAS_WIDTH, BG_POS.height)
+      that.ctx.drawImage(bg_under, CANVAS_WIDTH * i, BG_POS.yUnder, CANVAS_WIDTH, BG_POS.heightUnder);
     }
 
-    if (timer < 5000) {
+    if (timer < DAY.quarter) {
       game.style.backgroundColor = '#9ed7f1';
-    } else if (timer < 10000) {
+    } else if (timer < DAY.full / 2) {
       game.style.backgroundColor = '#00acea';
-    } else if (timer < 15000) {
+    } else if (timer < DAY.quarter * 3) {
       game.style.backgroundColor = '#ff8b59';
     } else {
       game.style.backgroundColor = '#1d2855';
@@ -272,11 +272,11 @@ function Game() {
   }
 
   function generateEnemies() {
-    var minDist = Math.max(that.player.x - 20, 0);
-    var maxDist = Math.min(that.player.x + 20, 150);
+    var minDist = Math.max(that.player.x - ENEMY_GEN_DIST.range, ENEMY_GEN_DIST.minMargin);
+    var maxDist = Math.min(that.player.x + ENEMY_GEN_DIST.range, ENEMY_GEN_DIST.maxMargin);
 
-    if (timer % 500 == 0 && !that.bossBattle) {
-      if (timer < 10000) {
+    if (timer % ENEMY_GEN_TIME == 0 && !that.bossBattle) {
+      if (timer < DAY.full / 2) {
         that.enemies.push(new Slime(that, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0))
       } else {
         that.enemies.push(new Eye(that, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0))
@@ -317,7 +317,7 @@ function Game() {
 
 
 
-    timer = (timer + 1) % 20000;
+    timer = (timer + 1) % DAY.full;
     generateEnemies();
     removeDeadEnemies();
 

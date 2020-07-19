@@ -14,6 +14,23 @@ var sounds = ['bg',
               'zombie_killed'
               ];
 
+var soundFolder = {
+  'bg': 'bg/',
+  'boss_battle': 'bg/',
+  'dig': 'action/',
+  'fireball': 'action/',
+  'night_bg': 'bg/',
+  'player_hurt': 'player/',
+  'roar': 'boss/',
+  'slime_hit': 'slime/',
+  'slime_killed': 'slime/',
+  'swing': 'action/',
+  'tree_hit': 'action/',
+  'zombie_create': 'zombie/',
+  'zombie_hit': 'zombie/',
+  'zombie_killed': 'zombie/'
+}
+
 var sound = {};
 
 var initSounds = function () {
@@ -24,7 +41,7 @@ var initSounds = function () {
     audio.style.display = "none";
     document.body.appendChild(audio);
     sound[sounds[i]] = audio;
-    sound[sounds[i]].src = 'audio/' + sounds[i] + '.wav';
+    sound[sounds[i]].src = 'audio/' + soundFolder[sounds[i]] + sounds[i] + '.wav';
   }
 }
 
