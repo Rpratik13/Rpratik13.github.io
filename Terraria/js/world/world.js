@@ -71,10 +71,10 @@ function World() {
    */
   this.drawTree = function (i, j) {
     var tree = this.world[i][j];
-    var treeNum = tree - TREE.shift;
-    if (tree == TREE.trunk) {
-      if (this.world[i - 1][j] != TREE.trunk && this.world[i - 1][j] != TREE.treeTopBase) {
-        treeNum = TREE.treeTopStart;
+    var treeNum = tree - TILE.shift;
+    if (tree == TILE.trunk) {
+      if (this.world[i - 1][j] != TILE.trunk && this.world[i - 1][j] != TILE.treeTopBase) {
+        treeNum = TILE.treeTopStart;
       }
     }
     this.ctx.drawImage(TILE_IMAGES['tree'][treeNum], TILE.size * (j - 1), TILE.size * (i - 1), TILE.size, TILE.size);

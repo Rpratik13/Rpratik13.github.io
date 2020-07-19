@@ -265,6 +265,7 @@ function Inventory(player) {
     }
 
     this.ctx.drawImage(SHIELD.img, playerX + SHIELD.x, SHIELD.y, SHIELD.width, SHIELD.height);
+    this.ctx.font = '12px Arial';
     if (this.player.armor.toString().length == 1) {
       this.ctx.fillText(this.player.armor, playerX + SHIELD.txt1X, SHIELD.txtY);
     } else {
