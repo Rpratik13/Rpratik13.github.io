@@ -5,19 +5,19 @@ function Fireball(game, x, y) {
   this.ctx = game.ctx;
   this.active = true;
   this.img = new Image;
-  this.img.src = 'images/fireball.png';
-  this.tileX = Math.floor((x - world.translated) / TILE_SIZE) + 1;
-  this.tileY = Math.floor(y / TILE_SIZE) + 1;
+  this.img.src = 'images/weapon/fireball.png';
+  this.tileX = Math.floor((x - this.world.translated) / TILE.size) + 1;
+  this.tileY = Math.floor(y / TILE.size) + 1;
   this.lifeTime = 0;
 
 
   this.slope = (this.tileY - this.player.y) / (this.tileX - this.player.x);
 
   if (Math.abs(this.tileY - this.player.y) > Math.abs(this.tileX - this.player.x)) {
-    this.dy = this.tileY < this.player.y ? -0.1 : 0.1;
+    this.dy = this.tileY < this.player.y ? -FIREBALL.moveSpeed : FIREBALL.moveSpeed;
     this.dx = (1 / this.slope) * this.dy;
   } else {
-    this.dx = this.tileX < this.player.x ? -0.1 : 0.1;
+    this.dx = this.tileX < this.player.x ? -FIREBALL.moveSpeed : FIREBALL.moveSpeed;
     this.dy = this.slope * this.dx;
   }
 
@@ -26,52 +26,63 @@ function Fireball(game, x, y) {
 
 
   this.throw = function () {
-    this.ctx.drawImage(this.img, this.x * 16, this.y * 16, TILE_SIZE, TILE_SIZE);
+    this.ctx.drawImage(this.img, this.x * TILE.size, this.y * TILE.size, TILE.size, TILE.size);
     this.enemyCollision();
     this.x += this.dx;
     this.y += this.dy;
     this.lifeTime += 1;
-    if (this.lifeTime == 200) {
+    if (this.lifeTime == FIREBALL.life) {
       this.active = false;
     }
   }
 
+
+  this.enemyXCollision = function (enemy) {
+    var xRange = {
+      'slime': SLIME.width,
+      'eye': EYE.width,
+      'zombie': ZOMBIE.width,
+      'boss': BOSS.width
+    }
+
+    for (var j = 0; j <= FIREBALL.size; j++) {
+      if (enemy.x <= this.x + j && this.x + j <= enemy.x + xRange[enemy.type]) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  this.enemyYCollision = function (enemy) {
+    var yRange = {
+      'slime': SLIME.height,
+      'eye': EYE.height,
+      'zombie': ZOMBIE.height,
+      'boss': BOSS.height
+    }
+
+    for (var j = 0; j <= FIREBALL.size; j++) {
+      if (enemy.y <= this.y + j && this.y + j <= enemy.y + yRange[enemy.type]) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   this.enemyCollision = function () {
-    var thisX = Math.round(this.x);
+    var enemies = this.enemies;
     for (var i = 0; i < this.enemies.length; i++) {
-      if (enemies[i].type == 'slime' || enemies[i].type == 'eye') {
-        if (((enemies[i].x <= thisX && thisX <= enemies[i].x + 2) ||
-            (enemies[i].x <= thisX + 1 && thisX + 1 <= enemies[i].x + 2)) &&
-          ((enemies[i].y <= this.y && this.y <= enemies[i].y + 1) ||
-            (enemies[i].y <= this.y + 1 && this.y + 1 <= enemies[i].y + 1))) {
-          enemies[i].knockback = true;
-          enemies[i].health -= 10;
-          this.active = false;
+      if (this.enemyXCollision(enemies[i]) && this.enemyYCollision(enemies[i])) {
+        enemies[i].knockback = true;
+        enemies[i].health -= FIREBALL.damage;
+        this.active = false;
+        if (enemies[i].type == 'slime' || enemies[i].type == 'eye') {
           playSound('slime_hit');
-          break;
-        }
-      } else if (enemies[i].type == 'zombie') {
-        if (((enemies[i].x <= thisX && thisX <= enemies[i].x + 1) ||
-            (enemies[i].x <= thisX + 1 && thisX + 1 <= enemies[i].x + 1)) &&
-          ((enemies[i].y <= this.y && this.y <= enemies[i].y + 3) ||
-            (enemies[i].y <= this.y + 1 && this.y + 1 <= enemies[i].y + 3))) {
-          enemies[i].knockback = true;
-          enemies[i].health -= 10;
-          this.active = false;
+        } else {
           playSound('zombie_hit');
-          break;
         }
-      } else if (enemies[i].type == 'boss') {
-        if (((enemies[i].x <= thisX && thisX <= enemies[i].x + 9) ||
-            (enemies[i].x <= thisX + 1 && thisX + 1 <= enemies[i].x + 9)) &&
-          ((enemies[i].y <= this.y && this.y <= enemies[i].y + 6) ||
-            (enemies[i].y <= this.y + 1 && this.y + 1 <= enemies[i].y + 6))) {
-          enemies[i].knockback = true;
-          enemies[i].health -= 10;
-          this.active = false;
-          playSound('zombie_hit');
-          break;
-        }
+
+        break;
       }
     }
   }

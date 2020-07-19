@@ -8,11 +8,13 @@ function Inventory(player) {
 
   this.drawTile = function (type, x, y, textFlag) {
     if (player.items[type] > 0) {
-      this.ctx.drawImage(INV_IMAGES[type], x + 5, y + 5, 20, 20)
+      this.ctx.drawImage(INV_IMAGES[type], x + INVENTORY.padding, y + INVENTORY.padding, INVENTORY.itemSize,
+        INVENTORY.itemSize)
+
 
       if (player.items[type] > 0 && textFlag) {
         this.ctx.font = '10px Arial';
-        this.ctx.fillText(player.items[type], x + 2, y + 10);
+        this.ctx.fillText(player.items[type], x + INVENTORY.textPaddingX, y + INVENTORY.textPaddingY);
       }
     }
   }
@@ -40,24 +42,47 @@ function Inventory(player) {
     }
   }
 
+  this.findMaxStringLength = function (arr) {
+    var maxLength = 0;
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].length > maxLength) {
+        maxLength = arr[i].length;
+      }
+    }
+    return maxLength;
+  }
+
+  this.drawDetailBackground = function (arr) {
+    this.ctx.fillStyle = 'black';
+    this.ctx.fillRect(-this.world.translated + this.mouseX + INVENTORY.detailsPad, this.mouseY - INVENTORY.detailsPad,
+      INVENTORY.detailsBoxWidth * this.findMaxStringLength(arr), INVENTORY.detailsBoxHeight * arr.length);
+    this.ctx.fillStyle = 'white';
+
+  }
+
   this.displayInventoryItemDetails = function (item) {
     if (item in ITEM_DETAILS) {
       var itemDetail = ITEM_DETAILS[item];
+      this.drawDetailBackground(itemDetail);
       for (var i = 0; i < itemDetail.length; i++) {
-        this.ctx.fillText(itemDetail[i], -this.world.translated + this.mouseX + 20, this.mouseY + 10 + 20 * i);
+        this.ctx.fillText(itemDetail[i], -this.world.translated + this.mouseX + INVENTORY.detailsPad,
+          this.mouseY + INVENTORY.detailsPad * i);
       }
     }
   }
 
   this.displayCraftingItemDetails = function () {
-    if (200 < this.mouseX && this.mouseX < 350 && 350 < this.mouseY && this.mouseY < 440) {
-      var i = Math.floor((this.mouseX - 200) / INV_CONTAINER_SIZE);
-      var j = Math.floor((this.mouseY - 350) / INV_CONTAINER_SIZE);
-      var craftItem = CRAFT_ITEM[j * 5 + i];
+    if (CRAFT.x < this.mouseX && this.mouseX < CRAFT.endX &&
+      CRAFT.y < this.mouseY && this.mouseY < CRAFT.endY) {
+      var i = Math.floor((this.mouseX - CRAFT.x) / INVENTORY.containerSize);
+      var j = Math.floor((this.mouseY - CRAFT.y) / INVENTORY.containerSize);
+      var craftItem = CRAFT_ITEM[j * INVENTORY.rowSize + i];
       if (craftItem in ITEM_DETAILS) {
         var itemDetail = ITEM_DETAILS[craftItem];
+        this.drawDetailBackground(itemDetail);
         for (var i = 0; i < itemDetail.length; i++) {
-          this.ctx.fillText(itemDetail[i], -this.world.translated + this.mouseX + 20, this.mouseY + 10 + 20 * i);
+          this.ctx.fillText(itemDetail[i], -this.world.translated + this.mouseX + INVENTORY.detailsPad,
+            this.mouseY + INVENTORY.detailsPad * i);
         }
       }
     }
@@ -66,27 +91,30 @@ function Inventory(player) {
   this.displayCraftMaterialDetails = function () {
     var material;
     if (this.craftingSelected != -1) {
-      if (370 < this.mouseX && this.mouseX < 400 && 350 < this.mouseY && this.mouseY < 380) {
+      if (CRAFT_MATS.mat1X < this.mouseX && this.mouseX < CRAFT_MATS.mat1X + INVENTORY.containerSize &&
+        CRAFT_MATS.matY < this.mouseY && this.mouseY < CRAFT_MATS.matY + INVENTORY.containerSize) {
         material = CRAFTING_MATERIAL[this.craftingSelected][0][0];
-      } else if (400 < this.mouseX && this.mouseX < 430 &&
-        350 < this.mouseY && this.mouseY < 380 &&
+      } else if (CRAFT_MATS.mat2X < this.mouseX && this.mouseX < CRAFT_MATS.mat2X + INVENTORY.containerSize &&
+        CRAFT_MATS.matY < this.mouseY && this.mouseY < CRAFT_MATS.matY + INVENTORY.containerSize &&
         CRAFTING_MATERIAL[this.craftingSelected].length == 2) {
         material = CRAFTING_MATERIAL[this.craftingSelected][1][0];
       }
       if (material) {
         var itemDetail = ITEM_DETAILS[material];
+        this.drawDetailBackground(itemDetail);
         for (var i = 0; i < itemDetail.length; i++) {
-          this.ctx.fillText(itemDetail[i], -this.world.translated + this.mouseX + 20, this.mouseY + 10 + 20 * i);
+          this.ctx.fillText(itemDetail[i], -this.world.translated + this.mouseX + INVENTORY.detailsPad,
+            this.mouseY + INVENTORY.detailsPad * i);
         }
       }
     }
   }
 
   this.displayItemDetails = function () {
-    var i = Math.floor((this.mouseX - 200) / INV_CONTAINER_SIZE);
-    var j = Math.floor((this.mouseY - 150) / INV_CONTAINER_SIZE);
+    var i = Math.floor((this.mouseX - INVENTORY.x) / INVENTORY.containerSize);
+    var j = Math.floor((this.mouseY - INVENTORY.y) / INVENTORY.containerSize);
     this.ctx.font = '20px Arial';
-    var item = this.player.itemsName[i + 5 * j];
+    var item = this.player.itemsName[i + INVENTORY.rowSize * j];
     this.displayInventoryItemDetails(item);
     this.displayCraftingItemDetails();
     this.displayCraftMaterialDetails();
@@ -96,101 +124,128 @@ function Inventory(player) {
     if (this.craftingSelected != -1) {
       var materials = CRAFTING_MATERIAL[this.craftingSelected];
       for (var i = 0; i < materials.length; i++) {
-        this.ctx.drawImage(INV_IMAGES[materials[i][0]], playerX + 225 + INV_CONTAINER_SIZE * i, 355, 20, 20);
-        this.ctx.fillText(materials[i][1], playerX + 222 + INV_CONTAINER_SIZE * i, 360);
+        if (this.player.items[materials[i][0]] == undefined || this.player.items[materials[i][0]] < materials[i][1]) {
+          this.ctx.drawImage(INV_NOT_ENOUGH, playerX + CRAFT_MAT_CONTAINER.x + i * INVENTORY.containerSize, CRAFT_MAT_CONTAINER.y, INVENTORY.containerSize, INVENTORY.containerSize);
+        } else {
+          this.ctx.drawImage(INV_SELECTED, playerX + CRAFT_MAT_CONTAINER.x + i * INVENTORY.containerSize, CRAFT_MAT_CONTAINER.y, INVENTORY.containerSize, INVENTORY.containerSize);
+        }
+        this.ctx.drawImage(INV_IMAGES[materials[i][0]], playerX + CRAFT_MAT_CONTAINER.x + INVENTORY.padding + INVENTORY.containerSize * i,
+          CRAFT_MAT_CONTAINER.y + INVENTORY.padding, INVENTORY.itemSize,
+          INVENTORY.itemSize);
+
+        this.ctx.fillText(materials[i][1], playerX + CRAFT_MAT_CONTAINER.x + INVENTORY.textPaddingX + INVENTORY.containerSize * i,
+          CRAFT_MAT_CONTAINER.y + INVENTORY.textPaddingY);
       }
     }
   }
 
   this.displayCrafting = function (playerX) {
-    for (var i = 0; i < 3; i++) {
-      for (var j = 0; j < 5; j++) {
-        if (this.craftingSelected == i * 5 + j) {
-          this.ctx.drawImage(INV_SELECTED, playerX + 50 + INV_CONTAINER_SIZE * j, 350 + INV_CONTAINER_SIZE * i, INV_CONTAINER_SIZE, INV_CONTAINER_SIZE);
+    for (var i = 0; i < CRAFT.colSize; i++) {
+      for (var j = 0; j < CRAFT.rowSize; j++) {
+        if (this.craftingSelected == i * INVENTORY.rowSize + j) {
+          this.ctx.drawImage(INV_SELECTED, playerX + INVENTORY.shift + INVENTORY.containerSize * j, CRAFT.y + INVENTORY.containerSize * i,
+            INVENTORY.containerSize, INVENTORY.containerSize);
         } else {
-          this.ctx.drawImage(INV_CONTAINER, playerX + 50 + INV_CONTAINER_SIZE * j, 350 + INV_CONTAINER_SIZE * i, INV_CONTAINER_SIZE, INV_CONTAINER_SIZE);
+          this.ctx.drawImage(INV_CONTAINER, playerX + INVENTORY.shift + INVENTORY.containerSize * j, CRAFT.y + INVENTORY.containerSize * i,
+            INVENTORY.containerSize, INVENTORY.containerSize);
         }
 
-        this.ctx.drawImage(INV_IMAGES[CRAFT_ITEM[i * 5 + j]], playerX + 55 + INV_CONTAINER_SIZE * j, 355 + INV_CONTAINER_SIZE * i, 20, 20);
+        this.ctx.drawImage(INV_IMAGES[CRAFT_ITEM[i * INVENTORY.rowSize + j]], playerX + INVENTORY.shift + INVENTORY.padding + INVENTORY.containerSize * j,
+          CRAFT.y + INVENTORY.padding + INVENTORY.containerSize * i, INVENTORY.itemSize,
+          INVENTORY.itemSize);
+
       }
     }
 
-    this.ctx.drawImage(INV_CONTAINER, playerX + 220, 350, INV_CONTAINER_SIZE, INV_CONTAINER_SIZE);
-    this.ctx.drawImage(INV_CONTAINER, playerX + 250, 350, INV_CONTAINER_SIZE, INV_CONTAINER_SIZE);
-    this.ctx.drawImage(CRAFT_BTN, playerX + 230, 390, INV_CONTAINER_SIZE, INV_CONTAINER_SIZE);
+    this.ctx.drawImage(INV_CONTAINER, playerX + 220, 350, INVENTORY.containerSize, INVENTORY.containerSize);
+    this.ctx.drawImage(INV_CONTAINER, playerX + 250, 350, INVENTORY.containerSize, INVENTORY.containerSize);
+    this.ctx.drawImage(CRAFT_BTN, playerX + 230, 390, INVENTORY.containerSize, INVENTORY.containerSize);
     this.displayCraftMaterials(playerX);
   }
 
   this.displayArmor = function (playerX) {
-    for (var i = 0; i < 3; i++) {
-      this.ctx.drawImage(INV_CONTAINER, playerX + 550, 250 + 40 * i, INV_CONTAINER_SIZE, INV_CONTAINER_SIZE);
+    for (var i = 0; i < ARMOR_CONTAINER.num; i++) {
+      this.ctx.drawImage(INV_CONTAINER, playerX + ARMOR_CONTAINER.containerX, ARMOR_CONTAINER.containerY + ARMOR_CONTAINER.marginY * i,
+        INVENTORY.containerSize, INVENTORY.containerSize);
     }
 
     if (this.player.helm == undefined) {
-      this.ctx.drawImage(UNEQUIPPED_IMG['head'], UNEQP_SPRITE[0][0], UNEQP_SPRITE[0][1], UNEQP_SPRITE[0][2], UNEQP_SPRITE[0][3],
-        playerX + 550 + (30 - UNEQP_SPRITE[0][2]) / 2, 250 + (30 - UNEQP_SPRITE[0][3]) / 2, UNEQP_SPRITE[0][2], UNEQP_SPRITE[0][3]);
+      this.ctx.drawImage(UNEQUIPPED_IMG['head'], UNEQUIP.sprite[0][0], UNEQUIP.sprite[0][1], UNEQUIP.sprite[0][2], UNEQUIP.sprite[0][3],
+        playerX + ARMOR_CONTAINER.containerX + (INVENTORY.containerSize - UNEQUIP.sprite[0][2]) / 2, ARMOR_CONTAINER.containerY + (INVENTORY.containerSize - UNEQUIP.sprite[0][3]) / 2,
+        UNEQUIP.sprite[0][2], UNEQUIP.sprite[0][3]);
     } else {
-      this.ctx.drawImage(INV_IMAGES[this.player.helm], playerX + 555, 255, 20, 20)
+      this.ctx.drawImage(INV_IMAGES[this.player.helm], playerX + ARMOR_CONTAINER.containerX + INVENTORY.padding, ARMOR_CONTAINER.containerY + INVENTORY.padding,
+        INVENTORY.itemSize,
+        INVENTORY.itemSize)
+
     }
 
     if (this.player.chest == undefined) {
-      this.ctx.drawImage(UNEQUIPPED_IMG['chest'], UNEQP_SPRITE[1][0], UNEQP_SPRITE[1][1], UNEQP_SPRITE[1][2], UNEQP_SPRITE[1][3],
-        playerX + 550 + (30 - UNEQP_SPRITE[1][2]) / 2, 290 + (30 - UNEQP_SPRITE[1][3]) / 2, UNEQP_SPRITE[1][2], UNEQP_SPRITE[1][3]);
+      this.ctx.drawImage(UNEQUIPPED_IMG['chest'], UNEQUIP.sprite[1][0], UNEQUIP.sprite[1][1], UNEQUIP.sprite[1][2], UNEQUIP.sprite[1][3],
+        playerX + ARMOR_CONTAINER.containerX + (INVENTORY.containerSize - UNEQUIP.sprite[1][2]) / 2,
+        ARMOR_CONTAINER.containerY + ARMOR_CONTAINER.marginY + (INVENTORY.containerSize - UNEQUIP.sprite[1][3]) / 2, UNEQUIP.sprite[1][2], UNEQUIP.sprite[1][3]);
     } else {
-      this.ctx.drawImage(INV_IMAGES[this.player.chest], playerX + 555, 295, 20, 20)
+      this.ctx.drawImage(INV_IMAGES[this.player.chest], playerX + ARMOR_CONTAINER.containerX + INVENTORY.padding,
+        ARMOR_CONTAINER.containerY + ARMOR_CONTAINER.marginY + INVENTORY.padding, INVENTORY.itemSize,
+        INVENTORY.itemSize)
+
     }
 
     if (this.player.boot == undefined) {
-      this.ctx.drawImage(UNEQUIPPED_IMG['boot'], UNEQP_SPRITE[2][0], UNEQP_SPRITE[2][1], UNEQP_SPRITE[2][2], UNEQP_SPRITE[2][3],
-        playerX + 550 + (30 - UNEQP_SPRITE[2][2]) / 2, 330 + (30 - UNEQP_SPRITE[2][3]) / 2, UNEQP_SPRITE[2][2], UNEQP_SPRITE[2][3]);
+      this.ctx.drawImage(UNEQUIPPED_IMG['boot'], UNEQUIP.sprite[2][0], UNEQUIP.sprite[2][1], UNEQUIP.sprite[2][2], UNEQUIP.sprite[2][3],
+        playerX + ARMOR_CONTAINER.containerX + (INVENTORY.containerSize - UNEQUIP.sprite[2][2]) / 2,
+        ARMOR_CONTAINER.containerY + ARMOR_CONTAINER.marginY * 2 + (INVENTORY.containerSize - UNEQUIP.sprite[2][3]) / 2, UNEQUIP.sprite[2][2], UNEQUIP.sprite[2][3]);
     } else {
-      this.ctx.drawImage(INV_IMAGES[this.player.boot], playerX + 555, 335, 20, 20)
+      this.ctx.drawImage(INV_IMAGES[this.player.boot], playerX + ARMOR.containerX + INVENTORY.padding,
+        ARMOR.containerY + ARMOR.marginY * 2 + INVENTORY.padding, INVENTORY.itemSize,
+        INVENTORY.itemSize)
+
     }
 
-    this.ctx.drawImage(SHIELD, playerX + 550, 400, 32, 26);
+    this.ctx.drawImage(SHIELD.img, playerX + SHIELD.x, SHIELD.y, SHIELD.width, SHIELD.height);
     if (this.player.armor.toString().length == 1) {
-      this.ctx.fillText(this.player.armor, playerX + 562, 417);
+      this.ctx.fillText(this.player.armor, playerX + SHIELD.txt1X, SHIELD.txtY);
     } else {
-      this.ctx.fillText(this.player.armor, playerX + 559, 417);
+      this.ctx.fillText(this.player.armor, playerX + SHIELD.txt2X, SHIELD.txtY);
     }
   }
 
   this.displayWeapon = function (playerX) {
-    this.ctx.drawImage(INV_CONTAINER, playerX + 510, 290, 30, 30);
+    this.ctx.drawImage(INV_CONTAINER, playerX + EQUIPPED.weapon.x, EQUIPPED.weapon.y, INVENTORY.containerSize, INVENTORY.containerSize);
     if (this.player.weapon != undefined) {
-      this.drawTile(this.player.weapon, playerX + 510, 290, false);
+      this.drawTile(this.player.weapon, playerX + EQUIPPED.weapon.x, EQUIPPED.weapon.y, false);
     }
   }
 
   this.displayAccessory = function (playerX) {
-    this.ctx.drawImage(INV_CONTAINER, playerX + 510, 330, 30, 30);
+    this.ctx.drawImage(INV_CONTAINER, playerX + EQUIPPED.accessory.x, EQUIPPED.accessory.y, INVENTORY.containerSize, INVENTORY.containerSize);
     if (this.player.accessory != undefined) {
-      this.drawTile(this.player.accessory, playerX + 510, 330, false);
+      this.drawTile(this.player.accessory, playerX + EQUIPPED.accessory.x, EQUIPPED.accessory.y, false);
     }
   }
 
   this.displayInventoryItems = function (playerX) {
-    for (var i = 0; i < 5; i++) {
-      for (var j = 0; j < 5; j++) {
-        this.ctx.drawImage(INV_CONTAINER, playerX + 50 + 30 * j, 150 + 30 * i, 30, 30);
-        if (this.player.itemsName.length > i * 5 + j) {
-          this.drawTile(this.player.itemsName[i * 5 + j], playerX + 50 + 30 * j, 150 + 30 * i, true);
+    for (var i = 0; i < INVENTORY.rowSize; i++) {
+      for (var j = 0; j < INVENTORY.colSize; j++) {
+        this.ctx.drawImage(INV_CONTAINER, playerX + INVENTORY.shift + INVENTORY.containerSize * j, INVENTORY.y + INVENTORY.containerSize * i, INVENTORY.containerSize, INVENTORY.containerSize);
+        if (this.player.itemsName.length > i * INVENTORY.rowSize + j) {
+          this.drawTile(this.player.itemsName[i * INVENTORY.rowSize + j], playerX + INVENTORY.shift + INVENTORY.containerSize * j, INVENTORY.y + INVENTORY.containerSize * i, true);
         }
       }
     }
   }
 
   this.display = function () {
-    var playerX = this.player.x * TILE_SIZE - 250
-    if (this.player.x < 25) {
-      playerX = 25 * TILE_SIZE - 250;
-    } else if (this.player.x > 128) {
-      playerX = 128 * TILE_SIZE - 250;
+    var playerX = this.player.x * TILE.size - INVENTORY.displayShift;
+    if (this.player.x < MIN_DISPLAY_POS) {
+      playerX = MIN_DISPLAY_POS * TILE.size - INVENTORY.displayShift;
+    } else if (this.player.x > MAX_DISPLAY_POS) {
+      playerX = MAX_DISPLAY_POS * TILE.size - INVENTORY.displayShift;
     }
     this.ctx.font = '20px Arial';
-    this.ctx.fillText('Inventory', playerX + 50, 140);
-    this.ctx.fillText('Crafting Menu', playerX + 50, 340);
-    this.ctx.fillText('Equipped', playerX + 500, 240);
+    this.ctx.fillText('Inventory', playerX + INVENTORY.text.inv.x, INVENTORY.text.inv.y);
+    this.ctx.fillText('Crafting Menu', playerX + INVENTORY.text.craft.x, INVENTORY.text.craft.y);
+    this.ctx.fillText('Equipped', playerX + INVENTORY.text.equipped.x, INVENTORY.text.equipped.y);
 
 
     this.displayInventoryItems(playerX);
@@ -202,8 +257,9 @@ function Inventory(player) {
   }
 
   this.itemEquip = function (x, y, item) {
-    if (200 <= x && x <= 350 && 150 <= y && y <= 300) {
-      if (PLACE_WEAPONS.includes(item) || ATTACK_WEAPONS.includes(item)) {
+    if (INVENTORY.x <= x && x <= INVENTORY.endX &&
+      INVENTORY.y <= y && y <= INVENTORY.endY) {
+      if (WEAPON.placeWeapons.includes(item) || WEAPON.attackWeapons.includes(item)) {
         this.player.weapon = item;
         this.player.checkPower();
       } else if (item == 'gold_helm' || item == 'silver_helm') {
@@ -223,27 +279,28 @@ function Inventory(player) {
   }
 
   this.itemUnequip = function (x, y) {
-    if (660 < x && x < 690 && 290 < y && y < 320) {
+    if (UNEQUIP.weapon.x < x && x < UNEQUIP.weapon.endX &&
+      UNEQUIP.weapon.y < y && y < UNEQUIP.weapon.endY) {
       this.player.weapon = undefined;
       this.player.checkPower();
     }
 
-    if (660 < x && x < 690 && 330 < y && y < 370) {
+    if (UNEQUIP.accessory.x < x && x < UNEQUIP.accessory.endX && UNEQUIP.accessory.y < y && y < UNEQUIP.accessory.endY) {
       this.player.accessory = undefined;
       this.player.checkAccessory();
     }
 
-    if (700 < x && x < 730 && 250 < y && y < 280) {
+    if (UNEQUIP.helm.x < x && x < UNEQUIP.helm.endX && UNEQUIP.helm.y < y && y < UNEQUIP.helm.endY) {
       this.player.helm = undefined;
       this.player.checkArmor();
     }
 
-    if (700 < x && x < 730 && 290 < y && y < 320) {
+    if (UNEQUIP.chest.x < x && x < UNEQUIP.chest.endX && UNEQUIP.chest.y < y && y < UNEQUIP.chest.endY) {
       this.player.chest = undefined;
       this.player.checkArmor();
     }
 
-    if (700 < x && x < 730 && 330 < y && y < 360) {
+    if (UNEQUIP.boot.x < x && x < UNEQUIP.boot.endX && UNEQUIP.boot.y < y && y < UNEQUIP.boot.endY) {
       this.player.boot = undefined;
       this.player.checkArmor();
     }
@@ -251,19 +308,20 @@ function Inventory(player) {
   }
 
   this.clicked = function (x, y) {
-    var i = Math.floor((x - 200) / INV_CONTAINER_SIZE);
-    var j = Math.floor((y - 150) / INV_CONTAINER_SIZE);
-    var item = this.player.itemsName[i + 5 * j];
+    var i = Math.floor((x - INVENTORY.x) / INVENTORY.containerSize);
+    var j = Math.floor((y - INVENTORY.y) / INVENTORY.containerSize);
+    var item = this.player.itemsName[i + INVENTORY.rowSize * j];
 
     this.itemEquip(x, y, item);
     this.itemUnequip(x, y);
 
-    if (200 < x && x < 350 && 350 < y && y < 440) {
-      var j = Math.floor((y - 350) / INV_CONTAINER_SIZE);
-      this.craftingSelected = j * 5 + i;
+    if (CRAFT.x < x && x < CRAFT.endX && CRAFT.y < y && y < CRAFT.endY) {
+      var j = Math.floor((y - CRAFT.y) / INVENTORY.containerSize);
+      this.craftingSelected = j * CRAFT.rowSize + i;
     }
 
-    if (380 < x && x < 410 && 390 < y && y < 420) {
+    if (CRAFT.craftBtn.x < x && x < CRAFT.craftBtn.endX &&
+      CRAFT.craftBtn.y < y && y < CRAFT.craftBtn.endY) {
       this.craftItem();
     }
   }
