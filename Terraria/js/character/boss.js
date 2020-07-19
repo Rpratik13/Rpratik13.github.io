@@ -163,11 +163,13 @@ function Boss(game, x) {
    */
   this.checkDeath = function () {
     if (this.health <= 0 || this.x < 0 || this.x > TILE.mapWidth) {
-      if (Math.random() < DROP_CHANCE.fireSword && this.alive && this.health <= 0) {
-        this.world.droppedTiles.push(new Tile(this.game, 'fire_sword', this.x, this.y))
-      }
       this.alive = false;
-      playSound('slime_killed');
+      if (this.health <= 0) {
+        playSound('slime_killed');
+        if (Math.random() < DROP_CHANCE.fireSword && this.alive) {
+          this.world.droppedTiles.push(new Tile(this.game, 'fire_sword', this.x, this.y))
+        }
+      }
       stopSound('boss_battle');
       this.game.bossBattle = false;
     }

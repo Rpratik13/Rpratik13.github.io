@@ -179,10 +179,11 @@ function Slime(game, x, y) {
   this.checkDeath = function () {
     if (this.health <= 0 || this.x < 0 || this.x > TILE.mapWidth) {
       this.alive = false;
-      playSound('slime_killed');
-
-      if (Math.random() > DROP_CHANCE.gel && this.health <= 0) {
-        this.world.droppedTiles.push(new Tile(this.game, 'gel', this.x, this.y));
+      if (this.health <= 0) {
+        playSound('slime_killed');
+        if (Math.random() > DROP_CHANCE.gel) {
+          this.world.droppedTiles.push(new Tile(this.game, 'gel', this.x, this.y));
+        }
       }
     }
   }

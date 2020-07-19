@@ -236,8 +236,8 @@ function Zombie(game, x, y) {
    */
   this.checkDeath = function () {
     if (this.health <= 0 || this.x < 0 || this.x > 154) {
-      playSound('zombie_killed');
       if (this.health <= 0) {
+        playSound('zombie_killed');
         if (Math.random() < DROP_CHANCE.zombieDrop) {
           this.world.droppedTiles.push(new Tile(this.game, 'zombie_drop', this.x, this.y));
         } else if (Math.random() < DROP_CHANCE.rocket && this.alive) {
