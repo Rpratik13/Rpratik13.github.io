@@ -7,7 +7,7 @@ const STATS = {
   healthHeight: 140,
   manaPicHeight: 143,
   manaHeight: 165
-}
+};
 
 STATS.heartImg.src = 'images/stats/heart.png';
 STATS.manaImg.src = 'images/stats/mana.png';

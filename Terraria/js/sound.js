@@ -29,10 +29,13 @@ var soundFolder = {
   'zombie_create': 'zombie/',
   'zombie_hit': 'zombie/',
   'zombie_killed': 'zombie/'
-}
+};
 
 var sound = {};
 
+/**
+ * It initializes sounds.
+ */
 var initSounds = function () {
   for (var i = 0; i < sounds.length; i++) {
     let audio = document.createElement("audio");
@@ -47,10 +50,21 @@ var initSounds = function () {
 
 
 initSounds();
+
+/**
+ * It plays the sound.
+ * 
+ * @param {string} name It holds the value for which sound to be played. 
+ */
 playSound = function (name) {
   sound[name].play();
 }
 
+/**
+ * It stops the sound.
+ * 
+ * @param {string} name It holds the value for which sound to be stopped. 
+ */
 stopSound = function (name) {
   sound[name].pause();
   sound[name].currentTime = 0;

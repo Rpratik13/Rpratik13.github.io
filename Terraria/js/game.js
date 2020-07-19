@@ -1,3 +1,6 @@
+/**
+ * It creates the main game object.
+ */
 function Game() {
   let that = this;
 
@@ -42,6 +45,9 @@ function Game() {
   this.mouseY = 0;
   this.player;
 
+  /* 
+   *It initializes the game.
+   */
   function start() {
     that.world = new World();
     that.player = new Player();
@@ -57,6 +63,9 @@ function Game() {
     drawStartScreen();
   }
 
+  /**
+   * It draws the start screen.
+   */
   function drawStartScreen() {
     var ctx = that.ctx;
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -71,6 +80,9 @@ function Game() {
     }
   }
 
+  /* 
+   * It draws the pause screen
+   */
   function drawPauseScreen() {
     var ctx = that.ctx;
     ctx.fillText('Paused', -that.world.translated + PAUSED.x, PAUSED.y);
@@ -186,6 +198,11 @@ function Game() {
     }
   })
 
+  /**
+   * It plays the background music.
+   * 
+   * @param {number} timer It holds the current time value of the game. 
+   */
   function playBackgroundMusic(timer) {
     if (!that.bossBattle) {
       if (timer < DAY.full / 2) {
@@ -198,6 +215,11 @@ function Game() {
     }
   }
 
+  /**
+   * It displays game time.
+   * 
+   * @param {number} timer It holds the current time value of the game. 
+   */
   function showTime(timer) {
     seconds = (timer / DAY.full) * SECONDS_IN_DAY;
     hours = Math.floor(seconds * TO_HOURS);
@@ -216,10 +238,13 @@ function Game() {
     that.ctx.fillText(hours + ':' + minutes, x, TIME_HEIGHT);
   }
 
+  /**
+   * It draws the game background.
+   */
   function drawBackground() {
     that.ctx.clearRect(-CANVAS_WIDTH, -CANVAS_HEIGHT, 5 * CANVAS_WIDTH, 3 * CANVAS_HEIGHT);
     for (var i = -1; i < 4; i++) {
-      that.ctx.drawImage(background, CANVAS_WIDTH * i, BG_POS.y, CANVAS_WIDTH, BG_POS.height)
+      that.ctx.drawImage(background, CANVAS_WIDTH * i, BG_POS.y, CANVAS_WIDTH, BG_POS.height);
       that.ctx.drawImage(bg_under, CANVAS_WIDTH * i, BG_POS.yUnder, CANVAS_WIDTH, BG_POS.heightUnder);
     }
 
@@ -235,6 +260,9 @@ function Game() {
 
   }
 
+  /**
+   * It draws the thrown fireballs.
+   */
   function drawFireball() {
     for (var i = 0; i < that.fireBalls.length; i++) {
       that.fireBalls[i].throw();
@@ -250,6 +278,9 @@ function Game() {
   }
 
 
+  /**
+   * It moves the player.
+   */
   function movePlayer() {
     if (that.player.falling) {
       that.player.fall();
@@ -265,26 +296,35 @@ function Game() {
     }
   }
 
+  /**
+   * It draws player inventory.
+   */
   function drawInventory() {
     if (that.player.showInventory) {
       that.player.inventory.display();
     }
   }
 
+  /**
+   * It generates enemy over time.
+   */
   function generateEnemies() {
     var minDist = Math.max(that.player.x - ENEMY_GEN_DIST.range, ENEMY_GEN_DIST.minMargin);
     var maxDist = Math.min(that.player.x + ENEMY_GEN_DIST.range, ENEMY_GEN_DIST.maxMargin);
 
     if (timer % ENEMY_GEN_TIME == 0 && !that.bossBattle) {
       if (timer < DAY.full / 2) {
-        that.enemies.push(new Slime(that, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0))
+        that.enemies.push(new Slime(that, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0));
       } else {
-        that.enemies.push(new Eye(that, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0))
-        that.enemies.push(new Zombie(that, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0))
+        that.enemies.push(new Eye(that, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0));
+        that.enemies.push(new Zombie(that, Math.floor(Math.random() * (maxDist - minDist) + minDist), 0));
       }
     }
   }
 
+  /**
+   * It deletes dead enemy objects.
+   */
   function removeDeadEnemies() {
     for (var i = 0; i < that.enemies.length; i++) {
       that.enemies[i].draw();
@@ -299,6 +339,9 @@ function Game() {
     enemiesDead = [];
   }
 
+  /**
+   * It runs the game.
+   */
   function run() {
     playBackgroundMusic(timer);
     drawBackground();

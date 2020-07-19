@@ -24,4 +24,4 @@ const ITEM_DETAILS = {
   'lens': ['Lens'],
   'zombie_drop': ['Zombie Part'],
   'gel': ['Gel']
-}
+};

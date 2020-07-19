@@ -13,6 +13,8 @@ const TILE = {
   treeBaseLeft: 6,
   treeBaseCenter: 7,
   treeTrunk: 8,
+  treeTopBase: 33,
+  shift: 5,
   tree: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
           19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33],
   dirt: 2,
@@ -20,7 +22,7 @@ const TILE = {
   treeBase: [5, 6, 7],
   mapWidth: 154,
   mapHeight: 39
-}
+};
 
 
 const TILE_MAP_VAL = {
@@ -29,14 +31,14 @@ const TILE_MAP_VAL = {
   3: 'gold',
   4: 'silver',
   36: 'wood'
-}
+};
 
 const TILE_PLACE_VAL = {
   'dirt': 2,
   'gold': 3,
   'silver': 4,
   'wood': 36
-}
+};
 
 const TILE_DROP = {
   1: 'dirt',
@@ -48,7 +50,7 @@ const TILE_DROP = {
   7: 'wood',
   8: 'wood',
   36: 'wood'
-}
+};
 
 
 const TILE_IMAGES = {
@@ -58,7 +60,7 @@ const TILE_IMAGES = {
   'gold': [],
   'silver': [],
   'wood': []
-}
+};
 
 
 for (var i = 0; i < 30; i++) {

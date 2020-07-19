@@ -1,3 +1,6 @@
+/**
+ * Its creates a loader object that loads audio files. 
+ */
 function AudioLoader() {
   this.numberOfLoadedAudios = 0;
   this.audios = [
@@ -18,6 +21,9 @@ function AudioLoader() {
     ];
 
 
+  /**
+   * It loads the required audio files.
+   */
   this.loadAudios = function (start) {
     let audio = new Audio();
     for (var i = 0; i < this.audios.length; i++) {

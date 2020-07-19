@@ -37,14 +37,14 @@ const BOSS = {
   sprite: [[830, 0, 152, 110], [0, 0, 146, 110]],
   width: 10,
   startY: 8
-}
+};
 
 const KNOCKBACK = {
   speed: 1 / 4,
   time: 10,
   damage: 2
-}
+};
 const ENEMY_SPEED = 1 / 50;
 const KNOCKBACK_SPEED = 1 / 4;
 const KNOCKBACK_TIME = 10;
-const KNOCKBACK_DAMAGE = 2
+const KNOCKBACK_DAMAGE = 2;
