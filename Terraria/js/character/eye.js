@@ -151,9 +151,11 @@ function Eye(game, x, y) {
   this.checkDeath = function () {
     if (this.health <= 0 || this.x < 0 || this.x > TILE.mapWidth) {
       this.alive = false;
-      playSound('slime_killed');
-      if (Math.random() < DROP_CHANCE.lens && this.health <= 0) {
-        this.world.droppedTiles.push(new Tile(this.game, 'lens', this.x, this.y));
+      if (this.health <= 0) {
+        playSound('slime_killed');
+        if (Math.random() < DROP_CHANCE.lens) {
+          this.world.droppedTiles.push(new Tile(this.game, 'lens', this.x, this.y));
+        }
       }
     }
   }
