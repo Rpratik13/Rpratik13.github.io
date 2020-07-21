@@ -1,0 +1,80 @@
+.post {
+  border: 1px solid #cfcfcf;
+  border-radius: 5px;
+  margin: 10px auto;
+  position: relative;
+  height: 585px;
+  width: 552px;
+}
+
+.post__menu {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+}
+
+.post__author {
+  margin: 16px 0px 0px 20px;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.post__author-details {
+  margin-left: 13px;
+}
+
+.post__author-time-img {
+  margin-left: 3px;
+}
+
+.post__title {
+  margin: 6px 0px 12px 16px;
+}
+
+.post__name {
+  margin: 3px 0px 0px 13px
+}
+
+.post__img {
+  height: 288px
+}
+
+.post__link {
+  margin: 10px 0px 0px 15px
+}
+
+.post__details {
+  padding: 10px 0px;
+}
+
+.post__meta {
+  margin: 12px 0px 0px 18px;
+}
+
+.post__meta-img {
+  margin-right: 6px;
+}
+
+.post__btns {
+  border-top: 1px solid #e6e9ec;
+  margin: 10px 17px 0px 17px;
+  padding-top: 11px;
+}
+
+.post__btn-img {
+  margin-right: 7px;
+}
+
+.post__btn-text {
+  margin: 4px 5px 0px 0px;
+}
+
+.post__btn {
+  margin-right: 8px
+}

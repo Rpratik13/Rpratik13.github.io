@@ -1,0 +1,63 @@
+body {
+  font-family: Arial;
+}
+
+a,
+a:active,
+a:visited {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.post__author-details {
+  font-size: 13px;
+}
+
+.post__author-name {
+  font-weight: bold;
+}
+
+.post__author-name:hover {
+  color: #1873b1;
+  text-decoration: underline;
+}
+
+.post__author-time,
+.post__author-follower {
+  color: #666;
+}
+
+.post__title {
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.post__name {
+  font-size: 13.5px;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.post__details {
+  background-color: #f3f6f8;
+}
+
+.post__link,
+.post__meta-reactions {
+  color: #616263;
+  font-size: 12px;
+}
+
+.post__meta-reactions:hover {
+  color: #1873b1;
+  text-decoration: underline;
+}
+
+.post__btn {
+  color: #666;
+  font-size: 14px;
+}
+
+.post__btn:hover {
+  color: #444;
+}
