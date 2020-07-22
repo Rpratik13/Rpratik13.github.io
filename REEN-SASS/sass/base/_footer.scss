@@ -1,0 +1,53 @@
+.footer {
+  background: $ebonyClay;
+  color: $slateGray;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0px auto;
+  padding: 35px 0px;
+  font-size: 12px;
+  position: relative;
+  @include e('container') {
+    margin: 0px auto;
+    width: (280px / 320px) * 100%;
+    @include mq('md') {
+      width: (728px / 768px) * 100%;
+    }
+    @include mq('xl') {
+      width: 1170px;
+    }
+  }
+  @include e('dot') {
+    display: none;
+    @include mq('md') {
+      display: initial;
+      margin: 0px 6px;
+    }
+  }
+  @include e('link') {
+    display: block;
+    margin-bottom: 5px;
+    @include mq('md') {
+      display: inline;
+      margin-bottom: 0px;
+    }
+    @include hover {
+      text-decoration: underline;
+    }
+  }
+  @include e('arrow') {
+    display: none;
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    border-radius: 5px;
+    top: 21px;
+    right: 20px;
+    @include mq('xl') {
+      display: initial;
+    }
+    @include hover {
+      cursor: pointer;
+    }
+  }
+}
