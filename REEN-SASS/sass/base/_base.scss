@@ -109,27 +109,15 @@ option {
   color: $black;
 }
 
-.left {
-  float: left;
-}
-
-.right {
-  float: right;
-}
-
-.btn--color--green {
-  color: $white;
-  background-color: $carribeanGreen;
-  @include hover {
-    background-color: $green;
-    cursor: pointer;
+.btn {
+  @include m(color) {
+    @include m(green) {
+      color: $white;
+      background-color: $carribeanGreen;
+      @include hover {
+        background-color: $mountainMeadow;
+        cursor: pointer;
+      }
+    }
   }
-}
-
-.hidden {
-  display: none;
-}
-
-.show {
-  display: initial;
 }

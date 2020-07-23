@@ -7,35 +7,35 @@
   padding: 35px 0px;
   font-size: 12px;
   position: relative;
-  @include e('container') {
+  @include e(container) {
     margin: 0px auto;
     width: (280px / 320px) * 100%;
-    @include mq('md') {
+    @include mq(md) {
       width: (728px / 768px) * 100%;
     }
-    @include mq('xl') {
+    @include mq(xl) {
       width: 1170px;
     }
   }
-  @include e('dot') {
+  @include e(dot) {
     display: none;
-    @include mq('md') {
+    @include mq(md) {
       display: initial;
       margin: 0px 6px;
     }
   }
-  @include e('link') {
+  @include e(link) {
     display: block;
     margin-bottom: 5px;
-    @include mq('md') {
+    @include mq(md) {
       display: inline;
       margin-bottom: 0px;
     }
     @include hover {
-      text-decoration: underline;
+      color: $carribeanGreen;
     }
   }
-  @include e('arrow') {
+  @include e(arrow) {
     display: none;
     position: absolute;
     height: 40px;
@@ -43,11 +43,13 @@
     border-radius: 5px;
     top: 21px;
     right: 20px;
-    @include mq('xl') {
+    background-image: url(../images/arrow_up.png);
+    @include mq(xl) {
       display: initial;
     }
     @include hover {
       cursor: pointer;
+      background-image: url(../images/arrow_up_hover.png);
     }
   }
 }

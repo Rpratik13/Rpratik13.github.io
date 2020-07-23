@@ -1,0 +1,230 @@
+.summary {
+  background-color: $pickledBluewood;
+  margin-top: 125px;
+  width: 100%;
+  max-width: 1920px;
+  margin: 130px auto 0px auto;
+  @include mq(xl) {
+    height: 364px;
+  }
+  @include e(container) {
+    margin: 0px auto;
+    padding-top: 5px;
+    @include mq(md) {
+      padding-top: 0px;
+    }
+    @include mq(xl) {
+      width: 1170px;
+    }
+  }
+  @include e(about) {
+    margin: 0px auto;
+    width: 260px;
+    @include mq(md) {
+      float: left;
+      margin-left: 0px;
+      margin-right: 30px;
+    }
+    @include mq(xl) {
+      width: 270px;
+    }
+  }
+  @include e(works) {
+    margin: 0px auto;
+    width: 260px;
+    @include mq(md) {
+      float: left;
+      margin: 0px;
+    }
+    @include mq(xl) {
+      width: 270px;
+    }
+  }
+  @include e(contacts) {
+    margin: 0px auto;
+    width: 260px;
+    @include mq(md) {
+      float: left;
+      margin-right: 30px;
+      margin-left: 0px;
+    }
+    @include mq(xl) {
+      width: 270px;
+    }
+  }
+  @include e(updates) {
+    margin: 0px auto 20px auto;
+    width: 260px;
+    @include mq(md) {
+      float: left;
+      margin: 0px;
+    }
+    @include mq(xl) {
+      width: 270px;
+    }
+  }
+  @include e(plus-img) {
+    position: absolute;
+    display: none;
+    left: calc(50% - 9.5px);
+    top: 33px;
+  }
+  @include e(arrow-img-hover) {
+    display: none;
+  }
+  @include e(img) {
+    position: relative;
+    margin: 0px 5px 5px 0px;
+    width: 125px;
+    height: 85px;
+    @include hover {
+      .summary__plus-img {
+        display: initial;
+      }
+      cursor: pointer;
+    }
+    @include m(bg) {
+      @include m(motel) {
+        background-image: url(../images/grand_motel_small.png);
+        @include hover {
+          background-image: linear-gradient(rgba(0, 188, 156, 0.5), rgba(0, 188, 156, 0.5)), url(../images/grand_motel_small.png);
+        }
+      }
+      @include m(tv) {
+        background-image: url(../images/tv.png);
+        @include hover {
+          background-image: linear-gradient(rgba(0, 188, 156, 0.5), rgba(0, 188, 156, 0.5)), url(../images/tv.png);
+        }
+      }
+      @include m(vinyl) {
+        background-image: url(../images/vinyl.png);
+        @include hover {
+          background-image: linear-gradient(rgba(0, 188, 156, 0.5), rgba(0, 188, 156, 0.5)), url(../images/vinyl.png);
+        }
+      }
+      @include m(iphone) {
+        background-image: url(../images/iphone.png);
+        @include hover {
+          background-image: linear-gradient(rgba(0, 188, 156, 0.5), rgba(0, 188, 156, 0.5)), url(../images/iphone.png);
+        }
+      }
+    }
+  }
+  @include e(title) {
+    color: $white;
+    font-size: 16px;
+    margin-top: 73px;
+    margin-bottom: 18px;
+  }
+  @include e(text) {
+    color: $regentGray;
+    font-size: 12px;
+    line-height: 22px;
+    width: 260px;
+  }
+  @include e(contact-text) {
+    font-size: 12px;
+    margin-left: 10px;
+  }
+  @include e(logo) {
+    margin: 23px 0px 19px 0px;
+  }
+  @include e(more) {
+    color: $regentGray;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 20px;
+    width: 97px;
+    @include hover {
+      color: $carribeanGreen;
+      .summary__arrow-img {
+        display: none;
+      }
+      .summary__arrow-img-hover {
+        display: initial;
+      }
+    }
+  }
+  @include e(imgs) {
+    margin-top: 23px;
+  }
+  @include e(contact-info) {
+    color: $regentGray;
+    margin-top: 3px;
+    @include hover {
+      .summary__contact-info-img-normal {
+        display: none;
+      }
+      .summary__contact-info-img-hover {
+        display: initial;
+      }
+    }
+  }
+  @include e(contact-infos) {
+    margin-top: 20px;
+  }
+  @include e(form) {
+    position: relative;
+    background-color: $riverBed;
+    margin-top: 15px;
+    height: 40px;
+    border-radius: 5px;
+    width: 270px;
+  }
+  @include e(inp) {
+    font-size: 13px;
+    padding-left: 12px;
+    color: $regentGray2;
+    background-color: $riverBed;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    width: 175px;
+    @include focus {
+      outline: none;
+    }
+  }
+  @include e(btn) {
+    position: absolute;
+    border-radius: 5px;
+    font-size: 12px;
+    padding-top: 9px;
+    text-align: center;
+    height: 30px;
+    width: 88px;
+    top: 5px;
+    right: 5px;
+  }
+  @include e(left) {
+    @include mq(md) {
+      margin: 0px auto;
+      width: 570px;
+    }
+    @include mq(xl) {
+      width: 600px;
+      float: left;
+      margin: 0px;
+    }
+  }
+  @include e(right) {
+    @include mq(md) {
+      margin: 0px auto 50px auto;
+      width: 570px;
+    }
+    @include mq(xl) {
+      margin: 0px auto;
+      float: left;
+      margin: 0px;
+    }
+  }
+  @include e(email) {
+    @include hover {
+      color: $carribeanGreen;
+      cursor: pointer;
+    }
+    width: 110px;
+  }
+  @include e(contact-info-img-hover) {
+    display: none;
+  }
+}

@@ -2,36 +2,36 @@
   margin: 0px auto;
   max-width: 1920px;
   width: 100%;
-  @include e('title') {
+  @include e(title) {
     color: $blueBayoux;
     margin-top: 50px;
     text-align: center;
     font-size: 20px;
-    @include mq('md') {
+    @include mq(md) {
       font-size: 36px;
       margin-top: 122px;
     }
-    @include mq('xl') {
+    @include mq(xl) {
       font-size: 46px;
     }
   }
-  @include e('text') {
+  @include e(text) {
     color: $lynch;
     font-size: 15px;
     line-height: 34px;
     margin: 24px auto 0px auto;
     text-align: center;
-    @include mq('md') {
+    @include mq(md) {
       font-size: 20px;
     }
-    @include mq('xl') {
+    @include mq(xl) {
       width: 740px;
     }
   }
-  @include e('type-container') {
+  @include e(type-container) {
     margin: 0px auto;
     width: (290px / 320px) * 100%;
-    @include mq('md') {
+    @include mq(md) {
       float: left;
       margin-right: (54px / 1298px) * 100%;
       width: (346px / 1298px) * 100%;
@@ -40,38 +40,38 @@
       }
     }
   }
-  @include e('type') {
+  @include e(type) {
     margin: 20px auto 0px auto;
-    @include mq('xl') {
+    @include mq(xl) {
       margin-top: 73px;
       width: (1300px / 1920px) * 100%;
     }
   }
-  @include e('type-desc') {
+  @include e(type-desc) {
     line-height: 25px;
     margin-right: (4px / 346px) * 100%;
     margin-left: (31px / 346px) * 100%;
     width: (250px / 346px) * 100%;
   }
-  @include e('type-text') {
+  @include e(type-text) {
     color: $lynch;
     font-size: 14px;
     margin: 10px auto 25px auto;
-    @include mq('md') {
+    @include mq(md) {
       margin-bottom: 0px;
       margin-top: 24px;
     }
   }
-  @include e('type-title') {
+  @include e(type-title) {
     color: $blueBayoux;
     font-size: 20px;
-    @include mq('md') {
+    @include mq(md) {
       font-size: 25px;
     }
   }
-  @include e('img') {
+  @include e(img) {
     width: (31px / 290px) * 100%;
-    @include mq('md') {
+    @include mq(md) {
       width: (61px / 346px) * 100%;
     }
   }
