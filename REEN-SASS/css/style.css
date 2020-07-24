@@ -1271,8 +1271,7 @@ option {
   max-width: 1920px;
   margin: 0px auto;
   padding: 35px 0px;
-  font-size: 12px;
-  position: relative; }
+  font-size: 12px; }
   .footer__container {
     margin: 0px auto;
     width: 87.5%; }
@@ -1298,17 +1297,13 @@ option {
     .footer__link:hover {
       color: #00BC9C; }
   .footer__arrow {
-    display: none;
-    position: absolute;
+    position: fixed;
     height: 40px;
     width: 40px;
     border-radius: 5px;
-    top: 21px;
+    bottom: 21px;
     right: 20px;
     background-image: url(../images/arrow_up.png); }
-    @media (min-width: 1200px) {
-      .footer__arrow {
-        display: initial; } }
     .footer__arrow:hover {
       cursor: pointer;
       background-image: url(../images/arrow_up_hover.png); }
