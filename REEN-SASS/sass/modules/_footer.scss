@@ -6,7 +6,6 @@
   margin: 0px auto;
   padding: 35px 0px;
   font-size: 12px;
-  position: relative;
   @include e(container) {
     margin: 0px auto;
     width: (280px / 320px) * 100%;
@@ -36,17 +35,13 @@
     }
   }
   @include e(arrow) {
-    display: none;
-    position: absolute;
+    position: fixed;
     height: 40px;
     width: 40px;
     border-radius: 5px;
-    top: 21px;
+    bottom: 21px;
     right: 20px;
     background-image: url(../images/arrow_up.png);
-    @include mq(xl) {
-      display: initial;
-    }
     @include hover {
       cursor: pointer;
       background-image: url(../images/arrow_up_hover.png);
