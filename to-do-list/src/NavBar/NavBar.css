@@ -1,0 +1,38 @@
+ul {
+  list-style-type : none;
+  margin-top      : 0px;
+  padding-left    : 0px;
+}
+
+.nav-bar {
+  box-shadow : 0px 1px 1px #888;
+}
+
+.nav-bar li {
+  display    : inline-block;
+  padding    : 20px 12px;
+  text-align : center;
+  width      : 80px;
+}
+
+.nav-bar li:hover {
+  cursor : pointer;
+}
+
+.nav-items {
+  margin : 0px auto;
+  width  : 312px;
+}
+
+.nav-item:hover {
+  color : blue;
+}
+
+.not-selected {
+  color : gray;
+}
+
+.selected {
+  border-bottom : 2px solid blue;
+  color         : blue;
+}
