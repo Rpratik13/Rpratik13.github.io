@@ -1,89 +1,68 @@
 import './ToDo.css';
 import React from 'react';
 import AddTask from '../AddTask/AddTask.js'; 
+import ToDoItem from '../ToDoItem/ToDoItem.js';
 
 class ToDo extends React.Component {
   constructor() {
     super();
-    var completedList = []
-    var toDoList      = []
-
-    for (var i = 0; i < (window.localStorage.getItem('to-do-len') || 0); i++){
-      toDoList.push(window.localStorage.getItem('to-do-items-' + i));    
-      if (window.localStorage.getItem('to-do-completed-' + i) === 'true'){
-        completedList.push(i)
-      }
-    }
-    
     this.state = {
-      completed : completedList,
-      items     : toDoList
+      items     : JSON.parse(window.localStorage.getItem('to-do-items')) || []
     };
   }  
+  
+  setItemState = (index) => {
+    let currentState = this.state.items[index].isCompleted;
+    let nextState = currentState === 'remaining' ? 'completed' : 'remaining';
+    
+    let newItems = this.state.items;
+    this.setState({
+      items : [...newItems.slice(0, index), 
+               {title : newItems[index].title, isCompleted: nextState},
+              ...newItems.slice(index + 1, newItems.length)]
+    });
+  }
+
+  showItem = (item, index) => {
+    if (item.title.toLowerCase().indexOf(this.props.searchQuery) !== -1){
+      if ((this.props.navSelected === 1 && item.isCompleted === 'remaining') || 
+          (this.props.navSelected === 2 && item.isCompleted === 'completed')) 
+          return;
+
+      return <ToDoItem 
+              isCompleted = {item.isCompleted}
+              keyIndex    = {index} 
+              removeItem  = {this.removeItem}
+              setState    = {this.setItemState}
+              title       = {item.title} 
+             />
+    }
+  }
+  
+  removeItem = (index) => {
+    let newItems = this.state.items;
+    this.setState({
+      items : [...newItems.slice(0, index), 
+               ...newItems.slice(index + 1, newItems.length)]
+    });
+  }
 
   render() {
     this.navSelected = this.props.navSelected;
     this.searchQuery = this.props.searchQuery;
+    window.localStorage.setItem('to-do-items', JSON.stringify(this.state.items));
     return (<div className  = "to-do-container">
               <AddTask toDo = {this} />
+              <div className = {(this.state.items.length === 0? "" : "hidden" )+ " no-task"} >
+                You have no tasks. Hooray.
+              </div>
               <ul>
                 {
-                  this.state.items.map((item, index) => this.setItemState(index, item))
+                  this.state.items.map((item, index) => this.showItem(item, index))
                 }
               </ul>
             </div>);
   }
-
-  setCompleted = (index) => {
-    let newList;
-    let arrayLen = (window.localStorage.getItem('to-do-len') || 0);
-    if (this.state.completed.includes(index)){
-      newList = this.state.completed.filter(function(e) { return e !== index })
-    } else {
-      newList = [...this.state.completed, index];
-    }
-
-    this.setState({
-      completed : newList
-    });
-
-    for (var i = 0; i <= arrayLen; i++){
-      let bool = false;
-      if (newList.includes(i)){
-        bool = true;
-      }
-      window.localStorage.setItem('to-do-completed-' + i, bool);
-    }
-  }
-
-  setItemState = (index, item) => {
-    let class_name;
-    if (this.state.completed.includes(index)){
-      class_name = "completed";
-      if (this.navSelected === 2)
-        return;
-    } else {
-      class_name = "remaining";
-      if (this.navSelected === 1)
-        return;
-    }
-    if (item.toLowerCase().indexOf(this.searchQuery) !== -1){
-      return (<li 
-                className = "item-container clearfix"
-                key       = {index} 
-              >
-                <div className = {class_name + " item"}>
-                  {item}
-                </div>
-                <div 
-                  className = {class_name + "-check check"} 
-                  onClick   = {() => this.setCompleted(index)} 
-                />
-              </li>);
-    }
-    return;
-  }
-
 }
 
 export default ToDo;

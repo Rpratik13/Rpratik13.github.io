@@ -1,8 +1,10 @@
-.check {
+.check,
+.delete {
   border-radius : 50%;
   cursor        : pointer;
   float         : right;
   height        : 20px;
+  margin-right  : 10px;
   width         : 20px;
 }
 
@@ -22,13 +24,27 @@
   border           : 1px solid green;  
 }
 
+.delete {
+  background-image: url('./cross.png');  
+  border : 1px solid red;
+}
+
+.delete:hover {
+  background-image: linear-gradient(rgba(255, 0, 0, 0.5), rgba(255, 0, 0, 0.5)), url(./cross.png);;  
+}
+
+.hidden {
+  display: none;
+}
+
 .item {
   float      : left;
   width      : 85%;
   word-break : break-all;
 }
 
-.item-container {
+.item-container,
+.no-task {
   background-color : #efefef;
   border           : 1px solid gray;
   border-radius    : 2px;
@@ -36,6 +52,13 @@
   width            : calc(80% - 22px);
   margin           : 0px auto;
   padding          : 15px 10px;
+}
+
+.no-task {
+  color       : gray;
+  height      : 100px;
+  padding-top : 90px;
+  text-align  : center;
 }
 
 .remaining {

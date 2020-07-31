@@ -13,7 +13,7 @@ class Search extends React.Component {
     this.setState({
       myInput : event.target.value,
     });
-    this.props.app.setSearchQuery(event.target.value.toLowerCase() || '');
+    this.props.searchQuery(event.target.value.toLowerCase() || '');
   }
 
   render() {

@@ -26,8 +26,8 @@ class App extends React.Component {
 
   render = () => {
     return (<div className="App">
-              <NavBar app = {this} />
-              <Search app = {this} />
+              <NavBar navSelected = {this.setNavSelected} />
+              <Search searchQuery = {this.setSearchQuery} />
               <ToDo 
                 navSelected = {this.state.navSelected} 
                 searchQuery = {this.state.searchQuery}

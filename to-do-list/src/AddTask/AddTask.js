@@ -13,16 +13,10 @@ class AddTask extends React.Component {
   handleKeyPress = (event) => {
     if(event.key === 'Enter'){
       if (this.state.myInput){
-        const newList = [...this.toDo.state.items, this.state.myInput];
+        const newList = [...this.toDo.state.items, {title: this.state.myInput, isCompleted: 'remaining', description: ''}];
         this.toDo.setState({
           items: newList
         });
-        
-        for (var i = 0; i < newList.length; i++){
-          window.localStorage.setItem('to-do-items-' + i, newList[i]);
-        }
-        
-        window.localStorage.setItem('to-do-len', newList.length);
         
         this.setState({
           myInput : ''

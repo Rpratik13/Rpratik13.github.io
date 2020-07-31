@@ -40,7 +40,7 @@ class NavBar extends React.Component {
     this.setState({
       selected : index
     });
-    this.props.app.setNavSelected(index);
+    this.props.navSelected(index);
   }
 }
 
