@@ -51,13 +51,15 @@ class NewsList extends React.Component {
   render () {
     return (<div>
              <Navigation news = {this} /> 
-              <ul className = "news-list">
+              {this.state.isLoading && <div className = "loader"></div>}
+              {!this.state.isLoading &&
+               <ul className = "news-list">
                 {this.state.list.slice((20 * (this.state.page - 1)), (20 * (this.state.page)))
                  .map((newsId) => (
                   <NewsItem id = {newsId} key = {newsId}/>
                  ))
                 }
-              </ul>
+              </ul>}
             </div>
             );
   }

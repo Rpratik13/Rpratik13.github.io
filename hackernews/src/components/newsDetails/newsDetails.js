@@ -5,9 +5,10 @@ class NewsDetails extends React.Component {
   constructor () {
     super();
     this.state      = {
-      display : false,
-      id      : 0,
-      news    : {},
+      display   : false,
+      id        : 0,
+      isLoading : false,
+      news      : {},
     }
     this.wrapperRef = React.createRef();
   }
@@ -55,11 +56,16 @@ class NewsDetails extends React.Component {
   }
 
   fetchNewsDetails = () => {
+    this.setState({
+      isLoading : true,
+    });
+
     const { newsId } = this.props.match.params;
     fetch('https://hacker-news.firebaseio.com/v0/item/' + newsId + '.json')
     .then(response => response.json())
     .then(response => this.setState({
-      news : response,
+      isLoading : false,
+      news      : response,
     }));
   }
 
@@ -75,13 +81,18 @@ class NewsDetails extends React.Component {
   render = () => {
     return (<div className = "news-details">
               <div ref = {this.wrapperRef} className = "news-details-container">
-                <div className = "cross-btn" onClick = {() => this.handleCrossClick()}></div>
-                <div className = "news-title">
-                  <a href = {this.state.news.url} target="_blank">
-                    {this.state.news.title}
-                  </a>
-                </div>
-                {this.showComment()}
+                {this.state.isLoading && <div className="loader"></div>}
+                {!this.state.isLoading && 
+                  <div>
+                    <div className = "cross-btn" onClick = {() => this.handleCrossClick()}></div>
+                    <div className = "news-title">
+                      <a href = {this.state.news.url} target = "_blank">
+                        {this.state.news.title}
+                      </a>
+                    </div>
+                    {this.showComment()}
+                  </div>
+                }
               </div>
             </div>
            );
