@@ -1,0 +1,120 @@
+ul {
+  list-style-type : none;
+}
+
+.arrow-left {
+  background : url('left.png');
+}
+
+.arrow-left:hover {
+  background : url('left_hover.png');
+  cursor     : pointer;
+}
+
+.arrow-right {
+  background : url('right.png');
+}
+
+.arrow-right:hover {
+  background : url('right_hover.png');
+  cursor     : pointer;
+}
+
+.comment,
+.sub-comment {
+  border-left : 2px solid gray;
+  word-wrap: break-word;
+}
+
+.comment:hover,
+.sub-comment:hover {
+  border-left : 2px solid #3273a8;
+}
+
+.comment-author {
+  font-weight : bold;
+}
+
+.cross-btn {
+  background-image : url('cross.png');
+}
+
+.cross-btn:hover {
+  background-image : url('cross_hover.png');
+  cursor: pointer;
+}
+
+.loading-pad {
+  padding : 15px 0px 12px 0px;
+}
+
+.nav-bar {
+  background-color : #3273a8;
+}
+
+.news-details {
+  background-color : rgba(0, 0, 0, 0.5);
+}
+
+.news-details-container {
+  background-color : white;
+}
+
+.news-title {
+  font-size : 30px;
+}
+
+.news-item {
+  padding : 15px 0px;
+}
+
+.news-item a,
+.news-item a:visited {
+  color           : inherit;
+  text-decoration : none;
+}
+
+.news-item-container {
+  background-color : rgb(0, 0, 0, 0.1);
+  border           : 1px solid rgb(1, 106, 161);
+}
+
+.news-item-container a,
+.news-title a {
+  color           : #3273a8;
+  text-decoration : none;
+}
+
+.news-item-container a:hover,
+.news-title a:hover {
+  text-decoration : underline;
+}
+
+
+.news-item-container:hover {
+  background-color : #cce8ed;
+  cursor           : pointer;
+  text-decoration  : underline;
+}
+
+.page-num {
+  color     : white;
+  font-size : 20px;
+}
+
+.title {
+  color     : white;
+  font-size : 30px;
+}
+
+@media (min-width: 768px) {
+  .comment,
+  .sub-comment {
+    border-left : 5px solid gray;
+  }
+  
+  .comment:hover,
+  .sub-comment:hover {
+    border-left : 5px solid #3273a8;
+  }
+}
