@@ -47,7 +47,7 @@ class NewsItem extends React.Component {
                <Loading width={this.state.width - 60} pad={true} />
               }
                 
-              <Link to = {"hackernews/build/news/" + this.id}>
+              <Link to = {"/news/" + this.id}>
                 {!this.state.loading && 
                  <li className = "news-item" key = {this.id}>{this.state.list.title}</li>
                 }
