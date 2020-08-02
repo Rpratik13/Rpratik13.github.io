@@ -77,7 +77,7 @@ class NewsDetails extends React.Component {
               <div ref = {this.wrapperRef} className = "news-details-container">
                 <div className = "cross-btn" onClick = {() => this.handleCrossClick()}></div>
                 <div className = "news-title">
-                  <a href = {this.state.news.url}>
+                  <a href = {this.state.news.url} target="_blank">
                     {this.state.news.title}
                   </a>
                 </div>
