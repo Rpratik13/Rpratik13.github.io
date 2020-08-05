@@ -1,0 +1,216 @@
+ul {
+  padding-left : 0px;
+  list-style-type : none;
+}
+
+.repo {
+  border-top: 1px solid #e1e4e8;
+  padding-top: 27px;
+  padding-bottom : 21px;
+  position   : relative;
+  width : 100%;
+}
+
+.repos {
+  text-align : left;
+  width: 90%;
+  margin : 0px auto;
+}
+
+.repo-forks {
+  margin-top: 10px;
+}
+.repo-name { 
+  width: 70%;
+  word-break: break-all;
+}
+
+.repo-name a{
+  color       : #0366d6;
+  font-size   : 18px;
+  font-weight : bold;
+  text-decoration : none;
+}
+
+.repo-name a:hover {
+  cursor : pointer;
+  text-decoration : underline;
+}
+
+.repo-desc {
+  color     : #586069;
+  font-size : 14px;
+  margin-top : 7px;
+}
+
+.repo-language-text {
+  float : left
+}
+.repo-language {
+  margin-top: 15px;
+}
+
+.repo-language-text {
+  color : #586069;
+  font-size : 12px;
+  margin: 3px 0px 0px 3px;
+}
+
+
+.repo-forks:hover {
+  cursor : pointer;
+  filter : invert(27%) sepia(51%) saturate(2878%) hue-rotate(230deg) brightness(104%) contrast(97%);
+}
+
+.license-icon,
+.repo-license-text {
+  float : left;
+}
+
+.license-icon {
+  margin: 10px 0px 0px 0px;
+}
+
+.repo-license-text {
+  color : #586069;
+  font-size : 12px;
+  margin: 10px 0px 0px 4px;
+}
+
+.forks-icon {
+  float : left;
+}
+
+.repo-forks-text {
+  color : #586069;
+  float : left;
+  font-size : 12px;
+  margin-left : 3px;
+}
+
+.circle {
+  border-radius : 50%;
+  float         : left;
+  font-size     : 12px;
+  height        : 12px;
+  width         : 12px;
+}
+
+.repo-updated {
+  color : #586069;
+  font-size : 12px;
+  float : left;
+  margin: 10px 0px 0px 0px;
+}
+
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.python {
+  background-color : #3572a5;
+  margin-top: 5px
+}
+
+.jupyter {
+  background-color : #da5b0b;
+  margin-top: 5px
+}
+
+.c {
+  background-color : #f34b7d;
+  margin-top: 5px
+} 
+
+.html {
+  background-color : #e34c26;
+  margin-top: 5px
+}
+
+.js {
+  background-color : #f1e05a;
+  margin-top: 5px
+}
+
+.css {
+  background-color : #563d7c;
+  margin-top: 5px;
+}
+
+.forked-owner {
+  color : #acb0b4;
+  font-size : 12px;
+  margin-top : 6px;
+}
+
+.star-button {
+  position : absolute;
+  background-color : #fafbfc;
+  border : 1px solid #d9dbdb;
+  border-radius : 5px;
+  right: 0px;
+  top: 31px;
+  height : 26px;
+  width  : 66px;
+  font-size : 12px;
+}
+
+.star-button:hover {
+  background-color: #f3f4f6;
+  cursor : pointer;
+}
+
+.star-button-icon {
+  float : left;
+  margin: 5px 0px 0px 12px;
+}
+
+.star-button-text {
+  float  : left;
+  margin : 5px 0px 0px 4px;
+}
+
+@media (min-width: 768px){
+  .repos {
+    float      : left;
+    width      : 68.6206896552%;
+    margin     : 0px;
+  }
+
+  ul {
+    padding-left : 33px;
+  }
+
+  
+.repo-desc {
+  width     : 55%;
+}
+
+.repo-forks {
+  margin: 18px 0px 0px 19px;
+  float : left;
+}
+
+.repo-language, 
+.repo-license{
+  float : left;
+}
+
+.license-icon {
+  margin: 17px 0px 0px 20px;
+}
+
+.repo-license-text {
+  color : #586069;
+  font-size : 12px;
+  margin: 18px 0px 0px 4px;
+}
+
+
+.repo-updated {
+  margin: 18px 0px 0px 19px;
+}
+}

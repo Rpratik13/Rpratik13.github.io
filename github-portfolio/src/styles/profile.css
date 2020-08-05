@@ -1,0 +1,157 @@
+
+.profile {
+  margin : 0px auto;
+}
+
+ 
+.avatar {
+  border        : 1px solid #e1e4e8;
+  border-radius : 50%;
+  overflow      : hidden;
+  width         : 100px;
+  margin        : 20px auto 0px auto;
+}
+
+.avatar img {
+  max-width  : 100px;
+}
+
+.follow-data {
+  font-size: 14px;
+  margin: 0px auto;
+  width: 220px;
+}
+
+
+.link {
+  width: 100px;
+  margin: 4px auto 0px auto;
+}
+
+
+.profile-edit {
+  background-color : #fafbfc;
+  border           : 1px solid #d9dbdb;
+  border-radius    : 5px;
+  height           : 32px;
+  margin           : 18px 0px 0px 1px;
+  width            : 80%; 
+}
+
+@media (min-width: 768px){
+  .profile {
+    float      : left;
+    margin     : 41px 0px 0px 4.95928941525%;
+    text-align : left;
+    width : 20.577350111%;
+  }
+  
+  .avatar {
+    width : 100%;
+    height : 150px;
+  }
+  
+.link {
+  width : 100%;
+  margin: 4px 0px 0px 0px;
+}
+
+  
+  .avatar img {
+    max-width  : 278px;
+  }
+  
+  .profile-edit {
+    width : 100%; 
+  }
+  
+  .follow-data {
+    margin: 12px 0px 19px 1px;
+    width: 100%;
+  }
+}
+.name {
+  font-size   : 25px;
+  font-weight : bold;
+  margin-top  : 15px;
+}
+
+.user-name {
+  color      : #6b6866;
+  font-size  : 20px;
+  margin-top : -2px;
+}
+
+.user-bio {
+  font-size : 15px;
+  margin    : 17px 0px 0px 1px;
+}
+
+.followers:hover,
+.following:hover,
+.stars:hover {
+  cursor : pointer;
+  filter : invert(27%) sepia(51%) saturate(2878%) hue-rotate(230deg) brightness(104%) contrast(97%);
+}
+
+.blog:hover,
+.twitter:hover {
+  color           : #0366d6;
+  cursor          : pointer;
+  text-decoration : underline;
+}
+
+.twitter-icon {
+  width: 16px;  
+}
+
+
+.profile-edit:hover {
+  background-color : #f3f4f6;
+  cursor           : pointer;
+}
+
+.profile-edit:focus {
+  outline : none; 
+}
+
+.icon {
+  float      : left;
+  margin : 8px 3px 0px 0px;
+}
+
+.follower,
+.data {
+  float : left;
+}
+
+.data {
+  margin-top : 5px;
+}
+
+.dot {
+  float  : left;
+  margin : 5px 3px 0px 4px;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.link-icon {
+  float : left;
+  margin: 0px 6px 0px 1px;
+}
+
+.link-text {
+  float : left;
+  font-size: 13px;
+}
+
+@media (min-width: 992px){
+  .avatar{
+    height : 278px;
+  }
+}
