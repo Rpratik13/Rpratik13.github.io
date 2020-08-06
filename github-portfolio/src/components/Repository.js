@@ -230,10 +230,12 @@ function Repository(props) {
             forkedRepo[repo.name] = repoData;
             props.addForkedRepos(forkedRepo);
           })
+          .catch(err => console.log(err))
         }
       })
       props.setLoading(false);
     })
+    .catch(err => console.log(err))
   }, []);
 
   return (

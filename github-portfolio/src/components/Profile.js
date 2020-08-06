@@ -202,7 +202,8 @@ function Profile(props) {
     .then(userData => {
       props.setProfile(userData)
       props.setLoading(false);
-    });
+    })
+    .catch(err => console.log(err));
 
   }, []);
 
