@@ -1,5 +1,6 @@
 {
   "name": "github-ui",
+  "description": "It is a clone of github repositories UI of account Rpratik13",
   "version": "0.1.0",
   "private": true,
   "homepage": ".",
