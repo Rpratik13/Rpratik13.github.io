@@ -6,7 +6,8 @@ const INITIAL_STATE = {
   repositories    : [],
   search          : '',
   forked_repos    : {},
-  isLoading       : true,
+  repoIsLoading       : true,
+  pageNum         : 1,
 };
 
 function repositoryReducer(state = INITIAL_STATE, action) {
@@ -23,12 +24,24 @@ function repositoryReducer(state = INITIAL_STATE, action) {
         forked_repos : {...state.forked_repos, ...action.payload}
       }
 
-    case repositoryActions.SET_LOADING: 
+    case repositoryActions.SET_REPO_LOADING: 
       return {
         ...state,
-        isLoading : action.payload
+        repoIsLoading : action.payload
       }
 
+    case repositoryActions.CHANGE_PAGE:
+      return {
+        ...state,
+        pageNum : (state.pageNum + action.payload),
+      }
+    
+    case repositoryActions.RESET_PAGE:
+      return {
+        ...state,
+        pageNum : action.payload
+      }
+      
     default:
       return state;
   }

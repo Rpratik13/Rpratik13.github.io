@@ -1,0 +1,58 @@
+.repo-stars {
+  margin-top: 10px;
+}
+
+.star-icon {
+  float : left;
+}
+
+.starred {
+  text-align : left;
+  width: 90%;
+  margin : 0px auto;
+}
+
+
+.starred-name { 
+  width: 70%;
+  word-break: break-all;
+}
+
+.starred-name a{
+  color       : #0366d6;
+  font-size   : 18px;
+  text-decoration : none;
+}
+
+
+.unstar-button {
+  position : absolute;
+  background-color : #fafbfc;
+  border : 1px solid #d9dbdb;
+  border-radius : 5px;
+  right: 0px;
+  top: 31px;
+  height : 26px;
+  width  : 86px;
+  font-size : 12px;
+}
+
+.unstar-button:hover {
+  background-color: #f3f4f6;
+  cursor : pointer;
+}
+
+
+@media (min-width: 768px){
+  .starred {
+    float      : left;
+    width      : 68.6206896552%;
+    margin     : 0px;
+    margin-top : 120px;
+  }
+
+  .repo-stars {
+    margin: 18px 0px 0px 0px;
+    float : left;
+  }
+}

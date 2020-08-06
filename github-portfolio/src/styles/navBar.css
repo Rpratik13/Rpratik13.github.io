@@ -1,0 +1,41 @@
+.nav-bar {
+  position : fixed;
+  z-index : 10;
+  border-bottom : 1px solid gray;
+  background-color : white;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.nav-link {
+  float   : left;
+  padding : 10px 5px;
+}
+
+.nav-link:hover {
+  cursor : pointer;
+}
+
+.nav-links {
+  margin : 0px auto;
+  width  : 320px;
+}
+
+.selected {
+  border-bottom : 2px solid red;
+}
+
+.unselected:hover {
+  border-bottom : 2px solid gray;
+}
+
+@media (min-width: 768px){
+  .nav-links {
+    margin : 0px auto;
+    width  : 500px;
+  }
+  .nav-link {
+    float   : left;
+    padding : 10px 25px;
+  }
+}

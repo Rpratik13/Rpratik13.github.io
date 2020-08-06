@@ -1,24 +1,61 @@
 import React from 'react';
 import './App.css';
-import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
 
+import NavBar from './components/NavBar';
+import Starred from './components/Starred';
 import Profile from './components/Profile';
+import Followers from './components/Followers';
+import Following from './components/Following';
 import Repository from './components/Repository';
-import store from './store';
 
-function App() {
+function showRepos(props) {
+  if (props.tabSelected === 'repositories')
   return (
-    <Provider store = {store}>
-      <div className="App">
+    <Repository />
+  )
+}
+
+function showStarred(props) {
+  if (props.tabSelected === 'starred')
+  return (
+    <Starred />
+  )
+}
+
+
+function showFollowers(props) {
+  if (props.tabSelected === 'followers')
+  return (
+      <Followers />
+  )
+}
+
+
+function showFollowing(props) {
+  if (props.tabSelected === "following")
+  return (
+      <Following />
+  )
+}
+
+function App(props) {
+  return (
+      <div className="App clearfix">
+        <NavBar />
         <Profile />
-        <Repository />
+        {showRepos(props)}
+        {showStarred(props)}
+        {showFollowers(props)}
+        {showFollowing(props)}
       </div>
-    </Provider>
   );
 }
 
-// function mapStateToProps(state) {
+function mapStateToProps(state) {
+  return {
+    tabSelected : state.navBar.isSelected,
+  };
+}
 
-// }
-
-export default App;
+export default connect(mapStateToProps)(App);

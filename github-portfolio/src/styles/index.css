@@ -40,3 +40,9 @@ code {
 .repo-loading {
   margin: 30px auto 0px auto;
 }
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}

@@ -47,7 +47,7 @@ ul {
   float : left
 }
 .repo-language {
-  margin-top: 15px;
+  margin: 15px 19px 0px 0px;
 }
 
 .repo-language-text {
@@ -103,12 +103,6 @@ ul {
   margin: 10px 0px 0px 0px;
 }
 
-
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
 
 .python {
   background-color : #3572a5;
@@ -173,6 +167,54 @@ ul {
   margin : 5px 0px 0px 4px;
 }
 
+.prev,
+.next, 
+.page-num {
+  float : left;
+}
+
+.page-controls {
+  margin: 0px auto 10px auto;
+  width : 130px
+}
+
+.prev,
+.next {
+  border : 1px solid #e1e4e8;
+  padding: 5px;
+}
+
+.prev {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.next {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.prev:hover,
+.next:hover {
+  border : 1px solid black;
+  cursor : pointer;
+}
+
+.disabled {
+  color: gray;
+}
+
+.disabled:hover {
+  border : 1px solid #e1e4e8;
+  cursor : default;
+}
+
+.page-num {
+  margin: 0px 15px;
+  padding-top: 2px;
+  font-size: 20px;
+}
+
 @media (min-width: 768px){
   .repos {
     float      : left;
@@ -190,7 +232,7 @@ ul {
 }
 
 .repo-forks {
-  margin: 18px 0px 0px 19px;
+  margin: 18px 19px 0px 0px;
   float : left;
 }
 

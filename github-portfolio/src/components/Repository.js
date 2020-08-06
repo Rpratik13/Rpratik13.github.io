@@ -8,6 +8,23 @@ import '../styles/repository.css';
 import { get } from '../Utils/https.js';
 
 
+function filteredRepos(repos) {
+  let filters = store.getState().filter;
+  let search = filters.search;
+  let filter_language = filters.filter_language;
+  let type = filters.type;
+  let filteredRepo = [];
+  
+  repos.map(repo => {
+    if ((search === '' || repo.name.toLowerCase().indexOf(search.toLowerCase()) !== -1) &&
+       ((filter_language === '' || (repo.language && repo.language.toLowerCase() === filter_language.toLowerCase())))
+         && checkType(repo, type)) {
+         filteredRepo.push(repo)
+       }
+      })
+  return filteredRepo;
+}
+
 function checkType(repo, type) {
   if ((type === '') ||
       (type === 'private' && repo.private) ||
@@ -188,14 +205,7 @@ function showStarButton(repo) {
 }
 
 function showRepositories(repo, props) {
-   let filters = store.getState().filter;
-   let search = filters.search;
-   let filter_language = filters.filter_language;
-   let type = filters.type;
-   if ((search === '' || repo.name.toLowerCase().indexOf(search.toLowerCase()) !== -1) &&
-       ((filter_language === '' || (repo.language && repo.language.toLowerCase() === filter_language.toLowerCase())))
-       && checkType(repo, type)) {
-     return (
+   return (
             <li key = {repo.id} className="repo">
               <div className="repo-name">
                 <a href={repo.html_url} title={repo.name}>
@@ -212,7 +222,37 @@ function showRepositories(repo, props) {
               </div>
               {showStarButton(repo)}
             </li>);
-   }
+}
+
+function showPageControls(props){
+  let filteredReposlen = filteredRepos(props.repositories).length;
+  let prevStatus = '';
+  let nextStatus = '';
+  if (props.pageNum === 1) {prevStatus = ' disabled'}
+  else if (props.pageNum === parseInt(filteredReposlen / 5 + 1)) {nextStatus = ' disabled'}
+  
+  if (filteredReposlen > 5)
+  return (
+          <div className="page-controls clearfix">
+            <div 
+              className={"prev" + prevStatus} 
+              onClick={()=>{if(props.pageNum > 1){
+                props.changePage(-1)
+                window.scrollTo(0, 0);
+                }}}
+            >
+              Prev
+            </div>
+            <div className="page-num">{props.pageNum}</div>
+            <div 
+              className={"next" + nextStatus}
+              onClick={()=>{if(props.pageNum < parseInt(filteredReposlen / 5) + 1){
+                props.changePage(1)
+                window.scrollTo(0, 0);
+              }}}>Next</div>
+          </div>
+  ) 
+
 }
 
 function Repository(props) {
@@ -233,20 +273,23 @@ function Repository(props) {
           .catch(err => console.log(err))
         }
       })
-      props.setLoading(false);
+      props.setRepoLoading(false);
     })
     .catch(err => console.log(err))
   }, []);
-
+  
   return (
-          <div className="repos">
-          <Filter />
-          {props.isLoading && <div className="loading repo-loading"></div>}
-          {!props.isLoading && 
+    <div className="repos">
+          <Filter repoProps={props}/>
+          {props.repoIsLoading && <div className="loading repo-loading"></div>}
+          {!props.repoIsLoading && 
             <ul>
-              {props.repositories.map(repo => showRepositories(repo, props))}  
+              {filteredRepos(props.repositories)
+              .slice(5 * (props.pageNum - 1), 5 * (props.pageNum))
+              .map(repo => showRepositories(repo, props))}  
             </ul>
           }
+          {showPageControls(props)}
           </div>
          );
 }
@@ -258,7 +301,8 @@ function mapStateToProps(state) {
     search          : state.filter.search,
     type            : state.filter.type,
     forked_repos    : state.repository.forked_repos,
-    isLoading       : state.repository.isLoading
+    repoIsLoading   : state.repository.repoIsLoading,
+    pageNum         : state.repository.pageNum,
   };
 }
 
@@ -272,8 +316,16 @@ function mapDispatchToProps(dispatch) {
       dispatch(repositoryActions.addForkedRepos(repoObj));
     },
 
-    setLoading: val => {
-      dispatch(repositoryActions.setLoading(val));
+    setRepoLoading: val => {
+      dispatch(repositoryActions.setRepoLoading(val));
+    },
+
+    changePage: change => {
+      dispatch(repositoryActions.changePage(change));
+    },
+
+    resetPage: () => {
+      dispatch(repositoryActions.resetPage());
     }
   }
 }

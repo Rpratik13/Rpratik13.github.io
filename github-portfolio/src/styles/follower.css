@@ -1,0 +1,127 @@
+.follower-img {
+  height: 50px;
+  width : 50px;
+  border-radius : 50%;
+  overflow : hidden;
+  margin: 0px auto;
+}
+
+.follower-img img {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.follower-id {
+  margin: 0px auto;
+  width : fit-content;
+}
+
+  
+.followers-list {
+  margin: 20px auto 0px auto;
+  width : 90%;
+}
+
+.follower-user {
+  border-bottom: 1px solid gray;
+  padding : 24px 0px;
+}
+
+.follower-name {
+  float : left;
+  margin: 1px 8px 0px 0px;
+  color: black
+}
+
+.follower-name:hover,
+.follower-login:hover {
+  text-decoration: underline;
+}
+
+
+.follower-login {
+  color : #586069;
+  float : left;
+  font-size : 14px;
+  margin-top: 3px;
+}
+
+.follower-bio {
+  margin-top: 6px;
+  line-height: 18px;
+  font-size: 12px;
+  color : gray;
+  text-align : center;
+  word-wrap: break-all;
+}
+
+.follower-company {
+  float : left;
+  margin-right : 19px;
+}
+
+.follower-company-text {
+  float : left;
+  font-size : 12px;
+  margin-top : 7px;
+}
+
+.follower-company-icon {
+  float : left;
+  margin : 6px 3px 0px 1px;
+}
+
+.follower-location-icon {
+  float : left;
+  margin-top : 6px;
+  margin-right : 3px;
+}
+
+.follower-location-text {
+  float : left;
+  font-size : 12px;
+  margin-top: 7px;
+}
+
+.location-company {
+  width : fit-content;
+  margin : 0px auto;
+}
+
+.follower-location {
+  float : left;
+}
+
+@media (min-width: 768px){
+  
+  .followers-list {
+    float : left;
+    margin: 100px 0px 0px 40px;
+    width : 60%;
+  }
+
+  .follower-details {
+    float : left;
+    width : 80%;
+  }
+
+  .follower-img {
+    float : left;
+   margin : 0px 25px 0px 0px ;
+
+  }
+  
+.follower-id {
+  float : none;
+  margin: 0px;
+}
+
+.follower-bio {
+  text-align : left;
+}
+
+.location-company {
+  width : 100%;
+  margin : 0px;
+}
+}

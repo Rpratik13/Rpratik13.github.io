@@ -26,7 +26,10 @@ function Filter(props) {
   return (<div>
             <input 
               className = "search"
-              onChange = {event => props.setSearch(event.target.value)}
+              onChange = {event => {
+                props.setSearch(event.target.value)
+                props.repoProps.resetPage();
+              }}
               placeholder = 'Find a repository...'
               type     = "text" 
               value    = {props.search} 
@@ -35,7 +38,10 @@ function Filter(props) {
               className = "type" 
               id       = "type" 
               name     = "type"
-              onChange = {event => props.setType(event.target.value)}
+              onChange = {event => { 
+                props.setType(event.target.value)
+                props.repoProps.resetPage();
+              }}
             >
               <option key="all" value = "">All</option>
               <option key="public" value = "public">Public</option>
@@ -50,7 +56,10 @@ function Filter(props) {
               className = "language"
               id       = "language" 
               name     = "language"
-              onChange = {event => props.setLanguage(event.target.value)}
+              onChange = {event => {
+                props.setLanguage(event.target.value)
+                props.repoProps.resetPage();
+              }}
             >
               <option key="all" value = "">All</option>
               {props.languages.map(language => showLanguages(language))}
