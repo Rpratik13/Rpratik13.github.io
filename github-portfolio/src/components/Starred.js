@@ -187,7 +187,7 @@ function showPageControls(props){
           <div className="page-controls clearfix">
             <div 
               className={"prev" + prevStatus} 
-              onClick={()=>{if(props.pageNum > 1){
+              onClick={()=>{if(props.starredPageNum > 1){
                 props.changeStarredPage(-1)
                 window.scrollTo(0, 0);
                 }}}
