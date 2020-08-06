@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   repositories    : [],
   search          : '',
   forked_repos    : {},
+  isLoading       : true,
 };
 
 function repositoryReducer(state = INITIAL_STATE, action) {
@@ -21,6 +22,13 @@ function repositoryReducer(state = INITIAL_STATE, action) {
         ...state,
         forked_repos : {...state.forked_repos, ...action.payload}
       }
+
+    case repositoryActions.SET_LOADING: 
+      return {
+        ...state,
+        isLoading : action.payload
+      }
+
     default:
       return state;
   }

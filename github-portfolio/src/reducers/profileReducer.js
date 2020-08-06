@@ -2,7 +2,8 @@ import * as profileActions from '../actions/profileActions';
 
 
 const INITIAL_STATE = {
-  userData : {}
+  userData  : {},
+  isLoading : true,
 };
 
 function profileReducer(state = INITIAL_STATE, action) {
@@ -12,6 +13,12 @@ function profileReducer(state = INITIAL_STATE, action) {
         ...state,
         userData : action.payload,
       };
+    
+    case profileActions.SET_LOADING:
+      return {
+        ...state,
+        isLoading : action.payload
+      }
 
     default:
       return state;

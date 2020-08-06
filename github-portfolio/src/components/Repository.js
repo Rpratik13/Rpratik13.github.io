@@ -232,15 +232,19 @@ function Repository(props) {
           })
         }
       })
+      props.setLoading(false);
     })
   }, []);
 
   return (
           <div className="repos">
           <Filter />
+          {props.isLoading && <div className="loading repo-loading"></div>}
+          {!props.isLoading && 
             <ul>
               {props.repositories.map(repo => showRepositories(repo, props))}  
             </ul>
+          }
           </div>
          );
 }
@@ -251,7 +255,8 @@ function mapStateToProps(state) {
     repositories    : state.repository.repositories,
     search          : state.filter.search,
     type            : state.filter.type,
-    forked_repos    : state.repository.forked_repos
+    forked_repos    : state.repository.forked_repos,
+    isLoading       : state.repository.isLoading
   };
 }
 
@@ -263,6 +268,10 @@ function mapDispatchToProps(dispatch) {
 
     addForkedRepos: repoObj => {
       dispatch(repositoryActions.addForkedRepos(repoObj));
+    },
+
+    setLoading: val => {
+      dispatch(repositoryActions.setLoading(val));
     }
   }
 }

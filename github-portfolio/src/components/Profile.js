@@ -199,11 +199,18 @@ function Profile(props) {
   useEffect(() => {
     get('users/Rpratik13')
     .then(response => response.json())
-    .then(userData => props.setProfile(userData));
+    .then(userData => {
+      props.setProfile(userData)
+      props.setLoading(false);
+    });
+
   }, []);
 
   return (
           <div className = "profile">
+            {console.log(props.isLoading)}
+            {props.isLoading && <div className="loading profile-loading"></div>}
+            {!props.isLoading && <div>
             <div className = "avatar">
               <img 
                 alt = "Avatar" 
@@ -223,6 +230,7 @@ function Profile(props) {
             {showLocation(props)}
             {showWebsite(props)}
             {showTwitter(props)}
+            </div>}
           </div>
          );
 }
@@ -230,6 +238,7 @@ function Profile(props) {
 function mapStateToProps(state) {
   return {
     userData : state.profile.userData,
+    isLoading : state.profile.isLoading
   };
 }
 
@@ -237,6 +246,10 @@ function mapDispatchToProps(dispatch) {
   return {
     setProfile: userData => {
       dispatch(profileActions.setProfile(userData));
+    },
+
+    setLoading: val => {
+      dispatch(profileActions.setLoading(val));
     }
   }
 }
