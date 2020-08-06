@@ -1,8 +1,7 @@
 export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const SET_SEARCH   = 'SET_SEARCH';
 export const SET_TYPE     = 'SET_TYPE';
-export const ADD_LANGUAGE = 'ADD_LANGAUGE';
-
+export const RESET_FILTER = 'RESET_FILTER';
 
 export const setLanguage = language => ({
   payload : language,
@@ -19,7 +18,7 @@ export const setType = type => ({
   type    : SET_TYPE,
 });
 
-export const addLanguage = language => ({
-  payload : language,
-  type    : ADD_LANGUAGE,
+export const resetFilter = () => ({
+  payload  : '',
+  type    : RESET_FILTER,
 });

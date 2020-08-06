@@ -3,6 +3,7 @@ export const ADD_FORKED_REPOS = 'ADD_FORKED_REPOS';
 export const SET_REPO_LOADING = 'SET_REPO_LOADING';
 export const CHANGE_PAGE      = 'CHANGE_PAGE';
 export const RESET_PAGE       = 'RESET_PAGE';
+export const CLEAR_SEARCH     = 'CLEAR_SEARCH';
 
 export const setRepositories = repositories => ({
   payload : repositories,
@@ -28,3 +29,4 @@ export const resetPage = () => ({
   payload : 1,
   type    : RESET_PAGE,
 });
+

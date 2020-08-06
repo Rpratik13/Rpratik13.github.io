@@ -26,7 +26,12 @@ function starredReducer(state = INITIAL_STATE, action) {
         ...state,
         starredPageNum : (state.starredPageNum + action.payload),
       }
-      
+    
+    case starredActions.RESET_STARRED_PAGE:
+      return {
+        ...state,
+        starredPageNum : action.payload,
+      }
     default:
       return state;
   }

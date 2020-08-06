@@ -6,9 +6,10 @@ import Filter from './Filter.js';
 import '../styles/repository.css';
 
 import { get } from '../Utils/https.js';
+import * as constants from '../Utils/constants';
 
 
-function filteredRepos(repos) {
+function filteredRepos(repos, props) {
   let filters = store.getState().filter;
   let search = filters.search;
   let filter_language = filters.filter_language;
@@ -17,7 +18,8 @@ function filteredRepos(repos) {
   
   repos.map(repo => {
     if ((search === '' || repo.name.toLowerCase().indexOf(search.toLowerCase()) !== -1) &&
-       ((filter_language === '' || (repo.language && repo.language.toLowerCase() === filter_language.toLowerCase())))
+       ((filter_language === '' || (repo.language && repo.language.toLowerCase() === filter_language.toLowerCase())
+         || props.forked_repos[repo.name] && props.forked_repos[repo.name].parent.language.toLowerCase() === filter_language.toLowerCase()))
          && checkType(repo, type)) {
          filteredRepo.push(repo)
        }
@@ -225,13 +227,13 @@ function showRepositories(repo, props) {
 }
 
 function showPageControls(props){
-  let filteredReposlen = filteredRepos(props.repositories).length;
+  let filteredReposlen = filteredRepos(props.repositories, props).length;
   let prevStatus = '';
   let nextStatus = '';
   if (props.pageNum === 1) {prevStatus = ' disabled'}
-  else if (props.pageNum === parseInt(filteredReposlen / 5 + 1)) {nextStatus = ' disabled'}
+  else if (props.pageNum === parseInt(filteredReposlen / constants.REPOS_PER_PAGE + 1)) {nextStatus = ' disabled'}
   
-  if (filteredReposlen > 5)
+  if (filteredReposlen > constants.REPOS_PER_PAGE)
   return (
           <div className="page-controls clearfix">
             <div 
@@ -246,7 +248,7 @@ function showPageControls(props){
             <div className="page-num">{props.pageNum}</div>
             <div 
               className={"next" + nextStatus}
-              onClick={()=>{if(props.pageNum < parseInt(filteredReposlen / 5) + 1){
+              onClick={()=>{if(props.pageNum < parseInt(filteredReposlen / constants.REPOS_PER_PAGE) + 1){
                 props.changePage(1)
                 window.scrollTo(0, 0);
               }}}>Next</div>
@@ -276,6 +278,10 @@ function Repository(props) {
       props.setRepoLoading(false);
     })
     .catch(err => console.log(err))
+
+    return () => {
+      props.resetPage();
+    }
   }, []);
   
   return (
@@ -284,7 +290,7 @@ function Repository(props) {
           {props.repoIsLoading && <div className="loading repo-loading"></div>}
           {!props.repoIsLoading && 
             <ul>
-              {filteredRepos(props.repositories)
+              {filteredRepos(props.repositories, props)
               .slice(5 * (props.pageNum - 1), 5 * (props.pageNum))
               .map(repo => showRepositories(repo, props))}  
             </ul>
@@ -292,6 +298,7 @@ function Repository(props) {
           {showPageControls(props)}
           </div>
          );
+  
 }
 
 function mapStateToProps(state) {

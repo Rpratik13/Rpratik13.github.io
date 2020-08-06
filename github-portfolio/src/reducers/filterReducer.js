@@ -27,12 +27,14 @@ function filterReducer(state = INITIAL_STATE, action) {
         ...state,
           type : action.payload,
       };
-    
-    case filterActions.ADD_LANGUAGE:
+
+    case filterActions.RESET_FILTER:
       return {
         ...state,
-        languages : [...state.languages, action.payload],
-    };
+        search : '',
+        type   : '',
+        filter_language : '',
+      }
 
     default:
       return state;

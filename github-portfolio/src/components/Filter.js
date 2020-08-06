@@ -4,23 +4,11 @@ import * as filterActions from '../actions/filterActions';
 
 import '../styles/filter.css';
 
-let addedLanguages = [];
-
-function showLanguages(language) {
-  if (!addedLanguages.includes(language)){
-    addedLanguages.push(language)
-    return <option key={language} value = {language.toLowerCase()}>{language}</option>
-  }
-  return;
-}
 
 function Filter(props) {
   useEffect(() => {
-    props.repositories.map(repo => { 
-      if (!props.languages.includes(repo.language) && repo.language) {
-        props.addLanguage(repo.language)
-      }});   
-  });
+    props.resetFilter();  
+  }, []);
   
   
   return (<div>
@@ -62,8 +50,11 @@ function Filter(props) {
               }}
             >
               <option key="all" value = "">All</option>
-              {props.languages.map(language => showLanguages(language))}
-              {addedLanguages = []}
+              <option key="python" value = "Python">Python</option>
+              <option key="jupyter" value = "Jupyter Notebook">Jupyter Notebook</option>
+              <option key="c++" value = "C++">C++</option>
+              <option key="html" value = "HTML">HTML</option>
+              <option key="css" value = "CSS">CSS</option>
           </select>
           </div>
          );
@@ -85,13 +76,13 @@ function mapDispatchToProps(dispatch) {
     setType: type => {
       dispatch(filterActions.setType(type));
     },
-    
-    addLanguage: language => {
-      dispatch(filterActions.addLanguage(language));
-    },
 
     setLanguage: language => {
       dispatch(filterActions.setLanguage(language));
+    },
+
+    resetFilter: () => {
+      dispatch(filterActions.resetFilter());
     }
   }
 }

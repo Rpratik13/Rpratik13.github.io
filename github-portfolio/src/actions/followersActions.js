@@ -10,3 +10,4 @@ export const setLoading = val => ({
   payload : val,
   type    : SET_FOLLOWER_LOADING,
 })
+

@@ -5,6 +5,7 @@ import '../styles/repository.css';
 import '../styles/starred.css';
 
 import { get } from '../Utils/https.js';
+import * as constants from '../Utils/constants.js';
 
 
 function showRepoDetails(repo) {
@@ -180,9 +181,9 @@ function showPageControls(props){
   let prevStatus = '';
   let nextStatus = '';
   if (props.starredPageNum === 1) {prevStatus = ' disabled'}
-  else if (props.starredPageNum === parseInt(filteredReposlen / 5 + 1)) {nextStatus = ' disabled'}
+  else if (props.starredPageNum === parseInt(filteredReposlen / constants.REPOS_PER_PAGE + 1)) {nextStatus = ' disabled'}
   
-  if (filteredReposlen > 5)
+  if (filteredReposlen > constants.REPOS_PER_PAGE)
   return (
           <div className="page-controls clearfix">
             <div 
@@ -197,7 +198,7 @@ function showPageControls(props){
             <div className="page-num">{props.starredPageNum}</div>
             <div 
               className={"next" + nextStatus}
-              onClick={()=>{if(props.starredPageNum < parseInt(filteredReposlen / 5) + 1){
+              onClick={()=>{if(props.starredPageNum < parseInt(filteredReposlen / constants.REPOS_PER_PAGE) + 1){
                 props.changeStarredPage(1)
                 window.scrollTo(0, 0);
               }}}>Next</div>
@@ -215,6 +216,10 @@ function Starred(props) {
       props.setStarredLoading(false);
       })
     .catch(err => console.log(err))
+
+    return () => {
+      props.resetStarredPage();
+    }
   }, []);
 
   return (
@@ -238,7 +243,7 @@ function mapStateToProps(state) {
   return {
     repositories     : state.starred.repositories,
     starredIsLoading : state.starred.starredIsLoading,
-    starredPageNum          : state.starred.starredPageNum,
+    starredPageNum    : state.starred.starredPageNum,
   };
 }
 
@@ -254,6 +259,10 @@ function mapDispatchToProps(dispatch) {
 
     changeStarredPage: change => {
       dispatch(starredActions.changeStarredPage(change));
+    },
+
+    resetStarredPage: () => {
+      dispatch(starredActions.resetStarredPage());
     }
   }
 }

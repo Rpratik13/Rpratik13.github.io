@@ -41,6 +41,12 @@ function repositoryReducer(state = INITIAL_STATE, action) {
         ...state,
         pageNum : action.payload
       }
+
+    case repositoryActions.CLEAR_SEARCH:
+      return {
+        ...state,
+        search : '',
+      }
       
     default:
       return state;
