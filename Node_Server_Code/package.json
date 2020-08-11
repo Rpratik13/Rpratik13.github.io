@@ -1,0 +1,11 @@
+{
+  "name": "group29_API",
+  "version": "1.0.0",
+  "description": "Internship server project",
+  "main": "index.js",
+  "author": "Pratik Rajbhandari",
+  "license": "MIT",
+  "dependencies": {
+    "multer": "^1.4.2"
+  }
+}
