@@ -1,0 +1,21 @@
+.add-task {
+  margin : 0px auto;
+  width  : 80%;
+}
+
+input {
+  background-color : #efefef;
+  border           : 1px solid gray;
+  border-radius    : 2px;
+  height           : 35px;
+  padding          : 5px 0px 5px 10px;
+  width            : calc(100% - 12px);
+}
+
+input:focus {
+  outline : none;
+}
+
+.add {
+  width : 100%;
+}
